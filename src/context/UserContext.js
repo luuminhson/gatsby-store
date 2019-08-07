@@ -4,8 +4,6 @@ export const defaultUserContext = {
   loading: false,
   error: false,
   discount: false,
-  profile: {},
-  contributor: {},
   handleLogout: () => {},
   updateContributor: () => {}
 };

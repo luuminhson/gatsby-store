@@ -424,7 +424,6 @@ class Cart extends Component {
 Cart.propTypes = {
   status: PropTypes.string.isRequired,
   toggle: PropTypes.func.isRequired,
-  contributorAreaStatus: PropTypes.string.isRequired,
   isDesktopViewport: PropTypes.bool,
   productImagesBrowserStatus: PropTypes.string
 };

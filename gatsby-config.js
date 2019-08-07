@@ -4,10 +4,10 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    siteUrl: 'https://store.gatsbyjs.org',
-    title: 'Holy buckets! Get your Gatsby swag here!',
+    siteUrl: 'https://originalinside.com',
+    title: 'Original Inside',
     description:
-      'Do you like spaced-out socks? All purple everything? Hitting #maximumcomf with JAMstack Jammies? Oh boy have we got the swag store for you!'
+      'Because you are original.'
   },
   plugins: [
     {
@@ -20,8 +20,9 @@ module.exports = {
     {
       resolve: 'gatsby-source-shopify',
       options: {
-        shopName: 'gatsby-swag',
-        accessToken: process.env.SHOPIFY_ACCESS_TOKEN
+        shopName: 'original-inside',
+        accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
+        paginationSize: 50,
       }
     },
     'gatsby-plugin-react-helmet',
