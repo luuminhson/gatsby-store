@@ -1,0 +1,98 @@
+
+/* ICON FONT
+----------------------------------------------------------------------- */
+
+@font-face {
+    font-family: 'OI Icon';
+    src:    url('./oiicon.eot?ozmd5x');
+    src:    url('./oiicon.eot?ozmd5x#iefix') format('embedded-opentype'),
+            url('./oiicon.ttf?ozmd5x') format('truetype'),
+            url('./oiicon.woff?ozmd5x') format('woff'),
+            url('./oiicon.svg?ozmd5x#oiicon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="oi-icon-"],
+[class*=" oi-icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'OI Icon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.oi-icon-arrow-back:before {
+    content: "\e900";
+}
+.oi-icon-arrow-next:before {
+    content: "\e901";
+}
+.oi-icon-cart:before {
+    content: "\e902";
+}
+.oi-icon-check:before {
+    content: "\e903";
+}
+.oi-icon-close-circle:before {
+    content: "\e904";
+}
+.oi-icon-close:before {
+    content: "\e905";
+}
+.oi-icon-coupon:before {
+    content: "\e906";
+}
+.oi-icon-drop-down:before {
+    content: "\e907";
+}
+.oi-icon-email:before {
+    content: "\e908";
+}
+.oi-icon-facebook:before {
+    content: "\e909";
+}
+.oi-icon-info:before {
+    content: "\e90a";
+}
+.oi-icon-instagram:before {
+    content: "\e90b";
+}
+.oi-icon-menu:before {
+    content: "\e90c";
+}
+.oi-icon-minus:before {
+    content: "\e90d";
+}
+.oi-icon-phone-call:before {
+    content: "\e90e";
+}
+.oi-icon-plus:before {
+    content: "\e90f";
+}
+.oi-icon-search:before {
+    content: "\e910";
+}
+.oi-icon-update:before {
+    content: "\e911";
+}
+.oi-icon-user:before {
+    content: "\e912";
+}
+.oi-icon-heart:before {
+    content: "\e913";
+}
+.oi-icon-address:before {
+    content: "\e914";
+}
+.oi-icon-error:before {
+    content: "\e915";
+}
+  

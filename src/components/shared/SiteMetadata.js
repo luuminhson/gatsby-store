@@ -2,12 +2,11 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { graphql, StaticQuery } from 'gatsby';
 import { css } from 'react-emotion';
-import { colors } from '../../utils/styles';
+import { colors, fonts } from '../../utils/styles';
 
 const bodyStyles = css`
   color: ${colors.text};
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: ${fonts.body};
   font-size: 16px;
   line-height: 1.375;
   margin: 0 auto;

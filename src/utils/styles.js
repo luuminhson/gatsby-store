@@ -90,8 +90,8 @@ const monospaceFontStack = [
 ].join();
 
 export const fonts = {
-  body: defaultFontStack,
-  heading: `Futura PT, ${defaultFontStack}`,
+  body: `Source Sans Pro, ${defaultFontStack}`,
+  heading: `Fira Sans Condensed, ${defaultFontStack}`,
   monospace: monospaceFontStack
 };
 

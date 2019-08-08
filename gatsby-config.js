@@ -22,7 +22,7 @@ module.exports = {
       options: {
         shopName: 'original-inside',
         accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
-        paginationSize: 50,
+        paginationSize: 100,
       }
     },
     'gatsby-plugin-react-helmet',
@@ -35,7 +35,7 @@ module.exports = {
         start_url: '/',
         background_color: '#ffffff',
         theme_color: '#663399',
-        display: 'minimal-ui',
+        display: 'standalone',
         icon: 'static/android-chrome-512x512.png'
       }
     },
@@ -45,6 +45,20 @@ module.exports = {
       options: {
         trackingId: 'UA-93349937-6',
         respectDNT: true
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        custom: {
+          families: [
+            'Fira Sans Condensed:n4,n7,n8',
+            'Source Sans Pro:n4,i4,n7,i7'
+          ],
+          urls: [
+            'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i|Fira+Sans+Condensed:400,700,800&display=swap&subset=latin-ext,vietnamese',
+          ],
+        },
       }
     }
   ]
