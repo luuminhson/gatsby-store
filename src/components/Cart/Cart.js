@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import styled, { keyframes } from 'react-emotion';
 import PropTypes from 'prop-types';
 
+import OiIcon from '../OiIcon';
+
 import {
-  MdClose,
-  MdShoppingCart,
   MdArrowBack,
   MdArrowForward
 } from 'react-icons/md';
@@ -13,8 +13,6 @@ import StoreContext from '../../context/StoreContext';
 import CartList from './CartList';
 import CartIndicator from './CartIndicator';
 import EmptyCart from './EmptyCart';
-import FreeBonus from './FreeBonus';
-import ShippingInfo from './ShippingInfo';
 import { Button, PrimaryButton } from '../shared/Buttons';
 
 import {
@@ -35,7 +33,7 @@ const CartRoot = styled(`div`)`
   transition: transform 0.75s;
   width: 100%;
   will-change: transform;
-  z-index: 1000;
+  z-index: 3000;
 
   &.open {
     transform: translateX(0%);
@@ -100,11 +98,8 @@ const Title = styled(`h2`)`
 `;
 
 const Content = styled(`div`)`
-  bottom: 0;
   overflow-y: auto;
   padding: ${spacing.lg}px;
-  position: absolute;
-  top: ${dimensions.headerHeight};
   width: 100%;
 
   @media (min-width: ${breakpoints.desktop}px) {
@@ -195,77 +190,6 @@ const Total = styled(Cost)`
   }
 `;
 
-const iconEntry = keyframes`
-  0%, 50% {
-    transform: scale(0)
-  }
-  90% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-`;
-
-const numberEntry = keyframes`
-  0%{
-    transform: scale(0)
-  }
-  90% {
-    transform: scale(0.7);
-  }
-  100% {
-    transform: scale(0.6);
-  }
-`;
-
-const CartToggle = styled(Button)`
-  background: ${colors.lightest};
-  border: none;
-  border-radius: 0;
-  display: flex;
-  height: ${dimensions.headerHeight};
-  justify-content: center;
-  left: 0;
-  padding: 0;
-  position: relative;
-  top: 0;
-  transform: translateX(-100%);
-  transition: all 0.5s ease;
-  width: ${dimensions.headerHeight};
-
-  :focus {
-    box-shadow: 0 0 0 1px ${colors.accent} inset;
-  }
-
-  .open & {
-    background: ${colors.lilac};
-    color: ${colors.lightest};
-    transform: translateX(0);
-  }
-
-  @media (min-width: ${breakpoints.desktop}px) {
-    .open & {
-      transform: translateX(-100%);
-    }
-  }
-
-  svg {
-    animation: ${iconEntry} 0.75s ease forwards;
-    height: 28px;
-    margin: 0;
-    width: 28px;
-  }
-
-  ${ItemsNumber} {
-    animation: ${numberEntry} 0.5s ease forwards;
-    position: absolute;
-    right: ${spacing['3xs']}px;
-    top: ${spacing['3xs']}px;
-    transform: scale(0.6);
-  }
-`;
-
 const CheckOut = styled(PrimaryButton)`
   font-size: 1.25rem;
   margin: ${spacing.lg}px 0 ${spacing.md}px;
@@ -314,7 +238,7 @@ class Cart extends Component {
   }
 
   render() {
-    const { status, toggle } = this.props;
+    const { toggle } = this.props;
     const { className } = this.state;
 
     return (
@@ -345,32 +269,14 @@ class Cart extends Component {
             <CartRoot
               className={`${className} ${
                 this.state.isLoading ? 'loading' : ''
-              }`}
+                }`}
             >
               <Heading>
-                <CartToggle
-                  aria-label={`Shopping cart with ${itemsInCart} items`}
-                  onClick={toggle}
-                >
-                  {status === 'open' ? (
-                    <MdClose />
-                  ) : (
-                    <>
-                      <MdShoppingCart />
-                      {itemsInCart > 0 && (
-                        <ItemsNumber>{itemsInCart}</ItemsNumber>
-                      )}
-                    </>
-                  )}
-                </CartToggle>
                 <CartIndicator itemsInCart={itemsInCart} adding={adding} />
                 <Title>Your Cart</Title>
-                <ItemsInCart>
-                  items
-                  <br />
-                  in cart
-                  <ItemsNumber>{itemsInCart}</ItemsNumber>
-                </ItemsInCart>
+                <Button aria-label={`Close Cart`} onClick={toggle}>
+                  <OiIcon icon='oi-icon oi-icon-close' />
+                </Button>
               </Heading>
               {checkout.lineItems.length > 0 ? (
                 <Content>
@@ -406,13 +312,10 @@ class Cart extends Component {
                     <MdArrowBack />
                     Back to shopping
                   </BackLink>
-
-                  <FreeBonus />
-                  <ShippingInfo />
                 </Content>
               ) : (
-                <EmptyCart />
-              )}
+                  <EmptyCart />
+                )}
             </CartRoot>
           );
         }}
@@ -422,7 +325,6 @@ class Cart extends Component {
 }
 
 Cart.propTypes = {
-  status: PropTypes.string.isRequired,
   toggle: PropTypes.func.isRequired,
   isDesktopViewport: PropTypes.bool,
   productImagesBrowserStatus: PropTypes.string

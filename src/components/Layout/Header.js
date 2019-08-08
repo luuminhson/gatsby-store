@@ -3,26 +3,30 @@ import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import { Link } from 'gatsby';
 import Logo from './Logo';
+import Cart from '../Cart';
+import CartToggle from '../Cart/CartToggle';
 
 import { breakpoints, colors, dimensions, spacing } from '../../utils/styles';
 
 const HeaderRoot = styled('header')`
+  display: ${props => (props.isCovered ? 'none' : 'flex')};  
   align-items: center;
   background-color: ${colors.lightest};
   border-bottom: 1px solid ${colors.brandLight};
   box-sizing: border-box;
-  display: ${props => (props.isCovered ? 'none' : 'flex')};
-  height: ${dimensions.headerHeight};
+  height: ${dimensions.headerHeightMobile};
   justify-content: space-between;
   left: 0;
-  padding-left: ${spacing.md}px;
-  padding-right: ${spacing['3xl']}px;
+  padding: 0 ${spacing.xl}px;
   position: sticky;
   right: 0;
   top: 0;
   z-index: 1000;
 
   @media (min-width: ${breakpoints.desktop}px) {
+    height: ${dimensions.headerHeightDesktop};
+    padding: 0 ${spacing['4xl']}px;
+
     &.covered {
       display: none;
     }
@@ -64,6 +68,9 @@ class Header extends Component {
   }
 
   render() {
+    const {
+      toggleCart
+    } = this.props;
     const { className } = this.state;
 
     return (
@@ -71,14 +78,14 @@ class Header extends Component {
         <HomeLink to="/" aria-label="Home page">
           <Logo />
         </HomeLink>
+        <CartToggle toggle={toggleCart} />
       </HeaderRoot>
     );
   }
 }
 
 Header.propTypes = {
-  productImagesBrowserStatus: PropTypes.string.isRequired,
-  isDesktopViewport: PropTypes.bool
+  toggleCart: PropTypes.func.isRequired,
 };
 
 export default Header;

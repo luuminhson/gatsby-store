@@ -3,15 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 
 import Footer from './Footer';
-import { breakpoints, dimensions, animations } from '../../utils/styles';
-
-const {
-  contributorAreaWidth: {
-    openDesktop: desktopMaxWidth,
-    openHd: hdMaxWidth,
-    closedDesktop: desktopMinWidth
-  }
-} = dimensions;
+import { breakpoints, animations } from '../../utils/styles';
 
 const PageContentRoot = styled(`main`)`
   display: flex;
@@ -34,12 +26,6 @@ const PageContentRoot = styled(`main`)`
   }
 
   @media (min-width: ${breakpoints.desktop}px) {
-    padding-left: ${desktopMaxWidth};
-    transform: translateX(0);
-
-    &.wide {
-      padding-left: ${desktopMinWidth};
-    }
 
     &.moved {
       filter: blur(1px);
@@ -50,25 +36,6 @@ const PageContentRoot = styled(`main`)`
     &.covered {
       display: none;
     }
-  }
-
-  @media (min-width: ${breakpoints.hd}px) {
-    padding-left: ${props =>
-      props.contributorAreaStatus === 'closed' ? desktopMinWidth : hdMaxWidth};
-  }
-`;
-
-const Overlay = styled(`div`)`
-  display: none;
-
-  @media (min-width: ${breakpoints.desktop}px) {
-    background: rgba(0, 0, 0, 0.1);
-    bottom: 0;
-    display: block;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
   }
 `;
 
@@ -94,18 +61,6 @@ class PageContent extends Component {
         } else {
           this.setState(state => ({
             className: state.className.replace(' covered', '')
-          }));
-        }
-      }
-
-      if (cartStatusChanged) {
-        if (this.props.cartStatus === 'open') {
-          this.setState(state => ({
-            className: state.className + ' moved'
-          }));
-        } else {
-          this.setState(state => ({
-            className: state.className.replace('moved', '')
           }));
         }
       }
@@ -138,7 +93,6 @@ class PageContent extends Component {
     return (
       <PageContentRoot className={className}>
         {children}
-        {cartStatus === 'open' && <Overlay />}
         <Footer />
       </PageContentRoot>
     );
@@ -148,7 +102,6 @@ class PageContent extends Component {
 PageContent.propTypes = {
   cartStatus: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  // contributorAreaStatus: PropTypes.string.isRequired,
   location: PropTypes.object.isRequired,
   productImagesBrowserStatus: PropTypes.string.isRequired,
   isDesktopViewport: PropTypes.bool

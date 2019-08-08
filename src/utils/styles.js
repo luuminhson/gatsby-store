@@ -11,7 +11,7 @@ import { keyframes } from 'react-emotion';
 export const colors = {
   brandDarker: '#221133',
   brandDark: '#442266',
-  brand: '#663399',
+  brand: '#D24D57',
   brandBright: '#e0d6eb',
   brandLight: '#f5f3f7',
   brandLighter: '#fbfafc',
@@ -24,7 +24,9 @@ export const colors = {
   lilac: `#8c65b3`,
   accent: `#ffb238`,
   error: `#ec1818`,
-  lemon: `#ffdf37`
+  lemon: `#ffdf37`,
+
+  mainDark: `#222`,
 };
 
 export const badgeThemes = {
@@ -49,7 +51,8 @@ export const spacing = {
   lg: 24,
   xl: 32,
   '2xl': 40,
-  '3xl': 48
+  '3xl': 48,
+  '4xl': 60,
 };
 
 export const breakpoints = {
@@ -96,7 +99,8 @@ export const fonts = {
 };
 
 export const dimensions = {
-  headerHeight: '60px',
+  headerHeightDesktop: '180px',
+  headerHeightMobile: '100px',
   cartWidthDesktop: '400px',
   contributorAreaWidth: {
     closedDesktop: '60px',

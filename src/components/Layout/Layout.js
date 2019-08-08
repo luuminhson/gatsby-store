@@ -1,24 +1,16 @@
 import React from 'react';
 import styled, { injectGlobal } from 'react-emotion';
-// import { navigate } from 'gatsby';
 
-// import { client } from '../../context/ApolloContext';
 import StoreContext, { defaultStoreContext } from '../../context/StoreContext';
-import InterfaceContext, {
-  defaultInterfaceContext
-} from '../../context/InterfaceContext';
+import InterfaceContext, { defaultInterfaceContext } from '../../context/InterfaceContext';
 
+import Cart from '../Cart';
 import Header from './Header';
 import PageContent from './PageContent';
 import ProductImagesBrowser from '../ProductPage/ProductImagesBrowser';
-import Cart from '../Cart';
 import SiteMetadata from '../shared/SiteMetadata';
 
-// import { logout, getUserInfo } from '../../utils/auth';
-import { breakpoints, spacing } from '../../utils/styles';
-
-// Import Futura PT typeface
-import '../../fonts/futura-pt/Webfonts/futurapt_demi_macroman/stylesheet.css';
+import { breakpoints } from '../../utils/styles';
 
 injectGlobal`
     html {
@@ -37,6 +29,23 @@ injectGlobal`
 const Viewport = styled(`div`)`
   overflow-x: hidden;
   width: 100%;
+`;
+
+const Overlay = styled(`div`)`
+  display: none;
+
+  @media (min-width: ${breakpoints.desktop}px) {
+    background: rgba(0, 0, 0, 0.1);
+    bottom: 0;
+    display: block;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 110vw;
+    z-index: 2000;
+  }
 `;
 
 export default class Layout extends React.Component {
@@ -240,32 +249,34 @@ export default class Layout extends React.Component {
     return (
       <>
         <SiteMetadata />
-          <StoreContext.Provider value={this.state.store}>
-            <InterfaceContext.Provider value={this.state.interface}>
-              <InterfaceContext.Consumer>
-                {({
-                  isDesktopViewport,
-                  cartStatus,
-                  toggleCart,
-                  productImagesBrowserStatus,
-                  currentProductImages,
-                  featureProductImage,
-                  productImageFeatured,
-                  toggleProductImagesBrowser
-                }) => (
+        <StoreContext.Provider value={this.state.store}>
+          <InterfaceContext.Provider value={this.state.interface}>
+            <InterfaceContext.Consumer>
+              {({
+                isDesktopViewport,
+                cartStatus,
+                toggleCart,
+                productImagesBrowserStatus,
+                currentProductImages,
+                featureProductImage,
+                productImageFeatured,
+                toggleProductImagesBrowser
+              }) => (
                   <>
+                    {cartStatus === 'open' && <Overlay onClick={toggleCart} />}
+                    <Cart
+                      isDesktopViewport={isDesktopViewport}
+                      status={cartStatus}
+                      toggle={toggleCart}
+                      productImagesBrowserStatus={productImagesBrowserStatus}
+                    />
                     <Header
                       isDesktopViewport={isDesktopViewport}
                       productImagesBrowserStatus={productImagesBrowserStatus}
+                      cartStatus={cartStatus}
+                      toggleCart={toggleCart}
                     />
                     <Viewport>
-                      <Cart
-                        isDesktopViewport={isDesktopViewport}
-                        status={cartStatus}
-                        toggle={toggleCart}
-                        productImagesBrowserStatus={productImagesBrowserStatus}
-                      />
-
                       <PageContent
                         cartStatus={cartStatus}
                         isDesktopViewport={isDesktopViewport}
@@ -288,9 +299,9 @@ export default class Layout extends React.Component {
                     </Viewport>
                   </>
                 )}
-              </InterfaceContext.Consumer>
-            </InterfaceContext.Provider>
-          </StoreContext.Provider>
+            </InterfaceContext.Consumer>
+          </InterfaceContext.Provider>
+        </StoreContext.Provider>
       </>
     );
   }

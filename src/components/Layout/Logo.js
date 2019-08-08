@@ -1,8 +1,6 @@
 import React from 'react';
 import { css } from 'react-emotion';
 
-import { colors } from '../../utils/styles';
-
 const svg = css`
   display: inline-block;
   width: 146px;
