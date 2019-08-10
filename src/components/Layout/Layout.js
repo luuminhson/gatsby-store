@@ -91,13 +91,6 @@ export default class Layout extends React.Component {
           }
         }));
       },
-      toggleContributorArea: () => {
-        this.setState(state => ({
-          interface: {
-            ...state.interface,
-          }
-        }));
-      }
     },
     store: {
       ...defaultStoreContext,
@@ -206,7 +199,7 @@ export default class Layout extends React.Component {
 
   componentDidMount() {
     // Observe viewport switching from mobile to desktop and vice versa
-    const mediaQueryToMatch = `(min-width: ${breakpoints.desktop}px)`;
+    const mediaQueryToMatch = `(min-width: ${breakpoints.tablet}px)`;
 
     this.desktopMediaQuery = window.matchMedia(mediaQueryToMatch);
     this.desktopMediaQuery.addListener(this.updateViewPortState);
@@ -272,8 +265,6 @@ export default class Layout extends React.Component {
                     />
                     <Header
                       isDesktopViewport={isDesktopViewport}
-                      productImagesBrowserStatus={productImagesBrowserStatus}
-                      cartStatus={cartStatus}
                       toggleCart={toggleCart}
                     />
                     <Viewport>

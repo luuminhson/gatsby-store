@@ -1,29 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { css } from 'react-emotion';
-import { mediaQuery } from '../../utils/styles';
 
 const logoWrapper = css`
   display: inline-block;
 `;
 
 const logoDesktopStyle = css`
-  display: none;
+  display: inline-block;
   width: 146px;
   height: 60px;
-
-  ${mediaQuery.tabletFrom} {
-    display: inline-block;
-  }
 `;
 
 const logoPhoneStyle = css`
   display: inline-block;
   width: 42px;
   height: 24px;
-
-  ${mediaQuery.tabletFrom} {
-    display: none;
-  }
 `;
 
 const LogoDesktop = (props) => (
@@ -58,10 +50,17 @@ const LogoPhone = (props) => (
   </div>
 );
 
-export default () => (
+const Logo = ({isDesktopViewport}) => (
   <div className={logoWrapper}>
-    <LogoDesktop className={logoDesktopStyle} />
-    <LogoPhone className={logoPhoneStyle} />
-    {console.log(`${mediaQuery.tablet}, ${mediaQuery.desktop}`)}
+    { ( isDesktopViewport !== null && isDesktopViewport )
+      ? <LogoDesktop className={logoDesktopStyle} />
+      : <LogoPhone className={logoPhoneStyle} />
+    }
   </div>
 );
+
+Logo.propTypes = {
+  isDesktopViewport: PropTypes.bool,
+};
+
+export default Logo;

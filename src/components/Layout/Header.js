@@ -73,14 +73,15 @@ class Header extends Component {
 
   render() {
     const {
-      toggleCart
+      toggleCart,
+      isDesktopViewport,
     } = this.props;
     const { className } = this.state;
 
     return (
       <HeaderRoot className={className}>
         <HomeLink to="/" aria-label="Home page">
-          <Logo />
+          <Logo isDesktopViewport={isDesktopViewport} />
         </HomeLink>
         <CartToggle toggle={toggleCart} />
       </HeaderRoot>
@@ -90,6 +91,7 @@ class Header extends Component {
 
 Header.propTypes = {
   toggleCart: PropTypes.func.isRequired,
+  isDesktopViewport: PropTypes.bool,
 };
 
 export default Header;
