@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'react-emotion';
+import styled, { css, keyframes } from 'react-emotion';
 
 /*
  * NOTE: use a six-character hex code for all colors to allow alpha channel
@@ -13,59 +13,62 @@ import styled, { keyframes } from 'react-emotion';
 --------------------------------------------------------------- */
 
 export const colors = {
-  brand: '#D24D57',
-  brandLight: '#f5f3f7',
-  brandLighter: '#fbfafc',
-  lightest: '#ffffff',
-  darkest: '#4d4058',
-  text: '#333333',
-  textMild: '#555555',
-  textLight: '#7e718a',
-  textLighter: '#aaaaaa',
-  lilac: `#8c65b3`,
-  accent: `#ffb238`,
-  error: `#ec1818`,
+  brand:          '#D24D57',
+  brandLight:     '#f5f3f7',
+  brandLighter:   '#fbfafc',
+  lightest:       '#ffffff',
+  darkest:        '#4d4058',
+  text:           '#333333',
+  textMild:       '#555555',
+  textLight:      '#7e718a',
+  textLighter:    '#aaaaaa',
+  lilac:          '#8c65b3',
+  accent:         '#ffb238',
+  error:          '#ec1818',
 
-  black: `#000000`,
-  white: `#ffffff`,
+  black:          '#000000',
+  white:          '#ffffff',
 
-  mainDark: `#222222`,
-  mainLight: `#F9F9FB`,
+  mainDark:       '#222222',
+  mainLight:      '#F9F9FB',
 
-  mainBranding: `#1F3A93`, // Jacksons Purple
-  mainClickable: `#D24D57`, // Chesnut Rose
-  mainHighlight: `#F9B42D`, // Sea Buckthorn
-  mainSupport: `#1BA39C`, // Light Sea Green
+  mainBranding:   '#1F3A93', // Jacksons Purple
+  mainClickable:  '#D24D57', // Chesnut Rose
+  mainHighlight:  '#F9B42D', // Sea Buckthorn
+  mainSupport:    '#1BA39C', // Light Sea Green
 
-  neutral1: `#F6F7F9`, // Mystic
-  neutral2: `#E4E9ED`, // Solitude
-  neutral3: `#6C7A89`, // Lynch
-  neutral4: `#6C7A89`, // Lynch
-  neutral5: `#4A5460`, // Lynch Dark
-  neutral6: `#2E3131`, // Outter Space
+  neutral1:       '#F6F7F9', // Mystic
+  neutral2:       '#E4E9ED', // Solitude
+  neutral3:       '#6C7A89', // Lynch
+  neutral4:       '#6C7A89', // Lynch
+  neutral5:       '#4A5460', // Lynch Dark
+  neutral6:       '#2E3131', // Outter Space
 
-  darkTrans: `rgba(232,236,241,0.4)`,
-  lightTrans: `rgba(249,249,251,0.8)`,
+  darkTrans:      'rgba(232,236,241,0.4)',
+  lightTrans:     'rgba(249,249,251,0.8)',
 };
 
-/* BREAKPOINTS
+/* MEDIA QUERIES
 --------------------------------------------------------------- */
 
 export const breakpoints = {
-  mobile: 400,
-  phablet: 550,
-  tablet: 750,
-  desktop: 1280,
-  hd: 1440,
-  fhd: 1920,
+  mobile:         400,
+  phablet:        550,
+  tablet:         750,
+  desktop:        1280,
+  hd:             1440,
+  fhd:            1920,
 };
 
 export const mediaQuery = {
-  phone: `@media (max-width: ${breakpoints.tablet - 1}px)`,
-  tablet: `@media (max-width: ${breakpoints.desktop - 1}px)`,
-  desktop: `@media (min-width: ${breakpoints.desktop}px)`,
-  desktopLarge: `@media (min-width: ${breakpoints.hd}px)`,
-  desktopXLarge: `@media (min-width: ${breakpoints.fhd}px)`,
+  phoneSmall:     `@media (max-width: ${breakpoints.mobile - 1}px)`,
+  phoneLarge:     `@media (min-width: ${breakpoints.mobile}px) and (max-width: ${breakpoints.tablet - 1}px)`,
+  phone:          `@media (max-width: ${breakpoints.tablet - 1}px)`,
+  tablet:         `@media (min-width: ${breakpoints.phablet}px) and (max-width: ${breakpoints.desktop - 1}px)`,
+  tabletFrom:     `@media (min-width: ${breakpoints.tablet}px)`,
+  desktop:        `@media (min-width: ${breakpoints.desktop}px)`,
+  desktopLarge:   `@media (min-width: ${breakpoints.hd}px)`,
+  desktopXLarge:  `@media (min-width: ${breakpoints.fhd}px)`,
 }
 
 /* SPACING
@@ -89,7 +92,8 @@ export const spacing = {
 
 export const dimensions = {
   headerHeightDesktop: '180px',
-  headerHeightMobile: '100px',
+  headerHeightTablet: '96px',
+  headerHeightMobile: '68px',
   cartWidthDesktop: '400px',
   pictureBrowserAction: {
     widthDesktop: '200px',
