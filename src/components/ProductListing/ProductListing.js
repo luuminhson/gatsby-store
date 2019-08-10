@@ -5,23 +5,22 @@ import styled from 'react-emotion';
 import ProductListingHeader from './ProductListingHeader';
 import ProductListingItem from './ProductListingItem';
 
-import { breakpoints, spacing } from '../../utils/styles';
+import { breakpoints, mediaQuery, spacing } from '../../utils/styles';
 
 const ProductListingContainer = styled(`div`)`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: ${spacing.lg}px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: ${spacing.sm}px;
+  width: 100%;
   margin: 0 auto;
 
-  @media (min-width: ${breakpoints.tablet}px) {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    padding: ${spacing['2xl']}px;
+  ${mediaQuery.tablet} {
+    padding: ${spacing.lg}px;
   }
 
-  @media (min-width: ${breakpoints.desktop}px) {
+  ${mediaQuery.desktop} {
+    padding: ${spacing.xl}px;
     max-width: ${breakpoints.fhd}px;
   }
 `;

@@ -8,10 +8,9 @@ import UserContext from '../../context/UserContext';
 import { priceWithCommas } from '../../utils/helpers';
 
 import {
-  breakpoints,
+  mediaQuery,
   colors,
   FontStyle,
-  fontFamily,
   fontWeight,
   radius,
   spacing
@@ -20,19 +19,25 @@ import {
 const TRANSITION_DURATION = '250ms';
 
 const ProductListingItemLink = styled(Link)`
-  border-radius: ${radius.large}px;
-  margin: ${spacing.lg}px;
+  flex-basis: 100%;
+  margin: ${spacing.sm}px;
   overflow: hidden;
   text-decoration: none;
   box-sizing: border-box;
   transition: all ${TRANSITION_DURATION};
 
-  @media (min-width: ${breakpoints.tablet}px) {
-    flex-basis: calc(50% - 48px);
+  ${mediaQuery.phone} {
+    flex-basis: calc(50% - ${spacing.sm * 2}px);
   }
 
-  @media (min-width: ${breakpoints.desktop}px) {
-    flex-basis: calc(33.3333% - 48px);
+  ${mediaQuery.tablet} {
+    flex-basis: calc(50% - ${spacing.lg * 2}px);
+    margin: ${spacing.lg}px;
+  }
+
+  ${mediaQuery.desktop} {
+    flex-basis: calc(33.3333% - ${spacing.xl * 2}px);
+    margin: ${spacing.xl}px;
   }
 `;
 
@@ -49,24 +54,22 @@ const Preview = styled(`div`)`
   overflow: hidden;
   position: relative;
 
-  .gatsby-image-wrapper {
-    transition: all ${TRANSITION_DURATION};
-  }
-
   @media (hover: hover) {
     ${ProductListingItemLink}:hover & {
-      .gatsby-image-wrapper {
-        transform: scale(1.1);
-      }
+      background: ${colors.neutral1};
     }
   }
 `;
 
 const PriceRow = styled(`div`)`
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-end;
-  margin-top: ${spacing.xs}px;
+
+  ${mediaQuery.tablet} {
+    margin-top: ${spacing.xs}px;
+  }
 `;
 
 const Price = styled(FontStyle.h4)`
@@ -112,7 +115,6 @@ const ProductListingItem = props => {
                 {compareAtPrice &&
                   <SalePrice>{priceWithCommas(compareAtPrice)} VND</SalePrice>
                 }
-                {console.log(FontStyle)}
               </PriceRow>
             </Item>
           </ProductListingItemLink>
