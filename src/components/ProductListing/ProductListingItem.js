@@ -61,20 +61,37 @@ const Preview = styled(`div`)`
   }
 `;
 
+const SaleBadge = styled(`span`)`
+  position: absolute;
+  top: ${spacing.sm}px;
+  left: ${spacing.sm}px;
+  font-weight: ${fontWeight.body.medium};
+  color: ${colors.mainSupport};
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+
+  ${mediaQuery.tabletFrom} {
+    font-size: 1.125rem;
+    top: ${spacing.lg}px;
+    left: ${spacing.lg}px;
+  }
+`;
+
 const PriceRow = styled(`div`)`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-end;
+  margin-top: ${spacing['2xs']}px;
 
-  ${mediaQuery.tablet} {
+  ${mediaQuery.tabletFrom} {
     margin-top: ${spacing.xs}px;
   }
 `;
 
-const Price = styled(FontStyle.h4)`
-font-weight: ${fontWeight.heading.normal};  
-margin-right: 8px;
+const Price = styled(FontStyle.headline)`
+  font-weight: ${fontWeight.heading.normal};  
+  margin-right: 8px;
 `;
 
 const SalePrice = styled(FontStyle.headline)`
@@ -107,12 +124,15 @@ const ProductListingItem = props => {
           <ProductListingItemLink to={`/product/${handle}`}>
             <Item>
               <Preview>
+                { compareAtPrice && compareAtPrice !== null &&
+                  <SaleBadge>Sale</SaleBadge>
+                }
                 <Image fluid={fluid} />
               </Preview>
-              <FontStyle.h3>{title}</FontStyle.h3>
+              <FontStyle.h4>{title}</FontStyle.h4>
               <PriceRow>
                 <Price>{priceWithCommas(price)} VND</Price>
-                {compareAtPrice &&
+                {compareAtPrice && compareAtPrice !== null &&
                   <SalePrice>{priceWithCommas(compareAtPrice)} VND</SalePrice>
                 }
               </PriceRow>

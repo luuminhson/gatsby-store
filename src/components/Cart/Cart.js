@@ -20,7 +20,8 @@ import {
   colors,
   fontFamily,
   spacing,
-  dimensions
+  dimensions,
+  mediaQuery
 } from '../../utils/styles';
 
 const CartRoot = styled(`div`)`
@@ -30,7 +31,7 @@ const CartRoot = styled(`div`)`
   right: 0;
   top: -1px;
   transform: translateX(100%);
-  transition: transform 0.75s;
+  transition: transform 0.4s;
   width: 100%;
   will-change: transform;
   z-index: 3000;
@@ -63,7 +64,7 @@ const CartRoot = styled(`div`)`
     }
   }
 
-  @media (min-width: ${breakpoints.desktop}px) {
+  ${mediaQuery.tabletFrom} {
     width: ${dimensions.cartWidthDesktop};
 
     &.covered {

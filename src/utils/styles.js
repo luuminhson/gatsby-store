@@ -94,7 +94,7 @@ export const dimensions = {
   headerHeightDesktop: '180px',
   headerHeightTablet: '96px',
   headerHeightMobile: '68px',
-  cartWidthDesktop: '400px',
+  cartWidthDesktop: '520px',
   pictureBrowserAction: {
     widthDesktop: '200px',
     heightMobile: '80px'

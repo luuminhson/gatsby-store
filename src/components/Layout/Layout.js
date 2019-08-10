@@ -10,7 +10,7 @@ import PageContent from './PageContent';
 import ProductImagesBrowser from '../ProductPage/ProductImagesBrowser';
 import SiteMetadata from '../shared/SiteMetadata';
 
-import { breakpoints } from '../../utils/styles';
+import { breakpoints, mediaQuery } from '../../utils/styles';
 
 injectGlobal`
     html {
@@ -34,8 +34,8 @@ const Viewport = styled(`div`)`
 const Overlay = styled(`div`)`
   display: none;
 
-  @media (min-width: ${breakpoints.desktop}px) {
-    background: rgba(0, 0, 0, 0.1);
+  ${mediaQuery.tabletFrom} {
+    background: rgba(0, 0, 0, 0.2);
     bottom: 0;
     display: block;
     left: 0;

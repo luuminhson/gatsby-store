@@ -8,8 +8,6 @@ import { breakpoints, animations } from '../../utils/styles';
 const PageContentRoot = styled(`main`)`
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  min-height: calc(100vh - 60px);
   opacity: 1;
   padding-left: 0;
   transition: 0.75s;

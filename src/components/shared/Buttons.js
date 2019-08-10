@@ -10,7 +10,7 @@ export const ButtonBase = styled(`button`)`
   background: ${props => (props.inverse ? colors.mainClickable : colors.white)};
   border: 1px solid
     ${props => (props.inverse ? colors.brandLight : colors.brand)};
-  border-radius: ${radius.default}px;
+  border-radius: ${radius.large}px;
   color: ${props => (props.inverse ? colors.brandLight : colors.brand)};
   cursor: pointer;
   display: inline-flex;
