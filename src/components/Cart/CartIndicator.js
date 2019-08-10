@@ -5,9 +5,9 @@ import styled from 'react-emotion';
 import { colors, dimensions, radius, spacing } from '../../utils/styles';
 
 const CartIndicatorRoot = styled(`div`)`
-  background: ${colors.lemon};
+  background: ${colors.mainHighlight};
   border-radius: ${radius.default}px;
-  color: ${colors.brand};
+  color: ${colors.mainClickable};
   display: ${props => (props.visible ? 'flex' : 'none')};
   justify-content: center;
   left: 0;

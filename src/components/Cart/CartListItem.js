@@ -11,7 +11,7 @@ import { breakpoints, colors, spacing } from '../../utils/styles';
 
 const CartListItemRoot = styled('li')`
   align-items: center;
-  border-bottom: 1px solid ${colors.brandLight};
+  border-bottom: 1px solid ${colors.neutral2};
   display: flex;
   justify-content: space-between;
   padding: ${spacing.md}px 0;

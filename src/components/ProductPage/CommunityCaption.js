@@ -17,7 +17,7 @@ const CommunityCaptionRoot = styled(`div`)`
   bottom: calc(
     ${dimensions.pictureBrowserAction.heightMobile} + ${spacing.md}px
   );
-  color: ${colors.lightest};
+  color: ${colors.white};
   cursor: default;
   display: ${props => (props.superZoom ? 'none' : 'block')};
   left: ${spacing.md}px;
@@ -48,7 +48,7 @@ const Toggle = styled(`button`)`
   width: 46px;
 
   svg {
-    color: ${colors.lightest};
+    color: ${colors.white};
     height: 36px;
     width: 36px;
   }

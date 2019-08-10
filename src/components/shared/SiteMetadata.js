@@ -2,12 +2,12 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { graphql, StaticQuery } from 'gatsby';
 import { css } from 'react-emotion';
-import { colors, fonts } from '../../utils/styles';
+import { colors, fontFamily } from '../../utils/styles';
 
 const bodyStyles = css`
-  color: ${colors.text};
-  font-family: ${fonts.body};
-  font-size: 16px;
+  color: ${colors.mainDark};
+  font-family: ${fontFamily.body};
+  font-size: 14px;
   line-height: 1.375;
   margin: 0 auto;
 `;

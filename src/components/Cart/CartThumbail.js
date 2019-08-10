@@ -6,7 +6,7 @@ import Image from 'gatsby-image';
 import { colors, radius } from '../../utils/styles';
 
 const CartThumbailRoot = styled(Image)`
-  border: 1px solid ${colors.brandLight};
+  border: 1px solid ${colors.neutral2};
   border-radius: ${radius.default}px;
   height: 36px;
   width: 36px;

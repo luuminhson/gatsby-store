@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import { Link } from 'gatsby';
 
-import { colors, fonts, radius } from '../../utils/styles';
+import { colors, fontFamily, radius } from '../../utils/styles';
 
 export const ButtonBase = styled(`button`)`
   align-items: center;
-  background: ${props => (props.inverse ? colors.brandDark : colors.lightest)};
+  background: ${props => (props.inverse ? colors.mainClickable : colors.white)};
   border: 1px solid
     ${props => (props.inverse ? colors.brandLight : colors.brand)};
   border-radius: ${radius.default}px;
   color: ${props => (props.inverse ? colors.brandLight : colors.brand)};
   cursor: pointer;
   display: inline-flex;
-  font-family: ${fonts.heading};
+  font-family: ${fontFamily.heading};
   font-size: 1.1rem;
   justify-content: center;
   padding: 0.5em 0.75rem;
@@ -97,14 +97,8 @@ Button.propTypes = {
 
 export const PrimaryButton = styled(Button)`
   background: ${colors.brand};
-  color: ${colors.lightest};
+  color: ${colors.white};
   display: flex;
   font-size: 1.25rem;
   justify-content: center;
-
-  @media (hover: hover) {
-    &:hover {
-      background: ${colors.brandDark};
-    }
-  }
 `;

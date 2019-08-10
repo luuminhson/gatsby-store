@@ -10,15 +10,14 @@ import OiIcon from '../OiIcon';
 import {
     breakpoints,
     colors,
-    spacing,
     dimensions
 } from '../../utils/styles';
 
 const ItemsNumber = styled(`span`)`
   align-items: center;
-  background: ${colors.lemon};
+  background: ${colors.mainClickable};
   border-radius: 50%;
-  color: ${colors.brandDark};
+  color: ${colors.white};
   display: flex;
   font-size: 1.3rem;
   font-weight: bold;
@@ -52,27 +51,24 @@ const numberEntry = keyframes`
 `;
 
 const CartIcon = styled(Button)`
-  background: ${colors.lightest};
+  background: ${colors.white};
   border: none;
   border-radius: 0;
   display: flex;
-  height: ${dimensions.headerHeight};
+  width: 48px;
+  height: 48px;
   justify-content: center;
-  left: 0;
-  padding: 0;
   position: relative;
-  top: 0;
-  transform: translateX(calc(-100% - 32px));
   transition: all 0.5s ease;
-  width: ${dimensions.headerHeight};
 
+  :hover,
   :focus {
-    box-shadow: 0 0 0 1px ${colors.accent} inset;
+    box-shadow: none;
   }
 
   .open & {
     background: ${colors.lilac};
-    color: ${colors.lightest};
+    color: ${colors.white};
     transform: translateX(0);
   }
 
@@ -92,8 +88,8 @@ const CartIcon = styled(Button)`
   ${ItemsNumber} {
     animation: ${numberEntry} 0.5s ease forwards;
     position: absolute;
-    right: -20px;
-    top: -20px;
+    right: -10px;
+    top: -10px;
     transform: scale(0.6);
   }
 `;

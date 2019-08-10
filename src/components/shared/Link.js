@@ -22,13 +22,13 @@ const LinkRoot = styled(GatsbyLink)`
   }
 
   span {
-    border-bottom: 1px solid ${colors.brandBright};
+    border-bottom: 1px solid ${colors.neutral2};
     display: block;
     transition: inherit;
   }
 
   svg {
-    fill: ${colors.brandBright};
+    fill: ${colors.neutral2};
     margin-right: ${spacing['2xs']}px;
   }
 

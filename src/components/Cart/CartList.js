@@ -11,7 +11,7 @@ const CartListRoot = styled('ul')`
 `;
 
 const Headers = styled(`div`)`
-  border-bottom: 1px solid ${colors.brandBright};
+  border-bottom: 1px solid ${colors.neutral2};
   display: flex;
   justify-content: space-between;
 

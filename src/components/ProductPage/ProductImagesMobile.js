@@ -8,7 +8,7 @@ import ProductImage, { StyledImage } from './ProductImage';
 import {
   breakpoints,
   colors,
-  fonts,
+  fontFamily,
   radius,
   spacing
 } from '../../utils/styles';
@@ -51,7 +51,7 @@ const Incentive = styled(`div`)`
   width: 250px;
 
   h3 {
-    font-family: ${fonts.heading};
+    font-family: ${fontFamily.heading};
     font-size: 1.2rem;
     line-height: 1.2;
     margin: 0 0 0.5em;

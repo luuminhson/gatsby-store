@@ -18,13 +18,13 @@ import { Button, PrimaryButton } from '../shared/Buttons';
 import {
   breakpoints,
   colors,
-  fonts,
+  fontFamily,
   spacing,
   dimensions
 } from '../../utils/styles';
 
 const CartRoot = styled(`div`)`
-  background: ${colors.lightest};
+  background: ${colors.white};
   bottom: 0;
   position: fixed;
   right: 0;
@@ -44,7 +44,7 @@ const CartRoot = styled(`div`)`
   }
 
   ::after {
-    background-color: ${colors.lightest};
+    background-color: ${colors.white};
     bottom: 0;
     content: '';
     left: 0;
@@ -81,7 +81,7 @@ const Heading = styled(`header`)`
 
 const Title = styled(`h2`)`
   flex-grow: 1;
-  font-family: ${fonts.heading};
+  font-family: ${fontFamily.heading};
   font-size: 1.8rem;
   left: -${dimensions.headerHeight};
   margin: 0;
@@ -108,40 +108,14 @@ const Content = styled(`div`)`
       width: 6px;
     }
     ::-webkit-scrollbar-thumb {
-      background: ${colors.brandBright};
+      background: ${colors.neutral2};
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: ${colors.lilac};
+      background: ${colors.mainClickable};
     }
     ::-webkit-scrollbar-track {
-      background: ${colors.brandLight};
+      background: ${colors.neutral1};
     }
-  }
-`;
-
-const ItemsNumber = styled(`span`)`
-  align-items: center;
-  background: ${colors.lemon};
-  border-radius: 50%;
-  color: ${colors.brandDark};
-  display: flex;
-  font-size: 1.3rem;
-  font-weight: bold;
-  height: 36px;
-  justify-content: center;
-  width: 36px;
-`;
-
-const ItemsInCart = styled(`div`)`
-  align-items: center;
-  display: flex;
-  font-size: 0.8rem;
-  line-height: 1.2;
-  text-align: right;
-
-  ${ItemsNumber} {
-    margin-left: ${spacing.xs}px;
-    margin-right: ${spacing.md}px;
   }
 `;
 
@@ -174,8 +148,8 @@ const Cost = styled(`div`)`
 `;
 
 const Total = styled(Cost)`
-  border-top: 1px solid ${colors.brandBright};
-  color: ${colors.brandDark};
+  border-top: 1px solid ${colors.neutral2};
+  color: ${colors.mainDark};
   margin-top: ${spacing.xs}px;
   padding-top: ${spacing.sm}px;
 

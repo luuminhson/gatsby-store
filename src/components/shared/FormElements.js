@@ -5,8 +5,8 @@ import { PrimaryButton } from './Buttons';
 import { colors, radius, spacing } from '../../utils/styles';
 
 export const Input = styled(`input`)`
-  background-color: ${colors.lightest};
-  border: 1px solid ${colors.brandBright};
+  background-color: ${colors.white};
+  border: 1px solid ${colors.neutral2};
   border-radius: ${radius.default}px;
   color: ${colors.text};
   display: block;

@@ -12,11 +12,17 @@ const ProductListingContainer = styled(`div`)`
   flex-direction: column;
   justify-content: center;
   padding: ${spacing.lg}px;
+  margin: 0 auto;
 
-  @media (min-width: ${breakpoints.desktop}px) {
+  @media (min-width: ${breakpoints.tablet}px) {
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: flex-start;
     padding: ${spacing['2xl']}px;
+  }
+
+  @media (min-width: ${breakpoints.desktop}px) {
+    max-width: ${breakpoints.fhd}px;
   }
 `;
 
@@ -38,6 +44,7 @@ const ProductListing = () => (
                 shopifyId
                 title
                 price
+                compareAtPrice
                 availableForSale
               }
               images {

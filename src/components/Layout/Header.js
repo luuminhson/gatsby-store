@@ -11,8 +11,7 @@ import { breakpoints, colors, dimensions, spacing } from '../../utils/styles';
 const HeaderRoot = styled('header')`
   display: ${props => (props.isCovered ? 'none' : 'flex')};  
   align-items: center;
-  background-color: ${colors.lightest};
-  border-bottom: 1px solid ${colors.brandLight};
+  background-color: ${colors.white};
   box-sizing: border-box;
   height: ${dimensions.headerHeightMobile};
   justify-content: space-between;
@@ -26,6 +25,7 @@ const HeaderRoot = styled('header')`
   @media (min-width: ${breakpoints.desktop}px) {
     height: ${dimensions.headerHeightDesktop};
     padding: 0 ${spacing['4xl']}px;
+    position: relative;
 
     &.covered {
       display: none;
