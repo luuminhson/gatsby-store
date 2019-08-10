@@ -6,12 +6,10 @@ import ProductImagesMobile from './ProductImagesMobile';
 import ProductImagesDesktop from './ProductImagesDesktop';
 import ProductSpecs from './ProductSpecs';
 import ProductForm from './ProductForm';
-import BackLink from './BackLink';
 
-import { breakpoints, mediaQuery, colors, spacing } from '../../utils/styles';
+import { breakpoints, mediaQuery, colors, spacing, headerHeight } from '../../utils/styles';
 
 const ProductPageRoot = styled('div')`
-  background-color: ${colors.mainLight};
   padding-bottom: ${spacing.md}px;
   margin: 0 auto;
 
@@ -19,10 +17,15 @@ const ProductPageRoot = styled('div')`
     align-items: center;
     display: flex;
     justify-content: center;
-    min-height: calc(100vh - 110px);
+    min-height: calc(100vh - ${headerHeight.tablet});
+    background-color: ${colors.mainLight};
     padding: ${spacing.xl}px;
     width: 100%;
     max-width: ${breakpoints.fhd}px;
+  }
+
+  ${mediaQuery.desktop} {
+    min-height: calc(100vh - ${headerHeight.desktop});
   }
 `;
 
@@ -30,16 +33,16 @@ const Container = styled(`div`)`
   ${mediaQuery.tabletFrom} {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
   }
 `;
 
 const Details = styled(`div`)`
   position: relative;
-  flex: 1 0 50%;
 
   ${mediaQuery.tabletFrom} {
+    flex: 1 0 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -80,7 +83,6 @@ class ProductPage extends Component {
             />
           )}
           <Details>
-            <BackLink>Back to Product List</BackLink>
             <ProductSpecs product={product} />
             <ProductForm id={id} variants={variants} />
           </Details>

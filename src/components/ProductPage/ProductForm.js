@@ -10,7 +10,7 @@ import {
 
 import { Fieldset, Input, Label, Select, Submit } from '../shared/FormElements';
 
-import { breakpoints, colors, spacing, radius } from '../../utils/styles';
+import { colors, spacing, radius, mediaQuery } from '../../utils/styles';
 
 import StoreContext from '../../context/StoreContext';
 
@@ -18,13 +18,14 @@ const Form = styled(`form`)`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: ${spacing['2xl']}px ${spacing.md}px 0;
+  padding: ${spacing['2xl']}px ${spacing.xl}px 0;
 
-  @media (min-width: ${breakpoints.tablet}px) {
+  ${mediaQuery.tablet} {
     padding: ${spacing['2xl']}px ${spacing.xl}px 0;
+    justify-content: flex-start;
   }
 
-  @media (min-width: ${breakpoints.desktop}px) {
+  ${mediaQuery.desktop} {
     justify-content: flex-start;
   }
 `;
@@ -63,6 +64,7 @@ const ErrorMsgs = styled(`ul`)`
 `;
 
 const QtyFieldset = styled(Fieldset)`
+  display: none;
   flex-basis: 65px;
   flex-grow: 0;
   flex-shrink: 0;
@@ -78,8 +80,9 @@ const QtyFieldset = styled(Fieldset)`
   }
 `;
 
-const SizeFieldset = styled(Fieldset)`
-  flex-basis: calc(100% - ${spacing.md}px - 70px);
+const VariantFieldset = styled(Fieldset)`
+  flex-basis: 100%;
+  margin-bottom: ${spacing.md}px;
 
   ${Label} {
     justify-content: space-between;
@@ -90,7 +93,13 @@ const AddToCartButton = styled(Submit)`
   align-self: flex-end;
   flex-grow: 1;
   height: ${props => (props.fullWidth ? 'auto' : '')};
-  width: ${props => (props.fullWidth ? '100%' : 'auto')};
+  flex-basis: 100%;
+
+  ${mediaQuery.tabletFrom} {
+    flex-basis: auto;
+    width: auto;
+    max-width: 240px;
+  }
 `;
 
 class ProductForm extends Component {
@@ -136,7 +145,7 @@ class ProductForm extends Component {
     if (this.state.variant === '' || this.state.variant === '.') {
       errors.push({
         field: 'variant',
-        msg: 'Please select a <b>size</b>.'
+        msg: 'Please select a product option.'
       });
     }
 
@@ -179,7 +188,6 @@ class ProductForm extends Component {
               </ErrorMsgs>
             </Errors>
             <QtyFieldset>
-              <Label htmlFor="quantity">Qty.</Label>
               <Input
                 type="number"
                 id="quantity"
@@ -191,10 +199,7 @@ class ProductForm extends Component {
               />
             </QtyFieldset>
             {hasVariants && (
-              <SizeFieldset>
-                <Label htmlFor="variant">
-                  Options{' '}
-                </Label>
+              <VariantFieldset>
                 <Select
                   id="variant"
                   value={this.state.variant}
@@ -202,7 +207,7 @@ class ProductForm extends Component {
                   onChange={this.handleChange}
                 >
                   <option disabled value="">
-                    Choose Size
+                    Options...
                   </option>
                   {variants.map(variant => (
                     <option
@@ -214,12 +219,12 @@ class ProductForm extends Component {
                     </option>
                   ))}
                 </Select>
-              </SizeFieldset>
+              </VariantFieldset>
             )}
             <AddToCartButton
               type="submit"
               disabled={isOutOfStock}
-              fullWidth={hasVariants}
+              fullWidth={!hasVariants}
             >
               {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
               {isOutOfStock ? <MdSentimentDissatisfied /> : <MdShoppingCart />}

@@ -7,7 +7,7 @@ import InterfaceContext from '../../context/InterfaceContext';
 
 import { breakpoints, mediaQuery, colors, radius, spacing } from '../../utils/styles';
 
-const THUMBNAIL_SIZE = '44px';
+const THUMBNAIL_SIZE = '80px';
 
 const ProductThumbnailsRoot = styled(`div`)`
   height: ${THUMBNAIL_SIZE};
@@ -17,8 +17,10 @@ const ProductThumbnailsRoot = styled(`div`)`
   width: 100%;
 
   ${mediaQuery.tabletFrom} {
+    flex: 1 0 auto;
     height: auto;
     width: auto;
+    max-width: calc(${THUMBNAIL_SIZE} + ${spacing.xs * 2}px);
     padding: ${spacing.xs}px 0;
     margin-right: ${spacing.md}px;
     overflow-x: hidden;
@@ -103,7 +105,6 @@ class ProductThumbnails extends Component {
                 );
               })}
             </ProductThumbnailsContent>
-            {console.log(featureProductImage)}
           </ProductThumbnailsRoot>
         )}
       </InterfaceContext.Consumer>

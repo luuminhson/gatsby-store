@@ -2,40 +2,38 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 
-import { breakpoints, colors, fontFamily, spacing } from '../../utils/styles';
+import { fontWeight, FontStyle, spacing, mediaQuery } from '../../utils/styles';
 import { priceWithCommas } from '../../utils/helpers';
 
 const ProductSpecsRoot = styled(`div`)`
-  padding: 0 ${spacing.md}px;
+  padding: 0 ${spacing.xl}px;
 
-  @media (min-width: ${breakpoints.tablet}px) {
-    padding: ${spacing['2xl']}px ${spacing.xl}px 0;
+  ${mediaQuery.tabletFrom} {
+    padding: 0 ${spacing.xl}px;
   }
 `;
 
-const Name = styled(`h1`)`
-  color: ${colors.mainDark};
-  font-family: ${fontFamily.heading};
-  font-size: 1.8rem;
-  font-weight: 500;
-  margin: 0;
-`;
+const PriceRow = styled(`div`)`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: ${spacing.lg}px;
 
-const Description = styled(`p`)`
-  color: ${colors.text};
-  font-size: 1rem;
-  line-height: 1.5;
-`;
-
-const Price = styled(`div`)`
-  color: ${colors.brand};
-  font-size: 1.8rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-
-  span {
-    color: ${colors.textLight};
+  ${mediaQuery.tabletFrom} {
+    margin-top: ${spacing.lg}px;
+    margin-bottom: ${spacing.xl}px;
   }
+`;
+
+const Price = styled(FontStyle.h3)`
+  font-weight: ${fontWeight.heading.medium};  
+  margin-right: 8px;
+`;
+
+const SalePrice = styled(FontStyle.h4)`
+  text-decoration: line-through;
+  font-weight: ${fontWeight.heading.normal};
+  opacity: 0.5;
 `;
 
 const ProductSpecs = props => {
@@ -47,15 +45,18 @@ const ProductSpecs = props => {
     }
   } = props;
 
-  const { price } = variant;
+  const { price, compareAtPrice } = variant;
 
   return (
     <ProductSpecsRoot>
-      <Name>{title}</Name>
-      <Description>{description}</Description>
-      <Price>
-        {priceWithCommas(price)} VND
-      </Price>
+      <FontStyle.h1>{title}</FontStyle.h1>
+      <PriceRow>
+        <Price>{priceWithCommas(price)} VND</Price>
+        {compareAtPrice && compareAtPrice !== null &&
+          <SalePrice>{priceWithCommas(compareAtPrice)} VND</SalePrice>
+        }
+      </PriceRow>
+      <FontStyle.body>{description}</FontStyle.body>
     </ProductSpecsRoot>
   );
 };

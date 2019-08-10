@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Image from 'gatsby-image';
 import styled, { keyframes } from 'react-emotion';
-import { MdZoomIn } from 'react-icons/md';
 
-import { breakpoints, colors, radius, spacing } from '../../utils/styles';
+import { breakpoints, colors, radius, spacing, mediaQuery } from '../../utils/styles';
 
 export const IMAGE_CHANGE_ANIM_DURATION = 250;
 
@@ -18,41 +17,41 @@ const change = keyframes`
 `;
 
 const ProductImageLink = styled(`a`)`
-  flex: 1 0 auto;
-  width: auto;
-  display: block;
+  flex: 1 0 100%;
+  display: inline-block;
   position: relative;
+  scroll-snap-align: center;
+  width: 100%;
+  max-width: 80vw;
+  box-sizing: border-box;
+  padding: ${spacing.md}px;
+  margin-bottom: ${spacing.lg}px;
+
+  &:last-child {
+    max-width: calc(80vw + ${spacing.md}px);
+    padding-right: ${spacing.xl}px;
+  }
+
+  &.single,
+  &.single:last-child {
+    max-width: calc(100vw - ${spacing.lg}px);
+    padding-right: ${spacing.md}px;
+  }
 
   &.change {
     animation: ${change} ${IMAGE_CHANGE_ANIM_DURATION}ms ease-out forwards;
   }
 
-  @media (min-width: ${breakpoints.desktop}px) {
+  ${mediaQuery.tabletFrom} {
+    width: auto;
     cursor: zoom-in;
-  }
-`;
-
-const ZoomHelper = styled(`span`)`
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: ${radius.large}px;
-  display: flex;
-  left: ${spacing['xs']}px;
-  padding: ${spacing['xs']}px;
-  position: absolute;
-  top: ${spacing['xs']}px;
-
-  svg {
-    fill: ${colors.brand};
-    height: 24px;
-    width: 24px;
-  }
-
-  @media (min-width: ${breakpoints.desktop}px) {
-    display: none;
+    flex: 1 0 auto;
+    margin-bottom: 0;
   }
 `;
 
 export const StyledImage = styled(Image)`
+  background-color: ${colors.mainLight};
   border-radius: ${radius.large}px;
 
   img {
@@ -88,7 +87,8 @@ class ProductImage extends Component {
         }
       },
       onClick,
-      imageFeatured = null
+      imageFeatured = null,
+      single
     } = this.props;
 
     return (
@@ -98,11 +98,9 @@ class ProductImage extends Component {
         }}
         href={fluid.src}
         onClick={this.handleClick(onClick)}
+        className={ single ? 'single' : null }
       >
         <StyledImage fluid={imageFeatured ? featuredFluid : fluid} alt="" />
-        <ZoomHelper>
-          <MdZoomIn />
-        </ZoomHelper>
       </ProductImageLink>
     );
   }
@@ -111,7 +109,8 @@ class ProductImage extends Component {
 ProductImage.propTypes = {
   image: PropTypes.object.isRequired,
   onClick: PropTypes.func,
-  imageFeatured: PropTypes.object
+  imageFeatured: PropTypes.object,
+  single: PropTypes.bool
 };
 
 export default ProductImage;
