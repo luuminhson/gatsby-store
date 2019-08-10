@@ -5,18 +5,22 @@ import Image from 'gatsby-image';
 
 import InterfaceContext from '../../context/InterfaceContext';
 
-import { breakpoints, colors, radius, spacing } from '../../utils/styles';
+import { breakpoints, mediaQuery, colors, radius, spacing } from '../../utils/styles';
 
 const THUMBNAIL_SIZE = '44px';
 
 const ProductThumbnailsRoot = styled(`div`)`
   height: ${THUMBNAIL_SIZE};
+  padding: 0 ${spacing.xs}px;
   -webkit-overflow-scrolling: touch;
   overflow-x: scroll;
   width: 100%;
 
-  @media (min-width: ${breakpoints.desktop}px) {
+  ${mediaQuery.tabletFrom} {
     height: auto;
+    width: auto;
+    padding: ${spacing.xs}px 0;
+    margin-right: ${spacing.md}px;
     overflow-x: hidden;
   }
 `;
@@ -24,37 +28,55 @@ const ProductThumbnailsRoot = styled(`div`)`
 export const ProductThumbnailsContent = styled(`div`)`
   display: inline-flex;
   height: 100%;
-  padding-left: ${spacing.md}px;
 
-  @media (min-width: ${breakpoints.desktop}px) {
+  ${mediaQuery.tabletFrom} {
+    flex-direction: column;
     justify-content: center;
     min-width: 100%;
-    padding: ${spacing.lg}px 0 0;
   }
 `;
 
 export const Thumbnail = styled(`a`)`
-  border: 1px solid ${colors.neutral2};
   border-radius: ${radius.default}px;
   height: ${THUMBNAIL_SIZE};
-  margin-right: ${spacing.md}px;
+  margin: ${spacing.xs}px;
   width: ${THUMBNAIL_SIZE};
+  opacity: 0.6;
+  box-shadow: 0 0 0 1px ${colors.neutral2};
+  transition: all 0.2s ease-in-out;
+
+  &.active {
+    opacity: 1;
+    box-shadow: 0 0 0 2px ${colors.mainDark};
+  }
 
   @media (min-width: ${breakpoints.desktop}px) {
     cursor: pointer;
-    margin-right: ${spacing.md}px;
   }
 `;
 
 class ProductThumbnails extends Component {
-  handleClick = (image, callback) => event => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeIndex: 0
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick = (index, image, callback) => event => {
     event.preventDefault();
 
     callback(image);
+
+    this.setState({
+      activeIndex: index
+    });
   };
 
   render() {
     const { images, className = '' } = this.props;
+    const { activeIndex } = this.state;
 
     return (
       <InterfaceContext.Consumer>
@@ -72,7 +94,8 @@ class ProductThumbnails extends Component {
                 return (
                   <Thumbnail
                     key={id}
-                    onClick={this.handleClick(image, featureProductImage)}
+                    className={activeIndex == idx ? 'active' : ''}
+                    onClick={this.handleClick(idx, image, featureProductImage)}
                     href={fluid.src}
                   >
                     <Image fluid={fluid} />
@@ -80,6 +103,7 @@ class ProductThumbnails extends Component {
                 );
               })}
             </ProductThumbnailsContent>
+            {console.log(featureProductImage)}
           </ProductThumbnailsRoot>
         )}
       </InterfaceContext.Consumer>

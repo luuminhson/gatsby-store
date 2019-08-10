@@ -8,38 +8,41 @@ import ProductSpecs from './ProductSpecs';
 import ProductForm from './ProductForm';
 import BackLink from './BackLink';
 
-import { breakpoints, spacing } from '../../utils/styles';
+import { breakpoints, mediaQuery, colors, spacing } from '../../utils/styles';
 
 const ProductPageRoot = styled('div')`
+  background-color: ${colors.mainLight};
   padding-bottom: ${spacing.md}px;
+  margin: 0 auto;
 
-  @media (min-width: ${breakpoints.desktop}px) {
+  ${mediaQuery.tabletFrom} {
     align-items: center;
     display: flex;
     justify-content: center;
     min-height: calc(100vh - 110px);
     padding: ${spacing.xl}px;
     width: 100%;
+    max-width: ${breakpoints.fhd}px;
   }
 `;
 
 const Container = styled(`div`)`
-  @media (min-width: ${breakpoints.desktop}px) {
-    align-items: flex-start;
+  ${mediaQuery.tabletFrom} {
     display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
   }
 `;
 
 const Details = styled(`div`)`
   position: relative;
+  flex: 1 0 50%;
 
-  @media (min-width: ${breakpoints.desktop}px) {
+  ${mediaQuery.tabletFrom} {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-right: -${spacing.xl}px;
-    max-width: 400px;
-    min-height: 490px;
   }
 `;
 

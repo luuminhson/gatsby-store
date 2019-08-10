@@ -186,7 +186,15 @@ const CloseButton = styled(Button)`
 `;
 
 const ActionsThumbnails = styled(ProductThumbnails)`
-  @media (min-width: ${breakpoints.desktop}px) {
+  margin-right: 0 !important;
+  padding: ${spacing.lg}px 0 !important;
+  width: 100% !important;
+
+  & > div > a {
+    margin: 0;
+  }
+
+  @media (min-width: ${breakpoints.tablet}px) {
     ${ProductThumbnailsContent} {
       align-items: center;
       flex-direction: column;

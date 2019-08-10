@@ -37,7 +37,7 @@ const Toggle = styled(`button`)`
   align-items: center;
   background: transparent;
   border: 0;
-  border-radius: ${radius.large}px ${radius.large}px 0 0;
+  border-radius: ${radius.large}px;
   cursor: pointer;
   display: flex;
   height: 46px;
@@ -56,7 +56,7 @@ const Toggle = styled(`button`)`
 
 const Caption = styled(`div`)`
   background: rgba(0, 0, 0, 0.7);
-  border-radius: ${radius.large}px ${radius.large}px 0 0;
+  border-radius: ${radius.large}px;
   font-size: 1.1rem;
   padding: ${spacing.sm}px ${spacing.lg}px;
   padding-right: calc(${spacing.lg}px + 46px);
@@ -67,38 +67,7 @@ const Caption = styled(`div`)`
   }
 
   .minimized & {
-    border-radius: ${radius.large}px 0 0 ${radius.large}px;
-  }
-`;
-
-const UserPhotoHint = styled(`div`)`
-  background: rgba(68, 34, 102, 0.9);
-  border-radius: 0 0 ${radius.large}px ${radius.large}px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  padding: ${spacing.sm}px ${spacing.lg}px;
-  position: relative;
-  width: 100%;
-
-  .minimized & {
-    display: none;
-  }
-
-  span:last-child {
-    display: none;
-  }
-
-  &.expanded {
-    span:last-child {
-      display: inline;
-    }
-    strong {
-      display: none;
-    }
-  }
-
-  a {
-    color: inherit;
+    border-radius: ${radius.large}px;
   }
 `;
 
@@ -143,20 +112,6 @@ class CommunityCaption extends Component {
             <p dangerouslySetInnerHTML={{ __html: caption }} />
           )}
         </Caption>
-        <UserPhotoHint
-          onClick={this.toggleIncentive}
-          className={hintExpanded ? 'expanded' : ''}
-        >
-          <span>We want to see your Gatsby swag photos!</span>{' '}
-          <strong>Read more...</strong>
-          <span>
-            Upload your photos to{' '}
-            <a href="https://github.com/gatsbyjs/store.gatsbyjs.org/issues/143">
-              the official photo sharing issue
-            </a>{' '}
-            and it may be featured in the store!
-          </span>
-        </UserPhotoHint>
         <Toggle onClick={this.toggle}>
           {minimized ? <MdKeyboardArrowUp /> : <MdClose />}
         </Toggle>

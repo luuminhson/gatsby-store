@@ -18,6 +18,8 @@ const change = keyframes`
 `;
 
 const ProductImageLink = styled(`a`)`
+  flex: 1 0 auto;
+  width: auto;
   display: block;
   position: relative;
 
@@ -52,7 +54,10 @@ const ZoomHelper = styled(`span`)`
 
 export const StyledImage = styled(Image)`
   border-radius: ${radius.large}px;
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+
+  img {
+    display: block;
+  }
 `;
 
 class ProductImage extends Component {
