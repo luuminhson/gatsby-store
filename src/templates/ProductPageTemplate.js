@@ -86,6 +86,7 @@ export const query = graphql`
         shopifyId
         title
         price
+        compareAtPrice
         availableForSale
       }
       images {
