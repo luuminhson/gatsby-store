@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 
-import { breakpoints, colors, fonts, spacing } from '../../utils/styles';
+import { breakpoints, colors, fontFamily, spacing } from '../../utils/styles';
+import { priceWithCommas } from '../../utils/helpers';
 
 const ProductSpecsRoot = styled(`div`)`
   padding: 0 ${spacing.md}px;
@@ -13,8 +14,8 @@ const ProductSpecsRoot = styled(`div`)`
 `;
 
 const Name = styled(`h1`)`
-  color: ${colors.brandDark};
-  font-family: ${fonts.heading};
+  color: ${colors.mainDark};
+  font-family: ${fontFamily.heading};
   font-size: 1.8rem;
   font-weight: 500;
   margin: 0;
@@ -37,9 +38,6 @@ const Price = styled(`div`)`
   }
 `;
 
-const removeCareInstructions = desc =>
-  desc.split(/Care Instructions/).slice(0, 1);
-
 const ProductSpecs = props => {
   const {
     product: {
@@ -54,9 +52,9 @@ const ProductSpecs = props => {
   return (
     <ProductSpecsRoot>
       <Name>{title}</Name>
-      <Description>{removeCareInstructions(description)}</Description>
+      <Description>{description}</Description>
       <Price>
-        <span>USD</span> ${price}
+        {priceWithCommas(price)} VND
       </Price>
     </ProductSpecsRoot>
   );

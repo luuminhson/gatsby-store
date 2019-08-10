@@ -5,9 +5,6 @@ import Helmet from 'react-helmet';
 import InterfaceContext from '../context/InterfaceContext';
 import ProductPage from '../components/ProductPage';
 
-const removeCareInstructions = desc =>
-  desc.split(/Care Instructions/).slice(0, 1);
-
 const ProductPageTemplate = props => {
   const {
     site,
@@ -15,7 +12,7 @@ const ProductPageTemplate = props => {
     shopifyProduct: { title, description: fullDescription, handle }
   } = props.data;
 
-  const description = removeCareInstructions(fullDescription);
+  const description = fullDescription;
   const image = product.images[0].localFile.childImageSharp.fluid.src;
 
   return (

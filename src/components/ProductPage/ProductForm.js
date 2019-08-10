@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 
 import {
-  MdInfoOutline,
   MdErrorOutline,
   MdShoppingCart,
   MdSentimentDissatisfied
@@ -14,7 +13,6 @@ import { Fieldset, Input, Label, Select, Submit } from '../shared/FormElements';
 import { breakpoints, colors, spacing, radius } from '../../utils/styles';
 
 import StoreContext from '../../context/StoreContext';
-import Link from '../shared/Link';
 
 const Form = styled(`form`)`
   display: flex;
@@ -42,7 +40,7 @@ const ErrorSign = styled(`div`)`
   align-items: center;
   background: ${colors.error};
   border-radius: ${radius.default}px 0 0 ${radius.default}px;
-  color: ${colors.lightest};
+  color: ${colors.white};
   display: flex;
   flex-basis: 40px;
   justify-content: center;
@@ -86,14 +84,6 @@ const SizeFieldset = styled(Fieldset)`
   ${Label} {
     justify-content: space-between;
   }
-`;
-
-const InfoLinks = styled(`div`)`
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  margin-top: ${spacing.lg}px;
-  width: 100%;
 `;
 
 const AddToCartButton = styled(Submit)`
@@ -203,11 +193,7 @@ class ProductForm extends Component {
             {hasVariants && (
               <SizeFieldset>
                 <Label htmlFor="variant">
-                  Size{' '}
-                  <Link to="/product-details">
-                    <MdInfoOutline />
-                    <span>Size Chart</span>
-                  </Link>
+                  Options{' '}
                 </Label>
                 <Select
                   id="variant"
@@ -238,15 +224,6 @@ class ProductForm extends Component {
               {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
               {isOutOfStock ? <MdSentimentDissatisfied /> : <MdShoppingCart />}
             </AddToCartButton>
-            <InfoLinks>
-              <Link to="/product-details#materials-fit">
-                <span>Materials & Fit</span>
-              </Link>
-              &nbsp; • &nbsp;
-              <Link to="/product-details#care-instructions">
-                <span>Care instructions</span>
-              </Link>
-            </InfoLinks>
           </Form>
         )}
       </StoreContext.Consumer>
