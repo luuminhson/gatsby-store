@@ -22,14 +22,18 @@ const HeaderRoot = styled('header')`
   top: 0;
   z-index: 1000;
 
-  @media (min-width: ${breakpoints.desktop}px) {
-    height: ${dimensions.headerHeightDesktop};
+  @media (min-width: ${breakpoints.tablet}px) {
+    height: ${dimensions.headerHeightTablet};
     padding: 0 ${spacing['4xl']}px;
     position: relative;
 
     &.covered {
       display: none;
     }
+  }
+
+  @media (min-width: ${breakpoints.desktop}px) {
+    height: ${dimensions.headerHeightDesktop};
   }
 `;
 
