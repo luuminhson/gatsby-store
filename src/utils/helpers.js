@@ -13,12 +13,6 @@ export const debounce = (delay, fn) => {
   };
 };
 
-export const removeCareInstructions = desc =>
-  desc
-    .split(/Care Instructions/)
-    .slice(0, 1)
-    .join('');
-
 export const cutDescriptionShort = (desc, limit) => {
   if (desc.length > limit) {
     return `${desc.slice(0, limit).trim()}...`;
@@ -26,3 +20,7 @@ export const cutDescriptionShort = (desc, limit) => {
 
   return desc;
 };
+
+export const priceWithCommas = (x) => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

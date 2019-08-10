@@ -1,4 +1,4 @@
-import { keyframes } from 'react-emotion';
+import styled, { keyframes } from 'react-emotion';
 
 /*
  * NOTE: use a six-character hex code for all colors to allow alpha channel
@@ -8,11 +8,12 @@ import { keyframes } from 'react-emotion';
  *    // use the brand color at 25% opacity
  *    border-color: ${colors.brand}40;
  */
+
+/* COLORS
+--------------------------------------------------------------- */
+
 export const colors = {
-  brandDarker: '#221133',
-  brandDark: '#442266',
   brand: '#D24D57',
-  brandBright: '#e0d6eb',
   brandLight: '#f5f3f7',
   brandLighter: '#fbfafc',
   lightest: '#ffffff',
@@ -24,23 +25,51 @@ export const colors = {
   lilac: `#8c65b3`,
   accent: `#ffb238`,
   error: `#ec1818`,
-  lemon: `#ffdf37`,
 
-  mainDark: `#222`,
+  black: `#000000`,
+  white: `#ffffff`,
+
+  mainDark: `#222222`,
+  mainLight: `#F9F9FB`,
+
+  mainBranding: `#1F3A93`, // Jacksons Purple
+  mainClickable: `#D24D57`, // Chesnut Rose
+  mainHighlight: `#F9B42D`, // Sea Buckthorn
+  mainSupport: `#1BA39C`, // Light Sea Green
+
+  neutral1: `#F6F7F9`, // Mystic
+  neutral2: `#E4E9ED`, // Solitude
+  neutral3: `#6C7A89`, // Lynch
+  neutral4: `#6C7A89`, // Lynch
+  neutral5: `#4A5460`, // Lynch Dark
+  neutral6: `#2E3131`, // Outter Space
+
+  darkTrans: `rgba(232,236,241,0.4)`,
+  lightTrans: `rgba(249,249,251,0.8)`,
 };
 
-export const badgeThemes = {
-  BUILDWITHGATSBY: {
-    level: 1,
-    backgroundTheme: colors.brand,
-    textTheme: colors.lemon
-  },
-  HOLYBUCKETS: {
-    level: 2,
-    backgroundTheme: colors.lemon,
-    textTheme: colors.brandDark
-  }
+/* BREAKPOINTS
+--------------------------------------------------------------- */
+
+export const breakpoints = {
+  mobile: 400,
+  phablet: 550,
+  tablet: 750,
+  desktop: 1280,
+  hd: 1440,
+  fhd: 1920,
 };
+
+export const mediaQuery = {
+  phone: `@media (max-width: ${breakpoints.tablet - 1}px)`,
+  tablet: `@media (max-width: ${breakpoints.desktop - 1}px)`,
+  desktop: `@media (min-width: ${breakpoints.desktop}px)`,
+  desktopLarge: `@media (min-width: ${breakpoints.hd}px)`,
+  desktopXLarge: `@media (min-width: ${breakpoints.fhd}px)`,
+}
+
+/* SPACING
+--------------------------------------------------------------- */
 
 export const spacing = {
   '3xs': 2,
@@ -55,18 +84,39 @@ export const spacing = {
   '4xl': 60,
 };
 
-export const breakpoints = {
-  mobile: 400,
-  phablet: 550,
-  tablet: 750,
-  desktop: 1000,
-  hd: 1300
+/* DIMENSIONS
+--------------------------------------------------------------- */
+
+export const dimensions = {
+  headerHeightDesktop: '180px',
+  headerHeightMobile: '100px',
+  cartWidthDesktop: '400px',
+  pictureBrowserAction: {
+    widthDesktop: '200px',
+    heightMobile: '80px'
+  }
 };
 
-export const radius = {
-  default: 2,
-  large: 4
-};
+/* HEADER
+--------------------------------------------------------------- */
+
+export const headerHeight = {
+  phone: '68px',
+  tablet: '96px',
+  desktop: '180px',
+}
+
+/* LOGO
+--------------------------------------------------------------- */
+
+export const logoHeight = {
+  phone: '24px',
+  tablet: '48px',
+  desktop: '60px'
+}
+
+/* TYPOGRAPHY
+--------------------------------------------------------------- */
 
 export const defaultFontStack = [
   '-apple-system',
@@ -92,33 +142,171 @@ const monospaceFontStack = [
   `monospace`
 ].join();
 
-export const fonts = {
+export const fontFamily = {
   body: `Source Sans Pro, ${defaultFontStack}`,
   heading: `Fira Sans Condensed, ${defaultFontStack}`,
   monospace: monospaceFontStack
 };
 
-export const dimensions = {
-  headerHeightDesktop: '180px',
-  headerHeightMobile: '100px',
-  cartWidthDesktop: '400px',
-  contributorAreaWidth: {
-    closedDesktop: '60px',
-    openDesktop: '340px',
-    openHd: '420px'
+const fontSize = {
+  h1: {
+    mobile: '1.75rem',
+    desktop: '3rem'
   },
-  contributorAreaBarHeight: '50px',
-  pictureBrowserAction: {
-    widthDesktop: '200px',
-    heightMobile: '80px'
+  h2: {
+    mobile: '1.5rem',
+    desktop: '2rem'
+  },
+  h3: {
+    mobile: '1.25rem',
+    desktop: '1.5rem'
+  },
+  h4: {
+    mobile: '1.125rem',
+    desktop: '1.25rem'
+  },
+  headline: '1rem',
+  body: '1rem',
+  smallbody: '0.875rem',
+  subtext: '0.75rem'
+}
+
+const lineHeight = {
+  h1: '64px',
+  h2: '48px',
+  h3: '36px',
+  h4: '24px',
+  headline: '24px',
+  body: '24px',
+  smallbody: '24px',
+  subtext: '20px'
+}
+
+export const fontWeight = {
+  heading: {
+    normal: 400,
+    medium: 500,
+    bold: 600,
+  },
+  body: {
+    normal: 400,
+    medium: 600,
+    bold: 700,
   }
+}
+
+const headingLetterSpacing = '0.5px';
+
+/* HEADING
+--------------------------------------------------------------- */
+
+const headingCommonStyle = (`
+  color: ${colors.mainDark};  
+  font-family: ${fontFamily.heading};
+  font-weight: ${fontWeight.heading.medium};
+  letter-spacing: ${headingLetterSpacing};
+  margin: 0;
+`);
+
+const bodyCommonStyle = (`
+  color: ${colors.mainDark};  
+  font-family: ${fontFamily.body};
+  font-weight: ${fontWeight.body.normal};
+`);
+
+export const H1 = styled(`h1`)`
+  ${headingCommonStyle}
+  font-size: ${fontSize.h1.mobile};
+  line-height: ${lineHeight.h1};
+
+  @media (min-width: ${breakpoints.tablet}px) {
+    font-size: ${fontSize.h1.desktop};
+  }
+`;
+
+export const H2 = styled(`h2`)`
+  ${headingCommonStyle}
+  font-size: ${fontSize.h2.mobile};
+  line-height: ${lineHeight.h2};
+
+  @media (min-width: ${breakpoints.tablet}px) {
+    font-size: ${fontSize.h2.desktop};
+  }
+`;
+
+export const H3 = styled(`h3`)`
+  ${headingCommonStyle}
+  font-size: ${fontSize.h3.mobile};
+  line-height: ${lineHeight.h3};
+
+  @media (min-width: ${breakpoints.tablet}px) {
+    font-size: ${fontSize.h3.desktop};
+  }
+`;
+
+export const H4 = styled(`h4`)`
+  ${headingCommonStyle}
+  font-size: ${fontSize.h4.mobile};
+  line-height: ${lineHeight.h4};
+
+  @media (min-width: ${breakpoints.tablet}px) {
+    font-size: ${fontSize.h4.desktop};
+  }
+`;
+
+const fontStyleHeadline = styled(`span`)`
+  ${headingCommonStyle}
+  font-size: ${fontSize.headline};
+  line-height: ${lineHeight.headline};
+`;
+
+const fontStyleBody = styled(`span`)`
+  ${bodyCommonStyle}
+  font-size: ${fontSize.body};
+  line-height: ${lineHeight.body};
+`;
+
+const fontStyleSmallbody = styled(`span`)`
+  ${bodyCommonStyle}
+  font-size: ${fontSize.smallbody};
+  line-height: ${lineHeight.smallbody};
+`;
+
+const fontStyleSubtext = styled(`span`)`
+  ${bodyCommonStyle}
+  font-size: ${fontSize.subtext};
+  line-height: ${lineHeight.subtext};
+`;
+
+export const FontStyle = {
+  h1: H1,
+  h2: H2,
+  h3: H3,
+  h4: H4,
+  headline: fontStyleHeadline,
+  body: fontStyleBody,
+  smallbody: fontStyleSmallbody,
+  subtext: fontStyleSubtext
+};
+
+export const PageTitle = styled(H1)`
+  margin: 40px 0;
+  text-align: center;
+`;
+
+/* OTHERS
+--------------------------------------------------------------- */
+
+export const radius = {
+  default: 2,
+  large: 5
 };
 
 export const scrollbarStyles = {
   WebkitOverflowScrolling: `touch`,
   '&::-webkit-scrollbar': { width: `6px`, height: `6px` },
-  '&::-webkit-scrollbar-thumb': { background: colors.brandBright },
-  '&::-webkit-scrollbar-thumb:hover': { background: colors.lilac },
+  '&::-webkit-scrollbar-thumb': { background: colors.neutral2 },
+  '&::-webkit-scrollbar-thumb:hover': { background: colors.mainClickable },
   '&::-webkit-scrollbar-track': { background: colors.brandLight }
 };
 
