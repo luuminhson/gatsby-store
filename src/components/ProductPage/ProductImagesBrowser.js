@@ -4,7 +4,6 @@ import Image from 'gatsby-image';
 import styled, { keyframes } from 'react-emotion';
 import { MdClose, MdZoomIn, MdZoomOut } from 'react-icons/md';
 
-import ImageCaption from './ImageCaption';
 import ProductThumbnails, {
   ProductThumbnailsContent,
   Thumbnail
@@ -301,7 +300,7 @@ class ProductImagesBrowser extends Component {
   };
 
   render() {
-    const { images, position, imageFeatured, toggle } = this.props;
+    const { images, position, imageFeatured, imageFeaturedIndex, toggle } = this.props;
     const image = imageFeatured ? imageFeatured : images[0];
 
     const {
@@ -320,7 +319,7 @@ class ProductImagesBrowser extends Component {
         </CloseButton>
 
         <ThumbnailListWrapper>
-          <ThumbnailList images={images} />
+          <ThumbnailList images={images} activeIdx={imageFeaturedIndex} />
         </ThumbnailListWrapper>
 
         <ZoomArea
@@ -338,10 +337,8 @@ class ProductImagesBrowser extends Component {
             }}
           >
             <Image fluid={fluid} />
+            {/* {console.log(`Outside prop: ${imageFeaturedIndex}`)} */}
           </ImageBox>
-          {/* {altText && (
-            <ImageCaption caption={altText} superZoom={superZoom} />
-          )} */}
         </ZoomArea>
         <ZoomHelper>{superZoom ? <MdZoomOut /> : <MdZoomIn />}</ZoomHelper>
       </ProductImagesBrowserRoot>
@@ -354,6 +351,7 @@ ProductImagesBrowser.propTypes = {
   position: PropTypes.string.isRequired,
   toggle: PropTypes.func.isRequired,
   imageFeatured: PropTypes.object,
+  imageFeaturedIndex: PropTypes.number,
   isDesktopViewport: PropTypes.bool
 };
 

@@ -82,14 +82,16 @@ export default class Layout extends React.Component {
           }
         }));
       },
-      featureProductThumb: idx => {
+
+      featureProductImageIndex: idx => {
         this.setState(state => ({
           interface: {
             ...state.interface,
-            productThumbFeatured: idx
+            productImageFeaturedIndex: idx
           }
         }));
       },
+
       setCurrentProductImages: images => {
         this.setState(state => ({
           interface: {
@@ -259,8 +261,10 @@ export default class Layout extends React.Component {
                 toggleCart,
                 productImagesBrowserStatus,
                 currentProductImages,
-                featureProductImage,
+                // featureProductImage,
+                // featureProductImageIndex,
                 productImageFeatured,
+                productImageFeaturedIndex,
                 toggleProductImagesBrowser
               }) => (
                   <>
@@ -287,10 +291,11 @@ export default class Layout extends React.Component {
 
                       {currentProductImages.length > 0 && (
                         <ProductImagesBrowser
-                          featureProductImage={featureProductImage}
+                          // featureProductImage={featureProductImage}
                           images={currentProductImages}
                           position={productImagesBrowserStatus}
                           imageFeatured={productImageFeatured}
+                          imageFeaturedIndex={productImageFeaturedIndex}
                           toggle={toggleProductImagesBrowser}
                           isDesktopViewport={isDesktopViewport}
                         />

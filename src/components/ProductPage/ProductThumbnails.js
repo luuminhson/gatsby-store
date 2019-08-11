@@ -6,6 +6,7 @@ import Image from 'gatsby-image';
 import InterfaceContext from '../../context/InterfaceContext';
 
 import { breakpoints, mediaQuery, colors, radius, spacing } from '../../utils/styles';
+import { type } from 'os';
 
 const THUMBNAIL_SIZE = '80px';
 
@@ -67,14 +68,13 @@ class ProductThumbnails extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick = (index, image, callback) => event => {
+  handleClick = (index, callbackIndex, image, callbackImage) => event => {
     event.preventDefault();
 
-    callback(image);
+    callbackIndex(index);
+    
+    callbackImage(image);
 
-    this.setState({
-      activeIndex: index
-    });
   };
 
   render() {
@@ -83,7 +83,10 @@ class ProductThumbnails extends Component {
 
     return (
       <InterfaceContext.Consumer>
-        {({ featureProductImage }) => (
+        {({
+          featureProductImage,
+          featureProductImageIndex
+        }) => (
           <ProductThumbnailsRoot className={className}>
             <ProductThumbnailsContent>
               {images.map((image, idx) => {
@@ -97,8 +100,7 @@ class ProductThumbnails extends Component {
                 return (
                   <Thumbnail
                     key={id}
-                    className={activeIndex == idx ? 'active' : ''}
-                    onClick={this.handleClick(idx, image, featureProductImage)}
+                    onClick={this.handleClick(idx, featureProductImageIndex, image, featureProductImage)}
                     href={fluid.src}
                   >
                     <Image fluid={fluid} />
@@ -115,7 +117,8 @@ class ProductThumbnails extends Component {
 
 ProductThumbnails.propTypes = {
   images: PropTypes.array.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
+  activeIdx: PropTypes.number
 };
 
 export default ProductThumbnails;
