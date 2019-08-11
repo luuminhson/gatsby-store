@@ -227,7 +227,6 @@ class ProductForm extends Component {
               fullWidth={!hasVariants}
             >
               {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
-              {isOutOfStock ? <MdSentimentDissatisfied /> : <MdShoppingCart />}
             </AddToCartButton>
           </Form>
         )}

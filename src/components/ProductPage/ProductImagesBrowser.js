@@ -4,7 +4,7 @@ import Image from 'gatsby-image';
 import styled, { keyframes } from 'react-emotion';
 import { MdClose, MdZoomIn, MdZoomOut } from 'react-icons/md';
 
-import CommunityCaption from './CommunityCaption';
+import ImageCaption from './ImageCaption';
 import ProductThumbnails, {
   ProductThumbnailsContent,
   Thumbnail
@@ -13,11 +13,11 @@ import { Button } from '../shared/Buttons';
 import { debounce } from '../../utils/helpers';
 
 import {
-  breakpoints,
   colors,
   radius,
   spacing,
-  dimensions
+  dimensions,
+  mediaQuery
 } from '../../utils/styles';
 
 const IMAGE_CHANGE_ANIM_DURATION = 250;
@@ -76,9 +76,20 @@ const ProductImagesBrowserRoot = styled(`div`)`
     animation: ${exit} 200ms ease-out forwards;
   }
 
-  @media (min-width: ${breakpoints.desktop}px) {
+  ${mediaQuery.tabletFrom} { {
     flex-direction: row;
     height: 100vh;
+  }
+`;
+
+const CloseButton = styled(Button)`
+  position: absolute;
+  top: ${spacing.md}px;
+  right: ${spacing.md}px;
+  z-index: 1000;
+
+  svg {
+    margin: 0;
   }
 `;
 
@@ -105,7 +116,7 @@ const ZoomArea = styled(`div`)`
     animation: ${change} ${IMAGE_CHANGE_ANIM_DURATION}ms ease-out forwards;
   }
 
-  @media (min-width: ${breakpoints.desktop}px) {
+  ${mediaQuery.tabletFrom} { {
     border-bottom: none;
     border-left: 1px solid ${colors.brandLight};
     display: flex;
@@ -134,7 +145,7 @@ const ImageBox = styled(`a`)`
     }
   }
 
-  @media (min-width: ${breakpoints.desktop}px) {
+  ${mediaQuery.tabletFrom} { {
     cursor: ${props => (props.superZoom ? 'zoom-out' : 'zoom-in')};
     width: ${props => (props.superZoom ? '100%' : 'auto')};
 
@@ -159,19 +170,19 @@ const ZoomHelper = styled(`span`)`
     width: 34px;
   }
 
-  @media (min-width: ${breakpoints.desktop}px) {
+  ${mediaQuery.tabletFrom} { {
     display: none;
   }
 `;
 
-const Actions = styled(`div`)`
-  align-items: center;
+const ThumbnailListWrapper = styled(`div`)`
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-grow: 0;
-  height: ${dimensions.pictureBrowserAction.heightMobile};
-  padding-left: ${spacing.md}px;
+  padding: ${spacing.md}px;
 
-  @media (min-width: ${breakpoints.desktop}px) {
+  ${mediaQuery.tabletFrom} {
     align-items: center;
     flex-direction: column;
     height: 100vh;
@@ -181,30 +192,37 @@ const Actions = styled(`div`)`
   }
 `;
 
-const CloseButton = styled(Button)`
-  position: relative;
-`;
-
-const ActionsThumbnails = styled(ProductThumbnails)`
+const ThumbnailList = styled(ProductThumbnails)`
   margin-right: 0 !important;
-  padding: ${spacing.lg}px 0 !important;
-  width: 100% !important;
+  width: 100%;
+  height: auto;
 
-  & > div > a {
-    margin: 0;
+  ${ProductThumbnailsContent} {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: scroll;
+    align-items: center;
+    justify-content: center;
   }
 
-  @media (min-width: ${breakpoints.tablet}px) {
+  ${Thumbnail} {
+    width: 48px;
+    height: 48px;
+    margin: ${spacing.xs}px;
+  }
+
+  ${mediaQuery.tabletFrom} { {
+    padding: ${spacing.lg}px 0 !important;
+
     ${ProductThumbnailsContent} {
       align-items: center;
       flex-direction: column;
     }
 
     ${Thumbnail} {
-      height: 70px;
-      margin-bottom: ${spacing.md}px;
-      margin-right: 0;
-      width: 70px;
+      width: 64px;
+      height: 64px;
+      margin: ${spacing.md}px;
     }
   }
 `;
@@ -297,13 +315,13 @@ class ProductImagesBrowser extends Component {
 
     return (
       <ProductImagesBrowserRoot role="dialog" className={position}>
-        <Actions>
-          <CloseButton onClick={this.close(toggle)} ref={this.closeButton}>
-            <MdClose />
-            Close
-          </CloseButton>
-          <ActionsThumbnails images={images} />
-        </Actions>
+        <CloseButton onClick={this.close(toggle)} ref={this.closeButton}>
+          <MdClose />
+        </CloseButton>
+
+        <ThumbnailListWrapper>
+          <ThumbnailList images={images} />
+        </ThumbnailListWrapper>
 
         <ZoomArea
           innerRef={container => {
@@ -321,9 +339,9 @@ class ProductImagesBrowser extends Component {
           >
             <Image fluid={fluid} />
           </ImageBox>
-          {altText && (
-            <CommunityCaption caption={altText} superZoom={superZoom} />
-          )}
+          {/* {altText && (
+            <ImageCaption caption={altText} superZoom={superZoom} />
+          )} */}
         </ZoomArea>
         <ZoomHelper>{superZoom ? <MdZoomOut /> : <MdZoomIn />}</ZoomHelper>
       </ProductImagesBrowserRoot>

@@ -82,6 +82,14 @@ export default class Layout extends React.Component {
           }
         }));
       },
+      featureProductThumb: idx => {
+        this.setState(state => ({
+          interface: {
+            ...state.interface,
+            productThumbFeatured: idx
+          }
+        }));
+      },
       setCurrentProductImages: images => {
         this.setState(state => ({
           interface: {

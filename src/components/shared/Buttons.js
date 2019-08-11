@@ -8,11 +8,13 @@ import { colors, fontFamily, radius } from '../../utils/styles';
 export const ButtonBase = styled(`button`)`
   align-items: center;
   background: ${props => (props.inverse ? colors.mainClickable : colors.white)};
+  opacity: ${props => (props.disabled ? '0.75' : '1')};
   border: 1px solid
-    ${props => (props.inverse ? colors.brandLight : colors.brand)};
+    ${props => (props.inverse ? colors.brandLight : colors.mainClickable)};
   border-radius: ${radius.large}px;
-  color: ${props => (props.inverse ? colors.brandLight : colors.brand)};
-  cursor: pointer;
+  color: ${props => (props.inverse ? colors.brandLight : colors.mainClickable)};
+  cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
+
   display: inline-flex;
   font-family: ${fontFamily.heading};
   font-size: 1.1rem;
@@ -96,7 +98,7 @@ Button.propTypes = {
 };
 
 export const PrimaryButton = styled(Button)`
-  background: ${colors.brand};
+  background: ${colors.mainClickable};
   color: ${colors.white};
   display: flex;
   font-size: 1.25rem;

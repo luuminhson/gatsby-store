@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Image from 'gatsby-image';
 import styled, { keyframes } from 'react-emotion';
 
-import { breakpoints, colors, radius, spacing, mediaQuery } from '../../utils/styles';
+import { colors, radius, spacing, mediaQuery } from '../../utils/styles';
 
 export const IMAGE_CHANGE_ANIM_DURATION = 250;
 
@@ -87,7 +87,6 @@ class ProductImage extends Component {
         }
       },
       onClick,
-      imageFeatured = null,
       single
     } = this.props;
 
@@ -100,7 +99,7 @@ class ProductImage extends Component {
         onClick={this.handleClick(onClick)}
         className={ single ? 'single' : null }
       >
-        <StyledImage fluid={imageFeatured ? featuredFluid : fluid} alt="" />
+        <StyledImage fluid={fluid} alt="" />
       </ProductImageLink>
     );
   }
@@ -109,7 +108,6 @@ class ProductImage extends Component {
 ProductImage.propTypes = {
   image: PropTypes.object.isRequired,
   onClick: PropTypes.func,
-  imageFeatured: PropTypes.object,
   single: PropTypes.bool
 };
 

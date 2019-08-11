@@ -39,11 +39,12 @@ export const ProductThumbnailsContent = styled(`div`)`
 `;
 
 export const Thumbnail = styled(`a`)`
+  background-color: ${colors.white};
   border-radius: ${radius.default}px;
   height: ${THUMBNAIL_SIZE};
   margin: ${spacing.xs}px;
   width: ${THUMBNAIL_SIZE};
-  opacity: 0.6;
+  opacity: 0.75;
   box-shadow: 0 0 0 1px ${colors.neutral2};
   transition: all 0.2s ease-in-out;
 
@@ -77,7 +78,7 @@ class ProductThumbnails extends Component {
   };
 
   render() {
-    const { images, className = '' } = this.props;
+    const { images, className } = this.props;
     const { activeIndex } = this.state;
 
     return (
