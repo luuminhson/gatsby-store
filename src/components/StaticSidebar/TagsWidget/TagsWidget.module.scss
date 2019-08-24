@@ -1,0 +1,58 @@
+@import '../../../assets/scss/variables';
+@import '../../../assets/scss/mixins';
+
+.tags-widget {
+    &__inner {
+        &__list {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0 0;
+
+            &__item {
+                padding: 0;
+                margin: 0;
+                display: inline-block;
+
+                &__link {
+                    display: block;
+                    padding: 2px 12px;
+                    margin: 0 12px 12px 0;
+                    // background-color: rgba($color-primary, 0.06);
+                    background-color: rgba(0,0,0,0.04);
+                    font-family: $typographic-font-family-heading;
+                    border-radius: 4px;
+
+                    &:hover,
+                    &:active {
+                        background-color: rgba(0,0,0,0.06);
+                    }
+                    
+                    &__name {
+                        color: $color-base;
+                    }
+
+                    &__count {
+                        position: relative;
+                        top: -2px;
+                        display: inline-block;
+                        min-width: 16px;
+                        height: 16px;
+                        font-size: 12px;
+                        line-height: 16px;
+                        text-align: center;
+                        padding: 2px;
+                        margin-left: 4px;
+                        color: $color-base;
+                        background-color: rgba(0,0,0,0.06);
+                        border-radius: 20px;
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+@include breakpoint-md {
+
+}

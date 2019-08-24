@@ -1,0 +1,150 @@
+@import '../../assets/scss/variables';
+@import '../../assets/scss/mixins';
+
+// Mobile - Max-width 684px
+
+.navigation {
+    width: 100vw;
+    z-index: 2000;
+
+    &__inner {
+        position: relative;
+        padding: 0 24px;
+        height: $nav-height;
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+
+        .backButton {
+            font-family: $typographic-font-family-heading;
+            width: 60px;
+            height: $nav-height;
+            line-height: $nav-height;
+            font-size: 1.75rem;
+            font-weight: 400;
+            color: $color-base;
+            padding-left: 12px;
+            margin-left: -0.75rem;
+            box-sizing: border-box;
+        }
+
+        .detailTitle {
+            display: inline-block;
+            font-size: 0.85rem;
+            line-height: $nav-height;
+            color: $color-base;
+            white-space: nowrap;
+            overflow: hidden;
+            display: block;
+            text-overflow: ellipsis;
+            margin: 0;
+            padding: 0 12px;
+        }
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        background: $color-nav-light;
+        box-shadow: $nav-shadow-light;
+    }
+
+    &.dark {
+        &:before {
+            background: $color-nav-dark;
+            box-shadow: $nav-shadow-dark;
+        }
+
+        .backButton,
+        .detailTitle {
+            color: $color-white;
+        }
+    }
+}
+
+.headroom {
+    position: relative;
+    z-index: 100;
+
+    &.unfixed {
+        &.on_featured_image {
+            .navigation {
+                &:before {
+                    opacity: 0;
+                    box-shadow: none;
+                    transition: all 0.4s ease-in-out;
+                }
+
+                &.dark {
+                    &:before {
+                        box-shadow: none;
+                    }
+                }
+        
+                &__inner {
+                    .backButton,
+                    .detailTitle {
+                        color: $color-white;
+                        transition: color 0.4s ease-in-out;
+                    }
+                }
+            }
+        }
+
+        .navigation {
+            &.is_index {
+                &:before {
+                    opacity: 0;
+                    box-shadow: none;
+                    transition: all 0.4s ease-in-out;
+                }
+            }
+
+            .detailTitle {
+                opacity: 0;
+                transition: opacity 0.4s ease-in-out;
+            }
+        }
+
+        @include breakpoint-sm {
+            .navigation {
+                &.is_index {
+                    &:before {
+                        opacity: 1;
+                        background: $color-nav-light;
+                        box-shadow: $nav-shadow-light;
+                    }
+                }
+            }
+        }
+    }
+
+    &.unpinned {
+        .navigation {
+            &:before {
+                box-shadow: none;
+                transition: box-shadow 0.5s cubic-bezier(0, 0.78, 0.57, 1.05);
+            }
+        }
+    }
+
+    &.pinned {
+        .navigation {
+            &:before {
+                box-shadow: $nav-shadow-light;
+                transition: box-shadow 0.5s cubic-bezier(0, 0.78, 0.57, 1.05);
+            }
+
+            &.dark {
+                &:before {
+                    box-shadow: $nav-shadow-dark;
+                }
+            }
+        }
+    }
+}

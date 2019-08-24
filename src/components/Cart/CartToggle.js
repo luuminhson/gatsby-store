@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { keyframes } from 'react-emotion';
+import styled from '@emotion/styled';
+import { keyframes } from '@emotion/core';
 
 import StoreContext from '../../context/StoreContext';
 
@@ -12,19 +13,6 @@ import {
     colors,
     dimensions
 } from '../../utils/styles';
-
-const ItemsNumber = styled(`span`)`
-  align-items: center;
-  background: ${colors.mainClickable};
-  border-radius: 50%;
-  color: ${colors.white};
-  display: flex;
-  font-size: 1.3rem;
-  font-weight: bold;
-  height: 36px;
-  justify-content: center;
-  width: 36px;
-`;
 
 const iconEntry = keyframes`
   0%, 50% {
@@ -48,6 +36,24 @@ const numberEntry = keyframes`
   100% {
     transform: scale(0.6);
   }
+`;
+
+const ItemsNumber = styled(`span`)`
+  align-items: center;
+  background: ${colors.mainClickable};
+  border-radius: 50%;
+  color: ${colors.white};
+  display: flex;
+  font-size: 1.3rem;
+  font-weight: bold;
+  height: 36px;
+  justify-content: center;
+  width: 36px;
+  animation: ${numberEntry} 0.5s ease forwards;
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  transform: scale(0.6);
 `;
 
 const CartIcon = styled(Button)`
@@ -83,14 +89,6 @@ const CartIcon = styled(Button)`
     height: 28px;
     margin: 0;
     width: 28px;
-  }
-
-  ${ItemsNumber} {
-    animation: ${numberEntry} 0.5s ease forwards;
-    position: absolute;
-    right: -10px;
-    top: -10px;
-    transform: scale(0.6);
   }
 `;
 

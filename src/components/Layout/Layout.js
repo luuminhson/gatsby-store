@@ -1,5 +1,6 @@
 import React from 'react';
-import styled, { injectGlobal } from 'react-emotion';
+import styled from '@emotion/styled';
+import { injectGlobal } from 'emotion';
 
 import StoreContext, { defaultStoreContext } from '../../context/StoreContext';
 import InterfaceContext, { defaultInterfaceContext } from '../../context/InterfaceContext';
@@ -22,7 +23,8 @@ injectGlobal`
     }
 
     body {
-      -webkit-tap-highlight-color: rgba(0,0,0,.05)
+      -webkit-tap-highlight-color: rgba(0,0,0,.05);
+      margin: 0;
     }
 `;
 
@@ -233,21 +235,8 @@ export default class Layout extends React.Component {
     }));
   };
 
-  componentWillUnmount() {
-    this.desktopMediaQuery.removeListener(this.updateViewPortState);
-  }
-
-  updateViewPortState = e => {
-    this.setState(state => ({
-      interface: {
-        ...state.interface,
-        isDesktopViewport: this.desktopMediaQuery.matches
-      }
-    }));
-  };
-
   render() {
-    const { children, location } = this.props;
+    const { children } = this.props;
 
     return (
       <>
@@ -261,8 +250,6 @@ export default class Layout extends React.Component {
                 toggleCart,
                 productImagesBrowserStatus,
                 currentProductImages,
-                // featureProductImage,
-                // featureProductImageIndex,
                 productImageFeatured,
                 productImageFeaturedIndex,
                 toggleProductImagesBrowser
@@ -284,7 +271,7 @@ export default class Layout extends React.Component {
                         cartStatus={cartStatus}
                         isDesktopViewport={isDesktopViewport}
                         productImagesBrowserStatus={productImagesBrowserStatus}
-                        location={location}
+                        // location={location}
                       >
                         {children}
                       </PageContent>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
-import styled from 'react-emotion';
+import Layout from '../Layout';
+import styled from '@emotion/styled';
 
 import ProductListingHeader from './ProductListingHeader';
 import ProductListingItem from './ProductListingItem';
@@ -62,14 +63,14 @@ const ProductListing = () => (
       }
     `}
     render={({ products }) => (
-      <>
+      <Layout>
         <ProductListingHeader />
         <ProductListingContainer>
           {products.edges.map(({ node: product }) => (
             <ProductListingItem key={product.id} product={product} />
           ))}
         </ProductListingContainer>
-      </>
+      </Layout>
     )}
   />
 );

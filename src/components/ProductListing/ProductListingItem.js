@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import { Link } from 'gatsby';
 import Image from 'gatsby-image';
 
@@ -53,12 +53,6 @@ const Preview = styled(`div`)`
   margin-bottom: ${spacing.md}px;
   overflow: hidden;
   position: relative;
-
-  @media (hover: hover) {
-    ${ProductListingItemLink}:hover & {
-      background: ${colors.neutral1};
-    }
-  }
 `;
 
 const SaleBadge = styled(`span`)`

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
+import Navigation from './Navigation';
 import { Link } from 'gatsby';
-import Logo from './Logo';
-import Cart from '../Cart';
-import CartToggle from '../Cart/CartToggle';
 
-import { breakpoints, colors, dimensions, spacing } from '../../utils/styles';
+import { colors, dimensions, spacing, mediaQuery } from '../../utils/styles';
 
 const HeaderRoot = styled('header')`
   display: ${props => (props.isCovered ? 'none' : 'flex')};  
@@ -22,7 +20,7 @@ const HeaderRoot = styled('header')`
   top: 0;
   z-index: 1000;
 
-  @media (min-width: ${breakpoints.tablet}px) {
+  ${mediaQuery.tabletFrom} {
     height: ${dimensions.headerHeightTablet};
     padding: 0 ${spacing['4xl']}px;
     position: relative;
@@ -32,22 +30,29 @@ const HeaderRoot = styled('header')`
     }
   }
 
-  @media (min-width: ${breakpoints.desktop}px) {
+  ${mediaQuery.desktop} {
     height: ${dimensions.headerHeightDesktop};
   }
 `;
 
-const HomeLink = styled(Link)`
-  display: block;
-  flex-shrink: 0;
-  line-height: 1;
-  margin-right: auto;
-`;
-
 class Header extends Component {
-  state = {
-    className: ''
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sidebar: false,
+      className: ''
+    };
+  }
+
+  toggleSidebar = () => {
+    this.setState({ sidebar: !this.state.sidebar });
+    document.body.classList.toggle('noScroll');
   };
+
+  componentDidMount() {
+    document.body.className = document.body.className.replace('noScroll', '');
+  }
 
   componentDidUpdate(prevProps) {
     if (this.props.isDesktopViewport) {
@@ -75,15 +80,17 @@ class Header extends Component {
     const {
       toggleCart,
       isDesktopViewport,
+      isIndex,
+      isPost,
+      detailTitle,
+      from,
+      hasFeaturedImage
     } = this.props;
     const { className } = this.state;
 
     return (
       <HeaderRoot className={className}>
-        <HomeLink to="/" aria-label="Home page">
-          <Logo isDesktopViewport={isDesktopViewport} />
-        </HomeLink>
-        <CartToggle toggle={toggleCart} />
+        <Navigation toggleCart={toggleCart} isDesktopViewport={isDesktopViewport} burgerClick={this.toggleSidebar} isIndex={isIndex} isPost={isPost} detailTitle={detailTitle} onFeaturedImage={hasFeaturedImage} from={from} />
       </HeaderRoot>
     );
   }

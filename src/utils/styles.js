@@ -1,4 +1,5 @@
-import styled, { css, keyframes } from 'react-emotion';
+import styled  from '@emotion/styled';
+import { keyframes } from '@emotion/core';
 
 /*
  * NOTE: use a six-character hex code for all colors to allow alpha channel
@@ -47,6 +48,13 @@ export const colors = {
   darkTrans:      'rgba(232,236,241,0.4)',
   lightTrans:     'rgba(249,249,251,0.8)',
 };
+
+/* LAYOUT WIDTH
+--------------------------------------------------------------- */
+
+export const layoutWidth = {
+  post: '745px',
+}
 
 /* MEDIA QUERIES
 --------------------------------------------------------------- */
@@ -331,3 +339,8 @@ export const animations = {
   simpleEntry: `${simpleEntry} .75s ease forwards`,
   deadSimpleEntry: `${deadSimpleEntry} .5s ease forwards`
 };
+
+export const shadow = {
+  blockItemShadow: '0 16px 40px -12px rgba(0,0,0,0.2)',
+  navShadow: '0px 12px 40px -12px rgba(9,13,23,0.08)',
+}

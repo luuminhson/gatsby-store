@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled, { keyframes } from 'react-emotion';
+import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
 import OiIcon from '../OiIcon';

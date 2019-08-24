@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Helmet from 'react-helmet';
+import Layout from '../components/Layout';
 
 import InterfaceContext from '../context/InterfaceContext';
 import ProductPage from '../components/ProductPage';
@@ -16,6 +17,7 @@ const ProductPageTemplate = props => {
   const image = product.images[0].localFile.childImageSharp.fluid.src;
 
   return (
+    <Layout>
     <InterfaceContext.Consumer>
       {({
         isDesktopViewport,
@@ -24,7 +26,7 @@ const ProductPageTemplate = props => {
         toggleProductImagesBrowser,
         setCurrentProductImages
       }) => (
-        <>
+        <div>
           <Helmet>
             <title>{title}</title>
 
@@ -59,9 +61,10 @@ const ProductPageTemplate = props => {
             toggleProductImagesBrowser={toggleProductImagesBrowser}
             setCurrentProductImages={setCurrentProductImages}
           />
-        </>
+        </div>
       )}
     </InterfaceContext.Consumer>
+    </Layout>
   );
 };
 

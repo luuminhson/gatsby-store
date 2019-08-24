@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
 import Footer from './Footer';
 import { breakpoints, animations } from '../../utils/styles';
@@ -73,15 +73,15 @@ class PageContent extends Component {
       }
     }
 
-    if (prevProps.location.pathname !== this.props.location.pathname) {
-      this.setState(state => ({ className: state.className + ' entry' }));
+    // if (prevProps.location.pathname !== this.props.location.pathname) {
+    //   this.setState(state => ({ className: state.className + ' entry' }));
 
-      setTimeout(() => {
-        this.setState(state => ({
-          className: state.className.replace('entry', '')
-        }));
-      }, 500);
-    }
+    //   setTimeout(() => {
+    //     this.setState(state => ({
+    //       className: state.className.replace('entry', '')
+    //     }));
+    //   }, 500);
+    // }
   }
 
   render() {
@@ -100,7 +100,7 @@ class PageContent extends Component {
 PageContent.propTypes = {
   cartStatus: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  location: PropTypes.object.isRequired,
+  // location: PropTypes.object.isRequired,
   productImagesBrowserStatus: PropTypes.string.isRequired,
   isDesktopViewport: PropTypes.bool
 };
