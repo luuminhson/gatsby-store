@@ -1,12 +1,13 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import Layout from '../Layout';
+import Page from '../Page';
 import styled from '@emotion/styled';
 
 import ProductListingHeader from './ProductListingHeader';
 import ProductListingItem from './ProductListingItem';
 
-import { breakpoints, mediaQuery, spacing } from '../../utils/styles';
+import { mediaQuery, spacing } from '../../utils/styles';
 
 const ProductListingContainer = styled(`div`)`
   display: flex;
@@ -22,7 +23,6 @@ const ProductListingContainer = styled(`div`)`
 
   ${mediaQuery.desktop} {
     padding: ${spacing.xl}px;
-    max-width: ${breakpoints.fhd}px;
   }
 `;
 
@@ -51,8 +51,11 @@ const ProductListing = () => (
                 id
                 localFile {
                   childImageSharp {
-                    fluid(maxWidth: 910, maxHeight: 910) {
-                      ...GatsbyImageSharpFluid_withWebp
+                    resize(width: 910, height: 910) {
+                      src
+                    }
+                    fluid(maxWidth: 910) {
+                      ...GatsbyImageSharpFluid
                     }
                   }
                 }
@@ -64,12 +67,14 @@ const ProductListing = () => (
     `}
     render={({ products }) => (
       <Layout>
-        <ProductListingHeader />
-        <ProductListingContainer>
-          {products.edges.map(({ node: product }) => (
-            <ProductListingItem key={product.id} product={product} />
-          ))}
-        </ProductListingContainer>
+        <Page isStore>
+          <ProductListingHeader />
+          <ProductListingContainer>
+            {products.edges.map(({ node: product }) => (
+              <ProductListingItem key={product.id} product={product} />
+            ))}
+          </ProductListingContainer>
+        </Page>
       </Layout>
     )}
   />

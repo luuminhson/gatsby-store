@@ -1,36 +1,37 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
-import { MdClose } from 'react-icons/md';
-
 import CartThumbail from './CartThumbail';
 import { Input } from '../shared/FormElements';
-import { Button } from '../shared/Buttons';
+import OiIcon from '../OiIcon';
 
-import { breakpoints, colors, spacing } from '../../utils/styles';
+import { breakpoints, colors, spacing, FontStyle, radius } from '../../utils/styles';
+import { priceWithCommas } from '../../utils/helpers';
 
 const CartListItemRoot = styled('li')`
   align-items: center;
-  border-bottom: 1px solid ${colors.neutral2};
   display: flex;
   justify-content: space-between;
-  padding: ${spacing.md}px 0;
+  border-bottom: 1px solid ${colors.neutral1};
+  padding-bottom: ${spacing.lg}px;
+  margin-bottom: ${spacing.lg}px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const Thumbail = styled(CartThumbail)`
   flex-grow: 0;
-  margin-left: ${spacing['2xs']}px;
-  margin-right: ${spacing.sm}px;
+  margin-right: ${spacing.md}px;
 `;
 
 const Info = styled('div')`
   flex-grow: 1;
 `;
 
-const Name = styled('span')`
+const Name = styled(FontStyle.headline)`
   display: block;
-  font-size: 1rem;
-  line-height: 1.2;
 `;
 
 const Meta = styled('span')`
@@ -38,12 +39,15 @@ const Meta = styled('span')`
   display: block;
   font-size: 0.95rem;
   font-style: normal;
+
+  span {
+    display: block;
+  }
 `;
 
 const Quantity = styled(Input)`
   flex-grow: 0;
   height: 44px;
-  margin-right: ${spacing.xs}px;
   padding: 0 ${spacing.xs}px 0;
   text-align: center;
   width: 50px;
@@ -53,20 +57,35 @@ const Quantity = styled(Input)`
   }
 `;
 
-const Remove = styled(Button)`
-  border: 1px dotted ${colors.textLighter};
-  display: flex;
-  height: 44px;
-  justify-content: center;
-  margin-right: ${spacing['2xs']}px;
-  padding: 0;
-  width: 44px;
+const RemoveItem = styled(`div`)`
+  display: inline-flex;
+  align-items: center;
+  border-radius: ${radius.default}px;
+  padding-right: ${spacing.xs}px;
+  margin-top: ${spacing.xs}px;
+  background-color: ${colors.neutral1};
+  cursor: pointer;
 
-  svg {
-    height: 24px;
-    margin: 0;
-    width: 24px;
+  &:hover {
+    background-color: ${colors.neutral2};
   }
+
+  span {
+    color: ${colors.neutral3};
+    font-size: 0.9rem;
+  }
+`;
+
+const Remove = styled(OiIcon)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  border-radius: 24px;
+  color: ${colors.neutral3};
 `;
 
 export default ({
@@ -132,8 +151,13 @@ export default ({
       <Info>
         <Name>{item.title}</Name>
         <Meta>
-          {item.variant.title}, ${item.variant.price}
+          <span>{ item.variant.title !== 'Default Title' && item.variant.title } </span>
+          <span>{ quantity + ' x ' + priceWithCommas(item.variant.price) + ' VND' }</span>
         </Meta>
+        <RemoveItem onClick={handleRemoveItem}>
+          <Remove icon='oi-icon-close' />
+          <span>Remove</span>
+        </RemoveItem>
       </Info>
       <Quantity
         aria-label="Quantity"
@@ -146,9 +170,6 @@ export default ({
         onBlur={() => setQuantity(item.quantity)}
         value={quantity}
       />
-      <Remove onClick={handleRemoveItem}>
-        <MdClose />
-      </Remove>
     </CartListItemRoot>
   );
 };

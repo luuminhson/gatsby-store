@@ -46,46 +46,24 @@ class PageContent extends Component {
     const imageBrowserStatusChanged =
       this.props.productImagesBrowserStatus !==
       prevProps.productImagesBrowserStatus;
-    const cartStatusChanged = prevProps.cartStatus !== this.props.cartStatus;
 
-    if (this.props.isDesktopViewport) {
-      if (imageBrowserStatusChanged) {
-        if (this.props.productImagesBrowserStatus === 'open') {
-          setTimeout(() => {
-            this.setState(state => ({
-              className: state.className + ' covered'
-            }));
-          }, 500);
-        } else {
+    if (imageBrowserStatusChanged) {
+      if (this.props.productImagesBrowserStatus === 'open') {
+        setTimeout(() => {
           this.setState(state => ({
-            className: state.className.replace(' covered', '')
+            className: state.className + ' covered'
           }));
-        }
-      }
-    } else {
-      if (cartStatusChanged) {
-        this.setState({
-          className:
-            this.props.cartStatus === 'open'
-              ? 'covered'
-              : ''
-        });
+        }, 500);
+      } else {
+        this.setState(state => ({
+          className: state.className.replace(' covered', '')
+        }));
       }
     }
-
-    // if (prevProps.location.pathname !== this.props.location.pathname) {
-    //   this.setState(state => ({ className: state.className + ' entry' }));
-
-    //   setTimeout(() => {
-    //     this.setState(state => ({
-    //       className: state.className.replace('entry', '')
-    //     }));
-    //   }, 500);
-    // }
   }
 
   render() {
-    const { children, cartStatus } = this.props;
+    const { children } = this.props;
     const { className } = this.state;
 
     return (
@@ -100,7 +78,6 @@ class PageContent extends Component {
 PageContent.propTypes = {
   cartStatus: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  // location: PropTypes.object.isRequired,
   productImagesBrowserStatus: PropTypes.string.isRequired,
   isDesktopViewport: PropTypes.bool
 };

@@ -13,7 +13,8 @@ module.exports = {
     description: siteConfig.description,
     copyright: siteConfig.copyright,
     menu: siteConfig.menu,
-    logo: siteConfig.logo
+    logo: siteConfig.logo,
+    contacts: siteConfig.contacts,
   },
   plugins: [
     {

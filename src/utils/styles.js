@@ -1,6 +1,8 @@
 import styled  from '@emotion/styled';
 import { keyframes } from '@emotion/core';
 
+const path = require('path');
+
 /*
  * NOTE: use a six-character hex code for all colors to allow alpha channel
  * adjustment without adding extra vars and/or a color manipulation lib.
@@ -99,10 +101,13 @@ export const spacing = {
 --------------------------------------------------------------- */
 
 export const dimensions = {
-  headerHeightDesktop: '180px',
-  headerHeightTablet: '96px',
-  headerHeightMobile: '68px',
-  cartWidthDesktop: '520px',
+  indexPageWidth: '1280px',
+  storePageWidth: '1920px',
+  sidePanelMaxwidth: '280px',
+  navHeightDesktop: '180px',
+  navHeightTablet: '96px',
+  navHeightMobile: '68px',
+  cartWidthDesktop: '480px',
   pictureBrowserAction: {
     widthDesktop: '200px',
     heightMobile: '80px'
@@ -335,9 +340,19 @@ const deadSimpleEntry = keyframes`
   }
 `;
 
+const overlay = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
 export const animations = {
   simpleEntry: `${simpleEntry} .75s ease forwards`,
-  deadSimpleEntry: `${deadSimpleEntry} .5s ease forwards`
+  deadSimpleEntry: `${deadSimpleEntry} .5s ease forwards`,
+  maskOverlay: `${overlay} .75s ease-in-out forwards`,
 };
 
 export const shadow = {

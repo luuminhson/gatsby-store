@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { injectGlobal } from 'emotion';
 import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import { colors } from '../../utils/styles';
 
 // Import OiIcon typeface
@@ -16,8 +18,8 @@ const Icon = styled('i')`
     color: ${colors.mainDark};
 `;
 
-const OiIcon = ({ icon }) => (
-    <Icon className={icon} />
+const OiIcon = ({ icon, className, ...rest }) => (
+    <Icon className={`${icon} ${className}`} {...rest} />
 );
 
 OiIcon.propTypes = {

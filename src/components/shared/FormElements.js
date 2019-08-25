@@ -16,7 +16,7 @@ export const Input = styled(`input`)`
   -webkit-appearance: none;
 
   :focus {
-    box-shadow: 0 0 0 3px ${colors.mainHighlight};
+    border-color: ${colors.neutral3};
     outline: 0;
     transition: box-shadow 0.15s ease-in-out;
   }

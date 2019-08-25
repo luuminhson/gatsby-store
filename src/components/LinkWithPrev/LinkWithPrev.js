@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { Location } from '@reach/router';
 import { Link } from 'gatsby';
@@ -11,7 +12,7 @@ const LinkWithPrevUrl = ({ children, className, state, ...rest }) => (
   <Location>
     {({ location }) => (
       //make sure user's state is not overwritten
-      <Link className={`${className} ${LinkStyle}`} {...rest} state={{ prevUrl: location.pathname, ...state}}>
+      <Link className={className && `${className}`} css={LinkStyle} {...rest} state={{ prevUrl: location.pathname, ...state}}>
         { children }
       </Link>
     )}

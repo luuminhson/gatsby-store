@@ -33,5 +33,11 @@ module.exports = {
         alt: 'Miso Product Design',
         text: 'Miso',
         type: 'img' // 'img' for image logo or whatever string for text logo
+    },
+    contacts: {
+        phone: '+84934410491',
+        email: 'hello@originalinside.com',
+        facebook: 'original.inside',
+        instagram: 'original.inside',
     }
 };

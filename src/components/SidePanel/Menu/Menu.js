@@ -2,8 +2,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { Link } from '../../../LinkWithPrev';
-import { mediaQuery, colors, dimensions, fontFamily } from '../../../../utils/styles';
+import { Link } from '../../LinkWithPrev';
+import { mediaQuery, colors, dimensions, fontFamily } from '../../../utils/styles';
 
 type Props = {
   menu: {
@@ -35,7 +35,7 @@ const UnfixedStyle = css`
 const onFeaturedImageStyle = css``;
 
 const MenuWrapperInner = styled(`nav`)`
-  display: none;
+  display: flex;
   position: relative;
   padding: 0;
 
@@ -45,6 +45,7 @@ const MenuWrapperInner = styled(`nav`)`
 `;
 
 const MenuList = styled(`ul`)`
+  width: 100%;
   list-style: none;
   display: block;
   padding: 0;
@@ -52,8 +53,6 @@ const MenuList = styled(`ul`)`
 `;
 
 const MenuListItem = styled(`li`)`
-  display: inline-block;
-  width: auto;
   padding: 0;
   margin: 0;
 `;
@@ -62,7 +61,7 @@ const MenuItemLink = styled(Link)`
   font-family: ${fontFamily.heading};
   font-size: 1rem;
   font-weight: 500;
-  padding: 0 20px;
+  padding: 0 40px;
   height: 48px;
   line-height: 48px;
   display: block;
@@ -79,23 +78,25 @@ const MenuLinkActiveStyle = css`
     position: relative;
     color: ${colors.mainClickable};
 
-    &:after {
+    &:before {
       content: '';
       position: absolute;
-      bottom: 0;
+      top: 50%;
+      left: 0;
       display: block;
-      width: calc(100% - 40px);
-      height: 3px;
+      height: 24px;
+      width: 3px;
+      transform: translateY(-50%);
       background: ${colors.mainClickable};
     }
   }
 `;
 
-const Menu = ({ menu, isPost, unfixed, onFeaturedImage }: Props) => (
+const Menu = ({ menu, isPost, unfixed, onFeaturedImage, ...rest }: Props) => (
   <MenuWrapper css={[
     unfixed && UnfixedStyle,
     onFeaturedImage && onFeaturedImageStyle,
-  ]}>
+  ]} {...rest}>
     {!isPost && (
       <MenuWrapperInner>
         <MenuList>

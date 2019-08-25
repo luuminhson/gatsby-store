@@ -1,56 +1,56 @@
 // @flow
 import React from 'react';
 import PropTypes from 'prop-types';
-import { graphql, StaticQuery, Link } from 'gatsby';
+import { graphql, StaticQuery } from 'gatsby';
+import { Link } from '../../LinkWithPrev';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import Headroom from 'react-headroom';
 import Logo from './Logo';
 import Menu from './Menu';
+import OiIcon from '../../OiIcon';
 import CartToggle from '../../Cart/CartToggle';
-import { FontStyle, fontFamily, dimensions, shadow, colors, mediaQuery } from '../../../utils/styles';
+import { FontStyle, fontFamily, dimensions, mediaQuery, spacing, colors } from '../../../utils/styles';
 
 const NavigationWrapper = styled(`div`)`
+    background-color: ${colors.white};
     width: 100%;
+    padding: 0 ${spacing.lg}px;
     z-index: 2000;
 
-    &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-        background: ${colors.white};
-        box-shadow: ${shadow.navShadow};
+    ${mediaQuery.tabletFrom} {
+        padding: 0 ${spacing.xl}px;
+    }
+
+    ${mediaQuery.desktop} {
+        padding: 0 ${spacing['4xl']}px;
     }
 `;
 
 const NavigationInner = styled(`div`)`
     position: relative;
-    height: ${dimensions.headerHeightMobile};
+    height: ${dimensions.navHeightMobile};
     display: flex;
     align-items: stretch;
     justify-content: space-between;
 
     ${mediaQuery.tabletFrom} {
-        height: ${dimensions.headerHeightTablet};
+        height: ${dimensions.navHeightTablet};
     }
 
     ${mediaQuery.desktop} {
-        height: ${dimensions.headerHeightDesktop};
+        height: ${dimensions.navHeightDesktop};
     }
 `;
 
 const BackButton = styled(Link)`
     font-family: ${fontFamily.heading};
     width: 60px;
-    height: ${dimensions.headerHeightMobile};
-    line-height: ${dimensions.headerHeightMobile};
+    height: ${dimensions.navHeightMobile};
+    line-height: ${dimensions.navHeightMobile};
     font-size: 1.75rem;
     font-weight: 400;
-    color: $color-base;
+    color: ${colors.mainDark};
     padding-left: 12px;
     margin-left: -0.75rem;
     box-sizing: border-box;
@@ -59,19 +59,59 @@ const BackButton = styled(Link)`
 const DetailTitle = styled(FontStyle.h1)`
     display: inline-block;
     font-size: 0.85rem;
-    line-height: $nav-height;
-    color: $color-base;
+    line-height: ${dimensions.navHeightMobile};
+    color: ${colors.mainDark};
     white-space: nowrap;
     overflow: hidden;
     display: block;
     text-overflow: ellipsis;
     margin: 0;
     padding: 0 12px;
+
+    ${mediaQuery.tabletFrom} {
+        line-height: ${dimensions.navHeightTablet};
+        font-size: 1.1rem;
+    }
+
+    ${mediaQuery.desktop} {
+        line-height: ${dimensions.navHeightDesktop};
+    }
+`;
+
+const NavLeftWrapper = styled(`div`)`
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+`;
+
+const NavCenterWrapper = styled(`div`)`
+    max-width: 60%;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    ${mediaQuery.tabletFrom} {
+        max-width: 100%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
 `;
 
 const NavRightWrapper = styled(`div`)`
+    flex: 0 0 auto;
     display: flex;
     align-items: center;
+`;
+
+const MainMenu = styled(Menu)`
+    ${mediaQuery.tabletFrom} {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
 `;
 
 const unpinnedStyle = css``;
@@ -102,35 +142,41 @@ const HeadroomWrapper = styled(Headroom)`
     }
 `;
 
+const BurgerIcon = styled(`div`)`
+  position: relative;
+  width: 60px;
+  height: ${dimensions.navHeightMobile};
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: -12px;
+
+  span {
+    width: 100%;
+    height: 2px;
+    background: ${colors.mainDark};
+    transition: all ease-in-out 0.2s;
+
+    &:last-child {
+      width: 65%;
+    }
+  }
+
+  ${mediaQuery.tabletFrom} {
+    // display: none;
+  }
+`;
+
 const isIndexStyle = css``;
 
 const isPostStyle = css``;
 
 const unfixedStyle = css`
     ${NavigationWrapper} {
-        &${isIndexStyle} {
-            &:before {
-                opacity: 0;
-                box-shadow: none;
-                transition: all 0.4s ease-in-out;
-            }
-        }
-
         ${DetailTitle} {
             opacity: 0;
             transition: opacity 0.4s ease-in-out;
-        }
-    }
-
-    ${mediaQuery.tabletFrom} {
-        ${NavigationWrapper} {
-            &${isIndexStyle} {
-                &:before {
-                    opacity: 1;
-                    background: $color-nav-light;
-                    box-shadow: $nav-shadow-light;
-                }
-            }
         }
     }
 `;
@@ -146,7 +192,6 @@ const onFeaturedImageStyle = css`
         ${NavigationInner} {
             ${BackButton},
             ${DetailTitle} {
-                color: $color-white;
                 transition: color 0.4s ease-in-out;
             }
         }
@@ -225,14 +270,25 @@ class PureNavigation extends React.Component {
 
         const siteLogo = <Logo isDesktopViewport={isDesktopViewport} />;
 
-        const navLeft = isDetailScreen ? backButton : siteLogo;
+        const navLeft = (
+            <NavLeftWrapper>
+                {isDetailScreen ? backButton : <Link to='/'>{siteLogo}</Link>}
+            </NavLeftWrapper>
+        );
 
-        const navCenter = ( isDetailScreen && ( typeof detailTitle !== 'undefined' ) ) ? detailPageTitle : null;
+        const navCenter = (
+            <NavCenterWrapper>
+                { isDetailScreen && (typeof detailTitle !== 'undefined') ? detailPageTitle : null }
+                <MainMenu menu={menu} isPost={isPost} onFeaturedImage={onFeaturedImage} unfixed={unfixed} />
+            </NavCenterWrapper>
+        );
 
         const navRight = (
             <NavRightWrapper>
-                <Menu menu={menu} burgerClick={burgerClick} isPost={isPost} onFeaturedImage={onFeaturedImage} unfixed={unfixed} />
                 <CartToggle toggle={toggleCart} />
+                <BurgerIcon onClick={burgerClick}>
+                    <OiIcon icon='oi-icon-menu' />
+                </BurgerIcon>
             </NavRightWrapper>
         );
 
@@ -291,6 +347,6 @@ export const Navigation = (props) => (
 Navigation.propTypes = {
     toggleCart: PropTypes.func.isRequired,
     isDesktopViewport: PropTypes.bool
-  };
+};
 
 export default Navigation;

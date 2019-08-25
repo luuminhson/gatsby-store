@@ -5,7 +5,7 @@ import { Link } from '../LinkWithPrev';
 import { fontFamily, colors } from '../../utils/styles';
 
 const ButtonLink = styled(Link)`
-  font-family: ${fontFamily.heading}
+  font-family: ${fontFamily.heading};
   color: ${colors.mainClickable};
   font-size: 14px;
   font-weight: 700;

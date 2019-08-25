@@ -13,6 +13,12 @@ const useSiteMetadata = () => {
             siteUrl
             title
             description
+            contacts {
+              phone
+              email
+              facebook
+              instagram
+            }
           }
         }
       }

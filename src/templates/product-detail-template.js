@@ -6,7 +6,7 @@ import Layout from '../components/Layout';
 import InterfaceContext from '../context/InterfaceContext';
 import ProductPage from '../components/ProductPage';
 
-const ProductPageTemplate = props => {
+const ProductDetailTemplate = props => {
   const {
     site,
     shopifyProduct: product,
@@ -68,7 +68,7 @@ const ProductPageTemplate = props => {
   );
 };
 
-export default ProductPageTemplate;
+export default ProductDetailTemplate;
 
 export const query = graphql`
   query($handle: String!) {
@@ -97,8 +97,11 @@ export const query = graphql`
         altText
         localFile {
           childImageSharp {
-            fluid(maxWidth: 910, maxHeight: 910) {
-              ...GatsbyImageSharpFluid_withWebp
+            resize(width: 1000, height: 1000) {
+              src
+            }
+            fluid(maxWidth: 1000) {
+              ...GatsbyImageSharpFluid
             }
           }
         }

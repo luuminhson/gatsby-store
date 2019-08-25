@@ -8,7 +8,7 @@ import Img from 'gatsby-image';
 import SectionTitle from '../SectionTitle';
 import type { Edges } from '../../types';
 
-import { mediaQuery, shadow, colors } from '../../utils/styles';
+import { mediaQuery, shadow, colors, fontFamily } from '../../utils/styles';
 
 type Props = {
     edges: Edges,
@@ -22,7 +22,7 @@ const scrollbarHiddenPadding = '4.2rem';
 
 const Wrapper = styled(`div`)`
     margin: 0 -1.25rem;
-    height: 372px;
+    height: 380px;
     overflow: hidden;
 
     ${mediaQuery.tabletFrom} {
@@ -115,9 +115,10 @@ const ItemInfo = styled(`div`)`
 
     .info-title {
         color: ${colors.mainDark};
-        font-size: 1rem;
-        line-height: 24px;
-        max-height: 48px;
+        font-family: ${fontFamily.heading};
+        font-size: 1.1rem;
+        line-height: 28px;
+        max-height: 56px;
         margin: 0 0 12px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -175,7 +176,7 @@ const StripLayout = (edge) => {
 
 const Strip = ({ edges, sectionTitle, sectionLink, sectionLinkLabel }: Props) => (
     <Wrapper>
-        <SectionTitle className={SectionTitleStyle} title={sectionTitle} actionLink={sectionLink} actionLabel={sectionLinkLabel} />
+        <SectionTitle css={SectionTitleStyle} title={sectionTitle} actionLink={sectionLink} actionLabel={sectionLinkLabel} />
         <StripWrapper>
             {edges.map((edge) => (
                 <StripItem className={edge.node.frontmatter.featuredImage && 'has-featured-image'} key={edge.node.fields.slug}>

@@ -6,10 +6,10 @@ import Image from 'gatsby-image';
 import { colors, radius } from '../../utils/styles';
 
 const CartThumbailRoot = styled(Image)`
-  border: 1px solid ${colors.neutral2};
-  border-radius: ${radius.default}px;
-  height: 36px;
-  width: 36px;
+  background-color: ${colors.mainLight};
+  border-radius: ${radius.large}px;
+  height: 100px;
+  width: 100px;
 `;
 
 const CartThumbail = ({
@@ -40,8 +40,8 @@ export default props => (
                 id
                 localFile {
                   childImageSharp {
-                    fluid {
-                      ...GatsbyImageSharpFluid_withWebp
+                    fluid(maxWidth: 100) {
+                      ...GatsbyImageSharpFluid
                     }
                   }
                 }

@@ -4,57 +4,50 @@ import PropTypes from 'prop-types';
 
 import OiIcon from '../OiIcon';
 
-import {
-  MdArrowBack,
-  MdArrowForward
-} from 'react-icons/md';
-
 import StoreContext from '../../context/StoreContext';
 import CartList from './CartList';
-import CartIndicator from './CartIndicator';
 import EmptyCart from './EmptyCart';
 import { Button, PrimaryButton } from '../shared/Buttons';
+import { priceWithCommas } from '../../utils/helpers';
 
 import {
   breakpoints,
   colors,
-  fontFamily,
   spacing,
   dimensions,
-  mediaQuery
+  mediaQuery,
+  FontStyle,
+  fontFamily
 } from '../../utils/styles';
 
 const CartRoot = styled(`div`)`
   background: ${colors.white};
-  bottom: 0;
+  padding: 0;
   position: fixed;
+  top: 0;
   right: 0;
-  top: -1px;
-  transform: translateX(100%);
-  transition: transform 0.4s;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  overflow-y: scroll;
+  opacity: 0;
   will-change: transform;
-  z-index: 3000;
+  transform: translateX(100%);
+  z-index: -1;
+  box-shadow: 0 0 32px 0 rgba(0,0,0,0.12), 0 40px 80px -20px rgba(0,0,0,0.08);
+  transition: all 0.3s ease-in-out;
+  -webkit-overflow-scrolling: touch;
 
   &.open {
-    transform: translateX(0%);
+    opacity: 1;
+    transform: translateX(0);
+    z-index: 3000;
   }
 
   &.closed {
-    transform: translateX(100%);
-  }
-
-  ::after {
-    background-color: ${colors.white};
-    bottom: 0;
-    content: '';
-    left: 0;
     opacity: 0;
-    pointer-events: none;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: all 250ms;
+    transform: translateX(100%);
+    z-index: -1;
   }
 
   &.loading {
@@ -66,6 +59,12 @@ const CartRoot = styled(`div`)`
 
   ${mediaQuery.tabletFrom} {
     width: ${dimensions.cartWidthDesktop};
+    height: auto;
+    top: 0;
+    left: auto;
+    right: 0;
+    bottom: 0;
+    margin: auto;
 
     &.covered {
       display: none;
@@ -74,34 +73,39 @@ const CartRoot = styled(`div`)`
 `;
 
 const Heading = styled(`header`)`
-  align-items: center;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: ${colors.white};
+  width: 100%;
+  height: 60px;
   display: flex;
-  height: ${dimensions.headerHeight};
-  justify-content: flex-start;
-`;
-
-const Title = styled(`h2`)`
-  flex-grow: 1;
-  font-family: ${fontFamily.heading};
-  font-size: 1.8rem;
-  left: -${dimensions.headerHeight};
+  align-items: center;
   margin: 0;
-  margin-left: ${spacing.md}px;
-  position: relative;
-
-  .open & {
-    margin-left: calc(${dimensions.headerHeight} + ${spacing.md}px);
-
-    @media (min-width: ${breakpoints.desktop}px) {
-      margin-left: ${spacing.md}px;
-    }
-  }
+  padding: 0 ${spacing.xl}px;
+  justify-content: flex-start;
+  z-index: 3000;
 `;
+
+const Title = styled(FontStyle.h2)`
+  flex-grow: 1;
+  text-align: center;
+  position: relative;
+`;
+
+const CartCloseBtn = styled(OiIcon)`
+  position: absolute;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+`;
+
 
 const Content = styled(`div`)`
   overflow-y: auto;
-  padding: ${spacing.lg}px;
   width: 100%;
+  padding: ${spacing.lg}px ${spacing.lg}px ${spacing.md}px;
 
   @media (min-width: ${breakpoints.desktop}px) {
     ::-webkit-scrollbar {
@@ -120,32 +124,47 @@ const Content = styled(`div`)`
   }
 `;
 
+const CartFooter = styled(`div`)`
+  background-color: ${colors.white};
+  padding: 0 ${spacing.lg}px ${spacing.lg}px;
+  margin-bottom: ${spacing['4xl']}px;
+`;
+
 const Costs = styled('div')`
   display: flex;
   flex-direction: column;
-  margin-top: ${spacing.sm}px;
 `;
 
 const Cost = styled(`div`)`
   display: flex;
-  padding: 0 ${spacing.xs}px ${spacing['2xs']}px;
+  align-items: center;
+  padding: 0 0 ${spacing['2xs']}px;
 
   :last-child {
     padding-bottom: 0;
   }
 
   span {
-    color: ${colors.textMild};
-    flex-basis: 60%;
-    font-size: 0.9rem;
-    text-align: right;
+    flex-basis: 40%;
+    font-family: ${fontFamily.heading};
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: left;
   }
 
   strong {
-    color: ${colors.lilac};
-    flex-basis: 40%;
+    flex-basis: 60%;
+    font-family: ${fontFamily.heading};
+    font-size: 1.4rem;
+    font-weight: 600;
     text-align: right;
   }
+`;
+
+const Shipping = styled(FontStyle.smallbody)`
+  text-align: center;
+  color: ${colors.neutral4};
+  margin-top: ${spacing.lg}px;
 `;
 
 const Total = styled(Cost)`
@@ -165,15 +184,18 @@ const Total = styled(Cost)`
   }
 `;
 
+const ButtonGroup = styled(`div`)`
+  display: flex;
+  flex-direction: column;
+`;
+
 const CheckOut = styled(PrimaryButton)`
-  font-size: 1.25rem;
-  margin: ${spacing.lg}px 0 ${spacing.md}px;
+  margin: ${spacing.md}px 0 0;
   width: 100%;
 `;
 
 const BackLink = styled(Button)`
-  font-size: 1.25rem;
-  margin-bottom: ${spacing.sm}px;
+  margin: ${spacing.md}px 0 0;
   width: 100%;
 `;
 
@@ -218,7 +240,7 @@ class Cart extends Component {
 
     return (
       <StoreContext.Consumer>
-        {({ client, checkout, removeLineItem, updateLineItem, adding }) => {
+        {({ client, checkout, removeLineItem, updateLineItem }) => {
           const setCartLoading = bool => this.setState({ isLoading: bool });
 
           const handleRemove = itemID => async event => {
@@ -235,11 +257,6 @@ class Cart extends Component {
             setCartLoading(false);
           };
 
-          const itemsInCart = checkout.lineItems.reduce(
-            (total, item) => total + item.quantity,
-            0
-          );
-
           return (
             <CartRoot
               className={`${className} ${
@@ -247,47 +264,43 @@ class Cart extends Component {
                 }`}
             >
               <Heading>
-                <CartIndicator itemsInCart={itemsInCart} adding={adding} />
-                <Title>Your Cart</Title>
-                <Button aria-label={`Close Cart`} onClick={toggle}>
-                  <OiIcon icon='oi-icon oi-icon-close' />
-                </Button>
+                <Title>Cart</Title>
+                <CartCloseBtn icon='oi-icon-close' onClick={toggle} />
               </Heading>
               {checkout.lineItems.length > 0 ? (
-                <Content>
-                  <CartList
-                    items={checkout.lineItems}
-                    handleRemove={handleRemove}
-                    updateQuantity={handleQuantityChange}
-                    setCartLoading={setCartLoading}
-                    isCartLoading={this.state.isLoading}
-                  />
-
-                  <Costs>
-                    <Cost>
-                      <span>Subtotal:</span>{' '}
-                      <strong>USD ${checkout.subtotalPrice}</strong>
-                    </Cost>
-                    <Cost>
-                      <span>Taxes:</span> <strong>{checkout.totalTax}</strong>
-                    </Cost>
-                    <Cost>
-                      <span>Shipping (worldwide):</span> <strong>FREE</strong>
-                    </Cost>
-                    <Total>
-                      <span>Total Price:</span>
-                      <strong>USD ${checkout.totalPrice}</strong>
-                    </Total>
-                  </Costs>
-
-                  <CheckOut href={checkout.webUrl}>
-                    Check out <MdArrowForward />
-                  </CheckOut>
-                  <BackLink onClick={toggle}>
-                    <MdArrowBack />
-                    Back to shopping
-                  </BackLink>
-                </Content>
+                <>
+                  <Content>
+                    <CartList
+                      items={checkout.lineItems}
+                      handleRemove={handleRemove}
+                      updateQuantity={handleQuantityChange}
+                      setCartLoading={setCartLoading}
+                      isCartLoading={this.state.isLoading}
+                    />
+                  </Content>
+                  <CartFooter>
+                    <Costs>
+                      <Cost>
+                        <span>Subtotal</span>{' '}
+                        <strong>{priceWithCommas(checkout.subtotalPrice)} VND</strong>
+                      </Cost>
+                      {checkout.totalTax > 0 &&
+                        <Cost>
+                          <span>Taxes:</span> <strong>{checkout.totalTax}</strong>
+                        </Cost>
+                      }
+                      <Shipping>Shipping cost will be calculated at checkout.</Shipping>
+                      {/* <Total>
+                        <span>Total Price:</span>
+                        <strong>USD ${checkout.totalPrice}</strong>
+                      </Total> */}
+                    </Costs>
+                    <ButtonGroup>
+                      <CheckOut href={checkout.webUrl}>Check out</CheckOut>
+                      <BackLink onClick={toggle}>Continue shopping</BackLink>
+                    </ButtonGroup>
+                  </CartFooter>
+                </>
               ) : (
                   <EmptyCart />
                 )}

@@ -49,7 +49,6 @@
     "react": "^16.8.0-alpha.0",
     "react-apollo": "^2.2.4",
     "react-dom": "^16.8.0-alpha.0",
-    "react-grid-layout": "^0.16.6",
     "react-headroom": "^2.2.8",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.1.0",

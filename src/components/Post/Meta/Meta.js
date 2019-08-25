@@ -2,7 +2,6 @@
 import React from 'react';
 import moment from 'moment';
 import styled from '@emotion/styled';
-// import styles from './Meta.module.scss';
 
 type Props = {
   date: string,

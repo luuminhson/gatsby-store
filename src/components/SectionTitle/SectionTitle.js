@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Button from '../Button';
+import { FontStyle } from '../../utils/styles';
 
 const SectionWrapper = styled(`div`)`
     display: flex;
@@ -9,12 +10,9 @@ const SectionWrapper = styled(`div`)`
     align-items: center;
 `;
 
-const Title = styled(`h2`)`
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 800;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+const Title = styled(FontStyle.h2)`
+    font-size: 20px;
+    line-height: 28px;
     margin: 0;
 `;
 
