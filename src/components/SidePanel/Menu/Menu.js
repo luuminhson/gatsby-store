@@ -17,6 +17,16 @@ type Props = {
   onFeaturedImage: bool
 };
 
+const MenuWrapperInner = styled(`nav`)`
+  display: flex;
+  position: relative;
+  padding: 0;
+
+  ${mediaQuery.tabletFrom} {
+    display: flex;
+  }
+`;
+
 const MenuWrapper =  styled(`div`)`
   display: flex;
   align-items: center;
@@ -33,16 +43,6 @@ const UnfixedStyle = css`
 `;
 
 const onFeaturedImageStyle = css``;
-
-const MenuWrapperInner = styled(`nav`)`
-  display: flex;
-  position: relative;
-  padding: 0;
-
-  ${mediaQuery.tabletFrom} {
-    display: flex;
-  }
-`;
 
 const MenuList = styled(`ul`)`
   width: 100%;
