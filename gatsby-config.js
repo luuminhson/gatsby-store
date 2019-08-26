@@ -87,7 +87,9 @@ module.exports = {
                 }
               }
             `,
-          output: '/rss.xml'
+          output: '/rss.xml',
+          title: "Original Inside's RSS Feed",
+          match: "^/blog/",
         }]
       }
     },
