@@ -34,7 +34,7 @@ export default () => (
         <html lang="en" />
         <body className={bodyStyles} />
 
-        <link rel="preconnect" href="https://original-inside.myshopify.com" />
+        <link rel="preconnect" href="https://originalinside.com" />
 
         <link rel="canonical" href={siteUrl} />
         <link
@@ -55,9 +55,14 @@ export default () => (
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#663399" />
-        <meta name="msapplication-TileColor" content="#663399" />
-        <meta name="theme-color" content="#663399" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffffff" />
+        <meta name="msapplication-TileColor" content="#222222" />
+        <meta name="theme-color" content="#ffffff" />
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Original Inside" />
+        <link rel="apple-touch-startup-image" href="launch.png"></link>
 
         <meta name="description" content={description} />
 
@@ -74,13 +79,10 @@ export default () => (
         />
         <meta
           property="og:image:alt"
-          content="Gatsby Socks using Dora for scale."
+          content="We are Original Inside."
         />
         <meta property="og:image:width" content="1280" />
         <meta property="og:image:height" content="686" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@gatsbyjs" />
       </Helmet>
     )}
   />

@@ -10,6 +10,7 @@ import ProductForm from './ProductForm';
 import { breakpoints, mediaQuery, colors, spacing, headerHeight } from '../../utils/styles';
 
 const ProductPageRoot = styled('div')`
+  padding-top: ${headerHeight.phone};
   padding-bottom: ${spacing.md}px;
   margin: 0 auto;
 
@@ -17,15 +18,13 @@ const ProductPageRoot = styled('div')`
     align-items: center;
     display: flex;
     justify-content: center;
-    min-height: calc(100vh - ${headerHeight.tablet});
     background-color: ${colors.mainLight};
-    padding: ${spacing.xl}px;
+    padding: calc(${headerHeight.tablet} + ${spacing['4xl']}px) ${spacing.xl}px calc(${headerHeight.tablet});
     width: 100%;
-    max-width: ${breakpoints.fhd}px;
   }
 
   ${mediaQuery.desktop} {
-    min-height: calc(100vh - ${headerHeight.desktop});
+    padding-top: calc(${headerHeight.desktop} + ${spacing['4xl']}px);
   }
 `;
 
@@ -35,6 +34,7 @@ const Container = styled(`div`)`
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    max-width: ${breakpoints.fhd}px;
   }
 `;
 

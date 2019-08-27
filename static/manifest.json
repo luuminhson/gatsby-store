@@ -1,20 +1,20 @@
 {
-  "name": "Gatsby Store",
-  "short_name": "Store",
-  "start_url": ".",
+  "name": "Original Inside",
+  "short_name": "Original Inside",
+  "start_url": "/",
   "icons": [
     {
-      "src": "/android-chrome-192x192.png",
+      "src": "/favicon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/android-chrome-512x512.png",
+      "src": "/favicon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
   "theme_color": "#ffffff",
-  "background_color": "#663399",
+  "background_color": "#222222",
   "display": "standalone"
 }

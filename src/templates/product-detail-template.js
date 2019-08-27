@@ -17,7 +17,7 @@ const ProductDetailTemplate = props => {
   const image = product.images[0].localFile.childImageSharp.fluid.src;
 
   return (
-    <Layout>
+    <Layout isProduct>
     <InterfaceContext.Consumer>
       {({
         isDesktopViewport,
@@ -34,7 +34,7 @@ const ProductDetailTemplate = props => {
 
             <meta
               property="og:url"
-              content={`${site.siteMetadata.siteUrl}/product/${handle}`}
+              content={`${site.siteMetadata.siteUrl}/store/product/${handle}`}
             />
             <meta property="og:locale" content="en" />
             <meta property="og:title" content={title} />

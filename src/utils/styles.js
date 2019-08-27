@@ -101,7 +101,7 @@ export const spacing = {
 --------------------------------------------------------------- */
 
 export const dimensions = {
-  indexPageWidth: '1280px',
+  indexPageWidth: '1920px',
   storePageWidth: '1920px',
   sidePanelMaxwidth: '280px',
   navHeightDesktop: '180px',

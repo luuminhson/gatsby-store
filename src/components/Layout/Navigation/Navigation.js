@@ -10,12 +10,13 @@ import Logo from './Logo';
 import Menu from './Menu';
 import OiIcon from '../../OiIcon';
 import CartToggle from '../../Cart/CartToggle';
-import { FontStyle, fontFamily, dimensions, mediaQuery, spacing, colors } from '../../../utils/styles';
+import { FontStyle, fontFamily, dimensions, mediaQuery, spacing, colors, breakpoints, headerHeight } from '../../../utils/styles';
 
 const NavigationWrapper = styled(`div`)`
     background-color: ${colors.white};
     width: 100%;
     padding: 0 ${spacing.lg}px;
+    position: relative;
     z-index: 2000;
 
     ${mediaQuery.tabletFrom} {
@@ -33,6 +34,9 @@ const NavigationInner = styled(`div`)`
     display: flex;
     align-items: stretch;
     justify-content: space-between;
+    margin: 0 auto;
+    max-width: ${breakpoints.fhd}px;
+    transition: height 0.2s ease-in-out;
 
     ${mediaQuery.tabletFrom} {
         height: ${dimensions.navHeightTablet};
@@ -114,30 +118,53 @@ const MainMenu = styled(Menu)`
     }
 `;
 
-const unpinnedStyle = css``;
+const isStoreStyle = css``;
 
-const pinnedStyle = css``;
+const isProductStyle = css`
+    background-color: transparent;
+`;
 
 const HeadroomWrapper = styled(Headroom)`
     width: 100%;
     position: relative;
     z-index: 100;
+`;
 
-    &${unpinnedStyle} {
-        ${NavigationWrapper} {
-            &:before {
-                box-shadow: none;
-                transition: box-shadow 0.5s cubic-bezier(0, 0.78, 0.57, 1.05);
+const unpinnedStyle = css``;
+
+const pinnedStyle = css`
+    ${NavigationWrapper} {
+        background-color: ${colors.white};
+        
+        ${NavigationInner} {
+            ${mediaQuery.tabletFrom} {
+                height: ${headerHeight.tablet};
             }
         }
     }
+`;
 
-    &${pinnedStyle} {
-        ${NavigationWrapper} {
-            &:before {
-                box-shadow: $nav-shadow-light;
-                transition: box-shadow 0.5s cubic-bezier(0, 0.78, 0.57, 1.05);
+const unfixedStyle = css`
+    ${NavigationWrapper} {
+        ${NavigationInner} {
+            height: ${dimensions.navHeightMobile};
+    
+            ${mediaQuery.tabletFrom} {
+                height: ${dimensions.navHeightTablet};
             }
+    
+            ${mediaQuery.desktop} {
+                height: ${dimensions.navHeightDesktop};
+            }
+        }
+
+        ${DetailTitle} {
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        ${isProductStyle} {
+            background-color: transparent;
         }
     }
 `;
@@ -172,15 +199,6 @@ const isIndexStyle = css``;
 
 const isPostStyle = css``;
 
-const unfixedStyle = css`
-    ${NavigationWrapper} {
-        ${DetailTitle} {
-            opacity: 0;
-            transition: opacity 0.4s ease-in-out;
-        }
-    }
-`;
-
 const onFeaturedImageStyle = css`
     ${NavigationWrapper} {
         &:before {
@@ -213,7 +231,8 @@ class PureNavigation extends React.Component {
 
     headRoomUnfix = () => {
         this.setState({
-            // pinned: false,
+            pinned: false,
+            unpinned: false,
             unfixed: true
         });
     }
@@ -239,6 +258,8 @@ class PureNavigation extends React.Component {
             data,
             isIndex,
             isPost,
+            isStore,
+            isProduct,
             onFeaturedImage,
             burgerClick,
             from,
@@ -253,8 +274,6 @@ class PureNavigation extends React.Component {
         const {
             menu
         } = data.site.siteMetadata;
-
-        const isDetailScreen = isPost;
 
         const backLink = () => {
             if ('' !== from) {
@@ -272,13 +291,13 @@ class PureNavigation extends React.Component {
 
         const navLeft = (
             <NavLeftWrapper>
-                {isDetailScreen ? backButton : <Link to='/'>{siteLogo}</Link>}
+                {isPost ? backButton : <Link to='/'>{siteLogo}</Link>}
             </NavLeftWrapper>
         );
 
         const navCenter = (
             <NavCenterWrapper>
-                { isDetailScreen && (typeof detailTitle !== 'undefined') ? detailPageTitle : null }
+                { isPost && (typeof detailTitle !== 'undefined') ? detailPageTitle : null }
                 <MainMenu menu={menu} isPost={isPost} onFeaturedImage={onFeaturedImage} unfixed={unfixed} />
             </NavCenterWrapper>
         );
@@ -302,14 +321,16 @@ class PureNavigation extends React.Component {
                 css={[
                     unpinned && unpinnedStyle,
                     pinned && pinnedStyle,
-                    (isIndex || isDetailScreen) && unfixed && unfixedStyle,
-                    isDetailScreen && onFeaturedImage && onFeaturedImageStyle,
+                    unfixed && unfixedStyle,
+                    isPost && onFeaturedImage && onFeaturedImageStyle,
                 ]}
             >
                 <NavigationWrapper className={className}
                     css={[
                         isPost && isPostStyle,
-                        isIndex && isIndexStyle
+                        isIndex && isIndexStyle,
+                        isStore && isStoreStyle,
+                        isProduct && isProductStyle,
                     ]}
                 >
                     <NavigationInner>

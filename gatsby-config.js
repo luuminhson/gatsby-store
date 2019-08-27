@@ -194,13 +194,13 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'Gatsby Store',
-        short_name: 'Gatsby Store',
+        name: 'Original Inside',
+        short_name: 'Original Inside',
         start_url: '/',
         background_color: '#ffffff',
         theme_color: '#663399',
         display: 'standalone',
-        icon: 'static/android-chrome-512x512.png'
+        icon: 'static/favicon-512x512.png'
       }
     },
     'gatsby-plugin-offline', // must be placed after the 'gatsby-plugin-manifest'

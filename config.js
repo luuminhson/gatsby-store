@@ -3,7 +3,7 @@
 module.exports = {
     siteUrl: 'https://originalinside.com',
     title: 'Original Inside',
-    description: 'Some scattered notes of someone.',
+    description: 'Because you are original.',
     copyright: 'Original Inside © All rights reserved.',
     postsPerPage: 10,
     googleAnalyticsId: '',
@@ -25,15 +25,6 @@ module.exports = {
             path: '/about'
         }
     ],
-    logo: {
-        src: {
-            dark: '/logo-dark.svg',
-            light: '/logo-light.svg'
-        },
-        alt: 'Miso Product Design',
-        text: 'Miso',
-        type: 'img' // 'img' for image logo or whatever string for text logo
-    },
     contacts: {
         phone: '+84934410491',
         email: 'hello@originalinside.com',

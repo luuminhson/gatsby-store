@@ -14,7 +14,7 @@ import PageContent from './PageContent';
 import ProductImagesBrowser from '../ProductPage/ProductImagesBrowser';
 import SiteMetadata from '../shared/SiteMetadata';
 
-import { breakpoints, mediaQuery, fontFamily, colors, dimensions } from '../../utils/styles';
+import { breakpoints, mediaQuery, fontFamily, colors, dimensions, headerHeight } from '../../utils/styles';
 
 injectGlobal`
     html {
@@ -49,6 +49,23 @@ const LayoutWrapper = styled(`div`)`
 const Viewport = styled(`div`)`
   overflow-x: hidden;
   width: 100%;
+`;
+
+const isBlogStyle = css``;
+
+const isStoreStyle = css``;
+
+const isProductStyle = css`
+  padding-top: 0;
+  margin-top: -${headerHeight.phone};
+
+  ${mediaQuery.tabletFrom} {
+    margin-top: -${headerHeight.tablet};
+  }
+
+  ${mediaQuery.desktop} {
+    margin-top: -${headerHeight.desktop};
+  }
 `;
 
 const overlayOn = css`
@@ -121,8 +138,6 @@ export default class Layout extends React.Component {
               this.state.interface.cartStatus === 'open' ? 'closed' : 'open'
           }
         }));
-        // Add body class 'noScroll'
-        document.body.classList.toggle('noScroll');
       },
       toggleProductImagesBrowser: img => {
         this.setState(state => ({
@@ -271,8 +286,6 @@ export default class Layout extends React.Component {
 
   toggleSidebar = () => {
     this.setState({ sidebar: !this.state.sidebar });
-    // Add body class 'noScroll'
-    document.body.classList.toggle('noScroll');
   };
 
   componentDidMount() {
@@ -295,6 +308,27 @@ export default class Layout extends React.Component {
     this.desktopMediaQuery.removeListener(this.updateViewPortState);
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    const sidebarStatusChanged = prevState.sidebar !== this.state.sidebar;
+    const cartStatusChanged = prevState.interface.cartStatus !== this.state.interface.cartStatus;
+
+    // Add body class 'noScroll'
+
+    cartStatusChanged && (
+      (this.state.interface.cartStatus === 'open') ?
+        document.body.classList.add('noScroll')
+      :
+        document.body.classList.remove('noScroll')
+    );
+
+    sidebarStatusChanged && (
+      (this.state.sidebar === true) ?
+        document.body.classList.add('noScroll')
+      :
+      document.body.classList.remove('noScroll')
+    );
+  }
+
   updateViewPortState = e => {
     this.setState(state => ({
       interface: {
@@ -307,12 +341,12 @@ export default class Layout extends React.Component {
   render() {
     const {
       children,
-      title,
-      description,
       detailTitle,
       isPost,
       isBlog,
       isIndex,
+      isStore,
+      isProduct,
       hasFeaturedImage,
       from
     } = this.props;
@@ -367,11 +401,19 @@ export default class Layout extends React.Component {
                             burgerClick={this.toggleSidebar}
                             isIndex={isIndex}
                             isPost={isPost}
+                            isStore={isStore}
+                            isProduct={isProduct}
                             detailTitle={detailTitle}
                             onFeaturedImage={hasFeaturedImage}
                             from={from}
                           />
-                          <Viewport>
+                          <Viewport
+                            css={[
+                              isStore && isStoreStyle,
+                              isProduct && isProductStyle,
+                              isBlog && isBlogStyle,
+                            ]}
+                          >
                             <PageContent
                               cartStatus={cartStatus}
                               isDesktopViewport={isDesktopViewport}

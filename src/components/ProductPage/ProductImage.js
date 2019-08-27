@@ -17,19 +17,27 @@ const change = keyframes`
   }
 `;
 
-const ProductImageLink = styled(`a`)`
+const imageItemWidth = '80vw';
+
+// 'overflow: hidden' is important to not having the snap flickering
+
+const ProductImageInner = styled(`div`)`
+  overflow: hidden;
+  width: calc(${imageItemWidth} - ${spacing.md * 2}px);
+  height: calc(${imageItemWidth} - ${spacing.md * 2}px);
+`;
+
+const ProductImageWrapper = styled(`div`)`
   flex: 1 0 100%;
-  display: inline-block;
-  position: relative;
+  max-width: ${imageItemWidth};
   scroll-snap-align: center;
-  width: 100%;
-  max-width: 80vw;
-  box-sizing: border-box;
+  scroll-snap-stop: always;
+  position: relative;
   padding: ${spacing.md}px;
   margin-bottom: ${spacing.lg}px;
 
   &:last-child {
-    max-width: calc(80vw + ${spacing.md}px);
+    max-width: calc(${imageItemWidth} + ${spacing.md}px);
     padding-right: ${spacing.xl}px;
   }
 
@@ -37,17 +45,34 @@ const ProductImageLink = styled(`a`)`
   &.single:last-child {
     max-width: calc(100vw - ${spacing.lg}px);
     padding-right: ${spacing.md}px;
+
+    ${ProductImageInner} {
+      width: 100%;
+      height: 100%;
+    }
   }
+
+  ${mediaQuery.tabletFrom} {
+    flex: 1 0 auto;
+    margin-bottom: 0;
+
+    ${ProductImageInner} {
+      width: auto;
+      height: auto;
+    }
+  }
+`;
+
+const ProductImageLink = styled(`a`)`
+  display: block;
+  width: 100%;
 
   &.change {
     animation: ${change} ${IMAGE_CHANGE_ANIM_DURATION}ms ease-out forwards;
   }
 
   ${mediaQuery.tabletFrom} {
-    width: auto;
     cursor: zoom-in;
-    flex: 1 0 auto;
-    margin-bottom: 0;
   }
 `;
 
@@ -92,16 +117,19 @@ class ProductImage extends Component {
     } = this.props;
 
     return (
-      <ProductImageLink
-        ref={el => {
-          this.imageLink = el;
-        }}
-        href={fluid.src}
-        onClick={this.handleClick(onClick)}
-        className={ single ? 'single' : null }
-      >
-        <StyledImage fluid={fluid} alt="" />
-      </ProductImageLink>
+      <ProductImageWrapper className={single ? 'single' : null}>
+        <ProductImageInner>
+          <ProductImageLink
+            ref={el => {
+              this.imageLink = el;
+            }}
+            href={fluid.src}
+            onClick={this.handleClick(onClick)}
+          >
+            <StyledImage fluid={fluid} alt="" />
+          </ProductImageLink>
+        </ProductImageInner>
+      </ProductImageWrapper>
     );
   }
 }

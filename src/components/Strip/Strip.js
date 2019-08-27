@@ -8,7 +8,7 @@ import Img from 'gatsby-image';
 import SectionTitle from '../SectionTitle';
 import type { Edges } from '../../types';
 
-import { mediaQuery, shadow, colors, fontFamily } from '../../utils/styles';
+import { mediaQuery, shadow, colors, fontFamily, radius } from '../../utils/styles';
 
 type Props = {
     edges: Edges,
@@ -21,16 +21,13 @@ const cardWidth = '75vw';
 const scrollbarHiddenPadding = '4.2rem';
 
 const Wrapper = styled(`div`)`
-    margin: 0 -1.25rem;
+    margin: 0 -0.75rem;
     height: 380px;
     overflow: hidden;
 
     ${mediaQuery.tabletFrom} {
         height: auto;
-    }
-
-    ${mediaQuery.desktop} {
-        margin: 0 -2.1875rem;
+        margin: 0 -1rem;
     }
 `;
 
@@ -74,6 +71,7 @@ const StripItem = styled(`div`)`
                 height: 160px;
                 overflow: hidden;
                 box-sizing: border-box;
+                border-radius: ${radius.large}px;
             }
         }
     }
@@ -83,12 +81,11 @@ const StripItem = styled(`div`)`
         align-items: flex-end;
         overflow: hidden;
         background-color: ${colors.white};
-        box-shadow: ${shadow.blockItemShadow};
     }
 
     ${mediaQuery.tabletFrom} {
-        flex-basis: 33.3%;
-        max-width: calc(33.3% - 32px);
+        flex-basis: 33.3333%;
+        max-width: calc(33.3333%);
         padding: 0 1rem;
         margin-bottom: 32px;
 
@@ -109,7 +106,7 @@ const ItemLink = styled(Link)`
 
 const ItemInfo = styled(`div`)`
     flex: 1 0 100%;
-    padding: 16px 20px 20px;
+    padding: 16px 4px 0;
     max-width: 100%;
     box-sizing: border-box;
 
@@ -117,7 +114,7 @@ const ItemInfo = styled(`div`)`
         color: ${colors.mainDark};
         font-family: ${fontFamily.heading};
         font-size: 1.1rem;
-        line-height: 28px;
+        line-height: 24px;
         max-height: 56px;
         margin: 0 0 12px;
         overflow: hidden;
@@ -135,7 +132,7 @@ const ItemInfo = styled(`div`)`
         display: block;
         font-size: 14px;
         line-height: 20px;
-        color: ${colors.mainDark};
+        color: ${colors.neutral4};
     }
 `;
 

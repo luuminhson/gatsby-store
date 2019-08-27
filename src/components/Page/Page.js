@@ -21,16 +21,16 @@ const PageStyle = css`
 `;
 
 const PageInner = styled(`div`)`
-  padding: 25px 20px;
+  padding: 24px 0.75rem;
   margin: 0 auto;
   max-width: 100%;
 
-  ${mediaQuery.tablet} {
-    padding: 30px 20px;
+  ${mediaQuery.tabletFrom} {
+    padding: 30px 1rem;
   }
 
   ${mediaQuery.desktop} {
-    padding: 40px 35px;
+    padding: 40px 60px;
     max-width: ${dimensions.indexPageWidth};
   }
 `;

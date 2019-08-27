@@ -36,7 +36,7 @@ const ProductImagesMobileContent = styled(`div`)`
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   padding: 0 ${spacing.md}px;
-  position: relative;
+  transform: translateZ(0);
 
   ${StyledImage} {
     width: 100%;

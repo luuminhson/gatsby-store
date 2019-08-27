@@ -115,7 +115,7 @@ const ProductListingItem = props => {
     <UserContext.Consumer>
       {() => {
         return (
-          <ProductListingItemLink to={`/product/${handle}`}>
+          <ProductListingItemLink to={`/store/product/${handle}`}>
             <Item>
               <Preview>
                 { compareAtPrice && compareAtPrice !== null &&

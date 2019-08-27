@@ -78,19 +78,46 @@ const Heading = styled(`header`)`
   left: 0;
   background-color: ${colors.white};
   width: 100%;
-  height: 60px;
+  height: ${dimensions.navHeightMobile};
+  box-shadow: 0 1px 0 ${colors.neutral1};
   display: flex;
   align-items: center;
   margin: 0;
   padding: 0 ${spacing.xl}px;
   justify-content: flex-start;
   z-index: 3000;
+
+  ${mediaQuery.tabletFrom} {
+    height: ${dimensions.navHeightTablet};
+  }
 `;
 
 const Title = styled(FontStyle.h2)`
   flex-grow: 1;
   text-align: center;
   position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+const ItemsNumber = styled(FontStyle.smallbody)`
+  margin-left: ${spacing.xs}px;
+  background-color: ${colors.mainClickable};
+  color: ${colors.white};
+  padding: 2px 4px;
+  border-radius: 20px;
+  font-weight: 700;
+  text-align: center;
+  height: 20px;
+  min-width: 20px;
+  line-height: 16px;
+
+  ${mediaQuery.tabletFrom} {
+    height: 24px;
+    min-width: 24px;
+    line-height: 20px;
+  }
 `;
 
 const CartCloseBtn = styled(OiIcon)`
@@ -257,6 +284,11 @@ class Cart extends Component {
             setCartLoading(false);
           };
 
+          const itemsInCart = checkout.lineItems.reduce(
+            (total, item) => total + item.quantity,
+            0
+          );
+
           return (
             <CartRoot
               className={`${className} ${
@@ -264,7 +296,10 @@ class Cart extends Component {
                 }`}
             >
               <Heading>
-                <Title>Cart</Title>
+                <Title>
+                  <span>Cart</span>
+                  {itemsInCart > 0 && <ItemsNumber>{itemsInCart}</ItemsNumber>}
+                </Title>
                 <CartCloseBtn icon='oi-icon-close' onClick={toggle} />
               </Heading>
               {checkout.lineItems.length > 0 ? (

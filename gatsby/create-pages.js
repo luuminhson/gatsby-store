@@ -29,7 +29,7 @@ const createPages = async ({ graphql, actions }) => {
 
   pages.data.allShopifyProduct.edges.forEach(edge => {
     createPage({
-      path: `/product/${edge.node.handle}`,
+      path: `/store/product/${edge.node.handle}`,
       component: path.resolve('./src/templates/product-detail-template.js'),
       context: {
         id: edge.node.id,
