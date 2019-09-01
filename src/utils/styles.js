@@ -311,11 +311,6 @@ export const FontStyle = {
   subtext: fontStyleSubtext
 };
 
-export const PageTitle = styled(H1)`
-  margin: 40px 0;
-  text-align: center;
-`;
-
 /* OTHERS
 --------------------------------------------------------------- */
 

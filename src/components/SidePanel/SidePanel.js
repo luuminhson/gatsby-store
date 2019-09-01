@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import Contacts from './Contacts';
 import Menu from './Menu';
 import { useSiteMetadata } from '../../hooks';
-import { mediaQuery, dimensions, colors } from '../../utils/styles';
+import { mediaQuery } from '../../utils/styles';
 
 type Props = {
   isIndex?: boolean,
