@@ -4,6 +4,8 @@ import Image from 'gatsby-image';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/core';
 
+import InterfaceContext from '../../context/InterfaceContext';
+
 import { colors, radius, spacing, mediaQuery } from '../../utils/styles';
 
 export const IMAGE_CHANGE_ANIM_DURATION = 250;
@@ -99,10 +101,11 @@ class ProductImage extends Component {
     }
   };
 
-  handleClick = ( callback ) => event => {
+  handleClick = ( callbackImage, calbackIdx ) => event => {
     event.preventDefault();
 
-    callback(this.props.image);
+    callbackImage(this.props.image);
+    calbackIdx(this.props.idx);
   };
 
   render() {
@@ -118,19 +121,25 @@ class ProductImage extends Component {
     } = this.props;
 
     return (
-      <ProductImageWrapper className={single ? 'single' : null}>
-        <ProductImageInner>
-          <ProductImageLink
-            ref={el => {
-              this.imageLink = el;
-            }}
-            href={fluid.src}
-            onClick={this.handleClick(onClick)}
-          >
-            <StyledImage fluid={fluid} alt="" />
-          </ProductImageLink>
-        </ProductImageInner>
-      </ProductImageWrapper>
+      <InterfaceContext.Consumer>
+        {({
+          featureProductImageIndex
+        }) => (
+        <ProductImageWrapper className={single ? 'single' : null}>
+          <ProductImageInner>
+            <ProductImageLink
+              ref={el => {
+                this.imageLink = el;
+              }}
+              href={fluid.src}
+              onClick={this.handleClick(onClick, featureProductImageIndex)}
+            >
+              <StyledImage fluid={fluid} alt="" />
+            </ProductImageLink>
+          </ProductImageInner>
+        </ProductImageWrapper>
+      )}
+      </InterfaceContext.Consumer>
     );
   }
 }

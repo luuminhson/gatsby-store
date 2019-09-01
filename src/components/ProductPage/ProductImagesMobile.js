@@ -51,7 +51,7 @@ const ProductImagesMobile = ({ images, imageOnClick }) => (
   <ProductImagesMobileRoot className={ images.length === 1 ? 'single' : null }>
     <ProductImagesMobileContent>
       {images.map((image, idx) => (
-        <ProductImage single={ images.length === 1 ? true : false } key={idx} image={image} onClick={imageOnClick} />
+        <ProductImage single={ images.length === 1 ? true : false } idx={idx} key={idx} image={image} onClick={imageOnClick} />
       ))}
     </ProductImagesMobileContent>
   </ProductImagesMobileRoot>

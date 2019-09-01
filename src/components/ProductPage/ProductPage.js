@@ -73,8 +73,6 @@ class ProductPage extends Component {
     return (
       <InterfaceContext.Consumer>
         {({
-          featureProductImage,
-          featureProductImageIndex,
           productImageFeaturedIndex,
         }) => (
           <ProductPageRoot>
