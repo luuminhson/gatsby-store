@@ -5,7 +5,7 @@ export const defaultInterfaceContext = {
   cartStatus: 'initial',
   toggleCart: () => {},
   productImageFeatured: null,
-  productImageFeaturedIndex: null,
+  productImageFeaturedIndex: 0,
   featureProductImage: () => {},
   featureProductImageIndex: () => {},
   currentProductImages: [],

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import Image from 'gatsby-image';
 
 import InterfaceContext from '../../context/InterfaceContext';
@@ -59,11 +60,15 @@ export const Thumbnail = styled(`a`)`
   }
 `;
 
+const active = css`
+  box-shadow: 0 0 0 2px ${colors.mainDark};
+`;
+
 class ProductThumbnails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeIndex: 0
+      activeIndex: this.props.activeIdx,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -76,6 +81,18 @@ class ProductThumbnails extends Component {
     callbackImage(image);
 
   };
+
+  componentDidUpdate(prevProps) {
+    const activeIdxChanged = prevProps.activeIdx !== this.props.activeIdx;
+
+    // Update state activeIndex
+
+    activeIdxChanged && (
+      this.setState({
+        activeIndex: this.props.activeIdx,
+      })
+    );
+  }
 
   render() {
     const { images, className } = this.props;
@@ -100,6 +117,7 @@ class ProductThumbnails extends Component {
                 return (
                   <Thumbnail
                     key={id}
+                    css={idx === activeIndex && active}
                     onClick={this.handleClick(idx, featureProductImageIndex, image, featureProductImage)}
                     href={fluid.src}
                   >

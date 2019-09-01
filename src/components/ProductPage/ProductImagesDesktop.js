@@ -25,15 +25,16 @@ const Thumbnails = styled(ProductThumbnails)`
   }
 `;
 
-const ProductImagesDesktop = ({ images, imageFeatured, imageOnClick }) => {
+const ProductImagesDesktop = ({ images, imageFeatured, imageOnClick, imageFeaturedIndex }) => {
   const image = images[0];
 
   return (
     <ProductImagesDesktopRoot>
-      { images.length !== 1 && <Thumbnails images={images} /> }
+      { images.length !== 1 && <Thumbnails images={images} activeIdx={imageFeaturedIndex} /> }
       <ProductImage
         image={imageFeatured ? imageFeatured : image}
         onClick={imageOnClick}
+        idx={imageFeaturedIndex}
         single={ images.length === 1 ? true : false }
       />
     </ProductImagesDesktopRoot>
@@ -43,7 +44,8 @@ const ProductImagesDesktop = ({ images, imageFeatured, imageOnClick }) => {
 ProductImagesDesktop.propTypes = {
   images: PropTypes.array.isRequired,
   imageOnClick: PropTypes.func,
-  imageFeatured: PropTypes.object
+  imageFeatured: PropTypes.object,
+  imageFeaturedIndex: PropTypes.number,
 };
 
 export default ProductImagesDesktop;

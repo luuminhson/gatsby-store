@@ -198,7 +198,7 @@ module.exports = {
         short_name: 'Original Inside',
         start_url: '/',
         background_color: '#ffffff',
-        theme_color: '#663399',
+        theme_color: '#ffffff',
         display: 'standalone',
         icon: 'static/favicon-512x512.png'
       }

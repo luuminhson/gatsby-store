@@ -7,6 +7,8 @@ import ProductImagesDesktop from './ProductImagesDesktop';
 import ProductSpecs from './ProductSpecs';
 import ProductForm from './ProductForm';
 
+import InterfaceContext, { defaultInterfaceContext } from '../../context/InterfaceContext';
+
 import { breakpoints, mediaQuery, colors, spacing, headerHeight } from '../../utils/styles';
 
 const ProductPageRoot = styled('div')`
@@ -50,6 +52,7 @@ const Details = styled(`div`)`
 `;
 
 class ProductPage extends Component {
+
   componentDidMount() {
     const images = this.props.product.images;
     this.props.setCurrentProductImages(images);
@@ -68,26 +71,35 @@ class ProductPage extends Component {
     } = this.props;
 
     return (
-      <ProductPageRoot>
-        <Container>
-          {!isDesktopViewport ? (
-            <ProductImagesMobile
-              images={images}
-              imageOnClick={toggleProductImagesBrowser}
-            />
-          ) : (
-            <ProductImagesDesktop
-              images={images}
-              imageOnClick={toggleProductImagesBrowser}
-              imageFeatured={productImageFeatured}
-            />
-          )}
-          <Details>
-            <ProductSpecs product={product} />
-            <ProductForm id={id} variants={variants} />
-          </Details>
-        </Container>
-      </ProductPageRoot>
+      <InterfaceContext.Consumer>
+        {({
+          featureProductImage,
+          featureProductImageIndex,
+          productImageFeaturedIndex,
+        }) => (
+          <ProductPageRoot>
+            <Container>
+              {!isDesktopViewport ? (
+                <ProductImagesMobile
+                  images={images}
+                  imageOnClick={toggleProductImagesBrowser}
+                />
+              ) : (
+                <ProductImagesDesktop
+                  images={images}
+                  imageOnClick={toggleProductImagesBrowser}
+                  imageFeatured={productImageFeatured}
+                  imageFeaturedIndex={productImageFeaturedIndex}
+                />
+              )}
+              <Details>
+                <ProductSpecs product={product} />
+                <ProductForm id={id} variants={variants} />
+              </Details>
+            </Container>
+          </ProductPageRoot>
+        )}
+      </InterfaceContext.Consumer>
     );
   }
 }

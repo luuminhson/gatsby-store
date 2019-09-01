@@ -99,7 +99,7 @@ class ProductImage extends Component {
     }
   };
 
-  handleClick = callback => event => {
+  handleClick = ( callback ) => event => {
     event.preventDefault();
 
     callback(this.props.image);
@@ -113,7 +113,8 @@ class ProductImage extends Component {
         }
       },
       onClick,
-      single
+      single,
+      idx
     } = this.props;
 
     return (
@@ -137,6 +138,7 @@ class ProductImage extends Component {
 ProductImage.propTypes = {
   image: PropTypes.object.isRequired,
   onClick: PropTypes.func,
+  idx: PropTypes.number,
   single: PropTypes.bool
 };
 
