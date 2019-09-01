@@ -99,7 +99,7 @@ const createPages = async ({ graphql, actions }) => {
 
   createPage({
     path: '/store',
-    component: path.resolve('./src/templates/products-list-template.js')
+    component: path.resolve('./src/templates/store-template.js')
   });
 
   /* POST LIST (BLOG)

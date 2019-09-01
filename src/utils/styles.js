@@ -62,23 +62,26 @@ export const layoutWidth = {
 --------------------------------------------------------------- */
 
 export const breakpoints = {
-  mobile:         400,
-  phablet:        550,
-  tablet:         750,
-  desktop:        1280,
-  hd:             1440,
-  fhd:            1920,
+  mobile:           400,
+  phablet:          550,
+  tablet:           750,
+  tabletLandscape:  1024,
+  desktop:          1280,
+  hd:               1440,
+  fhd:              1920,
 };
 
 export const mediaQuery = {
-  phoneSmall:     `@media (max-width: ${breakpoints.mobile - 1}px)`,
-  phoneLarge:     `@media (min-width: ${breakpoints.mobile}px) and (max-width: ${breakpoints.tablet - 1}px)`,
-  phone:          `@media (max-width: ${breakpoints.tablet - 1}px)`,
-  tablet:         `@media (min-width: ${breakpoints.phablet}px) and (max-width: ${breakpoints.desktop - 1}px)`,
-  tabletFrom:     `@media (min-width: ${breakpoints.tablet}px)`,
-  desktop:        `@media (min-width: ${breakpoints.desktop}px)`,
-  desktopLarge:   `@media (min-width: ${breakpoints.hd}px)`,
-  desktopXLarge:  `@media (min-width: ${breakpoints.fhd}px)`,
+  phoneSmall:       `@media (max-width: ${breakpoints.mobile - 1}px)`,
+  phoneLarge:       `@media (min-width: ${breakpoints.mobile}px) and (max-width: ${breakpoints.tablet - 1}px)`,
+  phone:            `@media (max-width: ${breakpoints.tablet - 1}px)`,
+  tablet:           `@media (min-width: ${breakpoints.phablet}px) and (max-width: ${breakpoints.desktop - 1}px)`,
+  tabletPortrait:   `@media (min-width: ${breakpoints.phablet}px) and (max-width: ${breakpoints.tabletLandscape - 1}px) and (orientation: portrait)`,  
+  tabletLandscape:  `@media (min-width: ${breakpoints.phablet}px) and (max-width: ${breakpoints.tabletLandscape}px) and (orientation: landscape)`,
+  tabletFrom:       `@media (min-width: ${breakpoints.tablet}px)`,
+  desktop:          `@media (min-width: ${breakpoints.desktop}px)`,
+  desktopLarge:     `@media (min-width: ${breakpoints.hd}px)`,
+  desktopXLarge:    `@media (min-width: ${breakpoints.fhd}px)`,
 }
 
 /* SPACING
@@ -95,6 +98,8 @@ export const spacing = {
   '2xl': 40,
   '3xl': 48,
   '4xl': 60,
+  '6xl': 80,
+  '8xl': 100,
 };
 
 /* DIMENSIONS

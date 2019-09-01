@@ -33,7 +33,6 @@ const ProductImageWrapper = styled(`div`)`
   flex: 1 0 100%;
   max-width: ${imageItemWidth};
   scroll-snap-align: center;
-  scroll-snap-stop: always;
   position: relative;
   padding: ${spacing.md}px;
   margin-bottom: ${spacing.lg}px;
@@ -57,6 +56,11 @@ const ProductImageWrapper = styled(`div`)`
   ${mediaQuery.tabletFrom} {
     flex: 1 0 auto;
     margin-bottom: 0;
+    max-width: 40vw;
+
+    &:last-child {
+      max-width: 40vw;
+    }
 
     ${ProductImageInner} {
       width: auto;
@@ -116,8 +120,7 @@ class ProductImage extends Component {
         }
       },
       onClick,
-      single,
-      idx
+      single
     } = this.props;
 
     return (

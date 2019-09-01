@@ -319,9 +319,11 @@ class ProductImagesBrowser extends Component {
           <MdClose />
         </CloseButton>
 
-        <ThumbnailListWrapper>
-          <ThumbnailList images={images} activeIdx={imageFeaturedIndex} />
-        </ThumbnailListWrapper>
+        { images.length !== 1 && 
+          <ThumbnailListWrapper>
+            <ThumbnailList images={images} activeIdx={imageFeaturedIndex} />
+          </ThumbnailListWrapper>
+        }
 
         <ZoomArea
           ref={container => {

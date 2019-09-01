@@ -291,7 +291,7 @@ class PureNavigation extends React.Component {
 
         const navLeft = (
             <NavLeftWrapper>
-                {isPost ? backButton : <Link to='/'>{siteLogo}</Link>}
+                {(isPost || isProduct) ? backButton : <Link to='/'>{siteLogo}</Link>}
             </NavLeftWrapper>
         );
 

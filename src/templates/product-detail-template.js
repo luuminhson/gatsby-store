@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import { Location } from '@reach/router';
 import Helmet from 'react-helmet';
 import Layout from '../components/Layout';
 
@@ -16,55 +17,72 @@ const ProductDetailTemplate = props => {
   const description = fullDescription;
   const image = product.images[0].localFile.childImageSharp.fluid.src;
 
+  const checkLocationState = (location) => {
+    const locationState = location.state;
+
+    if (locationState == null) {
+      return '/store';
+    } else {
+      const hasLocationState = location.state.hasOwnProperty('prevUrl');
+      const passedBackLink = hasLocationState ? location.state.prevUrl : '/store';
+
+      return passedBackLink;
+    }
+  }
+
   return (
-    <Layout isProduct>
-    <InterfaceContext.Consumer>
-      {({
-        isDesktopViewport,
-        productImagesBrowserStatus,
-        productImageFeatured,
-        toggleProductImagesBrowser,
-        setCurrentProductImages
-      }) => (
-        <div>
-          <Helmet>
-            <title>{title}</title>
+    <Location>
+      {({ location }) => (
+        <Layout isProduct from={checkLocationState(location)}>
+          <InterfaceContext.Consumer>
+            {({
+              isDesktopViewport,
+              productImagesBrowserStatus,
+              productImageFeatured,
+              toggleProductImagesBrowser,
+              setCurrentProductImages
+            }) => (
+              <div>
+                <Helmet>
+                  <title>{title}</title>
 
-            <meta name="description" content={description} />
+                  <meta name="description" content={description} />
 
-            <meta
-              property="og:url"
-              content={`${site.siteMetadata.siteUrl}/store/product/${handle}`}
-            />
-            <meta property="og:locale" content="en" />
-            <meta property="og:title" content={title} />
-            <meta property="og:site_name" content="Gatsby Swag Store" />
-            <meta property="og:description" content={description} />
+                  <meta
+                    property="og:url"
+                    content={`${site.siteMetadata.siteUrl}/store/product/${handle}`}
+                  />
+                  <meta property="og:locale" content="en" />
+                  <meta property="og:title" content={title} />
+                  <meta property="og:site_name" content="Gatsby Swag Store" />
+                  <meta property="og:description" content={description} />
 
-            {/* TODO: add the image */}
-            <meta
-              property="og:image"
-              content={`${site.siteMetadata.siteUrl}${image}`}
-            />
-            <meta property="og:image:alt" content={title} />
-            <meta property="og:image:width" content="600" />
-            <meta property="og:image:height" content="600" />
+                  {/* TODO: add the image */}
+                  <meta
+                    property="og:image"
+                    content={`${site.siteMetadata.siteUrl}${image}`}
+                  />
+                  <meta property="og:image:alt" content={title} />
+                  <meta property="og:image:width" content="600" />
+                  <meta property="og:image:height" content="600" />
 
-            <meta name="twitter:card" content="summary" />
-            <meta name="twitter:site" content="@gatsbyjs" />
-          </Helmet>
-          <ProductPage
-            product={product}
-            isDesktopViewport={isDesktopViewport}
-            productImagesBrowserStatus={productImagesBrowserStatus}
-            productImageFeatured={productImageFeatured}
-            toggleProductImagesBrowser={toggleProductImagesBrowser}
-            setCurrentProductImages={setCurrentProductImages}
-          />
-        </div>
-      )}
-    </InterfaceContext.Consumer>
-    </Layout>
+                  <meta name="twitter:card" content="summary" />
+                  <meta name="twitter:site" content="@gatsbyjs" />
+                </Helmet>
+                <ProductPage
+                  product={product}
+                  isDesktopViewport={isDesktopViewport}
+                  productImagesBrowserStatus={productImagesBrowserStatus}
+                  productImageFeatured={productImageFeatured}
+                  toggleProductImagesBrowser={toggleProductImagesBrowser}
+                  setCurrentProductImages={setCurrentProductImages}
+                />
+              </div>
+            )}
+          </InterfaceContext.Consumer>
+        </Layout>
+    )}
+    </Location>
   );
 };
 

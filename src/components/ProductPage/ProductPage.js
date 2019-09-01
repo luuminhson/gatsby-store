@@ -34,9 +34,13 @@ const Container = styled(`div`)`
   ${mediaQuery.tabletFrom} {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     width: 100%;
     max-width: ${breakpoints.fhd}px;
+  }
+
+  ${mediaQuery.tabletPortrait} {
+    flex-direction: column;
   }
 `;
 
@@ -45,9 +49,11 @@ const Details = styled(`div`)`
 
   ${mediaQuery.tabletFrom} {
     flex: 1 0 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    margin-top: ${spacing['4xl']}px;
+  }
+
+  ${mediaQuery.desktop} {
+    margin-top: ${spacing['6xl']}px;
   }
 `;
 
