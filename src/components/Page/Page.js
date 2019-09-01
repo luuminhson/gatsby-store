@@ -36,8 +36,8 @@ const PageInner = styled(`div`)`
 `;
 
 const PageTitle = styled(FontStyle.h1)`
-  margin-top: 0;
-  margin-bottom: 24px;
+  margin: 40px auto;
+  text-align: center;
 `;
 
 const PageBody = styled(`div`)`

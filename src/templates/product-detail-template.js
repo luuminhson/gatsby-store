@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import { Location } from '@reach/router';
 import Helmet from 'react-helmet';
 import Layout from '../components/Layout';
+import { useSiteMetadata } from '../hooks';
 
 import InterfaceContext from '../context/InterfaceContext';
 import ProductPage from '../components/ProductPage';
@@ -11,8 +12,10 @@ const ProductDetailTemplate = props => {
   const {
     site,
     shopifyProduct: product,
-    shopifyProduct: { title, description: fullDescription, handle }
+    shopifyProduct: { title: productTitle, description: fullDescription, productType: productCategory, handle }
   } = props.data;
+
+  const { title: siteTitle } = useSiteMetadata();
 
   const description = fullDescription;
   const image = product.images[0].localFile.childImageSharp.fluid.src;
@@ -33,7 +36,7 @@ const ProductDetailTemplate = props => {
   return (
     <Location>
       {({ location }) => (
-        <Layout isProduct from={checkLocationState(location)}>
+        <Layout title={`${productTitle} — ${productCategory} ‧ ${siteTitle}`} description={description} isProduct from={checkLocationState(location)}>
           <InterfaceContext.Consumer>
             {({
               isDesktopViewport,
@@ -44,16 +47,12 @@ const ProductDetailTemplate = props => {
             }) => (
               <div>
                 <Helmet>
-                  <title>{title}</title>
-
-                  <meta name="description" content={description} />
-
                   <meta
                     property="og:url"
                     content={`${site.siteMetadata.siteUrl}/store/product/${handle}`}
                   />
                   <meta property="og:locale" content="en" />
-                  <meta property="og:title" content={title} />
+                  <meta property="og:title" content={productTitle} />
                   <meta property="og:site_name" content="Gatsby Swag Store" />
                   <meta property="og:description" content={description} />
 
@@ -62,7 +61,7 @@ const ProductDetailTemplate = props => {
                     property="og:image"
                     content={`${site.siteMetadata.siteUrl}${image}`}
                   />
-                  <meta property="og:image:alt" content={title} />
+                  <meta property="og:image:alt" content={productTitle} />
                   <meta property="og:image:width" content="600" />
                   <meta property="og:image:height" content="600" />
 

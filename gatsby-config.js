@@ -10,6 +10,7 @@ module.exports = {
   siteMetadata: {
     siteUrl: siteConfig.siteUrl,
     title: siteConfig.title,
+    subtitle: siteConfig.subtitle,
     description: siteConfig.description,
     copyright: siteConfig.copyright,
     menu: siteConfig.menu,
@@ -135,12 +136,6 @@ module.exports = {
         ]
       }
     },
-    // {
-    //   resolve: `gatsby-plugin-layout`,
-    //   options: {
-    //     component: require.resolve(`./src/components/Layout/`)
-    //   }
-    // },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-plugin-netlify',

@@ -10,7 +10,7 @@ const TagsListTemplate = () => {
   const tags = useTagsList();
 
   return (
-    <Layout title={`Tags - ${title}`} description={description}>
+    <Layout title={`Tags ‧ ${title}`} description={description}>
       <Page title="Tags">
         <ul>
           {tags.map((tag) => (

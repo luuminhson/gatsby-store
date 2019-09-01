@@ -15,7 +15,7 @@ type Props = {
 };
 
 const BlogTemplate = ({ data, pageContext }: Props) => {
-  const { title: siteTitle, description: siteSubtitle } = useSiteMetadata();
+  const { title, description } = useSiteMetadata();
   const hasCategories = useCategoriesList().length > 0;
   const hasTags = useTagsList().length > 0;
   const hasSidebar = (hasCategories || hasTags);
@@ -30,11 +30,11 @@ const BlogTemplate = ({ data, pageContext }: Props) => {
 
 
   const { edges } = data.allMarkdownRemark;
-  const pageTitle = currentPage > 0 ? `Posts - Page ${currentPage} - ${siteTitle}` : siteTitle;
+  const pageTitle = currentPage > 0 ? `Blog - Page ${currentPage} ‧ ${title}` : `Blog ‧ ${title}`;
 
   return (
-    <Layout title={pageTitle} description={siteSubtitle} isBlog pageTitle='Articles'>
-      <Page isBlog withSidebar={hasSidebar}>
+    <Layout title={pageTitle} description={description} isBlog>
+      <Page isBlog withSidebar={hasSidebar} title='Blog'>
         <Feed edges={edges} />
         {hasNextPage &&
           <Pagination

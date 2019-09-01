@@ -1,4 +1,6 @@
 import React from 'react';
+import Helmet from 'react-helmet';
+import { graphql, StaticQuery } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { injectGlobal } from 'emotion';
@@ -12,7 +14,6 @@ import Navigation from './Navigation';
 import SidePanel from '../SidePanel';
 import PageContent from './PageContent';
 import ProductImagesBrowser from '../ProductPage/ProductImagesBrowser';
-import SiteMetadata from '../shared/SiteMetadata';
 
 import { breakpoints, mediaQuery, fontFamily, colors, dimensions, headerHeight } from '../../utils/styles';
 
@@ -124,7 +125,7 @@ const SidePanelCloseBtn = css`
   z-index: 3100;
 `;
 
-export default class Layout extends React.Component {
+class PureLayout extends React.Component {
   desktopMediaQuery;
 
   state = {
@@ -340,6 +341,9 @@ export default class Layout extends React.Component {
 
   render() {
     const {
+      data,
+      title,
+      description,
       children,
       detailTitle,
       isPost,
@@ -351,9 +355,42 @@ export default class Layout extends React.Component {
       from
     } = this.props;
 
+    const { siteUrl } = data.site.siteMetadata;
+
     return (
       <LayoutWrapper>
-        <SiteMetadata />
+        {/* <SiteMetadata /> */}
+        <Helmet>
+          <html lang="en" />
+          <title>{title}</title>
+          <meta name="description" content={description} />
+
+          <link rel="preconnect" href="https://originalinside.com" />
+          <link rel="canonical" href={siteUrl} />
+          <link rel="apple-touch-startup-image" href="launch.png"></link>
+          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffffff" />
+          <meta name="msapplication-TileColor" content="#222222" />
+          <meta name="theme-color" content="#ffffff" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+          <meta name="apple-mobile-web-app-title" content="Original Inside" />
+
+          <meta property="og:url" content={siteUrl} />
+          <meta property="og:type" content="website" />
+          <meta property="og:locale" content="en" />
+          <meta property="og:title" content={title} />
+          <meta property="og:site_name" content={title} />
+          <meta property="og:description" content={description} />
+
+          <meta property="og:image" content={`${siteUrl}/instagram-doraforscale.jpg`} />
+          <meta property="og:image:alt" content="We are Original Inside." />
+          <meta property="og:image:width" content="1280" />
+          <meta property="og:image:height" content="686" />
+        </Helmet>
         <StoreContext.Provider value={this.state.store}>
           <InterfaceContext.Provider value={this.state.interface}>
             <InterfaceContext.Consumer>
@@ -445,3 +482,32 @@ export default class Layout extends React.Component {
     );
   }
 }
+
+export const Layout = (props) => (
+  <StaticQuery
+      query={graphql`
+      query MainLayoutQuery {
+        site {
+          siteMetadata {
+            siteUrl
+            title
+            description
+            contacts {
+              phone
+              email
+              facebook
+              instagram
+            }
+            menu {
+              label
+              path
+            }
+          }
+        }
+      }
+    `}
+      render={(data) => <PureLayout {...props} data={data} />}
+  />
+);
+
+export default Layout;

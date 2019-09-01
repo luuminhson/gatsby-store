@@ -10,7 +10,7 @@ const CategoriesListTemplate = () => {
   const categories = useCategoriesList();
 
   return (
-    <Layout title={`Categories - ${title}`} description={description}>
+    <Layout title={`Categories ‧ ${title}`} description={description}>
       <Page title="Categories">
         <ul>
           {categories.map((category) => (

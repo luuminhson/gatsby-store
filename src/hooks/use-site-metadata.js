@@ -12,6 +12,7 @@ const useSiteMetadata = () => {
             }
             siteUrl
             title
+            subtitle
             description
             contacts {
               phone

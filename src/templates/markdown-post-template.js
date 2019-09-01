@@ -12,9 +12,9 @@ type Props = {
 };
 
 const PostTemplate = ({ data }: Props) => {
-  const { title: siteTitle, description: siteSubtitle } = useSiteMetadata();
+  const { title: siteTitle, description: siteDescription } = useSiteMetadata();
   const { title: postTitle, description: postDescription } = data.markdownRemark.frontmatter;
-  const metaDescription = postDescription !== null ? postDescription : siteSubtitle;
+  const metaDescription = postDescription !== null ? postDescription : siteDescription;
   const hasFeaturedImage = null !== data.markdownRemark.frontmatter.featuredImage;
 
   const checkLocationState = (location) => {
@@ -33,7 +33,7 @@ const PostTemplate = ({ data }: Props) => {
   return (
     <Location>
       {({ location }) => (
-        <Layout title={`${postTitle} - ${siteTitle}`} description={metaDescription} isPost detailTitle={postTitle} hasFeaturedImage={hasFeaturedImage} style={`post`} from={checkLocationState(location)}>
+        <Layout title={`${postTitle} ‧ ${siteTitle}`} description={metaDescription} isPost detailTitle={postTitle} hasFeaturedImage={hasFeaturedImage} from={checkLocationState(location)}>
           <Post post={data.markdownRemark} />
         </Layout>
       )}

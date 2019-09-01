@@ -12,12 +12,12 @@ type Props = {
 };
 
 const IndexTemplate = ({ data }: Props) => {
-  const { title: siteTitle, description: siteSubtitle } = useSiteMetadata();
+  const { title, subtitle, description } = useSiteMetadata();
 
   const blogPost = data.blogStrip.edges;
 
   return (
-    <Layout title={siteTitle} description={siteSubtitle} isIndex>
+    <Layout title={`${title} ‧ ${subtitle}`} description={description} isIndex>
       <Page isIndex>
         <Strip edges={blogPost} sectionTitle='Articles' sectionLink='/blog' sectionLinkLabel='See All' />
       </Page>
