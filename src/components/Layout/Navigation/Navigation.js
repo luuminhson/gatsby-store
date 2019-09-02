@@ -43,6 +43,18 @@ const NavigationInner = styled(`div`)`
     }
 `;
 
+const isIndexStyle = css``;
+
+const isPostStyle = css`
+    background-color: transparent;
+`;
+
+const isStoreStyle = css``;
+
+const isProductStyle = css`
+    background-color: transparent;
+`;
+
 const BackButton = styled(Link)`
     font-family: ${fontFamily.heading};
     width: 60px;
@@ -105,6 +117,21 @@ const NavRightWrapper = styled(`div`)`
     align-items: center;
 `;
 
+const CartToggleIcon = styled(CartToggle)`
+    display: flex;
+`;
+
+const BurgerIcon = styled(`div`)`
+  position: relative;
+  width: 60px;
+  height: ${dimensions.navHeightMobile};
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: -12px;
+`;
+
 const MainMenu = styled(Menu)`
     ${mediaQuery.tabletFrom} {
         position: absolute;
@@ -125,96 +152,47 @@ const unpinnedStyle = css``;
 const pinnedStyle = css`
     ${NavigationWrapper} {
         background-color: ${colors.white};
-        
-        // ${NavigationInner} {
-        //     ${mediaQuery.tabletFrom} {
-        //         height: ${headerHeight.tablet};
-        //     }
-        // }
-    }
-`;
 
-const unfixedStyle = css`
-    ${NavigationWrapper} {
-        // ${NavigationInner} {
-        //     height: ${dimensions.navHeightMobile};
-    
-        //     ${mediaQuery.tabletFrom} {
-        //         height: ${dimensions.navHeightTablet};
-        //     }
-    
-        //     ${mediaQuery.desktop} {
-        //         height: ${dimensions.navHeightDesktop};
-        //     }
-        // }
-
+        ${BackButton},
         ${DetailTitle} {
-            opacity: 0;
-            transition: opacity 0.4s ease-in-out;
+            color: ${colors.mainDark};
+            transition: color 0.4s ease-in-out;
         }
 
-        ${isProductStyle} {
-            background-color: transparent;
-        }
-    }
-`;
-
-const BurgerIcon = styled(`div`)`
-  position: relative;
-  width: 60px;
-  height: ${dimensions.navHeightMobile};
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: -12px;
-
-  span {
-    width: 100%;
-    height: 2px;
-    background: ${colors.mainDark};
-    transition: all ease-in-out 0.2s;
-
-    &:last-child {
-      width: 65%;
-    }
-  }
-
-  ${mediaQuery.tabletFrom} {
-    // display: none;
-  }
-`;
-
-const isIndexStyle = css``;
-
-const isPostStyle = css`
-    background-color: transparent;
-`;
-
-const isStoreStyle = css``;
-
-const isProductStyle = css`
-    background-color: transparent;
-`;
-
-const onFeaturedImageStyle = css`
-    ${NavigationWrapper} {
-        &:before {
-            opacity: 0;
-            box-shadow: none;
-            transition: all 0.4s ease-in-out;
-        }
-
-        ${NavigationInner} {
-            ${BackButton},
-            ${DetailTitle} {
+        ${CartToggleIcon},
+        ${BurgerIcon} {
+            i {
+                color: ${colors.mainDark};
                 transition: color 0.4s ease-in-out;
             }
         }
     }
 `;
 
+const unfixedStyle = css`
+    ${NavigationWrapper} {
+        ${DetailTitle} {
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+    }
+`;
 
+const onFeaturedImageStyle = css`
+
+    ${BackButton},
+    ${DetailTitle} {
+        transition: color 0.4s ease-in-out;
+        color: ${colors.white};
+    }
+
+    ${CartToggleIcon},
+    ${BurgerIcon} {
+        i {
+            color: ${colors.white};
+        }
+    }
+`;
 
 class PureNavigation extends React.Component {
     constructor(props) {
@@ -302,7 +280,7 @@ class PureNavigation extends React.Component {
 
         const navRight = (
             <NavRightWrapper>
-                <CartToggle toggle={toggleCart} />
+                <CartToggleIcon toggle={toggleCart} />
                 <BurgerIcon onClick={burgerClick}>
                     <OiIcon icon='oi-icon-menu' />
                 </BurgerIcon>
@@ -316,12 +294,12 @@ class PureNavigation extends React.Component {
                 onUnfix={this.headRoomUnfix}
                 onUnpin={this.headRoomUnpin}
                 onPin={this.headRoomPin}
-                pinStart={viewportIs === 'desktop' ? 60 : (viewportIs === 'tablet') ? 40 : 0}
+                pinStart={viewportIs === 'desktop' ? 60 : (viewportIs === 'tablet') ? 20 : 0}
                 css={[
+                    onFeaturedImage && onFeaturedImageStyle,
                     unpinned && unpinnedStyle,
                     pinned && pinnedStyle,
                     unfixed && unfixedStyle,
-                    isPost && onFeaturedImage && onFeaturedImageStyle,
                 ]}
             >
                 <NavigationWrapper className={className}

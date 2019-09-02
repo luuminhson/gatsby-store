@@ -21,9 +21,9 @@ const PostHero = styled(`div`)`
 `;
 
 const PostFooter = styled(`div`)`
-  max-width: ${layoutWidth.blog};
+  max-width: ${layoutWidth.post};
   margin: 0 auto;
-  padding: 0 24px 64px;
+  padding: 0 0 64px;
 `;
 
 const mask = css`
@@ -85,7 +85,7 @@ const CategoriesList = styled(Categories)`
 const HeroImage = styled(BackgroundImage)`
   position: relative;
   height: 60vh;
-  min-height: 320px;
+  min-height: 480px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -166,7 +166,7 @@ const Post = ({ post }: Props) => {
           fluid={featuredImage.childImageSharp.fluid}
           backgroundColor={'#040e18'}
         >
-          <div className={mask} />
+          <div css={mask} />
           {headerContent}
         </HeroImage>
       );

@@ -77,7 +77,11 @@ const isProductStyle = css`
   }
 `;
 
-const isPostStyle = css`
+const isPostStyle = css``;
+
+const hasFeaturedImageStyle = css`
+  margin-top: -${headerHeight.phone};
+
   ${mediaQuery.tabletFrom} {
     margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet});
   }
@@ -445,7 +449,6 @@ class PureLayout extends React.Component {
                             css={this.state.sidebar === true ? overlayOn : overlayOff}
                           />
                           <CartIndicator itemsInCart={itemsInCart} adding={adding} />
-                          {console.log(viewportIs)}
                           <Cart
                             viewportIs={viewportIs}
                             status={cartStatus}
@@ -474,6 +477,7 @@ class PureLayout extends React.Component {
                               isProduct && isProductStyle,
                               isBlog && isBlogStyle,
                               isPost && isPostStyle,
+                              isPost && hasFeaturedImage && hasFeaturedImageStyle,
                             ]}
                           >
                             <PageContent

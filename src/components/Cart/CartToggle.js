@@ -56,7 +56,7 @@ const CartIcon = styled(`div`)`
 `;
 
 
-const CartToggle = ({ toggle }) => (
+const CartToggle = ({ toggle, ...rest }) => (
   <StoreContext.Consumer>
     {({ checkout }) => {
 
@@ -66,7 +66,7 @@ const CartToggle = ({ toggle }) => (
       );
 
       return (
-        <CartIcon aria-label={`Shopping cart with ${itemsInCart} items`} onClick={toggle}>
+        <CartIcon aria-label={`Shopping cart with ${itemsInCart} items`} onClick={toggle} {...rest}>
           <OiIcon icon='oi-icon-cart' />
           {itemsInCart > 0 && (
             <ItemsNumber>{itemsInCart}</ItemsNumber>

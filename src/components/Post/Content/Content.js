@@ -52,8 +52,8 @@ const ContentBody = styled(`div`)`
 
     & p {
       font-size: ${16 * 1.125}px;
-      line-height: 1.125;
       margin-bottom: 16px;
+      line-height: 1.5;
     }
   }
 `;
