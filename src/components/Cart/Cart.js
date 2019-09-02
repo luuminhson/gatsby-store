@@ -244,7 +244,7 @@ class Cart extends Component {
       });
     }
 
-    if (this.props.isDesktopViewport) {
+    if (this.props.viewportIs === 'desktop') {
       if (imageBrowserStatusChanged) {
         if (this.props.productImagesBrowserStatus === 'open') {
           setTimeout(() => {
@@ -349,7 +349,7 @@ class Cart extends Component {
 
 Cart.propTypes = {
   toggle: PropTypes.func.isRequired,
-  isDesktopViewport: PropTypes.bool,
+  viewportIs: PropTypes.string,
   productImagesBrowserStatus: PropTypes.string
 };
 

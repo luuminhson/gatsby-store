@@ -61,6 +61,7 @@ export const Thumbnail = styled(`a`)`
 `;
 
 const active = css`
+  opacity: 1;
   box-shadow: 0 0 0 2px ${colors.mainDark};
 `;
 

@@ -78,16 +78,6 @@ const MenuLinkActiveStyle = css`
   &.activeMenuItem {
     position: relative;
     color: ${colors.mainClickable};
-
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      display: block;
-      width: calc(100% - 40px);
-      height: 3px;
-      background: ${colors.mainClickable};
-    }
   }
 `;
 

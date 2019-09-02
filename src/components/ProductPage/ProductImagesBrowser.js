@@ -354,7 +354,7 @@ ProductImagesBrowser.propTypes = {
   toggle: PropTypes.func.isRequired,
   imageFeatured: PropTypes.object,
   imageFeaturedIndex: PropTypes.number,
-  isDesktopViewport: PropTypes.bool
+  viewportIs: PropTypes.string
 };
 
 export default ProductImagesBrowser;

@@ -39,7 +39,7 @@ const ProductDetailTemplate = props => {
         <Layout title={`${productTitle} — ${productCategory} ‧ ${siteTitle}`} description={description} isProduct from={checkLocationState(location)}>
           <InterfaceContext.Consumer>
             {({
-              isDesktopViewport,
+              viewportIs,
               productImagesBrowserStatus,
               productImageFeatured,
               toggleProductImagesBrowser,
@@ -70,7 +70,7 @@ const ProductDetailTemplate = props => {
                 </Helmet>
                 <ProductPage
                   product={product}
-                  isDesktopViewport={isDesktopViewport}
+                  viewportIs={viewportIs}
                   productImagesBrowserStatus={productImagesBrowserStatus}
                   productImageFeatured={productImageFeatured}
                   toggleProductImagesBrowser={toggleProductImagesBrowser}

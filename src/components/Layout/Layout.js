@@ -44,7 +44,15 @@ injectGlobal`
 `;
 
 const LayoutWrapper = styled(`div`)`
+    padding-top: 0;
 
+    ${mediaQuery.tabletFrom} {
+      padding-top: ${dimensions.navPaddingTopTablet};
+    }
+
+    ${mediaQuery.desktop} {
+      padding-top: ${dimensions.navPaddingTopDesktop};
+    }
 `;
 
 const Viewport = styled(`div`)`
@@ -61,11 +69,21 @@ const isProductStyle = css`
   margin-top: -${headerHeight.phone};
 
   ${mediaQuery.tabletFrom} {
-    margin-top: -${headerHeight.tablet};
+    margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet});
   }
 
   ${mediaQuery.desktop} {
-    margin-top: -${headerHeight.desktop};
+    margin-top: calc(-${headerHeight.desktop} - ${dimensions.navPaddingTopDesktop});
+  }
+`;
+
+const isPostStyle = css`
+  ${mediaQuery.tabletFrom} {
+    margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet});
+  }
+
+  ${mediaQuery.desktop} {
+    margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopDesktop});
   }
 `;
 
@@ -291,9 +309,13 @@ class PureLayout extends React.Component {
 
   componentDidMount() {
     // Observe viewport switching from mobile to desktop and vice versa
-    const mediaQueryToMatch = `(min-width: ${breakpoints.tablet}px)`;
+    const mediaQueryToMatchTablet = `(min-width: ${breakpoints.tablet}px)`;
+    const mediaQueryToMatchDesktop = `(min-width: ${breakpoints.desktop}px)`;
 
-    this.desktopMediaQuery = window.matchMedia(mediaQueryToMatch);
+    this.tabletMediaQuery = window.matchMedia(mediaQueryToMatchTablet);
+    this.desktopMediaQuery = window.matchMedia(mediaQueryToMatchDesktop);
+
+    this.tabletMediaQuery.addListener(this.updateViewPortState);
     this.desktopMediaQuery.addListener(this.updateViewPortState);
 
     this.updateViewPortState();
@@ -306,6 +328,7 @@ class PureLayout extends React.Component {
   }
 
   componentWillUnmount = () => {
+    this.tabletMediaQuery.removeListener(this.updateViewPortState);
     this.desktopMediaQuery.removeListener(this.updateViewPortState);
   };
 
@@ -334,7 +357,7 @@ class PureLayout extends React.Component {
     this.setState(state => ({
       interface: {
         ...state.interface,
-        isDesktopViewport: this.desktopMediaQuery.matches
+        viewportIs: ( this.desktopMediaQuery.matches ? 'desktop' : ( this.tabletMediaQuery.matches ? 'tablet' : null) ),
       }
     }));
   };
@@ -395,7 +418,7 @@ class PureLayout extends React.Component {
           <InterfaceContext.Provider value={this.state.interface}>
             <InterfaceContext.Consumer>
               {({
-                isDesktopViewport,
+                viewportIs,
                 cartStatus,
                 toggleCart,
                 productImagesBrowserStatus,
@@ -422,8 +445,9 @@ class PureLayout extends React.Component {
                             css={this.state.sidebar === true ? overlayOn : overlayOff}
                           />
                           <CartIndicator itemsInCart={itemsInCart} adding={adding} />
+                          {console.log(viewportIs)}
                           <Cart
-                            isDesktopViewport={isDesktopViewport}
+                            viewportIs={viewportIs}
                             status={cartStatus}
                             toggle={toggleCart}
                             productImagesBrowserStatus={productImagesBrowserStatus}
@@ -434,7 +458,7 @@ class PureLayout extends React.Component {
                           </SidePanelWrapper>
                           <Navigation
                             toggleCart={toggleCart}
-                            isDesktopViewport={isDesktopViewport}
+                            viewportIs={viewportIs}
                             burgerClick={this.toggleSidebar}
                             isIndex={isIndex}
                             isPost={isPost}
@@ -449,11 +473,12 @@ class PureLayout extends React.Component {
                               isStore && isStoreStyle,
                               isProduct && isProductStyle,
                               isBlog && isBlogStyle,
+                              isPost && isPostStyle,
                             ]}
                           >
                             <PageContent
                               cartStatus={cartStatus}
-                              isDesktopViewport={isDesktopViewport}
+                              viewportIs={viewportIs}
                               productImagesBrowserStatus={productImagesBrowserStatus}
                             >
                               {children}
@@ -466,7 +491,7 @@ class PureLayout extends React.Component {
                                 imageFeatured={productImageFeatured}
                                 imageFeaturedIndex={productImageFeaturedIndex}
                                 toggle={toggleProductImagesBrowser}
-                                isDesktopViewport={isDesktopViewport}
+                                viewportIs={viewportIs}
                               />
                             )}
                           </Viewport>

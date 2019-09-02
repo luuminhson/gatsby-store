@@ -47,9 +47,9 @@ const LogoPhone = () => (
     </LogoPhoneSVG>
 );
 
-const Logo = ({isDesktopViewport}) => (
+const Logo = ({ viewportIs }) => (
   <LogoWrapper>
-    { ( isDesktopViewport !== null && isDesktopViewport )
+    { ( viewportIs !== null && viewportIs === 'desktop' )
       ? <LogoDesktop />
       : <LogoPhone />
     }
@@ -57,7 +57,7 @@ const Logo = ({isDesktopViewport}) => (
 );
 
 Logo.propTypes = {
-  isDesktopViewport: PropTypes.bool
+  viewportIs: PropTypes.string
 };
 
 export default Logo;

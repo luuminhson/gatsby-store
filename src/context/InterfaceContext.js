@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const defaultInterfaceContext = {
-  isDesktopViewport: null,
+  viewportIs: null,
   cartStatus: 'initial',
   toggleCart: () => {},
   productImageFeatured: null,

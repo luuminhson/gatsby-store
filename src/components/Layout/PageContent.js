@@ -79,7 +79,7 @@ PageContent.propTypes = {
   cartStatus: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   productImagesBrowserStatus: PropTypes.string.isRequired,
-  isDesktopViewport: PropTypes.bool
+  viewportIs: PropTypes.string
 };
 
 export default PageContent;

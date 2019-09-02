@@ -9,7 +9,7 @@ import ProductForm from './ProductForm';
 
 import InterfaceContext, { defaultInterfaceContext } from '../../context/InterfaceContext';
 
-import { breakpoints, mediaQuery, colors, spacing, headerHeight } from '../../utils/styles';
+import { breakpoints, mediaQuery, colors, spacing, headerHeight, dimensions } from '../../utils/styles';
 
 const ProductPageRoot = styled('div')`
   padding-top: ${headerHeight.phone};
@@ -21,12 +21,12 @@ const ProductPageRoot = styled('div')`
     display: flex;
     justify-content: center;
     background-color: ${colors.mainLight};
-    padding: calc(${headerHeight.tablet} + ${spacing['4xl']}px) ${spacing.xl}px calc(${headerHeight.tablet});
+    padding: calc(${headerHeight.tablet} + ${spacing['4xl']}px + ${dimensions.navPaddingTopTablet}) ${spacing.xl}px calc(${headerHeight.tablet});
     width: 100%;
   }
 
   ${mediaQuery.desktop} {
-    padding-top: calc(${headerHeight.desktop} + ${spacing['4xl']}px);
+    padding-top: calc(${headerHeight.desktop} + ${spacing['4xl']}px + ${dimensions.navPaddingTopDesktop});
   }
 `;
 
@@ -71,7 +71,7 @@ class ProductPage extends Component {
     } = this.props;
 
     const {
-      isDesktopViewport,
+      viewportIs,
       productImageFeatured,
       toggleProductImagesBrowser
     } = this.props;
@@ -83,7 +83,7 @@ class ProductPage extends Component {
         }) => (
           <ProductPageRoot>
             <Container>
-              {!isDesktopViewport ? (
+              {( viewportIs !== 'desktop') && ( viewportIs !== 'tablet')  ? (
                 <ProductImagesMobile
                   images={images}
                   imageOnClick={toggleProductImagesBrowser}
@@ -114,7 +114,7 @@ ProductPage.propTypes = {
   toggleProductImagesBrowser: PropTypes.func.isRequired,
   setCurrentProductImages: PropTypes.func.isRequired,
   productImageFeatured: PropTypes.object,
-  isDesktopViewport: PropTypes.bool
+  viewportIs: PropTypes.string
 };
 
 export default ProductPage;

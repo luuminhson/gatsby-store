@@ -41,10 +41,6 @@ const NavigationInner = styled(`div`)`
     ${mediaQuery.tabletFrom} {
         height: ${dimensions.navHeightTablet};
     }
-
-    ${mediaQuery.desktop} {
-        height: ${dimensions.navHeightDesktop};
-    }
 `;
 
 const BackButton = styled(Link)`
@@ -118,12 +114,6 @@ const MainMenu = styled(Menu)`
     }
 `;
 
-const isStoreStyle = css``;
-
-const isProductStyle = css`
-    background-color: transparent;
-`;
-
 const HeadroomWrapper = styled(Headroom)`
     width: 100%;
     position: relative;
@@ -136,27 +126,27 @@ const pinnedStyle = css`
     ${NavigationWrapper} {
         background-color: ${colors.white};
         
-        ${NavigationInner} {
-            ${mediaQuery.tabletFrom} {
-                height: ${headerHeight.tablet};
-            }
-        }
+        // ${NavigationInner} {
+        //     ${mediaQuery.tabletFrom} {
+        //         height: ${headerHeight.tablet};
+        //     }
+        // }
     }
 `;
 
 const unfixedStyle = css`
     ${NavigationWrapper} {
-        ${NavigationInner} {
-            height: ${dimensions.navHeightMobile};
+        // ${NavigationInner} {
+        //     height: ${dimensions.navHeightMobile};
     
-            ${mediaQuery.tabletFrom} {
-                height: ${dimensions.navHeightTablet};
-            }
+        //     ${mediaQuery.tabletFrom} {
+        //         height: ${dimensions.navHeightTablet};
+        //     }
     
-            ${mediaQuery.desktop} {
-                height: ${dimensions.navHeightDesktop};
-            }
-        }
+        //     ${mediaQuery.desktop} {
+        //         height: ${dimensions.navHeightDesktop};
+        //     }
+        // }
 
         ${DetailTitle} {
             opacity: 0;
@@ -197,7 +187,15 @@ const BurgerIcon = styled(`div`)`
 
 const isIndexStyle = css``;
 
-const isPostStyle = css``;
+const isPostStyle = css`
+    background-color: transparent;
+`;
+
+const isStoreStyle = css``;
+
+const isProductStyle = css`
+    background-color: transparent;
+`;
 
 const onFeaturedImageStyle = css`
     ${NavigationWrapper} {
@@ -264,7 +262,7 @@ class PureNavigation extends React.Component {
             burgerClick,
             from,
             detailTitle,
-            isDesktopViewport,
+            viewportIs,
             toggleCart,
             className
         } = this.props;
@@ -287,7 +285,7 @@ class PureNavigation extends React.Component {
 
         const detailPageTitle = <DetailTitle>{detailTitle}</DetailTitle>
 
-        const siteLogo = <Logo isDesktopViewport={isDesktopViewport} />;
+        const siteLogo = <Logo viewportIs={viewportIs} />;
 
         const navLeft = (
             <NavLeftWrapper>
@@ -318,6 +316,7 @@ class PureNavigation extends React.Component {
                 onUnfix={this.headRoomUnfix}
                 onUnpin={this.headRoomUnpin}
                 onPin={this.headRoomPin}
+                pinStart={viewportIs === 'desktop' ? 60 : (viewportIs === 'tablet') ? 40 : 0}
                 css={[
                     unpinned && unpinnedStyle,
                     pinned && pinnedStyle,
@@ -367,7 +366,7 @@ export const Navigation = (props) => (
 
 Navigation.propTypes = {
     toggleCart: PropTypes.func.isRequired,
-    isDesktopViewport: PropTypes.bool
+    viewportIs: PropTypes.string
 };
 
 export default Navigation;

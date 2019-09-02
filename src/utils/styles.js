@@ -112,6 +112,8 @@ export const dimensions = {
   navHeightDesktop: '180px',
   navHeightTablet: '96px',
   navHeightMobile: '68px',
+  navPaddingTopTablet: '20px',
+  navPaddingTopDesktop: '60px',
   cartWidthDesktop: '480px',
   pictureBrowserAction: {
     widthDesktop: '200px',
