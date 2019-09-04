@@ -7,7 +7,7 @@ import { fontFamily, colors } from '../../utils/styles';
 const ButtonLink = styled(Link)`
   font-family: ${fontFamily.heading};
   color: ${colors.mainClickable};
-  font-size: 14px;
+  font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: .046854em;
   text-decoration: none;

@@ -55,7 +55,7 @@ export const colors = {
 --------------------------------------------------------------- */
 
 export const layoutWidth = {
-  post: '745px',
+  post: '60rem',
 }
 
 /* MEDIA QUERIES
@@ -108,12 +108,14 @@ export const spacing = {
 export const dimensions = {
   indexPageWidth: '1920px',
   storePageWidth: '1920px',
+  blogPageWidth: '960px',
+  blogWithSidebarPageWidth: '1280px',
   sidePanelMaxwidth: '280px',
   navHeightDesktop: '180px',
   navHeightTablet: '96px',
   navHeightMobile: '68px',
   navPaddingTopTablet: '20px',
-  navPaddingTopDesktop: '60px',
+  navPaddingTopDesktop: '40px',
   cartWidthDesktop: '480px',
   pictureBrowserAction: {
     widthDesktop: '200px',
@@ -168,14 +170,14 @@ const monospaceFontStack = [
 
 export const fontFamily = {
   body: `Source Sans Pro, ${defaultFontStack}`,
-  heading: `Fira Sans Condensed, ${defaultFontStack}`,
+  heading: `Merriweather Sans, ${defaultFontStack}`,
   monospace: monospaceFontStack
 };
 
 const fontSize = {
   h1: {
-    mobile: '1.75rem',
-    desktop: '3rem'
+    mobile: '1.8rem',
+    desktop: '2.5rem'
   },
   h2: {
     mobile: '1.5rem',
@@ -186,8 +188,8 @@ const fontSize = {
     desktop: '1.5rem'
   },
   h4: {
-    mobile: '1.125rem',
-    desktop: '1.25rem'
+    mobile: '1rem',
+    desktop: '1.2rem'
   },
   headline: '1rem',
   body: '1rem',
@@ -209,8 +211,8 @@ const lineHeight = {
 export const fontWeight = {
   heading: {
     normal: 400,
-    medium: 500,
-    bold: 600,
+    medium: 700,
+    bold: 800,
   },
   body: {
     normal: 400,
@@ -219,7 +221,7 @@ export const fontWeight = {
   }
 }
 
-const headingLetterSpacing = '0.5px';
+const headingLetterSpacing = '0';
 
 /* HEADING
 --------------------------------------------------------------- */

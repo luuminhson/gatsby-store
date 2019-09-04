@@ -52,6 +52,5 @@ export const Label = styled(`label`)`
 `;
 
 export const Submit = styled(PrimaryButton)`
-  font-size: 1.25rem;
   width: 100%;
 `;

@@ -5,13 +5,9 @@ import { keyframes } from '@emotion/core';
 
 import StoreContext from '../../context/StoreContext';
 
-import { Button } from '../shared/Buttons';
 import OiIcon from '../OiIcon';
 
-import {
-  breakpoints,
-  colors
-} from '../../utils/styles';
+import { colors } from '../../utils/styles';
 
 const numberEntry = keyframes`
   0%{
@@ -38,8 +34,8 @@ const ItemsNumber = styled(`span`)`
   justify-content: center;
   animation: ${numberEntry} 0.5s ease forwards;
   position: absolute;
-  right: -2px;
-  top: -2px;
+  right: 2px;
+  top: 2px;
   transform: scale(0.6);
 `;
 

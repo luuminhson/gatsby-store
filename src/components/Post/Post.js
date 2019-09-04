@@ -9,7 +9,7 @@ import Categories from './Categories';
 import BackgroundImage from 'gatsby-background-image';
 import type { Node } from '../../types';
 
-import { layoutWidth, colors, mediaQuery, fontFamily } from '../../utils/styles';
+import { colors, mediaQuery, spacing } from '../../utils/styles';
 
 type Props = {
   post: Node
@@ -21,9 +21,13 @@ const PostHero = styled(`div`)`
 `;
 
 const PostFooter = styled(`div`)`
-  max-width: ${layoutWidth.post};
+  max-width: 46.5625rem;
   margin: 0 auto;
-  padding: 0 0 64px;
+  padding: 0 ${spacing.lg}px ${spacing.xl}px;
+
+  ${mediaQuery.tabletFrom} {
+    padding: 0 0 ${spacing['4xl']}px;
+  }
 `;
 
 const mask = css`
@@ -49,22 +53,28 @@ const HeaderContent = styled(`div`)`
   z-index: 1;
 
   ${mediaQuery.tabletFrom} {
-      max-width: ${layoutWidth.post};
+      max-width: 600px;
       padding: 20px 0 0;
+      margin-top: ${spacing['4xl']}px;
     }
   }
 `;
 
 const Title = styled(`h1`)`
-  font-size: ${fontFamily.heading};
-  line-height: 28px;
+  font-size: 1.4rem;
+  line-height: 2.2rem;
   margin-top: 8px;
   margin-bottom: 8px;
+
+  ${mediaQuery.tabletFrom} {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+  }
 `;
 
 const ContentMeta = styled(`div`)`
   font-size: 0.8rem;
-  color: ${colors.neutral3};
+  opacity: 0.7;
   margin: 20px 0;
 `;
 
@@ -101,6 +111,10 @@ const HeroImage = styled(BackgroundImage)`
     color: ${colors.white};
     padding: 0;
     margin-bottom: 0;
+  }
+
+  ${Title} {
+    color: ${colors.white};
   }
 
   ${ContentMeta} {

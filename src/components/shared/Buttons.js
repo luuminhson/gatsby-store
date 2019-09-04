@@ -17,11 +17,10 @@ export const ButtonBase = styled(`button`)`
   display: inline-flex;
   font-family: ${fontFamily.heading};
   font-size: 1rem;
-  font-weight: 500;
-  text-transform: capitalize;
-  letter-spacing: 0.3px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
   justify-content: center;
-  padding: 0.5em 0.75rem;
+  padding: 0.85rem 1.125rem;
   transition: 0.5s;
 
   :focus {
@@ -38,7 +37,7 @@ export const ButtonBase = styled(`button`)`
 
   @media (hover: hover) {
     &:hover {
-      background: ${colors.neutral2};
+      background: ${colors.neutral1};
     }
   }
 `;
@@ -114,4 +113,8 @@ export const PrimaryButton = styled(Button)`
       background: ${colors.mainClickable};
     }
   }
+`;
+
+export const FlatButton = styled(Button)`
+  background-color: transparent;
 `;

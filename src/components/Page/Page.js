@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { mediaQuery, FontStyle, dimensions } from '../../utils/styles';
+import { mediaQuery, FontStyle, dimensions, spacing } from '../../utils/styles';
 
 type Props = {
   title?: string,
@@ -27,11 +27,11 @@ const PageInner = styled(`div`)`
 
   ${mediaQuery.tabletFrom} {
     padding: 30px 1rem;
+    max-width: ${dimensions.indexPageWidth};
   }
 
   ${mediaQuery.desktop} {
     padding: 40px 60px;
-    max-width: ${dimensions.indexPageWidth};
   }
 `;
 
@@ -40,9 +40,7 @@ const PageTitle = styled(FontStyle.h1)`
   text-align: center;
 `;
 
-const PageBody = styled(`div`)`
-  font-size: 1rem;
-  line-height: 1rem;
+export const PageBody = styled(`div`)`
   margin: 0 0 16px;
 `;
 
@@ -60,13 +58,29 @@ const isStoreStyle = css`
   }
 `;
 
-const isBlogStyle = css``;
+const isBlogStyle = css`
+  ${PageInner} {
+    margin: 0 auto;
+    padding-left: ${spacing.lg}px;
+    padding-right: ${spacing.lg}px;
+
+    ${mediaQuery.tabletFrom} {
+      max-width: ${dimensions.blogPageWidth};
+      padding-left: ${spacing.xl}px;
+      padding-right: ${spacing.xl}px;
+    }
+  }
+`;
 
 const isPageStyle = css``;
 
-const withSidebarStyle = css``;
+const withSidebarStyle = css`
+  ${PageInner} {
+    max-width: ${dimensions.blogWithSidebarPageWidth};
+  }
+`;
 
-const Page = ({ title, children, isIndex, isStore, isBlog, isPage, withSidebar, className }: Props) => {
+const Page = ({ title, children, isIndex, isStore, isBlog, isPage, withSidebar, css, ...rest }: Props) => {
   return (
     <div css={[
         PageStyle,
@@ -75,8 +89,9 @@ const Page = ({ title, children, isIndex, isStore, isBlog, isPage, withSidebar, 
         isBlog && isBlogStyle,
         isPage && isPageStyle,
         withSidebar && withSidebarStyle,
-        className
+        css
     ]}
+    {...rest}
     >
       <PageInner>
         {title && <PageTitle>{title}</PageTitle>}

@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import Button from '../Button';
+import { Button } from '../shared/Buttons';
 import { PAGINATION } from '../../constants';
 
 import { colors, fontFamily } from '../../utils/styles';

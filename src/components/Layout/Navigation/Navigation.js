@@ -10,13 +10,15 @@ import Logo from './Logo';
 import Menu from './Menu';
 import OiIcon from '../../OiIcon';
 import CartToggle from '../../Cart/CartToggle';
-import { FontStyle, fontFamily, dimensions, mediaQuery, spacing, colors, breakpoints, headerHeight } from '../../../utils/styles';
+import { FontStyle, fontFamily, dimensions, mediaQuery, spacing, colors, breakpoints, shadow } from '../../../utils/styles';
 
 const NavigationWrapper = styled(`div`)`
     background-color: ${colors.white};
     width: 100%;
     padding: 0 ${spacing.lg}px;
     position: relative;
+    box-shadow: ${shadow.navShadow};
+    transition: all 0.3s ease-in-out;
     z-index: 2000;
 
     ${mediaQuery.tabletFrom} {
@@ -66,6 +68,22 @@ const BackButton = styled(Link)`
     padding-left: 12px;
     margin-left: -0.75rem;
     box-sizing: border-box;
+
+    span {
+        display: none;
+    }
+
+    ${mediaQuery.tabletFrom} {
+        width: auto;
+        display: flex;
+        align-items: center;
+
+        span {
+            font-size: 1rem;
+            display: inline-block;
+            margin-left: ${spacing.sm}px;
+        }
+    }
 `;
 
 const DetailTitle = styled(FontStyle.h1)`
@@ -97,7 +115,7 @@ const NavLeftWrapper = styled(`div`)`
 `;
 
 const NavCenterWrapper = styled(`div`)`
-    max-width: 60%;
+    max-width: 56%;
     display: flex;
     align-items: center;
     position: relative;
@@ -125,11 +143,15 @@ const BurgerIcon = styled(`div`)`
   position: relative;
   width: 60px;
   height: ${dimensions.navHeightMobile};
+  margin-right: -8px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: -12px;
+
+  ${mediaQuery.tabletFrom} {
+    margin-right: -12px;
+  }
 `;
 
 const MainMenu = styled(Menu)`
@@ -153,7 +175,14 @@ const pinnedStyle = css`
     ${NavigationWrapper} {
         background-color: ${colors.white};
 
-        ${BackButton},
+        ${BackButton} {
+            color: ${colors.mainDark};
+
+            i {
+                color: ${colors.mainDark};
+            }
+        }
+
         ${DetailTitle} {
             color: ${colors.mainDark};
             transition: color 0.4s ease-in-out;
@@ -171,6 +200,8 @@ const pinnedStyle = css`
 
 const unfixedStyle = css`
     ${NavigationWrapper} {
+        box-shadow: none;
+
         ${DetailTitle} {
             opacity: 0;
             transition: opacity 0.4s ease-in-out;
@@ -180,7 +211,14 @@ const unfixedStyle = css`
 
 const onFeaturedImageStyle = css`
 
-    ${BackButton},
+    ${BackButton} {
+        color: ${colors.white};
+
+        i {
+            color: ${colors.white};
+        }
+    }
+
     ${DetailTitle} {
         transition: color 0.4s ease-in-out;
         color: ${colors.white};
@@ -259,7 +297,10 @@ class PureNavigation extends React.Component {
             return '/';
         }
 
-        const backButton = <BackButton to={backLink()}>←</BackButton>;
+        const backButton = <BackButton to={backLink()}>
+            <OiIcon icon='oi-icon-arrow-back' />
+            <span>Back</span>
+        </BackButton>;
 
         const detailPageTitle = <DetailTitle>{detailTitle}</DetailTitle>
 

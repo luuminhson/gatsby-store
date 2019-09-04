@@ -11,11 +11,11 @@ const CategoriesListTemplate = () => {
 
   return (
     <Layout title={`Categories ‧ ${title}`} description={description}>
-      <Page title="Categories">
+      <Page title="Categories" isBlog>
         <ul>
           {categories.map((category) => (
             <li key={category.fieldValue}>
-              <Link to={`/category/${kebabCase(category.fieldValue)}/`}>
+              <Link to={`/blog/category/${kebabCase(category.fieldValue)}/`}>
                 {category.fieldValue} ({category.totalCount})
               </Link>
             </li>

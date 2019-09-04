@@ -1,13 +1,13 @@
 // @flow
 import React from 'react';
 import styled from '@emotion/styled';
-import { css, jsx } from '@emotion/core';
+import { css } from '@emotion/core';
 import { Link } from '../LinkWithPrev';
 import Img from 'gatsby-image';
-import Button from '../Button';
+import { FlatButton } from '../shared/Buttons';
 import type { Edges } from '../../types';
 
-import { shadow, colors, FontStyle } from '../../utils/styles';
+import { shadow, colors, spacing, FontStyle, radius, mediaQuery } from '../../utils/styles';
 
 type Props = {
   edges: Edges
@@ -18,14 +18,19 @@ const FeedItem = styled(`div`)`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  padding: 24px;
+  padding: ${spacing.md}px ${spacing.lg}px;
   background: ${colors.white};
-  margin-bottom: 16px;
+  margin-bottom: ${spacing.xl}px;
   overflow: hidden;
+  border-radius: ${radius.large}px;
   box-shadow: ${shadow.blockItemShadow};
 
   &:last-child {
     margin-bottom: 8px;
+  }
+
+  ${mediaQuery.tabletFrom} {
+    margin-bottom: ${spacing['2xl']}px;
   }
 `;
 
@@ -34,6 +39,10 @@ const PostThumbnail = styled(Img)`
   height: 200px;
   overflow: hidden;
   box-sizing: border-box;
+
+  ${mediaQuery.tabletFrom} {
+    height: 280px;
+  }
 `;
 
 const FeedItemContent = styled(`div`)`
@@ -41,7 +50,7 @@ const FeedItemContent = styled(`div`)`
 `;
 
 const FeedItemTitle = styled(FontStyle.h3)`
-  margin: 12px 0;
+  margin: ${spacing.sm}px 0;
 `;
 
 const FeedItemTitleLink = styled(Link)`
@@ -55,20 +64,24 @@ const FeedItemTitleLink = styled(Link)`
 `;
 
 const FeedItemDescription = styled(`p`)`
-  font-size: 1rem;
-  line-height: 1rem;
   margin-bottom: 8px;
+  max-height: 72px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* number of lines to show */
 `;
 
-const Readmore = styled(Button)`
-  margin-left: -0.7rem;
+const Readmore = styled(FlatButton)`
+  margin-left: -1.125rem;
 `;
 
 const hasFeaturedImage = css`
   padding: 0;
 
   ${FeedItemContent} {
-    padding: 24px;
+    padding: ${spacing.md}px ${spacing.lg}px;
   }
 `;
 
@@ -86,7 +99,7 @@ const feedLayout = (edge) => {
             </FeedItemTitleLink>
           </FeedItemTitle>
           <FeedItemDescription>{edge.node.frontmatter.description}</FeedItemDescription>
-          <Readmore link={edge.node.fields.slug} label='Read More' onDark />
+          <Readmore to={edge.node.fields.slug}>Read More</Readmore>
         </FeedItemContent>
       </div>
     );
@@ -99,7 +112,7 @@ const feedLayout = (edge) => {
           </FeedItemTitleLink>
         </FeedItemTitle>
         <FeedItemDescription>{edge.node.frontmatter.description}</FeedItemDescription>
-        <Readmore link={edge.node.fields.slug} label='Read More' onDark />
+        <Readmore to={edge.node.fields.slug}>Read More</Readmore>
       </FeedItemContent>
     );
   }

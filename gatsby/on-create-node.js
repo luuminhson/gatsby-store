@@ -28,13 +28,13 @@ const onCreateNode = ({ node, actions, getNode }) => {
 
     // Create slug for tags
     if (node.frontmatter.tags) {
-      const tagSlugs = node.frontmatter.tags.map((tag) => `/tag/${_.kebabCase(tag)}/`);
+      const tagSlugs = node.frontmatter.tags.map((tag) => `/blog/tag/${_.kebabCase(tag)}/`);
       createNodeField({ node, name: 'tagSlugs', value: tagSlugs });
     }
 
     // Create slug for categories
     if (node.frontmatter.categories) {
-      const categorySlugs = node.frontmatter.categories.map((category) => `/category/${_.kebabCase(category)}/`);
+      const categorySlugs = node.frontmatter.categories.map((category) => `/blog/category/${_.kebabCase(category)}/`);
       createNodeField({ node, name: 'categorySlugs', value: categorySlugs });
     }
   }

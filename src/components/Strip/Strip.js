@@ -18,7 +18,7 @@ type Props = {
 };
 
 const cardWidth = '75vw';
-const scrollbarHiddenPadding = '4.2rem';
+const scrollbarHiddenPadding = '4.8rem';
 
 const Wrapper = styled(`div`)`
     margin: 0 -0.75rem;
@@ -87,7 +87,7 @@ const StripItem = styled(`div`)`
         flex-basis: 33.3333%;
         max-width: calc(33.3333%);
         padding: 0 1rem;
-        margin-bottom: 32px;
+        margin-bottom: 36px;
 
         &.has-featured-image {
             .strip-item-inner {
@@ -115,8 +115,8 @@ const ItemInfo = styled(`div`)`
         font-family: ${fontFamily.heading};
         font-size: 1.1rem;
         line-height: 24px;
-        max-height: 56px;
-        margin: 0 0 12px;
+        max-height: 48px;
+        margin: 0 0 8px;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;

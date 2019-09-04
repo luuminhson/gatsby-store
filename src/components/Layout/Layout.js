@@ -30,6 +30,8 @@ injectGlobal`
       -webkit-tap-highlight-color: rgba(0,0,0,.05);
       margin: 0;
       font-family: ${fontFamily.body};
+      color: ${colors.mainDark};
+      line-height: 1.5rem;
 
       &.noScroll {
         overflow: hidden;
@@ -38,8 +40,25 @@ injectGlobal`
       }
     }
 
+    ul {
+      list-style: square;
+
+      li {
+        padding: 0 0.3125rem;
+        margin-bottom: 0.625rem;
+      }
+    }
+
     a {
+      color: ${colors.mainClickable};
       text-decoration: none;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: ${fontFamily.heading};
+      font-weight: 600;
+      margin-top: 1.6em;
+      margin-bottom: 0.8em;
     }
 `;
 
@@ -56,8 +75,8 @@ const LayoutWrapper = styled(`div`)`
 `;
 
 const Viewport = styled(`div`)`
-  overflow-x: hidden;
   width: 100%;
+  margin: 0 auto;
 `;
 
 const isBlogStyle = css``;

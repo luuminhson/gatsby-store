@@ -3,7 +3,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { Link } from '../../../LinkWithPrev';
-import { mediaQuery, colors, dimensions, fontFamily } from '../../../../utils/styles';
+import { mediaQuery, colors, fontWeight, fontFamily } from '../../../../utils/styles';
 
 type Props = {
   menu: {
@@ -60,8 +60,8 @@ const MenuListItem = styled(`li`)`
 
 const MenuItemLink = styled(Link)`
   font-family: ${fontFamily.heading};
-  font-size: 1rem;
-  font-weight: 500;
+  font-weight: ${fontWeight.heading.medium};
+  font-size: 0.9rem;
   padding: 0 20px;
   height: 48px;
   line-height: 48px;

@@ -26,7 +26,7 @@ const PriceRow = styled(`div`)`
 `;
 
 const Price = styled(FontStyle.h3)`
-  font-weight: ${fontWeight.heading.medium};  
+  font-weight: ${fontWeight.heading.bold};  
   margin-right: 8px;
 `;
 

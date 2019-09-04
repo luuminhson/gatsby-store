@@ -13,7 +13,8 @@ import {
   FontStyle,
   fontWeight,
   radius,
-  spacing
+  spacing,
+  fontFamily
 } from '../../utils/styles';
 
 const TRANSITION_DURATION = '250ms';
@@ -59,13 +60,15 @@ const SaleBadge = styled(`span`)`
   position: absolute;
   top: ${spacing.sm}px;
   left: ${spacing.sm}px;
-  font-weight: ${fontWeight.body.medium};
+  font-family: ${fontFamily.heading};
+  font-weight: ${fontWeight.heading.medium};
+  font-size: 0.8rem;
   color: ${colors.mainSupport};
   text-transform: uppercase;
   letter-spacing: 0.05rem;
 
   ${mediaQuery.tabletFrom} {
-    font-size: 1.125rem;
+    font-size: 1rem;
     top: ${spacing.lg}px;
     left: ${spacing.lg}px;
   }
@@ -84,14 +87,25 @@ const PriceRow = styled(`div`)`
 `;
 
 const Price = styled(FontStyle.headline)`
-  font-weight: ${fontWeight.heading.normal};  
+  font-size: 0.85rem;
+  font-weight: ${fontWeight.heading.normal};
+  color: ${colors.neutral5};
   margin-right: 8px;
+
+  ${mediaQuery.tabletFrom} {
+    font-size: 0.95rem;
+  }
 `;
 
 const SalePrice = styled(FontStyle.headline)`
   text-decoration: line-through;
   font-weight: ${fontWeight.heading.normal};
+  font-size: 0.85rem;
   opacity: 0.5;
+
+  ${mediaQuery.tabletFrom} {
+    font-size: 0.95rem;
+  }
 `;
 
 const ProductListingItem = props => {

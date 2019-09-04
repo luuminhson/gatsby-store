@@ -28,10 +28,8 @@ const TagList = styled(`ul`)`
 
 const TagLink = css`
   display: inline-block;
-  height: ${dimensions.buttonHeight};
-  padding: 0 24px;
-  line-height: ${dimensions.buttonHeight};
-  border: 1px solid ${colors.neutral3};
+  padding: 4px 16px;
+  background-color: ${colors.neutral1};
   text-decoration: none;
   border-radius: 20px;
   color: ${colors.mainDark};
@@ -47,7 +45,7 @@ const Tags = ({ tags, tagSlugs }: Props) => (
     <TagList>
       {tagSlugs && tagSlugs.map((slug, i) => (
         <li key={tags[i]}>
-          <Link to={slug} className={TagLink}>
+          <Link to={slug} css={TagLink}>
             {tags[i]}
           </Link>
         </li>

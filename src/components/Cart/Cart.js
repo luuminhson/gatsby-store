@@ -17,7 +17,8 @@ import {
   dimensions,
   mediaQuery,
   FontStyle,
-  fontFamily
+  fontFamily,
+  fontWeight
 } from '../../utils/styles';
 
 const CartRoot = styled(`div`)`
@@ -174,8 +175,8 @@ const Cost = styled(`div`)`
   span {
     flex-basis: 40%;
     font-family: ${fontFamily.heading};
+    font-weight: ${fontWeight.heading.medium};
     font-size: 1.2rem;
-    font-weight: 500;
     text-align: left;
   }
 

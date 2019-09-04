@@ -1,13 +1,17 @@
 // @flow
 import React from 'react';
 import { graphql } from 'gatsby';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import Layout from '../components/Layout';
-import Page from '../components/Page';
+import Page, { PageBody } from '../components/Page/Page';
 import StaticSidebar from '../components/StaticSidebar';
 import Feed from '../components/Feed';
 import Pagination from '../components/Pagination';
 import { useSiteMetadata, useCategoriesList, useTagsList } from '../hooks';
 import type { PageContext, AllMarkdownRemark } from '../types';
+
+import { mediaQuery, spacing } from '../utils/styles';
 
 type Props = {
   data: AllMarkdownRemark,
@@ -28,24 +32,52 @@ const BlogTemplate = ({ data, pageContext }: Props) => {
     nextPagePath
   } = pageContext;
 
+  const PageStyle = css`
+    ${PageBody} {
+      justify-content: space-between;
+      padding-top: ${spacing.xl}px;
+
+      ${mediaQuery.tabletFrom} {
+        display: ${hasSidebar ? 'flex' : 'block'};
+      }
+    }
+  `;
+
+  const FeedWrapper = styled(`div`)`
+    width: 100%;
+
+    ${mediaQuery.tabletFrom} {
+      width: ${hasSidebar && '65%'};
+    }
+  `;
+
+  const SidebarStyle = css`
+    width: 100%;
+
+    ${mediaQuery.tabletFrom} {
+      width: 30%;
+    }
+  `;
 
   const { edges } = data.allMarkdownRemark;
   const pageTitle = currentPage > 0 ? `Blog - Page ${currentPage} ‧ ${title}` : `Blog ‧ ${title}`;
 
   return (
     <Layout title={pageTitle} description={description} isBlog>
-      <Page isBlog withSidebar={hasSidebar} title='Blog'>
-        <Feed edges={edges} />
-        {hasNextPage &&
-          <Pagination
-            prevPagePath={prevPagePath}
-            nextPagePath={nextPagePath}
-            hasPrevPage={hasPrevPage}
-            hasNextPage={hasNextPage}
-          />
-        }
+      <Page css={PageStyle} isBlog withSidebar={hasSidebar} title='Blog'>
+        <FeedWrapper>
+          <Feed edges={edges} />
+          {hasNextPage &&
+            <Pagination
+              prevPagePath={prevPagePath}
+              nextPagePath={nextPagePath}
+              hasPrevPage={hasPrevPage}
+              hasNextPage={hasNextPage}
+            />
+          }
+        </FeedWrapper>
+        {hasSidebar && <StaticSidebar css={SidebarStyle} isBlog />}
       </Page>
-      {hasSidebar && <StaticSidebar isBlog />}
     </Layout>
   );
 };

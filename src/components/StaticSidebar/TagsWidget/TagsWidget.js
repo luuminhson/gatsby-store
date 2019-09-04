@@ -72,7 +72,7 @@ const TagsWidget = ({ tagCount }: Props) => {
                 <ul className={'tags-widget__inner__list'}>
                     {tags.map((tag) => (
                         <li className={'tags-widget__inner__list__item'} key={tag.fieldValue}>
-                            <Link to={`/tag/${kebabCase(tag.fieldValue)}/`} className={'tags-widget__inner__list__item__link'}>
+                            <Link to={`/blog/tag/${kebabCase(tag.fieldValue)}/`} className={'tags-widget__inner__list__item__link'}>
                                 <span className={'tags-widget__inner__list__item__link__name'}>{tag.fieldValue}</span>
                                 {tagCount &&
                                     <span className={'tags-widget__inner__list__item__link__count'}>{tag.totalCount}</span>

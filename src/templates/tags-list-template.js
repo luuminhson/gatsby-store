@@ -11,11 +11,11 @@ const TagsListTemplate = () => {
 
   return (
     <Layout title={`Tags ‧ ${title}`} description={description}>
-      <Page title="Tags">
+      <Page title='Tags' isBlog>
         <ul>
           {tags.map((tag) => (
             <li key={tag.fieldValue}>
-              <Link to={`/tag/${kebabCase(tag.fieldValue)}/`}>
+              <Link to={`/blog/tag/${kebabCase(tag.fieldValue)}/`}>
                 {tag.fieldValue} ({tag.totalCount})
               </Link>
             </li>
