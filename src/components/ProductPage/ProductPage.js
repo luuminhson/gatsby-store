@@ -7,7 +7,7 @@ import ProductImagesDesktop from './ProductImagesDesktop';
 import ProductSpecs from './ProductSpecs';
 import ProductForm from './ProductForm';
 
-import InterfaceContext, { defaultInterfaceContext } from '../../context/InterfaceContext';
+import InterfaceContext from '../../context/InterfaceContext';
 
 import { breakpoints, mediaQuery, colors, spacing, headerHeight, dimensions } from '../../utils/styles';
 

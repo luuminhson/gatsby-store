@@ -27,7 +27,7 @@ const FooterWrapper = styled(`div`)`
 const FooterWrapperInner = styled(`div`)`
   display: flex;
   flex-direction: column;
-  padding: 0 ${spacing.lg}px;
+  padding: 0 ${spacing.xl}px;
 
   ${mediaQuery.tabletFrom} {
     flex-direction: row;

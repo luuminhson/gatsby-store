@@ -60,15 +60,23 @@ const ProductImageWrapper = styled(`div`)`
   ${mediaQuery.tabletFrom} {
     flex: 1 0 auto;
     margin-bottom: 0;
-    max-width: 40vw;
+    max-width: 70vw;
 
     &:last-child {
-      max-width: 40vw;
+      max-width: 70vw;
     }
 
     ${ProductImageInner} {
       width: auto;
       height: auto;
+    }
+  }
+
+  ${mediaQuery.desktop} {
+    max-width: 40vw;
+
+    &:last-child {
+      max-width: 40vw;
     }
   }
 `;
