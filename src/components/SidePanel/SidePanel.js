@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import Contacts from './Contacts';
 import Menu from './Menu';
 import { useSiteMetadata } from '../../hooks';
-import { mediaQuery } from '../../utils/styles';
+import { mediaQuery, spacing, colors } from '../../utils/styles';
 
 type Props = {
   isIndex?: boolean,
@@ -34,6 +34,19 @@ const SidePanelMenu = styled(Menu)`
   }
 `;
 
+const ContactModule = styled(Contacts)`
+  margin: ${spacing.xl}px 0 ${spacing.lg}px;
+
+  > ul {
+    padding: 32px 0;
+    border-top: 1px solid ${colors.neutral2};
+
+    > li > a {
+      padding: 12px 32px;
+    }
+  }
+`;
+
 const SidePanel = ({ className }: Props) => {
   const { contacts, menu } = useSiteMetadata();
 
@@ -41,7 +54,7 @@ const SidePanel = ({ className }: Props) => {
     <SidePanelWrapper className={className}>
       <div className='sidebar__inner'>
         <SidePanelMenu menu={menu} />
-        <Contacts contacts={contacts} />
+        <ContactModule contacts={contacts} />
       </div>
     </SidePanelWrapper>
   );

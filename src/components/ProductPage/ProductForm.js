@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
-import {
-  MdErrorOutline,
-  MdShoppingCart,
-  MdSentimentDissatisfied
-} from 'react-icons/md';
+import OiIcon from '../OiIcon';
 
 import { Fieldset, Input, Label, Select, Submit } from '../shared/FormElements';
 
@@ -31,36 +27,34 @@ const Form = styled(`form`)`
 `;
 
 const Errors = styled(`div`)`
+  width: 100%;
   display: ${props => (props.show ? 'flex' : 'none')};
   flex-direction: row;
-  margin-bottom: ${spacing.xs}px;
-  width: 100%;
+  margin-bottom: ${spacing.md}px;
+  background-color: ${colors.mainHighlight};
+  border-radius: ${radius.large}px;
 `;
 
 const ErrorSign = styled(`div`)`
   align-items: center;
-  background: ${colors.error};
-  border-radius: ${radius.default}px 0 0 ${radius.default}px;
   color: ${colors.white};
   display: flex;
-  flex-basis: 40px;
+  flex-basis: 48px;
   justify-content: center;
-
-  svg {
-    height: 20px;
-    width: 20px;
-  }
 `;
 
 const ErrorMsgs = styled(`ul`)`
-  border: 1px dashed ${colors.error};
+  padding: 0;
+  list-style: none;
   border-left: none;
-  border-radius: 0 ${radius.default}px ${radius.default}px 0;
-  color: ${colors.error};
   flex-grow: 1;
   margin: 0;
-  padding: ${spacing.xs}px;
-  padding-left: ${spacing.xl}px;
+  padding: ${spacing.sm}px 0;
+
+  li {
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 const QtyFieldset = styled(Fieldset)`
@@ -176,7 +170,7 @@ class ProductForm extends Component {
           <Form onSubmit={this.handleSubmit(addVariantToCart)} noValidate>
             <Errors show={errors.length}>
               <ErrorSign>
-                <MdErrorOutline />
+                <OiIcon icon='oi-icon-error' />
               </ErrorSign>
               <ErrorMsgs>
                 {errors.map(error => (
@@ -207,7 +201,7 @@ class ProductForm extends Component {
                   onChange={this.handleChange}
                 >
                   <option disabled value="">
-                    Options...
+                    Product Options...
                   </option>
                   {variants.map(variant => (
                     <option

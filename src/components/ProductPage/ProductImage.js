@@ -51,6 +51,10 @@ const ProductImageWrapper = styled(`div`)`
       width: 100%;
       height: 100%;
     }
+
+    ${mediaQuery.tabletFrom} {
+      max-width: 800px;
+    }
   }
 
   ${mediaQuery.tabletFrom} {

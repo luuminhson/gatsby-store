@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectGlobal } from 'emotion';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
 import { colors } from '../../utils/styles';
 
 // Import OiIcon typeface

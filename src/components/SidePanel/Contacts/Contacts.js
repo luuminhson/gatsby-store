@@ -13,7 +13,7 @@ type Props = {
 };
 
 const ContactsWrapper = styled(`div`)`
-  margin: ${spacing.xl}px 0 ${spacing.lg}px;
+  position: relative;
 `;
 
 const ContactList = styled(`ul`)`
@@ -22,8 +22,7 @@ const ContactList = styled(`ul`)`
   align-items: flex-start;
   list-style: none;
   margin: 0;
-  padding: 32px 0;
-  border-top: 1px solid ${colors.neutral2};
+  padding: 0;
 `;
 
 const ContactListItem = styled(`li`)`
@@ -34,7 +33,7 @@ const ContactListItem = styled(`li`)`
 const ContactListItemLink = styled(`a`)`
   display: flex;
   align-items: center;
-  padding: 12px 32px;
+  padding: 12px 0;
   color: ${colors.mainDark};
 `;
 
@@ -42,15 +41,14 @@ const ContactIcon = styled(OiIcon)`
   margin-right: 8px;
 `;
 
-const Contacts = ({ contacts }: Props) => (
-  <ContactsWrapper>
+const Contacts = ({ contacts, className, ...rest }: Props) => (
+  <ContactsWrapper className={className} {...rest}>
     <ContactList>
       {Object.keys(contacts).map((name) => (
         <ContactListItem key={name}>
           <ContactListItemLink
             href={getContactHref(name, contacts[name])}
             rel="noopener noreferrer"
-            target="_blank"
             title={name}
             aria-label={name}
           >

@@ -6,7 +6,6 @@ import Widget from '../../Widget';
 import { Link } from '../../LinkWithPrev';
 import { useTagsList } from '../../../hooks';
 import { fontFamily, colors } from '../../../utils/styles';
-// import styles from './TagsWidget.module.scss';
 
 type Props = {
     tagCount: bool

@@ -33,6 +33,10 @@ export const Select = styled(Input.withComponent('select'))`
   background-repeat: no-repeat;
   background-size: 8px 10px;
   padding-right: ${spacing.xl}px !important;
+
+  option[disabled] {
+    color: ${colors.neutral4};
+  }
 `;
 
 export const Fieldset = styled(`fieldset`)`

@@ -6,7 +6,6 @@ import Widget from '../../Widget';
 import { Link } from '../../LinkWithPrev';
 import { useCategoriesList } from '../../../hooks';
 import { fontFamily, colors, fontWeight } from '../../../utils/styles';
-// import styles from './CategoriesWidget.module.scss';
 
 const CategoryWidget = styled(Widget)`
 .categories-widget__inner {

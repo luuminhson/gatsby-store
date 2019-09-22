@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
-import Footer from './Footer';
 import { breakpoints, animations } from '../../utils/styles';
 
 const PageContentRoot = styled(`main`)`
@@ -69,7 +68,6 @@ class PageContent extends Component {
     return (
       <PageContentRoot className={className}>
         {children}
-        <Footer />
       </PageContentRoot>
     );
   }

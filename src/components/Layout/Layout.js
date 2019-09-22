@@ -13,6 +13,7 @@ import CartIndicator from '../Cart/CartIndicator';
 import Navigation from './Navigation';
 import SidePanel from '../SidePanel';
 import PageContent from './PageContent';
+import Footer from './Footer';
 import ProductImagesBrowser from '../ProductPage/ProductImagesBrowser';
 
 import { breakpoints, mediaQuery, fontFamily, colors, dimensions, headerHeight } from '../../utils/styles';
@@ -64,6 +65,7 @@ injectGlobal`
 
 const LayoutWrapper = styled(`div`)`
     padding-top: 0;
+    overflow: hidden;
 
     ${mediaQuery.tabletFrom} {
       padding-top: ${dimensions.navPaddingTopTablet};
@@ -405,7 +407,6 @@ class PureLayout extends React.Component {
 
     return (
       <LayoutWrapper>
-        {/* <SiteMetadata /> */}
         <Helmet>
           <html lang="en" />
           <title>{title}</title>
@@ -518,6 +519,7 @@ class PureLayout extends React.Component {
                               />
                             )}
                           </Viewport>
+                          <Footer viewportIs={viewportIs} />
                         </>
                       );
                     }}

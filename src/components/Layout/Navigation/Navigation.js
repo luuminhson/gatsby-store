@@ -37,7 +37,7 @@ const NavigationInner = styled(`div`)`
     align-items: stretch;
     justify-content: space-between;
     margin: 0 auto;
-    max-width: ${breakpoints.fhd}px;
+    // max-width: ${breakpoints.fhd}px;
     transition: height 0.2s ease-in-out;
 
     ${mediaQuery.tabletFrom} {
@@ -335,7 +335,7 @@ class PureNavigation extends React.Component {
                 onUnfix={this.headRoomUnfix}
                 onUnpin={this.headRoomUnpin}
                 onPin={this.headRoomPin}
-                pinStart={viewportIs === 'desktop' ? 60 : (viewportIs === 'tablet') ? 20 : 0}
+                pinStart={viewportIs === 'desktop' ? 40 : (viewportIs === 'tablet') ? 20 : 0}
                 css={[
                     onFeaturedImage && onFeaturedImageStyle,
                     unpinned && unpinnedStyle,
