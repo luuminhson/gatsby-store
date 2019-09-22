@@ -15,10 +15,11 @@ type Props = {
 const _ = require('lodash');
 
 const SectionTitleWrapper = styled(SectionTitle)`
-    margin-bottom: ${spacing.xs}px;
+    margin-bottom: ${spacing.md}px;
     padding: 0 ${spacing.xl}px;
 
     ${mediaQuery.tabletFrom} {
+        margin-bottom: ${spacing.xl}px;
         padding: 0 ${spacing.md}px;
     }
 `;
@@ -39,6 +40,11 @@ const RelatedProductsWrapper = styled(`div`)`
 
 const RelatedProductList = styled(`div`)`
     overflow: hidden;
+    height: 320px;
+
+    ${mediaQuery.tabletFrom} {
+        height: auto;
+    }
 `;
 
 const RelatedProductListInner = styled(`div`)`
@@ -70,6 +76,11 @@ const RelatedProductItem = styled(`div`)`
     &:last-child {
         max-width: calc(60vw + ${spacing.xl - 4}px);
         padding-right: 44px;
+    }
+
+    > a {
+        display: block;
+        margin: 0;
     }
 
     ${mediaQuery.tabletFrom} {
