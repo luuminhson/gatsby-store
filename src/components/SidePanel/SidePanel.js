@@ -12,7 +12,7 @@ type Props = {
 
 const SidePanelWrapper = styled(`div`)`
   width: 100%;
-  height: 100vh;
+  height: 120vh;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
 

@@ -28,7 +28,7 @@ const CartRoot = styled(`div`)`
   top: 0;
   right: 0;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh + ${spacing.lg}px);
   max-width: 100%;
   overflow-y: scroll;
   opacity: 0;
@@ -155,7 +155,7 @@ const Content = styled(`div`)`
 const CartFooter = styled(`div`)`
   background-color: ${colors.white};
   padding: 0 ${spacing.lg}px ${spacing.lg}px;
-  margin-bottom: ${spacing['4xl']}px;
+  margin-bottom: ${spacing['4xl'] + 40}px;
 `;
 
 const Costs = styled('div')`

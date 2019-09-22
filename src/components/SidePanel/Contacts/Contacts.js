@@ -49,6 +49,7 @@ const Contacts = ({ contacts, className, ...rest }: Props) => (
           <ContactListItemLink
             href={getContactHref(name, contacts[name])}
             rel="noopener noreferrer"
+            target="_blank"
             title={name}
             aria-label={name}
           >
