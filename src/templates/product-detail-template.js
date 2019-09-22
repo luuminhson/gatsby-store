@@ -7,12 +7,14 @@ import { useSiteMetadata } from '../hooks';
 
 import InterfaceContext from '../context/InterfaceContext';
 import ProductPage from '../components/ProductPage';
+import RelatedProducts from '../components/ProductPage/RelatedProducts';
 
 const ProductDetailTemplate = props => {
   const {
     site,
     shopifyProduct: product,
-    shopifyProduct: { title: productTitle, description: fullDescription, productType: productCategory, handle }
+    shopifyProduct: { title: productTitle, description: fullDescription, productType: productCategory, handle },
+    relatedProducts,
   } = props.data;
 
   const { title: siteTitle } = useSiteMetadata();
@@ -76,6 +78,7 @@ const ProductDetailTemplate = props => {
                   toggleProductImagesBrowser={toggleProductImagesBrowser}
                   setCurrentProductImages={setCurrentProductImages}
                 />
+                <RelatedProducts edges={relatedProducts.edges} limit={4} />
               </div>
             )}
           </InterfaceContext.Consumer>
@@ -88,7 +91,7 @@ const ProductDetailTemplate = props => {
 export default ProductDetailTemplate;
 
 export const query = graphql`
-  query($handle: String!) {
+  query($handle: String!, $productType: String) {
     site {
       siteMetadata {
         siteUrl
@@ -96,7 +99,8 @@ export const query = graphql`
         description
       }
     }
-    shopifyProduct(handle: { eq: $handle }) {
+
+    shopifyProduct(handle: { eq: $handle }, productType: { eq: $productType }) {
       id
       title
       handle
@@ -119,6 +123,41 @@ export const query = graphql`
             }
             fluid(maxWidth: 1000) {
               ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+    }
+
+    relatedProducts: allShopifyProduct(
+      filter: { productType: { eq: $productType }, handle: { ne: $handle } },
+      sort: { fields: [publishedAt], order: ASC }
+    ) {
+      edges {
+        node {
+          id
+          handle
+          title
+          description
+          productType
+          variants {
+            shopifyId
+            title
+            price
+            compareAtPrice
+            availableForSale
+          }
+          images {
+            id
+            localFile {
+              childImageSharp {
+                resize(width: 910, height: 910) {
+                  src
+                }
+                fluid(maxWidth: 910) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
             }
           }
         }
