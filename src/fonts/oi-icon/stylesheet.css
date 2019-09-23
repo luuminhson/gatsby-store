@@ -95,4 +95,16 @@
 .oi-icon-error:before {
     content: "\e915";
 }
+.oi-icon-blog:before {
+    content: "\e916";
+}
+.oi-icon-home:before {
+    content: "\e917";
+}
+.oi-icon-more:before {
+    content: "\e918";
+}
+.oi-icon-store:before {
+    content: "\e919";
+}
   

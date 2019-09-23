@@ -362,4 +362,5 @@ export const animations = {
 export const shadow = {
   blockItemShadow: '0 16px 40px -12px rgba(0,0,0,0.2)',
   navShadow: '0px 12px 40px -12px rgba(9,13,23,0.08)',
+  botNavShadow: '0px -12px 40px -12px rgba(9,13,23,0.04)',
 }

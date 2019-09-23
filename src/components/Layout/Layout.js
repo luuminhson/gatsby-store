@@ -11,6 +11,7 @@ import OiIcon from '../OiIcon';
 import Cart from '../Cart';
 import CartIndicator from '../Cart/CartIndicator';
 import Navigation from './Navigation';
+import BottomNavigation from '../BottomNavigation';
 import SidePanel from '../SidePanel';
 import PageContent from './PageContent';
 import Footer from './Footer';
@@ -399,6 +400,8 @@ class PureLayout extends React.Component {
       isIndex,
       isStore,
       isProduct,
+      isCart,
+      isMore,
       hasFeaturedImage,
       from
     } = this.props;
@@ -490,6 +493,15 @@ class PureLayout extends React.Component {
                             detailTitle={detailTitle}
                             onFeaturedImage={hasFeaturedImage}
                             from={from}
+                          />
+                          <BottomNavigation
+                            isIndex={isIndex}
+                            isPost={isPost}
+                            isStore={isStore}
+                            isProduct={isProduct}
+                            isBlog={isBlog}
+                            isCart={isCart}
+                            isMore={isMore}
                           />
                           <Viewport
                             css={[

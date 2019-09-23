@@ -14,6 +14,7 @@ module.exports = {
     description: siteConfig.description,
     copyright: siteConfig.copyright,
     menu: siteConfig.menu,
+    botNav: siteConfig.botNav,
     logo: siteConfig.logo,
     contacts: siteConfig.contacts,
   },

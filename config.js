@@ -26,6 +26,33 @@ module.exports = {
             path: '/about'
         }
     ],
+    botNav: [
+        {
+            icon: 'oi-icon-home',
+            label: 'Home',
+            path: '/'
+        },
+        {
+            icon: 'oi-icon-store',
+            label: 'Store',
+            path: '/store'
+        },
+        {
+            icon: 'oi-icon-cart',
+            label: 'Cart',
+            path: '/cart'
+        },
+        {
+            icon: 'oi-icon-blog',
+            label: 'Blog',
+            path: '/blog'
+        },
+        {
+            icon: 'oi-icon-menu',
+            label: 'More',
+            path: '/more'
+        }
+    ],
     contacts: {
         phone: '+84934410491',
         email: 'hello@originalinside.com',
