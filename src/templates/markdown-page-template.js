@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { graphql } from 'gatsby';
-import Layout from '../components/Layout';
 import Page from '../components/Page';
 import { useSiteMetadata } from '../hooks';
 import type { MarkdownRemark } from '../types';
@@ -19,11 +18,9 @@ const PageTemplate = ({ data }: Props) => {
   const metaDescription = pageDescription !== null ? pageDescription : siteSubtitle;
 
   return (
-    <Layout title={`${pageTitle} ‧ ${siteTitle}`} description={metaDescription}>
-      <Page title={pageTitle} isPage>
-        <div dangerouslySetInnerHTML={{ __html: pageBody }} />
-      </Page>
-    </Layout>
+    <Page pageTitle={pageTitle} title={`${pageTitle} ‧ ${siteTitle}`} description={metaDescription} isPage>
+      <div dangerouslySetInnerHTML={{ __html: pageBody }} />
+    </Page>
   );
 };
 

@@ -188,6 +188,8 @@ class ProductForm extends Component {
                 name="quantity"
                 min="1"
                 step="1"
+                inputmode="numeric"
+                pattern="[0-9]*"
                 onChange={this.handleChange}
                 value={this.state.quantity}
               />

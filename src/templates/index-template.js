@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { graphql } from 'gatsby';
-import Layout from '../components/Layout';
 import Page from '../components/Page';
 import Strip from '../components/Strip';
 import { useSiteMetadata } from '../hooks';
@@ -17,11 +16,9 @@ const IndexTemplate = ({ data }: Props) => {
   const blogPost = data.blogStrip.edges;
 
   return (
-    <Layout title={`${title} ‧ ${subtitle}`} description={description} isIndex>
-      <Page isIndex>
-        <Strip edges={blogPost} sectionTitle='Articles' sectionLink='/blog' sectionLinkLabel='See All' />
-      </Page>
-    </Layout>
+    <Page pageTitle='Home' title={`${title} ‧ ${subtitle}`} description={description} isIndex>
+      <Strip edges={blogPost} sectionTitle='Articles' sectionLink='/blog' sectionLinkLabel='See All' />
+    </Page>
   );
 };
 

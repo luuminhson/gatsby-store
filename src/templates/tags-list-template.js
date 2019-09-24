@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from '../components/LinkWithPrev';
 import kebabCase from 'lodash/kebabCase';
-import Layout from '../components/Layout';
 import Page from '../components/Page';
 import { useSiteMetadata, useTagsList } from '../hooks';
 
@@ -10,8 +9,7 @@ const TagsListTemplate = () => {
   const tags = useTagsList();
 
   return (
-    <Layout title={`Tags ‧ ${title}`} description={description}>
-      <Page title='Tags' isBlog>
+      <Page pageTitle='Tags' title={`Tags ‧ ${title}`} description={description} isBlog>
         <ul>
           {tags.map((tag) => (
             <li key={tag.fieldValue}>
@@ -22,7 +20,6 @@ const TagsListTemplate = () => {
           ))}
         </ul>
       </Page>
-    </Layout>
   );
 };
 

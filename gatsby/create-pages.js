@@ -93,6 +93,14 @@ const createPages = async ({ graphql, actions }) => {
     component: path.resolve('./src/templates/not-found-template.js')
   });
 
+  /* CART
+  ------------------------------------------------ */
+
+  createPage({
+    path: '/cart',
+    component: path.resolve('./src/templates/cart-template.js')
+  });
+
   /* PRODUCT LIST
   ------------------------------------------------ */
 

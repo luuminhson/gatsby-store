@@ -1,7 +1,10 @@
 import React from 'react';
+import Helmet from 'react-helmet';
+import { graphql, StaticQuery } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { mediaQuery, FontStyle, dimensions, spacing } from '../../utils/styles';
+
+import { mediaQuery, FontStyle, dimensions, spacing, headerHeight } from '../../utils/styles';
 
 type Props = {
   title?: string,
@@ -21,17 +24,11 @@ const PageStyle = css`
 `;
 
 const PageInner = styled(`div`)`
-  padding: 24px 0.75rem;
   margin: 0 auto;
   max-width: 100%;
 
   ${mediaQuery.tabletFrom} {
-    padding: 30px 1rem;
     max-width: ${dimensions.indexPageWidth};
-  }
-
-  ${mediaQuery.desktop} {
-    padding: 40px 60px;
   }
 `;
 
@@ -72,6 +69,19 @@ const isBlogStyle = css`
   }
 `;
 
+const isProductStyle = css`
+  padding-top: 0;
+  margin-top: -${headerHeight.phone};
+
+  ${mediaQuery.tabletFrom} {
+    margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet});
+  }
+
+  ${mediaQuery.desktop} {
+    margin-top: calc(-${headerHeight.desktop} - ${dimensions.navPaddingTopDesktop});
+  }
+`;
+
 const isPageStyle = css``;
 
 const withSidebarStyle = css`
@@ -80,27 +90,113 @@ const withSidebarStyle = css`
   }
 `;
 
-const Page = ({ title, children, isIndex, isStore, isBlog, isPage, withSidebar, css, ...rest }: Props) => {
-  return (
-    <div css={[
+const hasFeaturedImageStyle = css`
+  margin-top: -${headerHeight.phone};
+
+  ${mediaQuery.tabletFrom} {
+    margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet});
+  }
+
+  ${mediaQuery.desktop} {
+    margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopDesktop});
+  }
+`;
+
+class PurePage extends React.Component {
+  render() {
+    const {
+      data,
+      children,
+      title,
+      description,
+      pageTitle,
+      detailTitle,
+      isPage,
+      isPost,
+      isBlog,
+      isIndex,
+      isStore,
+      isProduct,
+      isCart,
+      isMore,
+      hasFeaturedImage,
+      withSidebar,
+      css,
+      from,
+      ...rest
+    } = this.props;
+
+    const { siteUrl } = data.site.siteMetadata;
+
+    return (
+      <div css={[
         PageStyle,
         isIndex && isIndexStyle,
         isStore && isStoreStyle,
         isBlog && isBlogStyle,
         isPage && isPageStyle,
+        isProduct && isProductStyle,
         withSidebar && withSidebarStyle,
+        isPost && hasFeaturedImage && hasFeaturedImageStyle,
         css
-    ]}
-    {...rest}
-    >
-      <PageInner>
-        {title && <PageTitle>{title}</PageTitle>}
-        <PageBody>
-          {children}
-        </PageBody>
-      </PageInner>
-    </div>
-  );
-};
+      ]}
+        {...rest}
+      >
+        <Helmet>
+          <html lang="en" />
+          <title>{title}</title>
+          <meta name="description" content={description} />
+
+          <link rel="preconnect" href="https://originalinside.com" />
+          <link rel="canonical" href={siteUrl} />
+          <link rel="apple-touch-startup-image" href="launch.png"></link>
+          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffffff" />
+          <meta name="msapplication-TileColor" content="#222222" />
+          <meta name="theme-color" content="#ffffff" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+          <meta name="apple-mobile-web-app-title" content="Original Inside" />
+
+          <meta property="og:url" content={siteUrl} />
+          <meta property="og:type" content="website" />
+          <meta property="og:locale" content="en" />
+          <meta property="og:title" content={title} />
+          <meta property="og:site_name" content={title} />
+          <meta property="og:description" content={description} />
+
+          <meta property="og:image" content={`${siteUrl}/instagram-doraforscale.jpg`} />
+          <meta property="og:image:alt" content="We are Original Inside." />
+          <meta property="og:image:width" content="1280" />
+          <meta property="og:image:height" content="686" />
+        </Helmet>
+        <PageInner>
+          {pageTitle && <PageTitle>{pageTitle}</PageTitle>}
+          <PageBody>
+            {children}
+          </PageBody>
+        </PageInner>
+      </div>
+    );
+  }
+}
+
+export const Page = (props) => (
+  <StaticQuery
+    query={graphql`
+      query MainPageQuery {
+        site {
+          siteMetadata {
+            siteUrl
+          }
+        }
+      }
+    `}
+    render={(data) => <PurePage {...props} data={data} />}
+  />
+);
 
 export default Page;

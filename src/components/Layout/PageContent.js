@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { keyframes } from '@emotion/core';
 
-import { breakpoints, animations } from '../../utils/styles';
+import { breakpoints } from '../../utils/styles';
+
+const simpleEntry = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+`;
+
+const deadSimpleEntry = keyframes`
+  from {
+    opacity: .85;
+    transform: translateY(4px);
+  }
+`;
 
 const PageContentRoot = styled(`main`)`
   display: flex;
@@ -13,27 +28,31 @@ const PageContentRoot = styled(`main`)`
   width: 100%;
   will-change: transform;
 
-  &.covered {
+  .covered {
     opacity: 0;
     position: fixed;
   }
 
-  &.entry {
-    animation: ${animations.deadSimpleEntry};
+  .entry {
+    animation: ${deadSimpleEntry} .5s ease forwards;
   }
 
   @media (min-width: ${breakpoints.desktop}px) {
 
-    &.moved {
+    .moved {
       filter: blur(1px);
       position: fixed;
       transform: translateX(-400px);
     }
 
-    &.covered {
+    .covered {
       display: none;
     }
   }
+`;
+
+const PageContentInner = styled(`div`)`
+  display: block;
 `;
 
 class PageContent extends Component {
@@ -59,6 +78,20 @@ class PageContent extends Component {
         }));
       }
     }
+
+    // console.log('Prev: ' + prevProps.location.pathname);
+
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.setState(state => ({ className: state.className + 'entry ' }));
+
+      console.log('Page changed!');
+
+      setTimeout(() => {
+        this.setState(state => ({
+          className: state.className.replace('entry ', '')
+        }));
+      }, 500);
+    }
   }
 
   render() {
@@ -66,8 +99,10 @@ class PageContent extends Component {
     const { className } = this.state;
 
     return (
-      <PageContentRoot className={className}>
-        {children}
+      <PageContentRoot>
+        <PageContentInner className={className}>
+          {children}
+        </PageContentInner>
       </PageContentRoot>
     );
   }
@@ -75,6 +110,7 @@ class PageContent extends Component {
 
 PageContent.propTypes = {
   cartStatus: PropTypes.string.isRequired,
+  location: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
   productImagesBrowserStatus: PropTypes.string.isRequired,
   viewportIs: PropTypes.string

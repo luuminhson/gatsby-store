@@ -1,9 +1,8 @@
 // @flow
 import React from 'react';
 import { graphql } from 'gatsby';
-import Layout from '../components/Layout';
-import Feed from '../components/Feed';
 import Page from '../components/Page';
+import Feed from '../components/Feed';
 import Pagination from '../components/Pagination';
 import { useSiteMetadata } from '../hooks';
 import type { PageContext, AllMarkdownRemark } from '../types';
@@ -29,17 +28,15 @@ const CategoryTemplate = ({ data, pageContext }: Props) => {
   const pageTitle = currentPage > 0 ? `${category} — Page ${currentPage} ‧ ${siteTitle}` : `${category} ‧ ${siteTitle}`;
 
   return (
-    <Layout title={pageTitle} description={siteSubtitle}>
-      <Page title={category} isBlog>
-        <Feed edges={edges} />
-        <Pagination
-          prevPagePath={prevPagePath}
-          nextPagePath={nextPagePath}
-          hasPrevPage={hasPrevPage}
-          hasNextPage={hasNextPage}
-        />
-      </Page>
-    </Layout>
+    <Page pageTitle={category} title={pageTitle} description={siteSubtitle} isBlog>
+      <Feed edges={edges} />
+      <Pagination
+        prevPagePath={prevPagePath}
+        nextPagePath={nextPagePath}
+        hasPrevPage={hasPrevPage}
+        hasNextPage={hasNextPage}
+      />
+    </Page>
   );
 };
 

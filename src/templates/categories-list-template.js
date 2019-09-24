@@ -1,8 +1,7 @@
 import React from 'react';
+import Page from '../components/Page';
 import { Link } from '../components/LinkWithPrev';
 import kebabCase from 'lodash/kebabCase';
-import Layout from '../components/Layout';
-import Page from '../components/Page';
 import { useSiteMetadata, useCategoriesList } from '../hooks';
 
 const CategoriesListTemplate = () => {
@@ -10,19 +9,17 @@ const CategoriesListTemplate = () => {
   const categories = useCategoriesList();
 
   return (
-    <Layout title={`Categories ‧ ${title}`} description={description}>
-      <Page title="Categories" isBlog>
-        <ul>
-          {categories.map((category) => (
-            <li key={category.fieldValue}>
-              <Link to={`/blog/category/${kebabCase(category.fieldValue)}/`}>
-                {category.fieldValue} ({category.totalCount})
+    <Page pageTitle='Categories' title={`Categories ‧ ${title}`} description={description} isBlog>
+      <ul>
+        {categories.map((category) => (
+          <li key={category.fieldValue}>
+            <Link to={`/blog/category/${kebabCase(category.fieldValue)}/`}>
+              {category.fieldValue} ({category.totalCount})
               </Link>
-            </li>
-          ))}
-        </ul>
-      </Page>
-    </Layout>
+          </li>
+        ))}
+      </ul>
+    </Page>
   );
 };
 

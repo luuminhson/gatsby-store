@@ -1,6 +1,5 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
-import Layout from '../components/Layout';
+import { graphql } from 'gatsby';
 import Page from '../components/Page';
 import styled from '@emotion/styled';
 
@@ -27,19 +26,17 @@ const ProductListingContainer = styled(`div`)`
   }
 `;
 
-const StoreTemplate = ( { data } ) => {
-    const { title, description } = useSiteMetadata();
-    return (
-        <Layout title={`Store ‧ ${title}`} description={description} isStore>
-        <Page isStore title='Store'>
-            <ProductListingContainer>
-            {data.products.edges.map(({ node: product }) => (
-                <ProductListingItem key={product.id} product={product} />
-            ))}
-            </ProductListingContainer>
-        </Page>
-        </Layout>
-    );
+const StoreTemplate = ({ data }) => {
+  const { title, description } = useSiteMetadata();
+  return (
+    <Page pageTitle='Store' title={`Store ‧ ${title}`} description={description} isStore>
+      <ProductListingContainer>
+        {data.products.edges.map(({ node: product }) => (
+          <ProductListingItem key={product.id} product={product} />
+        ))}
+      </ProductListingContainer>
+    </Page>
+  );
 };
 
 export const query = graphql`

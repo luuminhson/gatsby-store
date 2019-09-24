@@ -1,6 +1,6 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 import { graphql, StaticQuery } from 'gatsby';
+import { Location } from '@reach/router';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { injectGlobal } from 'emotion';
@@ -75,42 +75,6 @@ const LayoutWrapper = styled(`div`)`
     ${mediaQuery.desktop} {
       padding-top: ${dimensions.navPaddingTopDesktop};
     }
-`;
-
-const Viewport = styled(`div`)`
-  width: 100%;
-  margin: 0 auto;
-`;
-
-const isBlogStyle = css``;
-
-const isStoreStyle = css``;
-
-const isProductStyle = css`
-  padding-top: 0;
-  margin-top: -${headerHeight.phone};
-
-  ${mediaQuery.tabletFrom} {
-    margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet});
-  }
-
-  ${mediaQuery.desktop} {
-    margin-top: calc(-${headerHeight.desktop} - ${dimensions.navPaddingTopDesktop});
-  }
-`;
-
-const isPostStyle = css``;
-
-const hasFeaturedImageStyle = css`
-  margin-top: -${headerHeight.phone};
-
-  ${mediaQuery.tabletFrom} {
-    margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet});
-  }
-
-  ${mediaQuery.desktop} {
-    margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopDesktop});
-  }
 `;
 
 const overlayOn = css`
@@ -353,11 +317,6 @@ class PureLayout extends React.Component {
     document.body.className = document.body.classList.remove('noScroll');
   }
 
-  componentWillUnmount = () => {
-    this.tabletMediaQuery.removeListener(this.updateViewPortState);
-    this.desktopMediaQuery.removeListener(this.updateViewPortState);
-  };
-
   componentDidUpdate(prevProps, prevState) {
     const sidebarStatusChanged = prevState.sidebar !== this.state.sidebar;
     const cartStatusChanged = prevState.interface.cartStatus !== this.state.interface.cartStatus;
@@ -367,34 +326,36 @@ class PureLayout extends React.Component {
     cartStatusChanged && (
       (this.state.interface.cartStatus === 'open') ?
         document.body.classList.add('noScroll')
-      :
+        :
         document.body.classList.remove('noScroll')
     );
 
     sidebarStatusChanged && (
       (this.state.sidebar === true) ?
         document.body.classList.add('noScroll')
-      :
-      document.body.classList.remove('noScroll')
+        :
+        document.body.classList.remove('noScroll')
     );
   }
+
+  componentWillUnmount() {
+    this.tabletMediaQuery.removeListener(this.updateViewPortState);
+    this.desktopMediaQuery.removeListener(this.updateViewPortState);
+  };
 
   updateViewPortState = e => {
     this.setState(state => ({
       interface: {
         ...state.interface,
-        viewportIs: ( this.desktopMediaQuery.matches ? 'desktop' : ( this.tabletMediaQuery.matches ? 'tablet' : null) ),
+        viewportIs: (this.desktopMediaQuery.matches ? 'desktop' : (this.tabletMediaQuery.matches ? 'tablet' : null)),
       }
     }));
   };
 
   render() {
     const {
-      data,
-      title,
-      description,
-      children,
       detailTitle,
+      children,
       isPost,
       isBlog,
       isIndex,
@@ -406,41 +367,8 @@ class PureLayout extends React.Component {
       from
     } = this.props;
 
-    const { siteUrl } = data.site.siteMetadata;
-
     return (
       <LayoutWrapper>
-        <Helmet>
-          <html lang="en" />
-          <title>{title}</title>
-          <meta name="description" content={description} />
-
-          <link rel="preconnect" href="https://originalinside.com" />
-          <link rel="canonical" href={siteUrl} />
-          <link rel="apple-touch-startup-image" href="launch.png"></link>
-          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-          <link rel="manifest" href="/manifest.json" />
-          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffffff" />
-          <meta name="msapplication-TileColor" content="#222222" />
-          <meta name="theme-color" content="#ffffff" />
-          <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-          <meta name="apple-mobile-web-app-title" content="Original Inside" />
-
-          <meta property="og:url" content={siteUrl} />
-          <meta property="og:type" content="website" />
-          <meta property="og:locale" content="en" />
-          <meta property="og:title" content={title} />
-          <meta property="og:site_name" content={title} />
-          <meta property="og:description" content={description} />
-
-          <meta property="og:image" content={`${siteUrl}/instagram-doraforscale.jpg`} />
-          <meta property="og:image:alt" content="We are Original Inside." />
-          <meta property="og:image:width" content="1280" />
-          <meta property="og:image:height" content="686" />
-        </Helmet>
         <StoreContext.Provider value={this.state.store}>
           <InterfaceContext.Provider value={this.state.interface}>
             <InterfaceContext.Consumer>
@@ -462,77 +390,76 @@ class PureLayout extends React.Component {
                       );
 
                       return (
-                        <>
-                          <Overlay
-                            onClick={toggleCart}
-                            css={cartStatus === 'open' ? overlayOn : overlayOff}
-                          />
-                          <Overlay
-                            onClick={this.toggleSidebar}
-                            css={this.state.sidebar === true ? overlayOn : overlayOff}
-                          />
-                          <CartIndicator itemsInCart={itemsInCart} adding={adding} />
-                          <Cart
-                            viewportIs={viewportIs}
-                            status={cartStatus}
-                            toggle={toggleCart}
-                            productImagesBrowserStatus={productImagesBrowserStatus}
-                          />
-                          <SidePanelWrapper css={this.state.sidebar === true && SidebarOn}>
-                            <OiIcon icon='oi-icon-close' css={SidePanelCloseBtn} onClick={this.toggleSidebar} />
-                            <SidePanel />
-                          </SidePanelWrapper>
-                          <Navigation
-                            toggleCart={toggleCart}
-                            viewportIs={viewportIs}
-                            burgerClick={this.toggleSidebar}
-                            isIndex={isIndex}
-                            isPost={isPost}
-                            isStore={isStore}
-                            isProduct={isProduct}
-                            detailTitle={detailTitle}
-                            onFeaturedImage={hasFeaturedImage}
-                            from={from}
-                          />
-                          <BottomNavigation
-                            isIndex={isIndex}
-                            isPost={isPost}
-                            isStore={isStore}
-                            isProduct={isProduct}
-                            isBlog={isBlog}
-                            isCart={isCart}
-                            isMore={isMore}
-                          />
-                          <Viewport
-                            css={[
-                              isStore && isStoreStyle,
-                              isProduct && isProductStyle,
-                              isBlog && isBlogStyle,
-                              isPost && isPostStyle,
-                              isPost && hasFeaturedImage && hasFeaturedImageStyle,
-                            ]}
-                          >
-                            <PageContent
-                              cartStatus={cartStatus}
-                              viewportIs={viewportIs}
-                              productImagesBrowserStatus={productImagesBrowserStatus}
-                            >
-                              {children}
-                            </PageContent>
-
-                            {currentProductImages.length > 0 && (
-                              <ProductImagesBrowser
-                                images={currentProductImages}
-                                position={productImagesBrowserStatus}
-                                imageFeatured={productImageFeatured}
-                                imageFeaturedIndex={productImageFeaturedIndex}
-                                toggle={toggleProductImagesBrowser}
-                                viewportIs={viewportIs}
+                        <Location>
+                          {({ location }) => (
+                            <>
+                              <Overlay
+                                onClick={toggleCart}
+                                css={cartStatus === 'open' ? overlayOn : overlayOff}
                               />
-                            )}
-                          </Viewport>
-                          <Footer viewportIs={viewportIs} />
-                        </>
+                              <Overlay
+                                onClick={this.toggleSidebar}
+                                css={this.state.sidebar === true ? overlayOn : overlayOff}
+                              />
+                              <CartIndicator itemsInCart={itemsInCart} adding={adding} />
+                              <Cart
+                                viewportIs={viewportIs}
+                                status={cartStatus}
+                                toggle={toggleCart}
+                                productImagesBrowserStatus={productImagesBrowserStatus}
+                              />
+                              <SidePanelWrapper css={this.state.sidebar === true && SidebarOn}>
+                                <OiIcon icon='oi-icon-close' css={SidePanelCloseBtn} onClick={this.toggleSidebar} />
+                                <SidePanel />
+                              </SidePanelWrapper>
+                              {viewportIs !== null &&
+                                <Navigation
+                                  toggleCart={toggleCart}
+                                  viewportIs={viewportIs}
+                                  burgerClick={this.toggleSidebar}
+                                  isIndex={isIndex}
+                                  isPost={isPost}
+                                  isStore={isStore}
+                                  isProduct={isProduct}
+                                  detailTitle={detailTitle}
+                                  onFeaturedImage={hasFeaturedImage}
+                                  from={from}
+                                />
+                              }
+                              {viewportIs === null &&
+                                <BottomNavigation
+                                  isIndex={isIndex}
+                                  isPost={isPost}
+                                  isStore={isStore}
+                                  isProduct={isProduct}
+                                  isBlog={isBlog}
+                                  isCart={isCart}
+                                  isMore={isMore}
+                                  cartNumber={itemsInCart}
+                                />
+                              }
+                              <PageContent
+                                cartStatus={cartStatus}
+                                viewportIs={viewportIs}
+                                productImagesBrowserStatus={productImagesBrowserStatus}
+                                location={location}
+                              >
+                                {children}
+                              </PageContent>
+                              {currentProductImages.length > 0 && (
+                                <ProductImagesBrowser
+                                  images={currentProductImages}
+                                  position={productImagesBrowserStatus}
+                                  imageFeatured={productImageFeatured}
+                                  imageFeaturedIndex={productImageFeaturedIndex}
+                                  toggle={toggleProductImagesBrowser}
+                                  viewportIs={viewportIs}
+                                />
+                              )}
+                              {viewportIs !== null && <Footer viewportIs={viewportIs} isCart={isCart} />}
+                            </>
+                          )}
+                        </Location>
                       );
                     }}
                   </StoreContext.Consumer>
@@ -547,7 +474,7 @@ class PureLayout extends React.Component {
 
 export const Layout = (props) => (
   <StaticQuery
-      query={graphql`
+    query={graphql`
       query MainLayoutQuery {
         site {
           siteMetadata {
@@ -568,7 +495,7 @@ export const Layout = (props) => (
         }
       }
     `}
-      render={(data) => <PureLayout {...props} data={data} />}
+    render={(data) => <PureLayout {...props} data={data} />}
   />
 );
 

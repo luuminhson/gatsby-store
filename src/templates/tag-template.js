@@ -1,9 +1,8 @@
 // @flow
 import React from 'react';
 import { graphql } from 'gatsby';
-import Layout from '../components/Layout';
-import Feed from '../components/Feed';
 import Page from '../components/Page';
+import Feed from '../components/Feed';
 import Pagination from '../components/Pagination';
 import { useSiteMetadata } from '../hooks';
 import type { AllMarkdownRemark, PageContext } from '../types';
@@ -29,17 +28,15 @@ const TagTemplate = ({ data, pageContext }: Props) => {
   const pageTitle = currentPage > 0 ? `All Posts tagged as "${tag}" — Page ${currentPage} ‧ ${siteTitle}` : `All Posts tagged as "${tag}" ‧ ${siteTitle}`;
 
   return (
-    <Layout title={pageTitle} description={siteSubtitle}>
-      <Page title={'Tag: ' + tag} isBlog>
-        <Feed edges={edges} />
-        <Pagination
-          prevPagePath={prevPagePath}
-          nextPagePath={nextPagePath}
-          hasPrevPage={hasPrevPage}
-          hasNextPage={hasNextPage}
-        />
-      </Page>
-    </Layout>
+    <Page pageTitle={'Tag: ' + tag} title={pageTitle} description={siteSubtitle} isBlog>
+      <Feed edges={edges} />
+      <Pagination
+        prevPagePath={prevPagePath}
+        nextPagePath={nextPagePath}
+        hasPrevPage={hasPrevPage}
+        hasNextPage={hasNextPage}
+      />
+    </Page>
   );
 };
 

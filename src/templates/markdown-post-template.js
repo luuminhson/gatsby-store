@@ -2,7 +2,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { Location } from '@reach/router';
-import Layout from '../components/Layout';
+import Page from '../components/Page';
 import Post from '../components/Post';
 import { useSiteMetadata } from '../hooks';
 import type { MarkdownRemark } from '../types';
@@ -33,9 +33,9 @@ const PostTemplate = ({ data }: Props) => {
   return (
     <Location>
       {({ location }) => (
-        <Layout title={`${postTitle} ‧ ${siteTitle}`} description={metaDescription} isPost detailTitle={postTitle} hasFeaturedImage={hasFeaturedImage} from={checkLocationState(location)}>
+        <Page title={`${postTitle} ‧ ${siteTitle}`} description={metaDescription} isPost detailTitle={postTitle} hasFeaturedImage={hasFeaturedImage} from={checkLocationState(location)}>
           <Post post={data.markdownRemark} />
-        </Layout>
+        </Page>
       )}
     </Location>
   );

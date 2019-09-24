@@ -1,16 +1,16 @@
 import React from 'react';
-import Layout from '../components/Layout';
+import Page from '../components/Page';
 import { useSiteMetadata } from '../hooks';
 import { Heading, TextContainer } from '../components/shared/Typography';
 
 const NotFoundPage = () => {
   const { title, description } = useSiteMetadata();
   return (
-    <Layout title={`404 ‧ ${title}`} description={description}>
+    <Page title={`404 ‧ ${title}`} description={description}>
       <TextContainer>
-        <Heading>Whoops - That Page Doesn’t Exist (404)</Heading>
+        <Heading>404<br />Page Not Found</Heading>
       </TextContainer>
-    </Layout>
+    </Page>
   );
 }
 

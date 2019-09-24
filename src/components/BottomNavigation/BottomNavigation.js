@@ -5,8 +5,9 @@ import { css } from '@emotion/core';
 import PropTypes from 'prop-types';
 import { Link } from '../LinkWithPrev';
 import OiIcon from '../OiIcon';
+import CartNumber from '../Cart/CartNumber';
 
-import { colors, shadow, spacing, mediaQuery } from '../../utils/styles';
+import { colors, shadow, mediaQuery } from '../../utils/styles';
 
 const navHeight = '60px';
 
@@ -15,9 +16,14 @@ const BotNavWrapper = styled(`div`)`
     left: 0;
     bottom: 0;
     z-index: 3000;
+
+    ${mediaQuery.tabletFrom} {
+        display: none;
+    }
 `;
 
 const BotNavInner = styled(`div`)`
+    position: relative;
     flex: 1 0 100%;
     display: flex;
     align-items: stretch;
@@ -74,6 +80,13 @@ const BotNavLinkActiveStyle = css`
   }
 `;
 
+const CartItemNumber = styled(CartNumber)`
+  position: absolute;
+  left: calc(50% + 4px);
+  top: 6px;
+  z-index: 2900;
+`;
+
 const isIndexStyle = css``;
 
 const isPostStyle = css``;
@@ -93,6 +106,7 @@ class PureBottomNavigation extends Component {
         const {
             data,
             className,
+            cartNumber,
             isIndex,
             isBlog,
             isPost,
@@ -132,6 +146,7 @@ class PureBottomNavigation extends Component {
                                 </NavItem>
                             ))}
                         </NavList>
+                        <CartItemNumber number={cartNumber} />
                     </BotNavInner>
                 }
             </BotNavWrapper>
@@ -160,6 +175,7 @@ export const BottomNavigation = (props) => (
 
 BottomNavigation.propTypes = {
     className: PropTypes.string,
+    cartNumber: PropTypes.number
 };
 
 export default BottomNavigation;

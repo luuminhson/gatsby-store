@@ -18,6 +18,7 @@ export const TextContainer = styled(`div`)`
 export const Heading = styled('h1')`
   color: ${colors.mainDark};
   font-size: 2.6rem;
+  line-height: 1.5em;
   letter-spacing: -0.02em;
   margin: 0;
   margin-bottom: ${spacing.lg}px;

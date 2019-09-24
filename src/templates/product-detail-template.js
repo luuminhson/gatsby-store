@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Location } from '@reach/router';
 import Helmet from 'react-helmet';
-import Layout from '../components/Layout';
+import Page from '../components/Page';
 import { useSiteMetadata } from '../hooks';
 
 import InterfaceContext from '../context/InterfaceContext';
@@ -38,7 +38,7 @@ const ProductDetailTemplate = props => {
   return (
     <Location>
       {({ location }) => (
-        <Layout title={`${productTitle} — ${productCategory} ‧ ${siteTitle}`} description={description} isProduct from={checkLocationState(location)}>
+        <Page title={`${productTitle} — ${productCategory} ‧ ${siteTitle}`} description={description} isProduct from={checkLocationState(location)}>
           <InterfaceContext.Consumer>
             {({
               viewportIs,
@@ -47,43 +47,43 @@ const ProductDetailTemplate = props => {
               toggleProductImagesBrowser,
               setCurrentProductImages
             }) => (
-              <div>
-                <Helmet>
-                  <meta
-                    property="og:url"
-                    content={`${site.siteMetadata.siteUrl}/store/product/${handle}`}
-                  />
-                  <meta property="og:locale" content="en" />
-                  <meta property="og:title" content={productTitle} />
-                  <meta property="og:site_name" content="Gatsby Swag Store" />
-                  <meta property="og:description" content={description} />
+                <div>
+                  <Helmet>
+                    <meta
+                      property="og:url"
+                      content={`${site.siteMetadata.siteUrl}/store/product/${handle}`}
+                    />
+                    <meta property="og:locale" content="en" />
+                    <meta property="og:title" content={productTitle} />
+                    <meta property="og:site_name" content="Gatsby Swag Store" />
+                    <meta property="og:description" content={description} />
 
-                  {/* TODO: add the image */}
-                  <meta
-                    property="og:image"
-                    content={`${site.siteMetadata.siteUrl}${image}`}
-                  />
-                  <meta property="og:image:alt" content={productTitle} />
-                  <meta property="og:image:width" content="600" />
-                  <meta property="og:image:height" content="600" />
+                    {/* TODO: add the image */}
+                    <meta
+                      property="og:image"
+                      content={`${site.siteMetadata.siteUrl}${image}`}
+                    />
+                    <meta property="og:image:alt" content={productTitle} />
+                    <meta property="og:image:width" content="600" />
+                    <meta property="og:image:height" content="600" />
 
-                  <meta name="twitter:card" content="summary" />
-                  <meta name="twitter:site" content="@gatsbyjs" />
-                </Helmet>
-                <ProductPage
-                  product={product}
-                  viewportIs={viewportIs}
-                  productImagesBrowserStatus={productImagesBrowserStatus}
-                  productImageFeatured={productImageFeatured}
-                  toggleProductImagesBrowser={toggleProductImagesBrowser}
-                  setCurrentProductImages={setCurrentProductImages}
-                />
-                <RelatedProducts edges={relatedProducts.edges} limit={4} />
-              </div>
-            )}
+                    <meta name="twitter:card" content="summary" />
+                    <meta name="twitter:site" content="@gatsbyjs" />
+                  </Helmet>
+                  <ProductPage
+                    product={product}
+                    viewportIs={viewportIs}
+                    productImagesBrowserStatus={productImagesBrowserStatus}
+                    productImageFeatured={productImageFeatured}
+                    toggleProductImagesBrowser={toggleProductImagesBrowser}
+                    setCurrentProductImages={setCurrentProductImages}
+                  />
+                  <RelatedProducts edges={relatedProducts.edges} limit={4} />
+                </div>
+              )}
           </InterfaceContext.Consumer>
-        </Layout>
-    )}
+        </Page>
+      )}
     </Location>
   );
 };

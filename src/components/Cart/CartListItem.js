@@ -166,6 +166,8 @@ export default ({
         name="quantity"
         min="1"
         step="1"
+        inputmode="numeric"
+        pattern="[0-9]*"
         onChange={event => handleInputChange(event)}
         onBlur={() => setQuantity(item.quantity)}
         value={quantity}
