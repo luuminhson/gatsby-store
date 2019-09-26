@@ -13,7 +13,7 @@ const ProductListingContainer = styled(`div`)`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  padding: ${spacing.sm}px;
+  padding: 0 ${spacing.sm}px ${spacing.sm}px;
   width: 100%;
   margin: 0 auto;
 
@@ -29,7 +29,7 @@ const ProductListingContainer = styled(`div`)`
 const StoreTemplate = ({ data }) => {
   const { title, description } = useSiteMetadata();
   return (
-    <Page pageTitle='Store' title={`Store ‧ ${title}`} description={description} isStore>
+    <Page mainTitle='Store' title={`Store ‧ ${title}`} description={description} isStore>
       <ProductListingContainer>
         {data.products.edges.map(({ node: product }) => (
           <ProductListingItem key={product.id} product={product} />

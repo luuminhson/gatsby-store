@@ -26,7 +26,6 @@ const PageContentRoot = styled(`main`)`
   padding-left: 0;
   transition: 0.75s;
   width: 100%;
-  will-change: transform;
 
   .covered {
     opacity: 0;
@@ -79,12 +78,8 @@ class PageContent extends Component {
       }
     }
 
-    // console.log('Prev: ' + prevProps.location.pathname);
-
     if (this.props.location.pathname !== prevProps.location.pathname) {
       this.setState(state => ({ className: state.className + 'entry ' }));
-
-      console.log('Page changed!');
 
       setTimeout(() => {
         this.setState(state => ({

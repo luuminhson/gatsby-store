@@ -16,7 +16,7 @@ const IndexTemplate = ({ data }: Props) => {
   const blogPost = data.blogStrip.edges;
 
   return (
-    <Page pageTitle='Home' title={`${title} ‧ ${subtitle}`} description={description} isIndex>
+    <Page title={`${title} ‧ ${subtitle}`} description={description} isIndex>
       <Strip edges={blogPost} sectionTitle='Articles' sectionLink='/blog' sectionLinkLabel='See All' />
     </Page>
   );

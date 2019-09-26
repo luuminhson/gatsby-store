@@ -127,6 +127,7 @@ export const dimensions = {
 --------------------------------------------------------------- */
 
 export const headerHeight = {
+  mobileTopNav: '48px',
   phone: '68px',
   tablet: '96px',
   desktop: '180px',

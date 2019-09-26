@@ -99,7 +99,7 @@ const HeroImage = styled(BackgroundImage)`
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding: 2.5rem 2rem 1.8rem;
+  padding: 2rem 1.8rem 1.5rem;
   box-sizing: border-box;
 
   ${mediaQuery.tabletFrom} {

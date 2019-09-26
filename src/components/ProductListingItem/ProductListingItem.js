@@ -51,9 +51,13 @@ const Item = styled(`article`)`
 const Preview = styled(`div`)`
   background: ${colors.mainLight};
   border-radius: ${radius.large}px;
-  margin-bottom: ${spacing.md}px;
+  margin-bottom: ${spacing.sm}px;
   overflow: hidden;
   position: relative;
+`;
+
+const ProductTitle = styled(FontStyle.h4)`
+  font-size: 0.9rem;
 `;
 
 const SaleBadge = styled(`span`)`
@@ -79,7 +83,6 @@ const PriceRow = styled(`div`)`
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-end;
-  margin-top: ${spacing['2xs']}px;
 
   ${mediaQuery.tabletFrom} {
     margin-top: ${spacing.xs}px;
@@ -87,7 +90,7 @@ const PriceRow = styled(`div`)`
 `;
 
 const Price = styled(FontStyle.headline)`
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: ${fontWeight.heading.normal};
   color: ${colors.neutral5};
   margin-right: 8px;
@@ -100,7 +103,7 @@ const Price = styled(FontStyle.headline)`
 const SalePrice = styled(FontStyle.headline)`
   text-decoration: line-through;
   font-weight: ${fontWeight.heading.normal};
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   opacity: 0.5;
 
   ${mediaQuery.tabletFrom} {
@@ -137,7 +140,7 @@ const ProductListingItem = props => {
                 }
                 <Image fluid={fluid} />
               </Preview>
-              <FontStyle.h4>{title}</FontStyle.h4>
+              <ProductTitle>{title}</ProductTitle>
               <PriceRow>
                 <Price>{priceWithCommas(price)} VND</Price>
                 {compareAtPrice && compareAtPrice !== null &&

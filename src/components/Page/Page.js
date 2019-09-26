@@ -3,7 +3,9 @@ import Helmet from 'react-helmet';
 import { graphql, StaticQuery } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import { MobileNavigation } from '../Layout/Navigation';
 
+import InterfaceContext from '../../context/InterfaceContext';
 import { mediaQuery, FontStyle, dimensions, spacing, headerHeight } from '../../utils/styles';
 
 type Props = {
@@ -18,6 +20,8 @@ type Props = {
 };
 
 const PageStyle = css`
+  position: relative;
+  
   ${mediaQuery.desktop} {
     margin-bottom: 32px;
   }
@@ -25,6 +29,7 @@ const PageStyle = css`
 
 const PageInner = styled(`div`)`
   margin: 0 auto;
+  padding-bottom: ${spacing.xl}px;
   max-width: 100%;
 
   ${mediaQuery.tabletFrom} {
@@ -43,7 +48,7 @@ export const PageBody = styled(`div`)`
 
 const isIndexStyle = css`
   ${PageInner} {
-
+    padding-top: ${spacing.lg}px;
   }
 `;
 
@@ -71,14 +76,17 @@ const isBlogStyle = css`
 
 const isProductStyle = css`
   padding-top: 0;
-  margin-top: -${headerHeight.phone};
 
   ${mediaQuery.tabletFrom} {
-    margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet});
+    ${PageInner} {
+      margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet});
+    }
   }
 
   ${mediaQuery.desktop} {
-    margin-top: calc(-${headerHeight.desktop} - ${dimensions.navPaddingTopDesktop});
+    ${PageInner} {
+      margin-top: calc(-${headerHeight.desktop} - ${dimensions.navPaddingTopDesktop});
+    }
   }
 `;
 
@@ -91,15 +99,7 @@ const withSidebarStyle = css`
 `;
 
 const hasFeaturedImageStyle = css`
-  margin-top: -${headerHeight.phone};
 
-  ${mediaQuery.tabletFrom} {
-    margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet});
-  }
-
-  ${mediaQuery.desktop} {
-    margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopDesktop});
-  }
 `;
 
 class PurePage extends React.Component {
@@ -119,6 +119,7 @@ class PurePage extends React.Component {
       isProduct,
       isCart,
       isMore,
+      mainTitle,
       hasFeaturedImage,
       withSidebar,
       css,
@@ -129,57 +130,74 @@ class PurePage extends React.Component {
     const { siteUrl } = data.site.siteMetadata;
 
     return (
-      <div css={[
-        PageStyle,
-        isIndex && isIndexStyle,
-        isStore && isStoreStyle,
-        isBlog && isBlogStyle,
-        isPage && isPageStyle,
-        isProduct && isProductStyle,
-        withSidebar && withSidebarStyle,
-        isPost && hasFeaturedImage && hasFeaturedImageStyle,
-        css
-      ]}
-        {...rest}
-      >
-        <Helmet>
-          <html lang="en" />
-          <title>{title}</title>
-          <meta name="description" content={description} />
+      <InterfaceContext.Consumer>
+        {({
+          viewportIs
+        }) => (
+            <div css={[
+              PageStyle,
+              isIndex && isIndexStyle,
+              isStore && isStoreStyle,
+              isBlog && isBlogStyle,
+              isPage && isPageStyle,
+              isProduct && isProductStyle,
+              withSidebar && withSidebarStyle,
+              isPost && hasFeaturedImage && hasFeaturedImageStyle,
+              css
+            ]}
+              {...rest}
+            >
+              <Helmet>
+                <html lang="en" />
+                <title>{title}</title>
+                <meta name="description" content={description} />
 
-          <link rel="preconnect" href="https://originalinside.com" />
-          <link rel="canonical" href={siteUrl} />
-          <link rel="apple-touch-startup-image" href="launch.png"></link>
-          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-          <link rel="manifest" href="/manifest.json" />
-          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffffff" />
-          <meta name="msapplication-TileColor" content="#222222" />
-          <meta name="theme-color" content="#ffffff" />
-          <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-          <meta name="apple-mobile-web-app-title" content="Original Inside" />
+                <link rel="preconnect" href="https://originalinside.com" />
+                <link rel="canonical" href={siteUrl} />
+                <link rel="apple-touch-startup-image" href="launch.png"></link>
+                <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+                <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+                <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+                <link rel="manifest" href="/manifest.json" />
+                <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffffff" />
+                <meta name="msapplication-TileColor" content="#222222" />
+                <meta name="theme-color" content="#ffffff" />
+                <meta name="apple-mobile-web-app-capable" content="yes" />
+                <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+                <meta name="apple-mobile-web-app-title" content="Original Inside" />
 
-          <meta property="og:url" content={siteUrl} />
-          <meta property="og:type" content="website" />
-          <meta property="og:locale" content="en" />
-          <meta property="og:title" content={title} />
-          <meta property="og:site_name" content={title} />
-          <meta property="og:description" content={description} />
+                <meta property="og:url" content={siteUrl} />
+                <meta property="og:type" content="website" />
+                <meta property="og:locale" content="en" />
+                <meta property="og:title" content={title} />
+                <meta property="og:site_name" content={title} />
+                <meta property="og:description" content={description} />
 
-          <meta property="og:image" content={`${siteUrl}/instagram-doraforscale.jpg`} />
-          <meta property="og:image:alt" content="We are Original Inside." />
-          <meta property="og:image:width" content="1280" />
-          <meta property="og:image:height" content="686" />
-        </Helmet>
-        <PageInner>
-          {pageTitle && <PageTitle>{pageTitle}</PageTitle>}
-          <PageBody>
-            {children}
-          </PageBody>
-        </PageInner>
-      </div>
+                <meta property="og:image" content={`${siteUrl}/instagram-doraforscale.jpg`} />
+                <meta property="og:image:alt" content="We are Original Inside." />
+                <meta property="og:image:width" content="1280" />
+                <meta property="og:image:height" content="686" />
+              </Helmet>
+              {viewportIs === null &&
+                <MobileNavigation
+                  viewportIs={viewportIs}
+                  isIndex={isIndex}
+                  isPost={isPost}
+                  isStore={isStore}
+                  isProduct={isProduct}
+                  mainTitle={mainTitle}
+                  from={from}
+                />
+              }
+              <PageInner>
+                {pageTitle && <PageTitle>{pageTitle}</PageTitle>}
+                <PageBody>
+                  {children}
+                </PageBody>
+              </PageInner>
+            </div>
+          )}
+      </InterfaceContext.Consumer>
     );
   }
 }

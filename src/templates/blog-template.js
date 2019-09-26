@@ -34,7 +34,7 @@ const BlogTemplate = ({ data, pageContext }: Props) => {
   const PageStyle = css`
     ${PageBody} {
       justify-content: space-between;
-      padding-top: ${spacing.xl}px;
+      padding-top: ${spacing.sm}px;
 
       ${mediaQuery.tabletFrom} {
         display: ${hasSidebar ? 'flex' : 'block'};
@@ -62,7 +62,7 @@ const BlogTemplate = ({ data, pageContext }: Props) => {
   const pageTitle = currentPage > 0 ? `Blog - Page ${currentPage} ‧ ${title}` : `Blog ‧ ${title}`;
 
   return (
-    <Page css={PageStyle} withSidebar={hasSidebar} pageTitle='Blog' title={pageTitle} description={description} isBlog>
+    <Page mainTitle='Blog' css={PageStyle} withSidebar={hasSidebar} title={pageTitle} description={description} isBlog>
       <FeedWrapper>
         <Feed edges={edges} />
         {hasNextPage &&

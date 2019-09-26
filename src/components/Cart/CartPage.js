@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 
 import StoreContext from '../../context/StoreContext';
 import CartList from './CartList';
@@ -8,41 +9,52 @@ import { Button, PrimaryButton } from '../shared/Buttons';
 import { priceWithCommas } from '../../utils/helpers';
 
 import {
-    breakpoints,
-    colors,
-    spacing,
-    dimensions,
-    mediaQuery,
-    FontStyle,
-    fontFamily,
-    fontWeight
+  breakpoints,
+  colors,
+  spacing,
+  dimensions,
+  mediaQuery,
+  FontStyle,
+  fontFamily,
+  fontWeight
 } from '../../utils/styles';
 
 const CartPageRoot = styled(`div`)`
+  position: relative;
   background: ${colors.white};
   padding: 0;
+`;
 
-  &.loading {
-    ::after {
-      opacity: 0.9;
-      pointer-events: all;
-    }
+const Mask = styled(`div`)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: ${colors.white};
+  pointer-events: none;
+  opacity: 0;
+  z-index: -1;
+  transition: all 0.2s ease-in-out;
+`;
+
+const CartLoading = css`
+  ${Mask} {
+    opacity: 0.8;
+    z-index: 1000;
   }
 `;
 
 const Heading = styled(`header`)`
-  position: sticky;
-  top: 0;
-  left: 0;
   background-color: ${colors.white};
-  width: 100%;
-  height: ${dimensions.navHeightMobile};
+  width: calc(100% - ${spacing.lg * 2}px);
+  height: 48px;
   box-shadow: 0 1px 0 ${colors.neutral1};
   display: flex;
   align-items: center;
-  margin: 0;
-  padding: 0 ${spacing.xl}px;
-  justify-content: flex-start;
+  justify-content: center;
+  padding: 0 0 ${spacing.lg}px;
+  margin: 0 ${spacing.lg}px;
   z-index: 3000;
 
   ${mediaQuery.tabletFrom} {
@@ -50,13 +62,9 @@ const Heading = styled(`header`)`
   }
 `;
 
-const Title = styled(FontStyle.h2)`
-  flex-grow: 1;
+const Title = styled(FontStyle.body)`
   text-align: center;
-  position: relative;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  color: ${colors.neutral4};
 `;
 
 const ItemsNumber = styled(FontStyle.smallbody)`
@@ -155,82 +163,81 @@ const CheckOut = styled(PrimaryButton)`
 `;
 
 class CartPage extends Component {
-    state = {
-        isLoading: false
-    };
+  state = {
+    isLoading: false
+  };
 
-    render() {
-        return (
-            <StoreContext.Consumer>
-                {({ client, checkout, removeLineItem, updateLineItem }) => {
-                    const setCartLoading = bool => this.setState({ isLoading: bool });
+  render() {
+    return (
+      <StoreContext.Consumer>
+        {({ client, checkout, removeLineItem, updateLineItem }) => {
+          const setCartLoading = bool => this.setState({ isLoading: bool });
 
-                    const handleRemove = itemID => async event => {
-                        event.preventDefault();
-                        await removeLineItem(client, checkout.id, itemID);
-                        setCartLoading(false);
-                    };
+          const handleRemove = itemID => async event => {
+            event.preventDefault();
+            await removeLineItem(client, checkout.id, itemID);
+            setCartLoading(false);
+          };
 
-                    const handleQuantityChange = lineItemID => async quantity => {
-                        if (!quantity) {
-                            return;
-                        }
-                        await updateLineItem(client, checkout.id, lineItemID, quantity);
-                        setCartLoading(false);
-                    };
+          const handleQuantityChange = lineItemID => async quantity => {
+            if (!quantity) {
+              return;
+            }
+            await updateLineItem(client, checkout.id, lineItemID, quantity);
+            setCartLoading(false);
+          };
 
-                    const itemsInCart = checkout.lineItems.reduce(
-                        (total, item) => total + item.quantity,
-                        0
-                    );
+          const itemsInCart = checkout.lineItems.reduce(
+            (total, item) => total + item.quantity,
+            0
+          );
 
-                    return (
-                        <CartPageRoot className={this.state.isLoading ? 'loading' : ''}>
-                            {/* {console.log(checkout)} */}
-                            <Heading>
-                                <Title>
-                                    <span>Cart</span>
-                                    {itemsInCart > 0 && <ItemsNumber>{itemsInCart}</ItemsNumber>}
-                                </Title>
-                            </Heading>
-                            {checkout.lineItems.length > 0 ? (
-                                <>
-                                    <Content>
-                                        <CartList
-                                            items={checkout.lineItems}
-                                            handleRemove={handleRemove}
-                                            updateQuantity={handleQuantityChange}
-                                            setCartLoading={setCartLoading}
-                                            isCartLoading={this.state.isLoading}
-                                        />
-                                    </Content>
-                                    <CartFooter>
-                                        <Costs>
-                                            <Cost>
-                                                <span>Subtotal</span>{' '}
-                                                <strong>{priceWithCommas(checkout.subtotalPrice)} VND</strong>
-                                            </Cost>
-                                            {checkout.totalTax > 0 &&
-                                                <Cost>
-                                                    <span>Taxes:</span> <strong>{checkout.totalTax}</strong>
-                                                </Cost>
-                                            }
-                                            <Shipping>Shipping cost will be calculated at checkout.</Shipping>
-                                        </Costs>
-                                        <ButtonGroup>
-                                            <CheckOut href={checkout.webUrl}>Check out</CheckOut>
-                                        </ButtonGroup>
-                                    </CartFooter>
-                                </>
-                            ) : (
-                                    <EmptyCart />
-                                )}
-                        </CartPageRoot>
-                    );
-                }}
-            </StoreContext.Consumer>
-        );
-    }
+          return (
+            <CartPageRoot css={this.state.isLoading && CartLoading}>
+              <Mask />
+              {itemsInCart > 0 &&
+                <Heading>
+                  <Title>You currently have {itemsInCart} product{itemsInCart > 1 && 's'} in cart.</Title>
+                </Heading>
+              }
+              {checkout.lineItems.length > 0 ? (
+                <>
+                  <Content>
+                    <CartList
+                      items={checkout.lineItems}
+                      handleRemove={handleRemove}
+                      updateQuantity={handleQuantityChange}
+                      setCartLoading={setCartLoading}
+                      isCartLoading={this.state.isLoading}
+                    />
+                  </Content>
+                  <CartFooter>
+                    <Costs>
+                      <Cost>
+                        <span>Subtotal</span>{' '}
+                        <strong>{priceWithCommas(checkout.subtotalPrice)} VND</strong>
+                      </Cost>
+                      {checkout.totalTax > 0 &&
+                        <Cost>
+                          <span>Taxes:</span> <strong>{checkout.totalTax}</strong>
+                        </Cost>
+                      }
+                      <Shipping>Shipping cost will be calculated at checkout.</Shipping>
+                    </Costs>
+                    <ButtonGroup>
+                      <CheckOut href={checkout.webUrl}>Check out</CheckOut>
+                    </ButtonGroup>
+                  </CartFooter>
+                </>
+              ) : (
+                  <EmptyCart />
+                )}
+            </CartPageRoot>
+          );
+        }}
+      </StoreContext.Consumer>
+    );
+  }
 }
 
 export default CartPage;

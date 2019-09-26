@@ -10,14 +10,14 @@ import InterfaceContext, { defaultInterfaceContext } from '../../context/Interfa
 import OiIcon from '../OiIcon';
 import Cart from '../Cart';
 import CartIndicator from '../Cart/CartIndicator';
-import Navigation from './Navigation';
+import { DesktopNavigation } from './Navigation';
 import BottomNavigation from '../BottomNavigation';
 import SidePanel from '../SidePanel';
 import PageContent from './PageContent';
 import Footer from './Footer';
 import ProductImagesBrowser from '../ProductPage/ProductImagesBrowser';
 
-import { breakpoints, mediaQuery, fontFamily, colors, dimensions, headerHeight } from '../../utils/styles';
+import { breakpoints, mediaQuery, fontFamily, colors, dimensions } from '../../utils/styles';
 
 injectGlobal`
     html {
@@ -66,7 +66,7 @@ injectGlobal`
 
 const LayoutWrapper = styled(`div`)`
     padding-top: 0;
-    overflow: hidden;
+    overflow-x: hidden;
 
     ${mediaQuery.tabletFrom} {
       padding-top: ${dimensions.navPaddingTopTablet};
@@ -145,6 +145,15 @@ class PureLayout extends React.Component {
             ...state.interface,
             cartStatus:
               this.state.interface.cartStatus === 'open' ? 'closed' : 'open'
+          }
+        }));
+      },
+      toggleSidebar: () => {
+        this.setState(state => ({
+          interface: {
+            ...state.interface,
+            sidebarStatus:
+              this.state.interface.sidebarStatus === true ? false : true
           }
         }));
       },
@@ -249,7 +258,7 @@ class PureLayout extends React.Component {
           });
       }
     },
-    sidebar: false,
+    // sidebar: false,
   };
 
   async initializeCheckout() {
@@ -293,9 +302,9 @@ class PureLayout extends React.Component {
     setCheckoutInState(newCheckout);
   }
 
-  toggleSidebar = () => {
-    this.setState({ sidebar: !this.state.sidebar });
-  };
+  // toggleSidebar = () => {
+  //   this.setState({ sidebar: !this.state.sidebar });
+  // };
 
   componentDidMount() {
     // Observe viewport switching from mobile to desktop and vice versa
@@ -318,7 +327,7 @@ class PureLayout extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const sidebarStatusChanged = prevState.sidebar !== this.state.sidebar;
+    const sidebarStatusChanged = prevState.interface.sidebarStatus !== this.state.interface.sidebarStatus;
     const cartStatusChanged = prevState.interface.cartStatus !== this.state.interface.cartStatus;
 
     // Add body class 'noScroll'
@@ -331,7 +340,7 @@ class PureLayout extends React.Component {
     );
 
     sidebarStatusChanged && (
-      (this.state.sidebar === true) ?
+      (this.state.interface.sidebarStatus === true) ?
         document.body.classList.add('noScroll')
         :
         document.body.classList.remove('noScroll')
@@ -354,6 +363,7 @@ class PureLayout extends React.Component {
 
   render() {
     const {
+      mainTitle,
       detailTitle,
       children,
       isPost,
@@ -375,7 +385,9 @@ class PureLayout extends React.Component {
               {({
                 viewportIs,
                 cartStatus,
+                sidebarStatus,
                 toggleCart,
+                toggleSidebar,
                 productImagesBrowserStatus,
                 currentProductImages,
                 productImageFeatured,
@@ -398,8 +410,8 @@ class PureLayout extends React.Component {
                                 css={cartStatus === 'open' ? overlayOn : overlayOff}
                               />
                               <Overlay
-                                onClick={this.toggleSidebar}
-                                css={this.state.sidebar === true ? overlayOn : overlayOff}
+                                onClick={toggleSidebar}
+                                css={sidebarStatus === true ? overlayOn : overlayOff}
                               />
                               <CartIndicator itemsInCart={itemsInCart} adding={adding} />
                               <Cart
@@ -408,19 +420,20 @@ class PureLayout extends React.Component {
                                 toggle={toggleCart}
                                 productImagesBrowserStatus={productImagesBrowserStatus}
                               />
-                              <SidePanelWrapper css={this.state.sidebar === true && SidebarOn}>
-                                <OiIcon icon='oi-icon-close' css={SidePanelCloseBtn} onClick={this.toggleSidebar} />
+                              <SidePanelWrapper css={sidebarStatus === true && SidebarOn}>
+                                <OiIcon icon='oi-icon-close' css={SidePanelCloseBtn} onClick={toggleSidebar} />
                                 <SidePanel />
                               </SidePanelWrapper>
                               {viewportIs !== null &&
-                                <Navigation
-                                  toggleCart={toggleCart}
+                                <DesktopNavigation
                                   viewportIs={viewportIs}
-                                  burgerClick={this.toggleSidebar}
+                                  toggleCart={toggleCart}
+                                  burgerClick={toggleSidebar}
                                   isIndex={isIndex}
                                   isPost={isPost}
                                   isStore={isStore}
                                   isProduct={isProduct}
+                                  mainTitle={mainTitle}
                                   detailTitle={detailTitle}
                                   onFeaturedImage={hasFeaturedImage}
                                   from={from}
@@ -456,7 +469,7 @@ class PureLayout extends React.Component {
                                   viewportIs={viewportIs}
                                 />
                               )}
-                              {viewportIs !== null && <Footer viewportIs={viewportIs} isCart={isCart} />}
+                              {viewportIs !== null && <Footer viewportIs={viewportIs} />}
                             </>
                           )}
                         </Location>

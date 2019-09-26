@@ -9,13 +9,13 @@ import CartNumber from '../Cart/CartNumber';
 
 import { colors, shadow, mediaQuery } from '../../utils/styles';
 
-const navHeight = '60px';
+const navHeight = '52px';
 
 const BotNavWrapper = styled(`div`)`
     position: fixed;
     left: 0;
     bottom: 0;
-    z-index: 3000;
+    z-index: 150;
 
     ${mediaQuery.tabletFrom} {
         display: none;
@@ -82,20 +82,24 @@ const BotNavLinkActiveStyle = css`
 
 const CartItemNumber = styled(CartNumber)`
   position: absolute;
-  left: calc(50% + 4px);
-  top: 6px;
+  left: calc(50%);
+  top: 10px;
   z-index: 2900;
 `;
 
 const isIndexStyle = css``;
 
-const isPostStyle = css``;
+const isPostStyle = css`
+  display: none;
+`;
 
 const isStoreStyle = css``;
 
 const isBlogStyle = css``;
 
-const isProductStyle = css``;
+const isProductStyle = css`
+  display: none;
+`;
 
 const isCartStyle = css``;
 
@@ -146,7 +150,7 @@ class PureBottomNavigation extends Component {
                                 </NavItem>
                             ))}
                         </NavList>
-                        <CartItemNumber number={cartNumber} />
+                        <Link to='/cart'><CartItemNumber number={cartNumber} /></Link>
                     </BotNavInner>
                 }
             </BotNavWrapper>

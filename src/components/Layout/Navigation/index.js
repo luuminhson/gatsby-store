@@ -1,2 +1,2 @@
 // @flow
-export { default } from './Navigation';
+export { MobileNavigation, DesktopNavigation } from './Navigation';

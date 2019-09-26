@@ -13,7 +13,7 @@ const CartListItemRoot = styled('li')`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid ${colors.neutral1};
-  padding-bottom: ${spacing.lg}px;
+  padding: 0 0 ${spacing.lg}px;
   margin-bottom: ${spacing.lg}px;
 
   &:last-child {

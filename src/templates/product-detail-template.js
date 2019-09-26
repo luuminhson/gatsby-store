@@ -38,7 +38,7 @@ const ProductDetailTemplate = props => {
   return (
     <Location>
       {({ location }) => (
-        <Page title={`${productTitle} — ${productCategory} ‧ ${siteTitle}`} description={description} isProduct from={checkLocationState(location)}>
+        <Page mainTitle={productTitle} title={`${productTitle} — ${productCategory} ‧ ${siteTitle}`} description={description} isProduct from={checkLocationState(location)}>
           <InterfaceContext.Consumer>
             {({
               viewportIs,

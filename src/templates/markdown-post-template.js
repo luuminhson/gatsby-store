@@ -33,7 +33,7 @@ const PostTemplate = ({ data }: Props) => {
   return (
     <Location>
       {({ location }) => (
-        <Page title={`${postTitle} ‧ ${siteTitle}`} description={metaDescription} isPost detailTitle={postTitle} hasFeaturedImage={hasFeaturedImage} from={checkLocationState(location)}>
+        <Page mainTitle=' ' title={`${postTitle} ‧ ${siteTitle}`} description={metaDescription} isPost detailTitle={postTitle} hasFeaturedImage={hasFeaturedImage} from={checkLocationState(location)}>
           <Post post={data.markdownRemark} />
         </Page>
       )}

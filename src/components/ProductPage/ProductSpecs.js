@@ -13,10 +13,19 @@ const ProductSpecsRoot = styled(`div`)`
   }
 `;
 
+const ProductTitle = styled(FontStyle.h1)`
+  display: none;
+
+  ${mediaQuery.tabletFrom} {
+    display: block;
+  }
+`;
+
 const PriceRow = styled(`div`)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-top: ${spacing.md}px;
   margin-bottom: ${spacing.lg}px;
 
   ${mediaQuery.tabletFrom} {
@@ -25,8 +34,8 @@ const PriceRow = styled(`div`)`
   }
 `;
 
-const Price = styled(FontStyle.h3)`
-  font-weight: ${fontWeight.heading.bold};  
+const Price = styled(FontStyle.h4)`
+  font-weight: ${fontWeight.heading.medium};  
   margin-right: 8px;
 `;
 
@@ -49,7 +58,7 @@ const ProductSpecs = props => {
 
   return (
     <ProductSpecsRoot>
-      <FontStyle.h1>{title}</FontStyle.h1>
+      <ProductTitle>{title}</ProductTitle>
       <PriceRow>
         <Price>{priceWithCommas(price)} VND</Price>
         {compareAtPrice && compareAtPrice !== null &&

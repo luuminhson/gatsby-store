@@ -21,7 +21,7 @@ const cardWidth = '75vw';
 const scrollbarHiddenPadding = '4.8rem';
 
 const Wrapper = styled(`div`)`
-    margin: 0 -0.75rem;
+    margin: 0;
     height: 380px;
     overflow: hidden;
 
@@ -106,14 +106,14 @@ const ItemLink = styled(Link)`
 
 const ItemInfo = styled(`div`)`
     flex: 1 0 100%;
-    padding: 16px 4px 0;
+    padding: 16px 0 0;
     max-width: 100%;
     box-sizing: border-box;
 
     .info-title {
         color: ${colors.mainDark};
         font-family: ${fontFamily.heading};
-        font-size: 1.1rem;
+        font-size: 1rem;
         line-height: 24px;
         max-height: 48px;
         margin: 0 0 8px;

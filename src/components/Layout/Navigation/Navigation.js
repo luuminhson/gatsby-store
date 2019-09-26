@@ -6,11 +6,15 @@ import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import Headroom from 'react-headroom';
-import Logo from './Logo';
+import Logo, { LogoDesktop } from './Logo';
 import Menu from './Menu';
 import OiIcon from '../../OiIcon';
 import CartToggle from '../../Cart/CartToggle';
-import { FontStyle, fontFamily, dimensions, mediaQuery, spacing, colors, breakpoints, shadow } from '../../../utils/styles';
+import { FontStyle, fontFamily, dimensions, mediaQuery, spacing, colors, breakpoints, shadow, headerHeight } from '../../../utils/styles';
+
+/* --------------------------- STYLES --------------------------- */
+
+// DESKTOP NAV STYLES
 
 const NavigationWrapper = styled(`div`)`
     background-color: ${colors.white};
@@ -232,7 +236,91 @@ const onFeaturedImageStyle = css`
     }
 `;
 
-class PureNavigation extends React.Component {
+// MOBILE NAV STYLES
+
+const MobileNavWrapper = styled(`div`)`
+    position: relative;
+    width: 100%;
+    height: ${headerHeight.tablet};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 ${spacing.md + 4}px;
+    // box-shadow: ${shadow.navShadow};
+    z-index: 2000;
+`;
+
+const MobileNavBackButton = styled(`div`)`
+    position: absolute;
+    left: ${spacing.md + 4}px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+
+    ${BackButton} {
+        width: 48px;
+        height: 48px;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+`;
+
+const MobileNavTitle = styled(FontStyle.h1)`
+    font-size: 2em;
+    width: 100%;
+    text-align: center;
+`;
+
+const isIndexMobileStyle = css``;
+
+const isPostMobileStyle = css`
+    position: absolute;
+    left: 0;
+    top: 0;
+    
+    ${MobileNavBackButton} {
+        left: ${spacing.lg}px;
+
+        ${BackButton} {
+            border-radius: 100px;
+            background-color: rgba(0,0,0,0.12);
+    
+            i {
+                color: ${colors.white};
+            }
+        }
+    }
+`;
+
+const isStoreMobileStyle = css``;
+
+const isProductMobileStyle = css`
+    // height: 64px;
+
+    ${MobileNavTitle} {
+        font-size: 1.4rem;
+    }
+`;
+
+
+const backButton = (to) => (
+    <BackButton to={to}>
+        <OiIcon icon='oi-icon-arrow-back' />
+        <span>Back</span>
+    </BackButton>
+);
+
+/* --------------------------- DESKTOP NAVIGATION --------------------------- */
+
+class PureDesktopNavigation extends React.Component {
     constructor(props) {
         super(props);
 
@@ -297,24 +385,19 @@ class PureNavigation extends React.Component {
             return '/';
         }
 
-        const backButton = <BackButton to={backLink()}>
-            <OiIcon icon='oi-icon-arrow-back' />
-            <span>Back</span>
-        </BackButton>;
-
         const detailPageTitle = <DetailTitle>{detailTitle}</DetailTitle>
 
         const siteLogo = <Logo viewportIs={viewportIs} />;
 
         const navLeft = (
             <NavLeftWrapper>
-                {(isPost || isProduct) ? backButton : <Link to='/'>{siteLogo}</Link>}
+                {(isPost || isProduct) ? backButton(backLink()) : <Link to='/'>{siteLogo}</Link>}
             </NavLeftWrapper>
         );
 
         const navCenter = (
             <NavCenterWrapper>
-                { isPost && (typeof detailTitle !== 'undefined') ? detailPageTitle : null }
+                {isPost && (typeof detailTitle !== 'undefined') ? detailPageTitle : null}
                 <MainMenu menu={menu} isPost={isPost} onFeaturedImage={onFeaturedImage} unfixed={unfixed} />
             </NavCenterWrapper>
         );
@@ -362,7 +445,7 @@ class PureNavigation extends React.Component {
     }
 }
 
-export const Navigation = (props) => (
+export const DesktopNavigation = (props) => (
     <StaticQuery
         query={graphql`
         query NavigationQuery {
@@ -379,13 +462,49 @@ export const Navigation = (props) => (
           }
         }
       `}
-        render={(data) => <PureNavigation {...props} data={data} />}
+        render={(data) => <PureDesktopNavigation {...props} data={data} />}
     />
 );
 
-Navigation.propTypes = {
+DesktopNavigation.propTypes = {
+    viewportIs: PropTypes.string,
     toggleCart: PropTypes.func.isRequired,
-    viewportIs: PropTypes.string
+    burgerClick: PropTypes.func.isRequired,
 };
 
-export default Navigation;
+/* --------------------------- MOBILE NAVIGATION --------------------------- */
+
+export const MobileNavigation = ({
+    isIndex,
+    isBlog,
+    isPost,
+    isStore,
+    isProduct,
+    from,
+    mainTitle,
+    viewportIs,
+    className
+}) => {
+
+    const backLink = () => {
+        if ('' !== from) {
+            return from;
+        }
+
+        return '/';
+    }
+
+    return (
+        <MobileNavWrapper className={className}
+            css={[
+                isIndex && isIndexMobileStyle,
+                isPost && isPostMobileStyle,
+                isStore && isStoreMobileStyle,
+                isProduct && isProductMobileStyle,
+            ]}
+        >
+            {(isPost || isProduct) && <MobileNavBackButton>{backButton(backLink())}</MobileNavBackButton>}
+            {mainTitle ? <MobileNavTitle>{mainTitle}</MobileNavTitle> : <LogoDesktop />}
+        </MobileNavWrapper>
+    );
+}

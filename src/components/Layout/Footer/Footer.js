@@ -190,12 +190,8 @@ const ModuleOthers = css`
   }
 `;
 
-const Footer = ({ viewportIs, isCart }) => {
+const Footer = ({ viewportIs }) => {
   const { contacts } = useSiteMetadata();
-
-  if (isCart) {
-    return(null);
-  } 
 
   return (
     <FooterWrapper>

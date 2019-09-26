@@ -12,9 +12,9 @@ import InterfaceContext from '../../context/InterfaceContext';
 import { breakpoints, mediaQuery, colors, spacing, headerHeight, dimensions } from '../../utils/styles';
 
 const ProductPageRoot = styled('div')`
-  padding-top: ${headerHeight.phone};
+  // padding-top: ${headerHeight.mobileTopNav};
   padding-bottom: ${spacing.md}px;
-  margin: 0 auto;
+  margin: -${spacing.md}px auto 0;
 
   ${mediaQuery.tabletFrom} {
     align-items: center;

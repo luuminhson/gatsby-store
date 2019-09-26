@@ -6,7 +6,7 @@ import { useSiteMetadata } from '../hooks';
 const NotFoundPage = () => {
     const { title, description } = useSiteMetadata();
     return (
-        <Page title={`Cart ‧ ${title}`} description={description} isCart>
+        <Page mainTitle='Cart' title={`Cart ‧ ${title}`} description={description} isCart>
             <CartPage />
         </Page>
     );

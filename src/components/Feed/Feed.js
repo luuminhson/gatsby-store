@@ -50,7 +50,9 @@ const FeedItemContent = styled(`div`)`
 `;
 
 const FeedItemTitle = styled(FontStyle.h3)`
-  margin: ${spacing.sm}px 0;
+  font-size: 1em;
+  line-height: 1.6em;
+  margin: 0;
 `;
 
 const FeedItemTitleLink = styled(Link)`
@@ -64,7 +66,7 @@ const FeedItemTitleLink = styled(Link)`
 `;
 
 const FeedItemDescription = styled(`p`)`
-  margin-bottom: 8px;
+  margin: 8px 0 4px;
   max-height: 72px;
   overflow: hidden;
   text-overflow: ellipsis;
