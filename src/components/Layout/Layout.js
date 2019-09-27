@@ -302,10 +302,6 @@ class PureLayout extends React.Component {
     setCheckoutInState(newCheckout);
   }
 
-  // toggleSidebar = () => {
-  //   this.setState({ sidebar: !this.state.sidebar });
-  // };
-
   componentDidMount() {
     // Observe viewport switching from mobile to desktop and vice versa
     const mediaQueryToMatchTablet = `(min-width: ${breakpoints.tablet}px)`;
