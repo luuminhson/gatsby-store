@@ -79,6 +79,7 @@ const isProductStyle = css`
 
   ${mediaQuery.tabletFrom} {
     ${PageInner} {
+      max-width: 100%;
       margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet});
     }
   }

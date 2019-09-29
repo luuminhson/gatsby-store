@@ -66,7 +66,7 @@ injectGlobal`
 
 const LayoutWrapper = styled(`div`)`
     padding-top: 0;
-    overflow-x: hidden;
+    overflow: hidden;
 
     ${mediaQuery.tabletFrom} {
       padding-top: ${dimensions.navPaddingTopTablet};
@@ -176,7 +176,6 @@ class PureLayout extends React.Component {
           }
         }));
       },
-
       featureProductImageIndex: idx => {
         this.setState(state => ({
           interface: {
@@ -185,7 +184,6 @@ class PureLayout extends React.Component {
           }
         }));
       },
-
       setCurrentProductImages: images => {
         this.setState(state => ({
           interface: {
@@ -195,6 +193,44 @@ class PureLayout extends React.Component {
           }
         }));
       },
+      setToPostPage: () => {
+        this.setState(state => ({
+          interface: {
+            ...state.interface,
+            isPost: true
+          }
+        }));
+      },
+      setToProductPage: () => {
+        this.setState(state => ({
+          interface: {
+            ...state.interface,
+            isProduct: true
+          }
+        }));
+      },
+      setPrevLink: (location, defaultLocation) => {
+        const locationState = location.state;
+  
+        if (locationState == null) {
+          this.setState(state => ({
+            interface: {
+              ...state.interface,
+              prevLink: defaultLocation
+            }
+          }));
+        } else {
+          const hasLocationState = location.state.hasOwnProperty('prevUrl');
+          const passedBackLink = hasLocationState ? location.state.prevUrl : defaultLocation;
+
+          this.setState(state => ({
+            interface: {
+              ...state.interface,
+              prevLink: passedBackLink
+            }
+          }));
+        }
+      }
     },
     store: {
       ...defaultStoreContext,
@@ -258,7 +294,6 @@ class PureLayout extends React.Component {
           });
       }
     },
-    // sidebar: false,
   };
 
   async initializeCheckout() {
@@ -362,15 +397,15 @@ class PureLayout extends React.Component {
       mainTitle,
       detailTitle,
       children,
-      isPost,
+      // isPost,
       isBlog,
       isIndex,
       isStore,
-      isProduct,
+      // isProduct,
       isCart,
       isMore,
       hasFeaturedImage,
-      from
+      // from
     } = this.props;
 
     return (
@@ -388,7 +423,10 @@ class PureLayout extends React.Component {
                 currentProductImages,
                 productImageFeatured,
                 productImageFeaturedIndex,
-                toggleProductImagesBrowser
+                toggleProductImagesBrowser,
+                isPost,
+                isProduct,
+                prevLink,
               }) => (
                   <StoreContext.Consumer>
                     {({ checkout, adding }) => {
@@ -401,6 +439,7 @@ class PureLayout extends React.Component {
                         <Location>
                           {({ location }) => (
                             <>
+                            {console.log(isPost)}
                               <Overlay
                                 onClick={toggleCart}
                                 css={cartStatus === 'open' ? overlayOn : overlayOff}
@@ -432,7 +471,7 @@ class PureLayout extends React.Component {
                                   mainTitle={mainTitle}
                                   detailTitle={detailTitle}
                                   onFeaturedImage={hasFeaturedImage}
-                                  from={from}
+                                  from={prevLink}
                                 />
                               }
                               {viewportIs === null &&

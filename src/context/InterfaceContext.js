@@ -13,7 +13,15 @@ export const defaultInterfaceContext = {
   currentProductImages: [],
   setCurrentProductImages: () => {},
   productImagesBrowserStatus: 'initial',
-  toggleProductImagesBrowser: () => {}
+  toggleProductImagesBrowser: () => {},
+  isProduct: false,
+  setToProductPage: () => {},
+  isPost: false,
+  setToPostPage: () => {},
+  isProduct: false,
+  setToProductPage: () => {},
+  prevLink: '',
+  setPrevLink: () => {},
 };
 
 export default React.createContext(defaultInterfaceContext);

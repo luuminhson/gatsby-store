@@ -1,94 +1,110 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import { Location } from '@reach/router';
 import Helmet from 'react-helmet';
 import Page from '../components/Page';
-import { useSiteMetadata } from '../hooks';
 
 import InterfaceContext from '../context/InterfaceContext';
 import ProductPage from '../components/ProductPage';
 import RelatedProducts from '../components/ProductPage/RelatedProducts';
 
-const ProductDetailTemplate = props => {
-  const {
-    site,
-    shopifyProduct: product,
-    shopifyProduct: { title: productTitle, description: fullDescription, productType: productCategory, handle },
-    relatedProducts,
-  } = props.data;
+class ProductDetailTemplate extends Component {
 
-  const { title: siteTitle } = useSiteMetadata();
-
-  const description = fullDescription;
-  const image = product.images[0].localFile.childImageSharp.fluid.src;
-
-  const checkLocationState = (location) => {
-    const locationState = location.state;
-
-    if (locationState == null) {
-      return '/store';
-    } else {
-      const hasLocationState = location.state.hasOwnProperty('prevUrl');
-      const passedBackLink = hasLocationState ? location.state.prevUrl : '/store';
-
-      return passedBackLink;
-    }
+  componentDidMount() {
+    this.props.setPage();
+    this.props.setBackLink();
   }
 
-  return (
-    <Location>
-      {({ location }) => (
-        <Page mainTitle={productTitle} title={`${productTitle} — ${productCategory} ‧ ${siteTitle}`} description={description} isProduct from={checkLocationState(location)}>
-          <InterfaceContext.Consumer>
-            {({
-              viewportIs,
-              productImagesBrowserStatus,
-              productImageFeatured,
-              toggleProductImagesBrowser,
-              setCurrentProductImages
-            }) => (
-                <div>
-                  <Helmet>
-                    <meta
-                      property="og:url"
-                      content={`${site.siteMetadata.siteUrl}/store/product/${handle}`}
-                    />
-                    <meta property="og:locale" content="en" />
-                    <meta property="og:title" content={productTitle} />
-                    <meta property="og:site_name" content="Gatsby Swag Store" />
-                    <meta property="og:description" content={description} />
+  render() {
 
-                    {/* TODO: add the image */}
-                    <meta
-                      property="og:image"
-                      content={`${site.siteMetadata.siteUrl}${image}`}
-                    />
-                    <meta property="og:image:alt" content={productTitle} />
-                    <meta property="og:image:width" content="600" />
-                    <meta property="og:image:height" content="600" />
+    const {
+      site,
+      shopifyProduct: product,
+      shopifyProduct: { title: productTitle, description: fullDescription, productType: productCategory, handle },
+      relatedProducts,
+    } = this.props.data;
 
-                    <meta name="twitter:card" content="summary" />
-                    <meta name="twitter:site" content="@gatsbyjs" />
-                  </Helmet>
-                  <ProductPage
-                    product={product}
-                    viewportIs={viewportIs}
-                    productImagesBrowserStatus={productImagesBrowserStatus}
-                    productImageFeatured={productImageFeatured}
-                    toggleProductImagesBrowser={toggleProductImagesBrowser}
-                    setCurrentProductImages={setCurrentProductImages}
-                  />
-                  <RelatedProducts edges={relatedProducts.edges} limit={4} />
-                </div>
-              )}
-          </InterfaceContext.Consumer>
-        </Page>
-      )}
-    </Location>
-  );
-};
+    const description = fullDescription;
+    const image = product.images[0].localFile.childImageSharp.fluid.src;
 
-export default ProductDetailTemplate;
+    const {
+      viewportIs,
+      productImagesBrowserStatus,
+      productImageFeatured,
+      toggleProductImagesBrowser,
+      setCurrentProductImages,
+      prevLink
+    } = this.props;
+
+    return (
+      <Page mainTitle={productTitle} title={`${productTitle} — ${productCategory} ‧ ${site.siteMetadata.title}`} description={description} isProduct from={prevLink}>
+        <div>
+          <Helmet>
+            <meta
+              property="og:url"
+              content={`${site.siteMetadata.siteUrl}/store/product/${handle}`}
+            />
+            <meta property="og:locale" content="en" />
+            <meta property="og:title" content={productTitle} />
+            <meta property="og:site_name" content="Gatsby Swag Store" />
+            <meta property="og:description" content={description} />
+
+            {/* TODO: add the image */}
+            <meta
+              property="og:image"
+              content={`${site.siteMetadata.siteUrl}${image}`}
+            />
+            <meta property="og:image:alt" content={productTitle} />
+            <meta property="og:image:width" content="600" />
+            <meta property="og:image:height" content="600" />
+
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:site" content="@gatsbyjs" />
+          </Helmet>
+          <ProductPage
+            product={product}
+            viewportIs={viewportIs}
+            productImagesBrowserStatus={productImagesBrowserStatus}
+            productImageFeatured={productImageFeatured}
+            toggleProductImagesBrowser={toggleProductImagesBrowser}
+            setCurrentProductImages={setCurrentProductImages}
+          />
+          <RelatedProducts edges={relatedProducts.edges} limit={4} />
+        </div>
+      </Page>
+    )
+  }
+}
+
+export default props => (
+  <Location>
+    {({ location }) => (
+      <InterfaceContext.Consumer>
+        {({
+          viewportIs,
+          productImagesBrowserStatus,
+          productImageFeatured,
+          toggleProductImagesBrowser,
+          setCurrentProductImages,
+          setToProductPage,
+          prevLink,
+          setPrevLink }) => (
+            <ProductDetailTemplate
+              {...props} 
+              viewportIs={viewportIs}
+              productImagesBrowserStatus={productImagesBrowserStatus}
+              productImageFeatured={productImageFeatured}
+              toggleProductImagesBrowser={toggleProductImagesBrowser}
+              setCurrentProductImages={setCurrentProductImages}
+              setPage={setToProductPage}
+              setBackLink={() => setPrevLink(location, '/store')}
+              prevLink={prevLink}
+            />
+          )}
+      </InterfaceContext.Consumer>
+    )}
+  </Location>
+)
 
 export const query = graphql`
   query($handle: String!, $productType: String) {

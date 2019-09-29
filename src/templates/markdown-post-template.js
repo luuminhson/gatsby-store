@@ -1,49 +1,72 @@
 // @flow
-import React from 'react';
+import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import { Location } from '@reach/router';
 import Page from '../components/Page';
 import Post from '../components/Post';
-import { useSiteMetadata } from '../hooks';
 import type { MarkdownRemark } from '../types';
+
+import InterfaceContext from '../context/InterfaceContext';
 
 type Props = {
   data: MarkdownRemark
 };
 
-const PostTemplate = ({ data }: Props) => {
-  const { title: siteTitle, description: siteDescription } = useSiteMetadata();
-  const { title: postTitle, description: postDescription } = data.markdownRemark.frontmatter;
-  const metaDescription = postDescription !== null ? postDescription : siteDescription;
-  const hasFeaturedImage = null !== data.markdownRemark.frontmatter.featuredImage;
+class PostTemplate extends Component {
 
-  const checkLocationState = (location) => {
-    const locationState = location.state;
-
-    if (locationState == null) {
-      return '/blog';
-    } else {
-      const hasLocationState = location.state.hasOwnProperty('prevUrl');
-      const passedBackLink = hasLocationState ? location.state.prevUrl : '/blog';
-
-      return passedBackLink;
-    }
+  componentDidMount() {
+    this.props.setPage();
+    this.props.setBackLink();
   }
 
-  return (
-    <Location>
-      {({ location }) => (
-        <Page mainTitle=' ' title={`${postTitle} ‧ ${siteTitle}`} description={metaDescription} isPost detailTitle={postTitle} hasFeaturedImage={hasFeaturedImage} from={checkLocationState(location)}>
-          <Post post={data.markdownRemark} />
-        </Page>
-      )}
-    </Location>
-  );
-};
+  render() {
+
+    const { site } = this.props.data;
+    const { title: postTitle, description: postDescription } = this.props.data.markdownRemark.frontmatter;
+    const metaDescription = postDescription !== null ? postDescription : siteDescription;
+    const hasFeaturedImage = null !== this.props.data.markdownRemark.frontmatter.featuredImage;
+
+    const { prevLink } = this.props;
+
+    return (
+      <Page mainTitle=' ' title={`${postTitle} ‧ ${site.siteMetadata.title}`} description={metaDescription} isPost detailTitle={postTitle} hasFeaturedImage={hasFeaturedImage} from={prevLink}>
+        <Post post={this.props.data.markdownRemark} />
+      </Page>
+    )
+  }
+}
+
+export default props => (
+  <Location>
+    {({ location }) => (
+      <InterfaceContext.Consumer>
+        {({
+          setToPostPage,
+          prevLink,
+          setPrevLink }) => (
+            <PostTemplate
+              {...props} 
+              setPage={setToPostPage}
+              setBackLink={() => setPrevLink(location, '/blog')}
+              prevLink={prevLink}
+            />
+          )}
+      </InterfaceContext.Consumer>
+    )}
+  </Location>
+)
 
 
 export const query = graphql`
   query PostBySlug($slug: String!) {
+    site {
+      siteMetadata {
+        siteUrl
+        title
+        description
+      }
+    }
+
     markdownRemark(fields: { slug: { eq: $slug } }) {
       id
       html
@@ -72,6 +95,3 @@ export const query = graphql`
     }
   }
 `;
-
-
-export default PostTemplate;
