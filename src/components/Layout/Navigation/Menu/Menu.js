@@ -81,12 +81,12 @@ const MenuLinkActiveStyle = css`
   }
 `;
 
-const Menu = ({ menu, isPost, unfixed, onFeaturedImage }: Props) => (
+const Menu = ({ menu, pageIs, unfixed, onFeaturedImage }: Props) => (
   <MenuWrapper css={[
     unfixed && UnfixedStyle,
     onFeaturedImage && onFeaturedImageStyle,
   ]}>
-    {!isPost && (
+    {pageIs !== 'Post' && (
       <MenuWrapperInner>
         <MenuList>
           {menu.map((item) => (

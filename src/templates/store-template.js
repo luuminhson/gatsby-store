@@ -3,8 +3,7 @@ import { graphql } from 'gatsby';
 import Page from '../components/Page';
 import styled from '@emotion/styled';
 
-import { useSiteMetadata } from '../hooks';
-
+import InterfaceContext from '../context/InterfaceContext';
 import ProductListingItem from '../components/ProductListingItem';
 
 import { mediaQuery, spacing } from '../utils/styles';
@@ -26,21 +25,49 @@ const ProductListingContainer = styled(`div`)`
   }
 `;
 
-const StoreTemplate = ({ data }) => {
-  const { title, description } = useSiteMetadata();
-  return (
-    <Page mainTitle='Store' title={`Store ‧ ${title}`} description={description} isStore>
-      <ProductListingContainer>
-        {data.products.edges.map(({ node: product }) => (
-          <ProductListingItem key={product.id} product={product} />
-        ))}
-      </ProductListingContainer>
-    </Page>
-  );
-};
+class StoreTemplate extends React.Component<Props> {
+
+  componentDidMount() {
+    this.props.setPage();
+  }
+
+  render() {
+
+    const { title, description } = this.props.data.site.siteMetadata;
+
+    return (
+      <Page mainTitle='Store' title={`Store ‧ ${title}`} description={description} pageIs='Store'>
+        <ProductListingContainer>
+          {this.props.data.products.edges.map(({ node: product }) => (
+            <ProductListingItem key={product.id} product={product} />
+          ))}
+        </ProductListingContainer>
+      </Page>
+    )
+  }
+}
+
+export default props => (
+  <InterfaceContext.Consumer>
+    {({
+      setToStorePage,
+    }) => (
+        <StoreTemplate
+          {...props}
+          setPage={setToStorePage}
+        />
+      )}
+  </InterfaceContext.Consumer>
+)
 
 export const query = graphql`
   query StoreTemplateQuery {
+    site {
+      siteMetadata {
+        title
+        description
+      }
+    }
     products: allShopifyProduct(
       sort: { fields: [publishedAt], order: ASC }
     ) {
@@ -76,5 +103,3 @@ export const query = graphql`
     }
   }
 `;
-
-export default StoreTemplate;

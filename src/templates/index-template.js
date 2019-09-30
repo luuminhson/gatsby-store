@@ -3,27 +3,55 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Page from '../components/Page';
 import Strip from '../components/Strip';
-import { useSiteMetadata } from '../hooks';
 import type { AllMarkdownRemark } from '../types';
+
+import InterfaceContext from '../context/InterfaceContext';
 
 type Props = {
   data: AllMarkdownRemark
 };
 
-const IndexTemplate = ({ data }: Props) => {
-  const { title, subtitle, description } = useSiteMetadata();
+class IndexTemplate extends React.Component<Props> {
 
-  const blogPost = data.blogStrip.edges;
+  componentDidMount() {
+    this.props.setPage();
+  }
 
-  return (
-    <Page title={`${title} ‧ ${subtitle}`} description={description} isIndex>
-      <Strip edges={blogPost} sectionTitle='Articles' sectionLink='/blog' sectionLinkLabel='See All' />
-    </Page>
-  );
-};
+  render() {
+
+    const { title, subtitle, description } = this.props.data.site.siteMetadata;
+    const blogPost = this.props.data.blogStrip.edges;
+
+    return (
+      <Page title={`${title} ‧ ${subtitle}`} description={description} pageIs='Index'>
+        <Strip edges={blogPost} sectionTitle='Articles' sectionLink='/blog' sectionLinkLabel='See All' />
+      </Page>
+    )
+  }
+}
+
+export default props => (
+  <InterfaceContext.Consumer>
+    {({
+      setToIndexPage,
+    }) => (
+        <IndexTemplate
+          {...props}
+          setPage={setToIndexPage}
+        />
+      )}
+  </InterfaceContext.Consumer>
+)
 
 export const query = graphql`
   query IndexTemplate {
+    site {
+      siteMetadata {
+        title
+        subtitle
+        description
+      }
+    }
     blogStrip: allMarkdownRemark(
         limit: 5,
         skip: 0,
@@ -57,5 +85,3 @@ export const query = graphql`
     }
   }
 `;
-
-export default IndexTemplate;

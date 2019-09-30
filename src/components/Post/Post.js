@@ -105,6 +105,7 @@ const HeroImage = styled(BackgroundImage)`
   ${mediaQuery.tabletFrom} {
     align-items: center;
     text-align: center;
+    min-height: 600px;
   }
 
   ${HeaderContent} {

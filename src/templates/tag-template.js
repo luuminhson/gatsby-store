@@ -28,7 +28,7 @@ const TagTemplate = ({ data, pageContext }: Props) => {
   const pageTitle = currentPage > 0 ? `All Posts tagged as "${tag}" — Page ${currentPage} ‧ ${siteTitle}` : `All Posts tagged as "${tag}" ‧ ${siteTitle}`;
 
   return (
-    <Page pageTitle={'Tag: ' + tag} title={pageTitle} description={siteSubtitle} isBlog>
+    <Page pageTitle={'Tag: ' + tag} title={pageTitle} description={siteSubtitle} pageIs='Blog'>
       <Feed edges={edges} />
       <Pagination
         prevPagePath={prevPagePath}

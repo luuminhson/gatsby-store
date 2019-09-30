@@ -14,7 +14,6 @@ type Props = {
   isIndex: bool,
   isBlog: bool,
   isPage: bool,
-  isIllussion: bool,
   withSidebar: bool,
   className: string
 };
@@ -34,6 +33,7 @@ const PageInner = styled(`div`)`
 
   ${mediaQuery.tabletFrom} {
     max-width: ${dimensions.indexPageWidth};
+    padding-top: ${spacing['4xl']}px;
   }
 `;
 
@@ -46,11 +46,7 @@ export const PageBody = styled(`div`)`
   margin: 0 0 16px;
 `;
 
-const isIndexStyle = css`
-  ${PageInner} {
-    padding-top: ${spacing.lg}px;
-  }
-`;
+const isIndexStyle = css``;
 
 const isStoreStyle = css`
   ${PageInner} {
@@ -70,6 +66,23 @@ const isBlogStyle = css`
       max-width: ${dimensions.blogPageWidth};
       padding-left: ${spacing.xl}px;
       padding-right: ${spacing.xl}px;
+    }
+  }
+`;
+
+const isPostStyle = css`
+  padding-top: 0;
+  
+  ${mediaQuery.tabletFrom} {
+    ${PageInner} {
+      max-width: 100%;
+      margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet});
+    }
+  }
+
+  ${mediaQuery.desktop} {
+    ${PageInner} {
+      margin-top: calc(-${headerHeight.desktop} - ${dimensions.navPaddingTopDesktop});
     }
   }
 `;
@@ -99,29 +112,21 @@ const withSidebarStyle = css`
   }
 `;
 
-const hasFeaturedImageStyle = css`
+const hasFeaturedImageStyle = css``;
 
-`;
+class PurePage extends React.Component<Props> {
 
-class PurePage extends React.Component {
   render() {
     const {
       data,
       children,
+      viewportIs,
+      pageIs,
+      hasFeaturedImage,
       title,
       description,
       pageTitle,
-      detailTitle,
-      isPage,
-      isPost,
-      isBlog,
-      isIndex,
-      isStore,
-      isProduct,
-      isCart,
-      isMore,
       mainTitle,
-      hasFeaturedImage,
       withSidebar,
       css,
       from,
@@ -131,74 +136,65 @@ class PurePage extends React.Component {
     const { siteUrl } = data.site.siteMetadata;
 
     return (
-      <InterfaceContext.Consumer>
-        {({
-          viewportIs
-        }) => (
-            <div css={[
-              PageStyle,
-              isIndex && isIndexStyle,
-              isStore && isStoreStyle,
-              isBlog && isBlogStyle,
-              isPage && isPageStyle,
-              isProduct && isProductStyle,
-              withSidebar && withSidebarStyle,
-              isPost && hasFeaturedImage && hasFeaturedImageStyle,
-              css
-            ]}
-              {...rest}
-            >
-              <Helmet>
-                <html lang="en" />
-                <title>{title}</title>
-                <meta name="description" content={description} />
+      <div css={[
+        PageStyle,
+        pageIs === 'Index' && isIndexStyle,
+        pageIs === 'Store' && isStoreStyle,
+        pageIs === 'Blog' && isBlogStyle,
+        pageIs === 'Page' && isPageStyle,
+        pageIs === 'Product' && isProductStyle,
+        pageIs === 'Post' && isPostStyle,
+        pageIs === 'Post' && hasFeaturedImage && hasFeaturedImageStyle,
+        withSidebar && withSidebarStyle,
+        css
+      ]}
+        {...rest}
+      >
+        <Helmet>
+          <html lang="en" />
+          <title>{title}</title>
+          <meta name="description" content={description} />
 
-                <link rel="preconnect" href="https://originalinside.com" />
-                <link rel="canonical" href={siteUrl} />
-                <link rel="apple-touch-startup-image" href="launch.png"></link>
-                <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-                <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-                <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-                <link rel="manifest" href="/manifest.json" />
-                <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffffff" />
-                <meta name="msapplication-TileColor" content="#222222" />
-                <meta name="theme-color" content="#ffffff" />
-                <meta name="apple-mobile-web-app-capable" content="yes" />
-                <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-                <meta name="apple-mobile-web-app-title" content="Original Inside" />
+          <link rel="preconnect" href="https://originalinside.com" />
+          <link rel="canonical" href={siteUrl} />
+          <link rel="apple-touch-startup-image" href="launch.png"></link>
+          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffffff" />
+          <meta name="msapplication-TileColor" content="#222222" />
+          <meta name="theme-color" content="#ffffff" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+          <meta name="apple-mobile-web-app-title" content="Original Inside" />
 
-                <meta property="og:url" content={siteUrl} />
-                <meta property="og:type" content="website" />
-                <meta property="og:locale" content="en" />
-                <meta property="og:title" content={title} />
-                <meta property="og:site_name" content={title} />
-                <meta property="og:description" content={description} />
+          <meta property="og:url" content={siteUrl} />
+          <meta property="og:type" content="website" />
+          <meta property="og:locale" content="en" />
+          <meta property="og:title" content={title} />
+          <meta property="og:site_name" content={title} />
+          <meta property="og:description" content={description} />
 
-                <meta property="og:image" content={`${siteUrl}/instagram-doraforscale.jpg`} />
-                <meta property="og:image:alt" content="We are Original Inside." />
-                <meta property="og:image:width" content="1280" />
-                <meta property="og:image:height" content="686" />
-              </Helmet>
-              {viewportIs === null &&
-                <MobileNavigation
-                  viewportIs={viewportIs}
-                  isIndex={isIndex}
-                  isPost={isPost}
-                  isStore={isStore}
-                  isProduct={isProduct}
-                  mainTitle={mainTitle}
-                  from={from}
-                />
-              }
-              <PageInner>
-                {pageTitle && <PageTitle>{pageTitle}</PageTitle>}
-                <PageBody>
-                  {children}
-                </PageBody>
-              </PageInner>
-            </div>
-          )}
-      </InterfaceContext.Consumer>
+          <meta property="og:image" content={`${siteUrl}/instagram-doraforscale.jpg`} />
+          <meta property="og:image:alt" content="We are Original Inside." />
+          <meta property="og:image:width" content="1280" />
+          <meta property="og:image:height" content="686" />
+        </Helmet>
+        {viewportIs === null &&
+          <MobileNavigation
+            pageIs={pageIs}
+            mainTitle={mainTitle}
+            from={from}
+          />
+        }
+        <PageInner>
+          {pageTitle && <PageTitle>{pageTitle}</PageTitle>}
+          <PageBody>
+            {children}
+          </PageBody>
+        </PageInner>
+      </div>
     );
   }
 }
@@ -218,4 +214,19 @@ export const Page = (props) => (
   />
 );
 
-export default Page;
+export default props => (
+  <InterfaceContext.Consumer>
+    {({
+      viewportIs,
+      pageIs,
+      hasFeaturedImage
+    }) => (
+        <Page
+          {...props}
+          viewportIs={viewportIs}
+          pageIs={pageIs}
+          hasFeaturedImage={hasFeaturedImage}
+        />
+      )}
+  </InterfaceContext.Consumer>
+);

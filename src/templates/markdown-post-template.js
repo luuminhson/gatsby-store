@@ -12,7 +12,14 @@ type Props = {
   data: MarkdownRemark
 };
 
-class PostTemplate extends Component {
+class PostTemplate extends Component<Props> {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      featureImage: null !== this.props.data.markdownRemark.frontmatter.featuredImage
+    };
+  }
 
   componentDidMount() {
     this.props.setPage();
@@ -24,12 +31,11 @@ class PostTemplate extends Component {
     const { site } = this.props.data;
     const { title: postTitle, description: postDescription } = this.props.data.markdownRemark.frontmatter;
     const metaDescription = postDescription !== null ? postDescription : siteDescription;
-    const hasFeaturedImage = null !== this.props.data.markdownRemark.frontmatter.featuredImage;
 
     const { prevLink } = this.props;
 
     return (
-      <Page mainTitle=' ' title={`${postTitle} ‧ ${site.siteMetadata.title}`} description={metaDescription} isPost detailTitle={postTitle} hasFeaturedImage={hasFeaturedImage} from={prevLink}>
+      <Page mainTitle=' ' title={`${postTitle} ‧ ${site.siteMetadata.title}`} description={metaDescription} from={prevLink} pageIs='Post'>
         <Post post={this.props.data.markdownRemark} />
       </Page>
     )
@@ -43,9 +49,10 @@ export default props => (
         {({
           setToPostPage,
           prevLink,
-          setPrevLink }) => (
+          setPrevLink,
+        }) => (
             <PostTemplate
-              {...props} 
+              {...props}
               setPage={setToPostPage}
               setBackLink={() => setPrevLink(location, '/blog')}
               prevLink={prevLink}

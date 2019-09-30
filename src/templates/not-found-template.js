@@ -1,15 +1,21 @@
 import React from 'react';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import Page from '../components/Page';
 import { useSiteMetadata } from '../hooks';
-import { Heading, TextContainer } from '../components/shared/Typography';
+// import { Heading, TextContainer } from '../components/shared/Typography';
+
+import { FontStyle } from '../utils/styles';
+
+const Heading = styled(FontStyle.h1)`
+  text-align: center;
+`;
 
 const NotFoundPage = () => {
   const { title, description } = useSiteMetadata();
   return (
-    <Page title={`404 ‧ ${title}`} description={description}>
-      <TextContainer>
-        <Heading>404<br />Page Not Found</Heading>
-      </TextContainer>
+    <Page pageTitle='404' title={`404 - Page Not Found ‧ ${title}`} description={description}>
+        <Heading>Page Not Found</Heading>
     </Page>
   );
 }

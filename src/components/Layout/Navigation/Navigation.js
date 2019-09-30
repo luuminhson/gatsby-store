@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { graphql, StaticQuery } from 'gatsby';
 import { Link } from 'gatsby';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
+import { css, keyframes } from '@emotion/core';
 import Headroom from 'react-headroom';
 import Logo, { LogoDesktop } from './Logo';
 import Menu from './Menu';
@@ -14,14 +14,28 @@ import { FontStyle, fontFamily, dimensions, mediaQuery, spacing, colors, breakpo
 
 /* --------------------------- STYLES --------------------------- */
 
+const startFade = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  50% {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+`;
+
 // DESKTOP NAV STYLES
 
 const NavigationWrapper = styled(`div`)`
-    background-color: ${colors.white};
     width: 100%;
     padding: 0 ${spacing.lg}px;
     position: relative;
-    box-shadow: ${shadow.navShadow};
+    animation: ${startFade} 1s ease forwards;
     transition: all 0.3s ease-in-out;
     z-index: 2000;
 
@@ -47,18 +61,6 @@ const NavigationInner = styled(`div`)`
     ${mediaQuery.tabletFrom} {
         height: ${dimensions.navHeightTablet};
     }
-`;
-
-const isIndexStyle = css``;
-
-const isPostStyle = css`
-    background-color: transparent;
-`;
-
-const isStoreStyle = css``;
-
-const isProductStyle = css`
-    background-color: transparent;
 `;
 
 const BackButton = styled(Link)`
@@ -87,28 +89,6 @@ const BackButton = styled(Link)`
             display: inline-block;
             margin-left: ${spacing.sm}px;
         }
-    }
-`;
-
-const DetailTitle = styled(FontStyle.h1)`
-    display: inline-block;
-    font-size: 0.85rem;
-    line-height: ${dimensions.navHeightMobile};
-    color: ${colors.mainDark};
-    white-space: nowrap;
-    overflow: hidden;
-    display: block;
-    text-overflow: ellipsis;
-    margin: 0;
-    padding: 0 12px;
-
-    ${mediaQuery.tabletFrom} {
-        line-height: ${dimensions.navHeightTablet};
-        font-size: 1.1rem;
-    }
-
-    ${mediaQuery.desktop} {
-        line-height: ${dimensions.navHeightDesktop};
     }
 `;
 
@@ -178,6 +158,7 @@ const unpinnedStyle = css``;
 const pinnedStyle = css`
     ${NavigationWrapper} {
         background-color: ${colors.white};
+        box-shadow: ${shadow.navShadow};
 
         ${BackButton} {
             color: ${colors.mainDark};
@@ -185,11 +166,6 @@ const pinnedStyle = css`
             i {
                 color: ${colors.mainDark};
             }
-        }
-
-        ${DetailTitle} {
-            color: ${colors.mainDark};
-            transition: color 0.4s ease-in-out;
         }
 
         ${CartToggleIcon},
@@ -205,27 +181,18 @@ const pinnedStyle = css`
 const unfixedStyle = css`
     ${NavigationWrapper} {
         box-shadow: none;
-
-        ${DetailTitle} {
-            opacity: 0;
-            transition: opacity 0.4s ease-in-out;
-        }
     }
 `;
 
-const onFeaturedImageStyle = css`
+const isIndexStyle = css``;
 
+const isPostStyle = css`
     ${BackButton} {
         color: ${colors.white};
 
         i {
             color: ${colors.white};
         }
-    }
-
-    ${DetailTitle} {
-        transition: color 0.4s ease-in-out;
-        color: ${colors.white};
     }
 
     ${CartToggleIcon},
@@ -235,6 +202,14 @@ const onFeaturedImageStyle = css`
         }
     }
 `;
+
+const isStoreStyle = css``;
+
+const isProductStyle = css`
+    background-color: transparent;
+`;
+
+const onFeaturedImageStyle = css``;
 
 // MOBILE NAV STYLES
 
@@ -358,16 +333,12 @@ class PureDesktopNavigation extends React.Component {
     render() {
         const {
             data,
-            isIndex,
-            isPost,
-            isStore,
-            isProduct,
-            onFeaturedImage,
-            burgerClick,
-            from,
-            detailTitle,
             viewportIs,
+            pageIs,
             toggleCart,
+            burgerClick,
+            onFeaturedImage,
+            from,
             className
         } = this.props;
 
@@ -385,20 +356,17 @@ class PureDesktopNavigation extends React.Component {
             return '/';
         }
 
-        const detailPageTitle = <DetailTitle>{detailTitle}</DetailTitle>
-
         const siteLogo = <Logo viewportIs={viewportIs} />;
 
         const navLeft = (
             <NavLeftWrapper>
-                {(isPost || isProduct) ? backButton(backLink()) : <Link to='/'>{siteLogo}</Link>}
+                {(pageIs === 'Post' || pageIs === 'Product') ? backButton(backLink()) : <Link to='/'>{siteLogo}</Link>}
             </NavLeftWrapper>
         );
 
         const navCenter = (
             <NavCenterWrapper>
-                {isPost && (typeof detailTitle !== 'undefined') ? detailPageTitle : null}
-                <MainMenu menu={menu} isPost={isPost} onFeaturedImage={onFeaturedImage} unfixed={unfixed} />
+                <MainMenu menu={menu} pageIs={pageIs} onFeaturedImage={onFeaturedImage} unfixed={unfixed} />
             </NavCenterWrapper>
         );
 
@@ -428,10 +396,10 @@ class PureDesktopNavigation extends React.Component {
             >
                 <NavigationWrapper className={className}
                     css={[
-                        isPost && isPostStyle,
-                        isIndex && isIndexStyle,
-                        isStore && isStoreStyle,
-                        isProduct && isProductStyle,
+                        pageIs === 'Post' && isPostStyle,
+                        pageIs === 'Index' && isIndexStyle,
+                        pageIs === 'Store' && isStoreStyle,
+                        pageIs === 'Product' && isProductStyle,
                     ]}
                 >
                     <NavigationInner>
@@ -475,14 +443,9 @@ DesktopNavigation.propTypes = {
 /* --------------------------- MOBILE NAVIGATION --------------------------- */
 
 export const MobileNavigation = ({
-    isIndex,
-    isBlog,
-    isPost,
-    isStore,
-    isProduct,
     from,
     mainTitle,
-    viewportIs,
+    pageIs,
     className
 }) => {
 
@@ -497,13 +460,13 @@ export const MobileNavigation = ({
     return (
         <MobileNavWrapper className={className}
             css={[
-                isIndex && isIndexMobileStyle,
-                isPost && isPostMobileStyle,
-                isStore && isStoreMobileStyle,
-                isProduct && isProductMobileStyle,
+                pageIs === 'Index' && isIndexMobileStyle,
+                pageIs === 'Post' && isPostMobileStyle,
+                pageIs === 'Store' && isStoreMobileStyle,
+                pageIs === 'Product' && isProductMobileStyle,
             ]}
         >
-            {(isPost || isProduct) && <MobileNavBackButton>{backButton(backLink())}</MobileNavBackButton>}
+            {(pageIs === 'Post' || pageIs === 'Product') && <MobileNavBackButton>{backButton(backLink())}</MobileNavBackButton>}
             {mainTitle ? <MobileNavTitle>{mainTitle}</MobileNavTitle> : <LogoDesktop />}
         </MobileNavWrapper>
     );

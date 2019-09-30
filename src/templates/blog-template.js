@@ -7,9 +7,9 @@ import Page, { PageBody } from '../components/Page/Page';
 import StaticSidebar from '../components/StaticSidebar';
 import Feed from '../components/Feed';
 import Pagination from '../components/Pagination';
-import { useSiteMetadata, useCategoriesList, useTagsList } from '../hooks';
 import type { PageContext, AllMarkdownRemark } from '../types';
 
+import InterfaceContext from '../context/InterfaceContext';
 import { mediaQuery, spacing } from '../utils/styles';
 
 type Props = {
@@ -17,71 +17,116 @@ type Props = {
   pageContext: PageContext
 };
 
-const BlogTemplate = ({ data, pageContext }: Props) => {
-  const { title, description } = useSiteMetadata();
-  const hasCategories = useCategoriesList().length > 0;
-  const hasTags = useTagsList().length > 0;
-  const hasSidebar = (hasCategories || hasTags);
+class BlogTemplate extends React.Component<Props> {
 
-  const {
-    currentPage,
-    hasNextPage,
-    hasPrevPage,
-    prevPagePath,
-    nextPagePath
-  } = pageContext;
+  componentDidMount() {
+    this.props.setPage();
+  }
 
-  const PageStyle = css`
-    ${PageBody} {
-      justify-content: space-between;
-      padding-top: ${spacing.sm}px;
+  render() {
+
+    const { data, pageContext } = this.props;
+
+    const { title, description } = data.site.siteMetadata;
+    const hasCategories = data.categoryList.group.length > 0;
+    const hasTags = data.tagList.group.length > 0;
+    const hasSidebar = (hasCategories || hasTags);
+
+    const {
+      currentPage,
+      hasNextPage,
+      hasPrevPage,
+      prevPagePath,
+      nextPagePath
+    } = pageContext;
+
+    const { edges } = data.postList;
+    const pageTitle = currentPage > 0 ? `Blog - Page ${currentPage} ‧ ${title}` : `Blog ‧ ${title}`;
+
+    const PageStyle = css`
+      ${PageBody} {
+        justify-content: space-between;
+        padding-top: ${spacing.sm}px;
+
+        ${mediaQuery.tabletFrom} {
+          display: ${hasSidebar ? 'flex' : 'block'};
+        }
+      }
+    `;
+
+    const FeedWrapper = styled(`div`)`
+      flex: 1 0 100%;
 
       ${mediaQuery.tabletFrom} {
-        display: ${hasSidebar ? 'flex' : 'block'};
+        flex: 1 0 ${hasSidebar && '65%'};
       }
-    }
-  `;
+    `;
 
-  const FeedWrapper = styled(`div`)`
-    width: 100%;
+    const SidebarStyle = css`
+      flex: 1 0 100%;
 
-    ${mediaQuery.tabletFrom} {
-      width: ${hasSidebar && '65%'};
-    }
-  `;
+      ${mediaQuery.tabletFrom} {
+        flex: 1 0 30%;
+      }
+    `;
 
-  const SidebarStyle = css`
-    width: 100%;
+    return (
+      <Page mainTitle='Blog' css={PageStyle} withSidebar={hasSidebar} title={pageTitle} description={description} pageIs='Blog'>
+        <FeedWrapper>
+          <Feed edges={edges} />
+          {hasNextPage &&
+            <Pagination
+              prevPagePath={prevPagePath}
+              nextPagePath={nextPagePath}
+              hasPrevPage={hasPrevPage}
+              hasNextPage={hasNextPage}
+            />
+          }
+        </FeedWrapper>
+        {hasSidebar && <StaticSidebar css={SidebarStyle} />}
+      </Page>
+    )
+  }
+}
 
-    ${mediaQuery.tabletFrom} {
-      width: 30%;
-    }
-  `;
-
-  const { edges } = data.allMarkdownRemark;
-  const pageTitle = currentPage > 0 ? `Blog - Page ${currentPage} ‧ ${title}` : `Blog ‧ ${title}`;
-
-  return (
-    <Page mainTitle='Blog' css={PageStyle} withSidebar={hasSidebar} title={pageTitle} description={description} isBlog>
-      <FeedWrapper>
-        <Feed edges={edges} />
-        {hasNextPage &&
-          <Pagination
-            prevPagePath={prevPagePath}
-            nextPagePath={nextPagePath}
-            hasPrevPage={hasPrevPage}
-            hasNextPage={hasNextPage}
-          />
-        }
-      </FeedWrapper>
-      {hasSidebar && <StaticSidebar css={SidebarStyle} isBlog />}
-    </Page>
-  );
-};
+export default props => (
+  <InterfaceContext.Consumer>
+    {({
+      setToBlogPage
+    }) => (
+        <BlogTemplate
+          {...props}
+          setPage={setToBlogPage}
+        />
+      )}
+  </InterfaceContext.Consumer>
+)
 
 export const query = graphql`
   query BlogTemplate($postsLimit: Int!, $postsOffset: Int!) {
-    allMarkdownRemark(
+    site {
+      siteMetadata {
+        title
+        description
+      }
+    }
+    categoryList: allMarkdownRemark(
+      filter: { frontmatter: { template: { eq: "post" }, draft: { ne: true } } }
+    ) {
+      group(field: frontmatter___categories) {
+        fieldValue
+        totalCount
+      }
+    }
+    tagList: allMarkdownRemark(
+      filter: { frontmatter: { template: { eq: "post" }, draft: { ne: true } } }
+    ) {
+      group(field: frontmatter___tags) {
+        fieldValue
+        totalCount
+      }
+    }
+    postList: allMarkdownRemark(
         limit: $postsLimit,
         skip: $postsOffset,
         filter: { frontmatter: { categories: { nin: ["Work"] }, template: { eq: "post" }, draft: { ne: true } } },
@@ -114,5 +159,3 @@ export const query = graphql`
     }
   }
 `;
-
-export default BlogTemplate;

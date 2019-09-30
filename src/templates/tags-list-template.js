@@ -1,15 +1,32 @@
 import React from 'react';
+import { graphql } from 'gatsby';
 import { Link } from '../components/LinkWithPrev';
 import kebabCase from 'lodash/kebabCase';
 import Page from '../components/Page';
-import { useSiteMetadata, useTagsList } from '../hooks';
+import type { PageContext, AllMarkdownRemark } from '../types';
 
-const TagsListTemplate = () => {
-  const { title, description } = useSiteMetadata();
-  const tags = useTagsList();
 
-  return (
-      <Page pageTitle='Tags' title={`Tags ‧ ${title}`} description={description} isBlog>
+import InterfaceContext from '../context/InterfaceContext';
+
+type Props = {
+  data: AllMarkdownRemark
+};
+
+class TagsListTemplate extends React.Component<Props> {
+
+  componentDidMount() {
+    this.props.setPage();
+  }
+
+  render() {
+
+    const { data } = this.props;
+
+    const { title, description } = data.site.siteMetadata;
+    const tags = data.tagList.group;
+
+    return (
+      <Page pageTitle='Tags' title={`Tags ‧ ${title}`} description={description} pageIs='Blog'>
         <ul>
           {tags.map((tag) => (
             <li key={tag.fieldValue}>
@@ -20,7 +37,38 @@ const TagsListTemplate = () => {
           ))}
         </ul>
       </Page>
-  );
-};
+    )
+  }
+}
 
-export default TagsListTemplate;
+export default props => (
+  <InterfaceContext.Consumer>
+    {({
+      setToBlogPage,
+    }) => (
+        <TagsListTemplate
+          {...props}
+          setPage={setToBlogPage}
+        />
+      )}
+  </InterfaceContext.Consumer>
+)
+
+export const query = graphql`
+  query TagListTemplate {
+    site {
+      siteMetadata {
+        title
+        description
+      }
+    }
+    tagList: allMarkdownRemark(
+      filter: { frontmatter: { template: { eq: "post" }, draft: { ne: true } } }
+    ) {
+      group(field: frontmatter___tags) {
+        fieldValue
+        totalCount
+      }
+    }
+  }
+`;

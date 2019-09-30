@@ -89,17 +89,13 @@ const CartItemNumber = styled(CartNumber)`
 
 const isIndexStyle = css``;
 
-const isPostStyle = css`
-  display: none;
-`;
+const isPostStyle = css``;
 
 const isStoreStyle = css``;
 
 const isBlogStyle = css``;
 
-const isProductStyle = css`
-  display: none;
-`;
+const isProductStyle = css``;
 
 const isCartStyle = css``;
 
@@ -111,29 +107,24 @@ class PureBottomNavigation extends Component {
             data,
             className,
             cartNumber,
-            isIndex,
-            isBlog,
-            isPost,
-            isStore,
-            isCart,
-            isMore,
-            isProduct } = this.props;
+            pageIs
+        } = this.props;
 
         const { botNav } = data.site.siteMetadata;
 
         return (
             <BotNavWrapper className={className}
                 css={[
-                    isPost && isPostStyle,
-                    isBlog && isBlogStyle,
-                    isIndex && isIndexStyle,
-                    isStore && isStoreStyle,
-                    isProduct && isProductStyle,
-                    isCart && isCartStyle,
-                    isMore && isMoreStyle
+                    pageIs === 'Post' && isPostStyle,
+                    pageIs === 'Blog' && isBlogStyle,
+                    pageIs === 'Index' && isIndexStyle,
+                    pageIs === 'Store' && isStoreStyle,
+                    pageIs === 'Product' && isProductStyle,
+                    pageIs === 'Cart' && isCartStyle,
+                    pageIs === 'More' && isMoreStyle
                 ]}
             >
-                { ( isProduct || isPost ) ? null :
+                { ( pageIs === 'Post' || pageIs === 'Product' ) ? null :
                     <BotNavInner>
                         <NavList>
                             {botNav.map((item) => (

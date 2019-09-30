@@ -28,7 +28,7 @@ const CategoryTemplate = ({ data, pageContext }: Props) => {
   const pageTitle = currentPage > 0 ? `${category} — Page ${currentPage} ‧ ${siteTitle}` : `${category} ‧ ${siteTitle}`;
 
   return (
-    <Page pageTitle={category} title={pageTitle} description={siteSubtitle} isBlog>
+    <Page pageTitle={category} title={pageTitle} description={siteSubtitle} pageIs='Blog'>
       <Feed edges={edges} />
       <Pagination
         prevPagePath={prevPagePath}

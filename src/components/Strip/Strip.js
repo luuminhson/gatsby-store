@@ -8,7 +8,7 @@ import Img from 'gatsby-image';
 import SectionTitle from '../SectionTitle';
 import type { Edges } from '../../types';
 
-import { mediaQuery, shadow, colors, fontFamily, radius } from '../../utils/styles';
+import { mediaQuery, colors, fontFamily, radius, spacing } from '../../utils/styles';
 
 type Props = {
     edges: Edges,
@@ -27,7 +27,6 @@ const Wrapper = styled(`div`)`
 
     ${mediaQuery.tabletFrom} {
         height: auto;
-        margin: 0 -1rem;
     }
 `;
 
@@ -47,7 +46,7 @@ const StripWrapper = styled(`div`)`
         scroll-snap-type: none;
         overflow: visible;
         flex-wrap: wrap;
-        padding-bottom: 20px;
+        padding: 0 ${spacing.md}px 20px;
     }
 `;
 
@@ -140,7 +139,7 @@ const SectionTitleStyle = css`
     padding: 0 1.5rem;
 
     ${mediaQuery.tabletFrom} {
-        padding: 0 1.75rem;
+        padding: 0 ${spacing.xl}px;
     }
 `;
 

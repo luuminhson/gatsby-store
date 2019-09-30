@@ -37,7 +37,7 @@ class ProductDetailTemplate extends Component {
     } = this.props;
 
     return (
-      <Page mainTitle={productTitle} title={`${productTitle} — ${productCategory} ‧ ${site.siteMetadata.title}`} description={description} isProduct from={prevLink}>
+      <Page mainTitle={productTitle} title={`${productTitle} — ${productCategory} ‧ ${site.siteMetadata.title}`} description={description} from={prevLink} pageIs='Product'>
         <div>
           <Helmet>
             <meta

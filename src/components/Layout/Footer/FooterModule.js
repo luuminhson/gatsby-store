@@ -13,7 +13,7 @@ export const ModuleTitle = styled(FontStyle.h3)`
     padding: ${spacing.md}px 0;
     margin-bottom: ${spacing.md}px;
 
-    ${mediaQuery.tabletFrom} {
+    ${mediaQuery.desktop} {
         padding: 0;
         cursor: default;
     }
@@ -30,7 +30,7 @@ export const FooterModuleInner = styled(`div`)`
     overflow: hidden;
     transition: all 1s cubic-bezier(.075,.82,.165,1);
 
-    ${mediaQuery.tabletFrom} {
+    ${mediaQuery.desktop} {
         overflow: visible;
         border-bottom: none;
     }
@@ -72,7 +72,7 @@ const FooterModuleWrapper = styled(`div`)`
 const ModuleToggle = styled(OiIcon)`
     cursor: pointer;
 
-    ${mediaQuery.tabletFrom} {
+    ${mediaQuery.desktop} {
         display: none;
     }
 `;
@@ -89,7 +89,7 @@ class FooterModule extends Component {
     componentDidUpdate(prevProps) {
         const viewportChanged = this.props.viewportIs !== prevProps.viewportIs;
 
-        if (this.props.viewportIs !== null) {
+        if (this.props.viewportIs === 'desktop') {
             if (viewportChanged) {
                 setTimeout(() => {
                     this.setState({

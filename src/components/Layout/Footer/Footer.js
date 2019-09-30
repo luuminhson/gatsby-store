@@ -18,7 +18,7 @@ const FooterWrapper = styled(`div`)`
   padding: 40px 0;
   background-color: ${colors.mainLight};
 
-  ${mediaQuery.tabletFrom} {
+  ${mediaQuery.desktop} {
     padding: 100px 0 60px;
     background-color: transparent;
   }
@@ -29,7 +29,7 @@ const FooterWrapperInner = styled(`div`)`
   flex-direction: column;
   padding: 0 ${spacing.xl}px;
 
-  ${mediaQuery.tabletFrom} {
+  ${mediaQuery.desktop} {
     flex-direction: row;
     padding: 0 ${spacing['3xl']}px;
     margin: 0 -${spacing.lg}px;
@@ -44,7 +44,7 @@ const Module = styled(FooterModule)`
   width: 100%;
   padding: 0;
 
-  ${mediaQuery.tabletFrom} {
+  ${mediaQuery.desktop} {
     padding: 0 ${spacing.lg}px;
     margin-bottom: ${spacing.lg}px;
   }
@@ -53,7 +53,7 @@ const Module = styled(FooterModule)`
     font-size: 16px;
     margin-bottom: 0;
 
-    ${mediaQuery.tabletFrom} {
+    ${mediaQuery.desktop} {
       margin-bottom: ${spacing.md}px;
     }
   }
@@ -79,7 +79,7 @@ const Module = styled(FooterModule)`
     }
   }
 
-  ${mediaQuery.tabletFrom} {
+  ${mediaQuery.desktop} {
     width: 25%;
   }
 `;
@@ -88,7 +88,7 @@ const AboutDesc = styled(`div`)`
   display: inline-block;
   padding-right: ${spacing.md}px;
 
-  ${mediaQuery.tabletFrom} {
+  ${mediaQuery.desktop} {
     max-width: 320px;
     padding-right: ${spacing.lg}px;
   }
@@ -113,7 +113,7 @@ const wishingANiceDay = css`
   align-items: center;
   height: auto !important;
 
-  ${mediaQuery.tabletFrom} {
+  ${mediaQuery.desktop} {
     flex-direction: row;
     height: ${menuItemHeight} !important;
   }
@@ -129,7 +129,7 @@ const wishImgs = css`
     border-radius: 100px;
     box-sizing: content-box;
 
-    ${mediaQuery.tabletFrom} {
+    ${mediaQuery.desktop} {
       padding: 0;
       margin: 0 2px;
       background-color: transparent;
@@ -138,7 +138,7 @@ const wishImgs = css`
     }
   }
 
-  ${mediaQuery.tabletFrom} {
+  ${mediaQuery.desktop} {
     margin-top: 0;
     margin-left: ${spacing.sm}px;
   }
@@ -152,7 +152,7 @@ const wishText = css`
 const Copyright = css`
   margin-top: ${spacing.md}px !important;
 
-  ${mediaQuery.tabletFrom} {
+  ${mediaQuery.desktop} {
     margin-top: 0 !important;
   }
 `;
@@ -173,17 +173,17 @@ const ModuleOthers = css`
     ul > li > a {
       justify-content: center;
 
-      ${mediaQuery.tabletFrom} {
+      ${mediaQuery.desktop} {
         justify-content: flex-start;
       }
     }
 
-    ${mediaQuery.tabletFrom} {
+    ${mediaQuery.desktop} {
       padding-top: 0;
     }
   }
 
-  ${mediaQuery.tabletFrom} {
+  ${mediaQuery.desktop} {
     ${ModuleTitle} {
       display: flex;
     }

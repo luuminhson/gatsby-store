@@ -193,22 +193,6 @@ class PureLayout extends React.Component {
           }
         }));
       },
-      setToPostPage: () => {
-        this.setState(state => ({
-          interface: {
-            ...state.interface,
-            isPost: true
-          }
-        }));
-      },
-      setToProductPage: () => {
-        this.setState(state => ({
-          interface: {
-            ...state.interface,
-            isProduct: true
-          }
-        }));
-      },
       setPrevLink: (location, defaultLocation) => {
         const locationState = location.state;
   
@@ -230,7 +214,79 @@ class PureLayout extends React.Component {
             }
           }));
         }
-      }
+      },
+      setToPostPage: () => {
+        this.setState(state => ({
+          interface: {
+            ...state.interface,
+            pageIs: 'Post'
+          }
+        }));
+      },
+      setToProductPage: () => {
+        this.setState(state => ({
+          interface: {
+            ...state.interface,
+            pageIs: 'Product'
+          }
+        }));
+      },
+      setToBlogPage: () => {
+        this.setState(state => ({
+          interface: {
+            ...state.interface,
+            pageIs: 'Blog'
+          }
+        }));
+      },
+      setToIndexPage: () => {
+        this.setState(state => ({
+          interface: {
+            ...state.interface,
+            pageIs: 'Index'
+          }
+        }));
+      },
+      setToStorePage: () => {
+        this.setState(state => ({
+          interface: {
+            ...state.interface,
+            pageIs: 'Store'
+          }
+        }));
+      },
+      setToCartPage: () => {
+        this.setState(state => ({
+          interface: {
+            ...state.interface,
+            pageIs: 'Cart'
+          }
+        }));
+      },
+      setToMorePage: () => {
+        this.setState(state => ({
+          interface: {
+            ...state.interface,
+            pageIs: 'More'
+          }
+        }));
+      },
+      setToPagePage: () => {
+        this.setState(state => ({
+          interface: {
+            ...state.interface,
+            pageIs: 'Page'
+          }
+        }));
+      },
+      setToHasFeaturedImage: () => {
+        this.setState(state => ({
+          interface: {
+            ...state.interface,
+            hasFeaturedImage: this.state.interface.pageIs === 'Post' ? true : false,
+          }
+        }));
+      },
     },
     store: {
       ...defaultStoreContext,
@@ -393,20 +449,7 @@ class PureLayout extends React.Component {
   };
 
   render() {
-    const {
-      mainTitle,
-      detailTitle,
-      children,
-      // isPost,
-      isBlog,
-      isIndex,
-      isStore,
-      // isProduct,
-      isCart,
-      isMore,
-      hasFeaturedImage,
-      // from
-    } = this.props;
+    const { children } = this.props;
 
     return (
       <LayoutWrapper>
@@ -415,6 +458,7 @@ class PureLayout extends React.Component {
             <InterfaceContext.Consumer>
               {({
                 viewportIs,
+                pageIs,
                 cartStatus,
                 sidebarStatus,
                 toggleCart,
@@ -424,8 +468,7 @@ class PureLayout extends React.Component {
                 productImageFeatured,
                 productImageFeaturedIndex,
                 toggleProductImagesBrowser,
-                isPost,
-                isProduct,
+                hasFeaturedImage,
                 prevLink,
               }) => (
                   <StoreContext.Consumer>
@@ -439,7 +482,6 @@ class PureLayout extends React.Component {
                         <Location>
                           {({ location }) => (
                             <>
-                            {console.log(isPost)}
                               <Overlay
                                 onClick={toggleCart}
                                 css={cartStatus === 'open' ? overlayOn : overlayOff}
@@ -462,27 +504,16 @@ class PureLayout extends React.Component {
                               {viewportIs !== null &&
                                 <DesktopNavigation
                                   viewportIs={viewportIs}
+                                  pageIs={pageIs}
                                   toggleCart={toggleCart}
                                   burgerClick={toggleSidebar}
-                                  isIndex={isIndex}
-                                  isPost={isPost}
-                                  isStore={isStore}
-                                  isProduct={isProduct}
-                                  mainTitle={mainTitle}
-                                  detailTitle={detailTitle}
                                   onFeaturedImage={hasFeaturedImage}
                                   from={prevLink}
                                 />
                               }
                               {viewportIs === null &&
                                 <BottomNavigation
-                                  isIndex={isIndex}
-                                  isPost={isPost}
-                                  isStore={isStore}
-                                  isProduct={isProduct}
-                                  isBlog={isBlog}
-                                  isCart={isCart}
-                                  isMore={isMore}
+                                  pageIs={pageIs}
                                   cartNumber={itemsInCart}
                                 />
                               }

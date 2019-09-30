@@ -5,17 +5,25 @@ import { keyframes } from '@emotion/core';
 
 import { breakpoints } from '../../utils/styles';
 
-const simpleEntry = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-`;
-
-const deadSimpleEntry = keyframes`
+const pageTransition = keyframes`
   from {
     opacity: .85;
     transform: translateY(4px);
+  }
+`;
+
+const startFade = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  50% {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
   }
 `;
 
@@ -26,6 +34,7 @@ const PageContentRoot = styled(`main`)`
   padding-left: 0;
   transition: 0.75s;
   width: 100%;
+  animation: ${startFade} 1.2s ease forwards;
 
   .covered {
     opacity: 0;
@@ -33,7 +42,7 @@ const PageContentRoot = styled(`main`)`
   }
 
   .entry {
-    animation: ${deadSimpleEntry} .5s ease forwards;
+    animation: ${pageTransition} .5s ease forwards;
   }
 
   @media (min-width: ${breakpoints.desktop}px) {

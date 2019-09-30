@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { FlatButton } from '../shared/Buttons';
-import { FontStyle } from '../../utils/styles';
+import { FontStyle, spacing } from '../../utils/styles';
 
 const SectionWrapper = styled(`div`)`
     display: flex;
@@ -11,7 +11,7 @@ const SectionWrapper = styled(`div`)`
 `;
 
 const ActionLink = styled(FlatButton)`
-    margin-right: -0.75rem;
+    margin-right: -${spacing.md}px;
 `;
 
 const SectionTitle = ({ title, actionLink, actionLabel, className }) => (
