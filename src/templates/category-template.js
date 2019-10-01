@@ -4,44 +4,74 @@ import { graphql } from 'gatsby';
 import Page from '../components/Page';
 import Feed from '../components/Feed';
 import Pagination from '../components/Pagination';
-import { useSiteMetadata } from '../hooks';
 import type { PageContext, AllMarkdownRemark } from '../types';
+
+import InterfaceContext from '../context/InterfaceContext';
 
 type Props = {
   data: AllMarkdownRemark,
   pageContext: PageContext
 };
 
-const CategoryTemplate = ({ data, pageContext }: Props) => {
-  const { title: siteTitle, description: siteSubtitle } = useSiteMetadata();
+class CategoryTemplate extends React.Component<Props> {
 
-  const {
-    category,
-    currentPage,
-    prevPagePath,
-    nextPagePath,
-    hasPrevPage,
-    hasNextPage,
-  } = pageContext;
+  componentDidMount() {
+    this.props.setPage();
+  }
 
-  const { edges } = data.allMarkdownRemark;
-  const pageTitle = currentPage > 0 ? `${category} — Page ${currentPage} ‧ ${siteTitle}` : `${category} ‧ ${siteTitle}`;
+  render() {
 
-  return (
-    <Page pageTitle={category} title={pageTitle} description={siteSubtitle} pageIs='Blog'>
-      <Feed edges={edges} />
-      <Pagination
-        prevPagePath={prevPagePath}
-        nextPagePath={nextPagePath}
-        hasPrevPage={hasPrevPage}
-        hasNextPage={hasNextPage}
-      />
-    </Page>
-  );
-};
+    const { data, pageContext } = this.props;
+
+    const { title: siteTitle, description: siteSubtitle } = data.site.siteMetadata;
+
+    const {
+      category,
+      currentPage,
+      prevPagePath,
+      nextPagePath,
+      hasPrevPage,
+      hasNextPage,
+    } = pageContext;
+
+    const { edges } = data.allMarkdownRemark;
+    const pageTitle = currentPage > 0 ? `${category} — Page ${currentPage} ‧ ${siteTitle}` : `${category} ‧ ${siteTitle}`;
+
+    return (
+      <Page pageTitle={category} mainTitle={category} title={pageTitle} description={siteSubtitle} pageIs='Blog'>
+        <Feed edges={edges} />
+        <Pagination
+          prevPagePath={prevPagePath}
+          nextPagePath={nextPagePath}
+          hasPrevPage={hasPrevPage}
+          hasNextPage={hasNextPage}
+        />
+      </Page>
+    )
+  }
+}
+
+export default props => (
+  <InterfaceContext.Consumer>
+    {({
+      setToBlogPage,
+    }) => (
+        <CategoryTemplate
+          {...props}
+          setPage={setToBlogPage}
+        />
+      )}
+  </InterfaceContext.Consumer>
+)
 
 export const query = graphql`
   query CategoryPage($category: String, $postsLimit: Int!, $postsOffset: Int!) {
+    site {
+      siteMetadata {
+        title
+        description
+      }
+    }
     allMarkdownRemark(
         limit: $postsLimit,
         skip: $postsOffset,
@@ -75,5 +105,3 @@ export const query = graphql`
     }
   }
 `;
-
-export default CategoryTemplate;

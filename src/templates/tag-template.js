@@ -4,41 +4,65 @@ import { graphql } from 'gatsby';
 import Page from '../components/Page';
 import Feed from '../components/Feed';
 import Pagination from '../components/Pagination';
-import { useSiteMetadata } from '../hooks';
 import type { AllMarkdownRemark, PageContext } from '../types';
+
+import InterfaceContext from '../context/InterfaceContext';
 
 type Props = {
   data: AllMarkdownRemark,
   pageContext: PageContext
 };
 
-const TagTemplate = ({ data, pageContext }: Props) => {
-  const { title: siteTitle, description: siteSubtitle } = useSiteMetadata();
+class TagTemplate extends React.Component<Props> {
 
-  const {
-    tag,
-    currentPage,
-    prevPagePath,
-    nextPagePath,
-    hasPrevPage,
-    hasNextPage
-  } = pageContext;
+  componentDidMount() {
+    this.props.setPage();
+  }
 
-  const { edges } = data.allMarkdownRemark;
-  const pageTitle = currentPage > 0 ? `All Posts tagged as "${tag}" — Page ${currentPage} ‧ ${siteTitle}` : `All Posts tagged as "${tag}" ‧ ${siteTitle}`;
+  render() {
 
-  return (
-    <Page pageTitle={'Tag: ' + tag} title={pageTitle} description={siteSubtitle} pageIs='Blog'>
-      <Feed edges={edges} />
-      <Pagination
-        prevPagePath={prevPagePath}
-        nextPagePath={nextPagePath}
-        hasPrevPage={hasPrevPage}
-        hasNextPage={hasNextPage}
-      />
-    </Page>
-  );
-};
+    const { data, pageContext } = this.props;
+
+    const { title: siteTitle, description: siteSubtitle } = data.site.siteMetadata;
+
+    const {
+      tag,
+      currentPage,
+      prevPagePath,
+      nextPagePath,
+      hasPrevPage,
+      hasNextPage
+    } = pageContext;
+
+    const { edges } = data.allMarkdownRemark;
+    const pageTitle = currentPage > 0 ? `All Posts tagged as "${tag}" — Page ${currentPage} ‧ ${siteTitle}` : `All Posts tagged as "${tag}" ‧ ${siteTitle}`;
+
+    return (
+      <Page pageTitle={'Tag: ' + tag} mainTitle={'Tag: ' + tag} title={pageTitle} description={siteSubtitle} pageIs='Blog'>
+        <Feed edges={edges} />
+        <Pagination
+          prevPagePath={prevPagePath}
+          nextPagePath={nextPagePath}
+          hasPrevPage={hasPrevPage}
+          hasNextPage={hasNextPage}
+        />
+      </Page>
+    )
+  }
+}
+
+export default props => (
+  <InterfaceContext.Consumer>
+    {({
+      setToBlogPage,
+    }) => (
+        <TagTemplate
+          {...props}
+          setPage={setToBlogPage}
+        />
+      )}
+  </InterfaceContext.Consumer>
+)
 
 export const query = graphql`
   query TagPage($tag: String, $postsLimit: Int!, $postsOffset: Int!) {
@@ -81,5 +105,3 @@ export const query = graphql`
     }
   }
 `;
-
-export default TagTemplate;
