@@ -36,7 +36,7 @@ export const FooterModuleInner = styled(`div`)`
     }
 `;
 
-const FooterModuleWrapper = styled(`div`)`
+export const FooterModuleWrapper = styled(`div`)`
     display: inline-block;
     position: relative;
 
@@ -46,7 +46,11 @@ const FooterModuleWrapper = styled(`div`)`
 
     :nth-of-type(1) {
         .expanded {
-            max-height: 220px;
+            max-height: 213px;
+
+            ${mediaQuery.phoneSmall} {
+                max-height: 237px;
+            }
         }
     }
 

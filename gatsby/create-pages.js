@@ -101,6 +101,14 @@ const createPages = async ({ graphql, actions }) => {
     component: path.resolve('./src/templates/cart-template.js')
   });
 
+  /* MORE
+  ------------------------------------------------ */
+
+  createPage({
+    path: '/more',
+    component: path.resolve('./src/templates/more-template.js')
+  });
+
   /* PRODUCT LIST
   ------------------------------------------------ */
 

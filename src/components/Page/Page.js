@@ -67,6 +67,11 @@ const isBlogStyle = css`
       padding-left: ${spacing.xl}px;
       padding-right: ${spacing.xl}px;
     }
+
+    ${mediaQuery.desktop} {
+      padding-left: ${spacing['4xl']}px;
+      padding-right: ${spacing['4xl']}px;
+    }
   }
 `;
 
@@ -76,6 +81,7 @@ const isPostStyle = css`
   ${mediaQuery.tabletFrom} {
     ${PageInner} {
       max-width: 100%;
+      padding-top: 0;
       margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet});
     }
   }
@@ -93,6 +99,7 @@ const isProductStyle = css`
   ${mediaQuery.tabletFrom} {
     ${PageInner} {
       max-width: 100%;
+      padding-top: 0;
       margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet});
     }
   }
@@ -106,9 +113,17 @@ const isProductStyle = css`
 
 const isPageStyle = css``;
 
-const withSidebarStyle = css`
+const isMoreStyle = css`
   ${PageInner} {
-    max-width: ${dimensions.blogWithSidebarPageWidth};
+    padding-top: ${spacing.sm}px;
+  }
+`;
+
+const withSidebarStyle = css`
+  ${mediaQuery.tabletFrom} {
+    ${PageInner} {
+      max-width: ${dimensions.blogWithSidebarPageWidth};
+    }
   }
 `;
 
@@ -144,6 +159,7 @@ class PurePage extends React.Component<Props> {
         pageIs === 'Page' && isPageStyle,
         pageIs === 'Product' && isProductStyle,
         pageIs === 'Post' && isPostStyle,
+        pageIs === 'More' && isMoreStyle,
         pageIs === 'Post' && hasFeaturedImage && hasFeaturedImageStyle,
         withSidebar && withSidebarStyle,
         css

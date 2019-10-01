@@ -190,11 +190,11 @@ const ModuleOthers = css`
   }
 `;
 
-const Footer = ({ viewportIs }) => {
+const Footer = ({ viewportIs, ...rest }) => {
   const { contacts } = useSiteMetadata();
 
   return (
-    <FooterWrapper>
+    <FooterWrapper {...rest}>
       <FooterWrapperInner>
         <Module viewportIs={viewportIs} title='About Original Inside'>
           <AboutDesc>
@@ -224,26 +224,28 @@ const Footer = ({ viewportIs }) => {
           </ul>
         </Module>
 
-        <Module viewportIs={viewportIs} alwaysExpand css={ModuleOthers} title='Others'>
-          <ul>
-            <li>
-              <Link to='/privacy-policy'>Privacy Policy</Link>
-            </li>
-            <li>
-              <Link to='/terms-and-conditions'>Terms &amp; Conditions</Link>
-            </li>
-            <li css={Copyright}>
-              <span css={copyrightText}>Original Inside © 2019 - All right reserved</span>
-            </li>
-            <li css={wishingANiceDay}>
-              <span css={wishText}>Wish you a nice day!</span>
-              <span css={wishImgs}>
-                <img src={bowingImg1} width='24' alt='Thank You from Oi' />
-                <img src={bowingImg2} width='24' alt='Thank You from Miso' />
-              </span>
-            </li>
-          </ul>
-        </Module>
+        {viewportIs !== null &&
+          <Module viewportIs={viewportIs} alwaysExpand css={ModuleOthers} title='Others'>
+            <ul>
+              <li>
+                <Link to='/privacy-policy'>Privacy Policy</Link>
+              </li>
+              <li>
+                <Link to='/terms-and-conditions'>Terms &amp; Conditions</Link>
+              </li>
+              <li css={Copyright}>
+                <span css={copyrightText}>Original Inside © 2019 - All right reserved</span>
+              </li>
+              <li css={wishingANiceDay}>
+                <span css={wishText}>Wish you a nice day!</span>
+                <span css={wishImgs}>
+                  <img src={bowingImg1} width='24' alt='Thank You from Oi' />
+                  <img src={bowingImg2} width='24' alt='Thank You from Miso' />
+                </span>
+              </li>
+            </ul>
+          </Module>
+        }
 
       </FooterWrapperInner>
     </FooterWrapper>
