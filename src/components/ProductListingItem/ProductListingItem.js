@@ -58,6 +58,11 @@ const Preview = styled(`div`)`
 
 const ProductTitle = styled(FontStyle.h4)`
   font-size: 0.9rem;
+
+  ${mediaQuery.tabletFrom} {
+    margin-top: ${spacing.sm}px;
+    font-size: 1.1rem;
+  }
 `;
 
 const SaleBadge = styled(`span`)`

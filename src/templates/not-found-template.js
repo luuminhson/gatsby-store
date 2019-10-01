@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
 import Page from '../components/Page';
 import { useSiteMetadata } from '../hooks';
-// import { Heading, TextContainer } from '../components/shared/Typography';
 
 import { FontStyle } from '../utils/styles';
 

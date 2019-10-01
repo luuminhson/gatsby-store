@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Page from '../components/Page';
 import CartPage from '../components/Cart/CartPage';
-// import { useSiteMetadata } from '../hooks';
 
 import InterfaceContext from '../context/InterfaceContext';
 
