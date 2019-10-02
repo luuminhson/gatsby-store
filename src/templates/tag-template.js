@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { graphql } from 'gatsby';
+import styled from '@emotion/styled';
 import Page from '../components/Page';
 import Feed from '../components/Feed';
 import Pagination from '../components/Pagination';
@@ -8,10 +9,22 @@ import type { AllMarkdownRemark, PageContext } from '../types';
 
 import InterfaceContext from '../context/InterfaceContext';
 
+import { mediaQuery, spacing, dimensions } from '../utils/styles';
+
 type Props = {
   data: AllMarkdownRemark,
   pageContext: PageContext
 };
+
+const FeedWrapper = styled(`div`)`
+  max-width: ${dimensions.blogPageWidth};
+  margin: 0 auto;
+  padding: ${spacing.md - 4}px ${spacing.lg}px;
+
+  ${mediaQuery.tabletFrom} {
+    padding: ${spacing.md - 4}px ${spacing.xl}px;
+  }
+`;
 
 class TagTemplate extends React.Component<Props> {
 
@@ -39,13 +52,15 @@ class TagTemplate extends React.Component<Props> {
 
     return (
       <Page pageTitle={'Tag: ' + tag} mainTitle={'Tag: ' + tag} title={pageTitle} description={siteSubtitle} pageIs='Blog'>
-        <Feed edges={edges} />
-        <Pagination
-          prevPagePath={prevPagePath}
-          nextPagePath={nextPagePath}
-          hasPrevPage={hasPrevPage}
-          hasNextPage={hasNextPage}
-        />
+        <FeedWrapper>
+          <Feed edges={edges} />
+          <Pagination
+            prevPagePath={prevPagePath}
+            nextPagePath={nextPagePath}
+            hasPrevPage={hasPrevPage}
+            hasNextPage={hasNextPage}
+          />
+        </FeedWrapper>
       </Page>
     )
   }

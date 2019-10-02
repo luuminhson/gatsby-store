@@ -37,7 +37,7 @@ class ProductDetailTemplate extends Component {
     } = this.props;
 
     return (
-      <Page mainTitle={productTitle} title={`${productTitle} — ${productCategory} ‧ ${site.siteMetadata.title}`} description={description} from={prevLink} pageIs='Product'>
+      <Page mainTitle={' '} title={`${productTitle} — ${productCategory} ‧ ${site.siteMetadata.title}`} description={description} from={prevLink} pageIs='Product'>
         <div>
           <Helmet>
             <meta
@@ -57,9 +57,6 @@ class ProductDetailTemplate extends Component {
             <meta property="og:image:alt" content={productTitle} />
             <meta property="og:image:width" content="600" />
             <meta property="og:image:height" content="600" />
-
-            <meta name="twitter:card" content="summary" />
-            <meta name="twitter:site" content="@gatsbyjs" />
           </Helmet>
           <ProductPage
             product={product}
@@ -90,7 +87,7 @@ export default props => (
           prevLink,
           setPrevLink }) => (
             <ProductDetailTemplate
-              {...props} 
+              {...props}
               viewportIs={viewportIs}
               productImagesBrowserStatus={productImagesBrowserStatus}
               productImageFeatured={productImageFeatured}

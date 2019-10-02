@@ -2,20 +2,29 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
-import Page, { PageBody } from '../components/Page/Page';
+import Page from '../components/Page/Page';
 import StaticSidebar from '../components/StaticSidebar';
 import Feed from '../components/Feed';
 import Pagination from '../components/Pagination';
 import type { PageContext, AllMarkdownRemark } from '../types';
 
 import InterfaceContext from '../context/InterfaceContext';
-import { mediaQuery, spacing } from '../utils/styles';
+import { mediaQuery, spacing, dimensions } from '../utils/styles';
 
 type Props = {
   data: AllMarkdownRemark,
   pageContext: PageContext
 };
+
+const FeedWrapper = styled(`div`)`
+  max-width: ${dimensions.blogPageWidth};
+  margin: 0 auto;
+  padding: ${spacing.md - 4}px ${spacing.lg}px;
+
+  ${mediaQuery.tabletFrom} {
+    padding: ${spacing.md - 4}px ${spacing.xl}px;
+  }
+`;
 
 class BlogTemplate extends React.Component<Props> {
 
@@ -43,35 +52,8 @@ class BlogTemplate extends React.Component<Props> {
     const { edges } = data.postList;
     const pageTitle = currentPage > 0 ? `Blog - Page ${currentPage} ‧ ${title}` : `Blog ‧ ${title}`;
 
-    const PageStyle = css`
-      ${PageBody} {
-        justify-content: space-between;
-        padding-top: ${spacing.sm}px;
-
-        ${mediaQuery.tabletFrom} {
-          display: ${hasSidebar ? 'flex' : 'block'};
-        }
-      }
-    `;
-
-    const FeedWrapper = styled(`div`)`
-      flex: 1 0 100%;
-
-      ${mediaQuery.tabletFrom} {
-        flex: 1 0 ${hasSidebar && '65%'};
-      }
-    `;
-
-    const SidebarStyle = css`
-      flex: 1 0 100%;
-
-      ${mediaQuery.tabletFrom} {
-        flex: 1 0 30%;
-      }
-    `;
-
     return (
-      <Page mainTitle='Blog' css={PageStyle} withSidebar={hasSidebar} title={pageTitle} description={description} pageIs='Blog'>
+      <Page mainTitle='Blog' withSidebar={hasSidebar} title={pageTitle} description={description} pageIs='Blog'>
         <FeedWrapper>
           <Feed edges={edges} />
           {hasNextPage &&
@@ -82,8 +64,8 @@ class BlogTemplate extends React.Component<Props> {
               hasNextPage={hasNextPage}
             />
           }
+          {hasSidebar && <StaticSidebar />}
         </FeedWrapper>
-        {hasSidebar && <StaticSidebar css={SidebarStyle} />}
       </Page>
     )
   }

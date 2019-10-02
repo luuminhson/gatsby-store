@@ -10,7 +10,7 @@ import Logo, { LogoDesktop } from './Logo';
 import Menu from './Menu';
 import OiIcon from '../../OiIcon';
 import CartToggle from '../../Cart/CartToggle';
-import { FontStyle, fontFamily, dimensions, mediaQuery, spacing, colors, breakpoints, shadow, headerHeight } from '../../../utils/styles';
+import { FontStyle, fontFamily, dimensions, mediaQuery, spacing, colors, breakpoints, headerHeight } from '../../../utils/styles';
 
 /* --------------------------- STYLES --------------------------- */
 
@@ -32,12 +32,12 @@ const startFade = keyframes`
 // DESKTOP NAV STYLES
 
 const NavigationWrapper = styled(`div`)`
+    position: relative;
     width: 100%;
     padding: 0 ${spacing.lg}px;
-    position: relative;
     animation: ${startFade} 1s ease forwards;
     transition: all 0.3s ease-in-out;
-    z-index: 2000;
+    z-index: 100;
 
     ${mediaQuery.tabletFrom} {
         padding: 0 ${spacing.xl}px;
@@ -60,6 +60,10 @@ const NavigationInner = styled(`div`)`
 
     ${mediaQuery.tabletFrom} {
         height: ${dimensions.navHeightTablet};
+    }
+
+    ${mediaQuery.desktop} {
+        height: ${dimensions.navHeightDesktop};
     }
 `;
 
@@ -123,21 +127,6 @@ const CartToggleIcon = styled(CartToggle)`
     display: flex;
 `;
 
-const BurgerIcon = styled(`div`)`
-  position: relative;
-  width: 60px;
-  height: ${dimensions.navHeightMobile};
-  margin-right: -8px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  ${mediaQuery.tabletFrom} {
-    margin-right: -12px;
-  }
-`;
-
 const MainMenu = styled(Menu)`
     ${mediaQuery.tabletFrom} {
         position: absolute;
@@ -146,70 +135,6 @@ const MainMenu = styled(Menu)`
         transform: translate(-50%, -50%);
     }
 `;
-
-const HeadroomWrapper = styled(Headroom)`
-    width: 100%;
-    position: relative;
-    z-index: 100;
-`;
-
-const unpinnedStyle = css``;
-
-const pinnedStyle = css`
-    ${NavigationWrapper} {
-        background-color: ${colors.white};
-        box-shadow: ${shadow.navShadow};
-
-        ${BackButton} {
-            color: ${colors.mainDark};
-
-            i {
-                color: ${colors.mainDark};
-            }
-        }
-
-        ${CartToggleIcon},
-        ${BurgerIcon} {
-            i {
-                color: ${colors.mainDark};
-                transition: color 0.4s ease-in-out;
-            }
-        }
-    }
-`;
-
-const unfixedStyle = css`
-    ${NavigationWrapper} {
-        box-shadow: none;
-    }
-`;
-
-const isIndexStyle = css``;
-
-const isPostStyle = css`
-    ${BackButton} {
-        color: ${colors.white};
-
-        i {
-            color: ${colors.white};
-        }
-    }
-
-    ${CartToggleIcon},
-    ${BurgerIcon} {
-        i {
-            color: ${colors.white};
-        }
-    }
-`;
-
-const isStoreStyle = css``;
-
-const isProductStyle = css`
-    background-color: transparent;
-`;
-
-const onFeaturedImageStyle = css``;
 
 // MOBILE NAV STYLES
 
@@ -221,8 +146,19 @@ const MobileNavWrapper = styled(`div`)`
     align-items: center;
     justify-content: center;
     padding: 0 ${spacing.md + 4}px;
-    // box-shadow: ${shadow.navShadow};
     z-index: 2000;
+`;
+
+const backBtnIn = keyframes`
+    0% {
+        opacity: 0;
+    }
+    70% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 `;
 
 const MobileNavBackButton = styled(`div`)`
@@ -231,11 +167,13 @@ const MobileNavBackButton = styled(`div`)`
     top: 50%;
     transform: translateY(-50%);
     display: inline-flex;
+    background: rgba(255,255,255,0.08);
     width: 48px;
     height: 48px;
     align-items: center;
     justify-content: center;
     border-radius: 100px;
+    animation: ${backBtnIn} 2s ease forwards;
 
     ${BackButton} {
         width: 48px;
@@ -245,6 +183,18 @@ const MobileNavBackButton = styled(`div`)`
         display: flex;
         align-items: center;
         justify-content: center;
+
+        i {
+            color: ${colors.white};
+        }
+    }
+`;
+
+const productBackBtn = css`
+    ${BackButton} {
+        i {
+            color: ${colors.mainDark};
+        }
     }
 `;
 
@@ -253,38 +203,6 @@ const MobileNavTitle = styled(FontStyle.h1)`
     width: 100%;
     text-align: center;
 `;
-
-const isIndexMobileStyle = css``;
-
-const isPostMobileStyle = css`
-    position: absolute;
-    left: 0;
-    top: 0;
-    
-    ${MobileNavBackButton} {
-        left: ${spacing.lg}px;
-
-        ${BackButton} {
-            border-radius: 100px;
-            background-color: rgba(0,0,0,0.12);
-    
-            i {
-                color: ${colors.white};
-            }
-        }
-    }
-`;
-
-const isStoreMobileStyle = css``;
-
-const isProductMobileStyle = css`
-    // height: 64px;
-
-    ${MobileNavTitle} {
-        font-size: 1.4rem;
-    }
-`;
-
 
 const backButton = (to) => (
     <BackButton to={to}>
@@ -296,119 +214,48 @@ const backButton = (to) => (
 /* --------------------------- DESKTOP NAVIGATION --------------------------- */
 
 class PureDesktopNavigation extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            unfixed: true,
-            pinned: false,
-            unpinned: false
-        };
-    }
-
-    headRoomUnfix = () => {
-        this.setState({
-            pinned: false,
-            unpinned: false,
-            unfixed: true
-        });
-    }
-
-    headRoomUnpin = () => {
-        this.setState({
-            unfixed: false,
-            pinned: false,
-            unpinned: true
-        });
-    }
-
-    headRoomPin = () => {
-        this.setState({
-            unfixed: false,
-            unpinned: false,
-            pinned: true
-        });
-    }
 
     render() {
         const {
             data,
             viewportIs,
-            pageIs,
             toggleCart,
-            burgerClick,
             onFeaturedImage,
-            from,
             className
         } = this.props;
-
-        const { unfixed, pinned, unpinned } = this.state;
 
         const {
             menu
         } = data.site.siteMetadata;
 
-        const backLink = () => {
-            if ('' !== from) {
-                return from;
-            }
-
-            return '/';
-        }
-
         const siteLogo = <Logo viewportIs={viewportIs} />;
 
         const navLeft = (
             <NavLeftWrapper>
-                {(pageIs === 'Post' || pageIs === 'Product') ? backButton(backLink()) : <Link to='/'>{siteLogo}</Link>}
+                <Link to='/'>{siteLogo}</Link>
             </NavLeftWrapper>
         );
 
         const navCenter = (
             <NavCenterWrapper>
-                <MainMenu menu={menu} pageIs={pageIs} onFeaturedImage={onFeaturedImage} unfixed={unfixed} />
+                <MainMenu menu={menu} onFeaturedImage={onFeaturedImage} />
             </NavCenterWrapper>
         );
 
         const navRight = (
             <NavRightWrapper>
                 <CartToggleIcon toggle={toggleCart} />
-                <BurgerIcon onClick={burgerClick}>
-                    <OiIcon icon='oi-icon-menu' />
-                </BurgerIcon>
             </NavRightWrapper>
         );
 
         return (
-            <HeadroomWrapper
-                upTolerance={8}
-                downTolerance={8}
-                onUnfix={this.headRoomUnfix}
-                onUnpin={this.headRoomUnpin}
-                onPin={this.headRoomPin}
-                pinStart={viewportIs === 'desktop' ? 40 : (viewportIs === 'tablet') ? 20 : 0}
-                css={[
-                    onFeaturedImage && onFeaturedImageStyle,
-                    unpinned && unpinnedStyle,
-                    pinned && pinnedStyle,
-                    unfixed && unfixedStyle,
-                ]}
-            >
-                <NavigationWrapper className={className}
-                    css={[
-                        pageIs === 'Post' && isPostStyle,
-                        pageIs === 'Index' && isIndexStyle,
-                        pageIs === 'Store' && isStoreStyle,
-                        pageIs === 'Product' && isProductStyle,
-                    ]}
-                >
-                    <NavigationInner>
-                        {navLeft}
-                        {navCenter}
-                        {navRight}
-                    </NavigationInner>
-                </NavigationWrapper>
-            </HeadroomWrapper>
+            <NavigationWrapper className={className}>
+                <NavigationInner>
+                    {navLeft}
+                    {navCenter}
+                    {navRight}
+                </NavigationInner>
+            </NavigationWrapper>
         );
     }
 }
@@ -458,15 +305,10 @@ export const MobileNavigation = ({
     }
 
     return (
-        <MobileNavWrapper className={className}
-            css={[
-                pageIs === 'Index' && isIndexMobileStyle,
-                pageIs === 'Post' && isPostMobileStyle,
-                pageIs === 'Store' && isStoreMobileStyle,
-                pageIs === 'Product' && isProductMobileStyle,
-            ]}
-        >
-            {(pageIs === 'Post' || pageIs === 'Product') && <MobileNavBackButton>{backButton(backLink())}</MobileNavBackButton>}
+        <MobileNavWrapper className={className}>
+            {(pageIs === 'Post' || pageIs === 'Product') &&
+                <MobileNavBackButton css={pageIs === 'Product' && productBackBtn}>{backButton(backLink())}</MobileNavBackButton>
+            }
             {mainTitle ? <MobileNavTitle>{mainTitle}</MobileNavTitle> : <LogoDesktop />}
         </MobileNavWrapper>
     );

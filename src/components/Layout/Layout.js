@@ -7,6 +7,7 @@ import { injectGlobal } from 'emotion';
 import StoreContext, { defaultStoreContext } from '../../context/StoreContext';
 import InterfaceContext, { defaultInterfaceContext } from '../../context/InterfaceContext';
 
+import Transition from './Transition';
 import OiIcon from '../OiIcon';
 import Cart from '../Cart';
 import CartIndicator from '../Cart/CartIndicator';
@@ -69,17 +70,17 @@ const LayoutWrapper = styled(`div`)`
     overflow: hidden;
 
     ${mediaQuery.tabletFrom} {
-      padding-top: ${dimensions.navPaddingTopTablet};
+      // padding-top: ${dimensions.navPaddingTopTablet};
     }
 
     ${mediaQuery.desktop} {
-      padding-top: ${dimensions.navPaddingTopDesktop};
+      // padding-top: ${dimensions.navPaddingTopDesktop};
     }
 `;
 
 const overlayOn = css`
   opacity: 1;
-  z-index: 2000;
+  z-index: 2500;
 `;
 
 const overlayOff = css`
@@ -468,8 +469,7 @@ class PureLayout extends React.Component {
                 productImageFeatured,
                 productImageFeaturedIndex,
                 toggleProductImagesBrowser,
-                hasFeaturedImage,
-                prevLink,
+                hasFeaturedImage
               }) => (
                   <StoreContext.Consumer>
                     {({ checkout, adding }) => {
@@ -504,11 +504,9 @@ class PureLayout extends React.Component {
                               {viewportIs !== null &&
                                 <DesktopNavigation
                                   viewportIs={viewportIs}
-                                  pageIs={pageIs}
                                   toggleCart={toggleCart}
                                   burgerClick={toggleSidebar}
                                   onFeaturedImage={hasFeaturedImage}
-                                  from={prevLink}
                                 />
                               }
                               {viewportIs === null &&
@@ -523,7 +521,9 @@ class PureLayout extends React.Component {
                                 productImagesBrowserStatus={productImagesBrowserStatus}
                                 location={location}
                               >
-                                {children}
+                                <Transition location={location}>
+                                  {children}
+                                </Transition>
                               </PageContent>
                               {currentProductImages.length > 0 && (
                                 <ProductImagesBrowser
@@ -535,7 +535,7 @@ class PureLayout extends React.Component {
                                   viewportIs={viewportIs}
                                 />
                               )}
-                              {viewportIs !== null && <Footer viewportIs={viewportIs} />}
+                              {/* {viewportIs !== null && <Footer viewportIs={viewportIs} />} */}
                             </>
                           )}
                         </Location>

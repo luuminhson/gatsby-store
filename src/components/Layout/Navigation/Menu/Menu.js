@@ -14,7 +14,6 @@ type Props = {
   isPost: bool,
   unfixed: bool,
   dark: bool,
-  onFeaturedImage: bool
 };
 
 const MenuWrapperInner = styled(`nav`)`
@@ -37,12 +36,6 @@ const MenuWrapper =  styled(`div`)`
     }
   }
 `;
-
-const UnfixedStyle = css`
-
-`;
-
-const onFeaturedImageStyle = css``;
 
 const MenuList = styled(`ul`)`
   list-style: none;
@@ -81,12 +74,8 @@ const MenuLinkActiveStyle = css`
   }
 `;
 
-const Menu = ({ menu, pageIs, unfixed, onFeaturedImage }: Props) => (
-  <MenuWrapper css={[
-    unfixed && UnfixedStyle,
-    onFeaturedImage && onFeaturedImageStyle,
-  ]}>
-    {pageIs !== 'Post' && (
+const Menu = ({ menu }: Props) => (
+  <MenuWrapper>
       <MenuWrapperInner>
         <MenuList>
           {menu.map((item) => (
@@ -103,7 +92,6 @@ const Menu = ({ menu, pageIs, unfixed, onFeaturedImage }: Props) => (
           ))}
         </MenuList>
       </MenuWrapperInner>
-    )}
   </MenuWrapper>
 );
 

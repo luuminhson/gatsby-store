@@ -42,7 +42,7 @@ const PageContentRoot = styled(`main`)`
   }
 
   .entry {
-    animation: ${pageTransition} .8s ease forwards;
+    // animation: ${pageTransition} .8s ease forwards;
   }
 
   @media (min-width: ${breakpoints.desktop}px) {

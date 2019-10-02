@@ -9,12 +9,11 @@ import ProductForm from './ProductForm';
 
 import InterfaceContext from '../../context/InterfaceContext';
 
-import { breakpoints, mediaQuery, colors, spacing, headerHeight, dimensions } from '../../utils/styles';
+import { FontStyle, breakpoints, mediaQuery, colors, spacing, headerHeight, dimensions } from '../../utils/styles';
 
 const ProductPageRoot = styled('div')`
-  // padding-top: ${headerHeight.mobileTopNav};
   padding-bottom: ${spacing.md}px;
-  margin: -${spacing.md}px auto 0;
+  margin: -${headerHeight.tablet} auto 0;
 
   ${mediaQuery.tabletFrom} {
     align-items: center;
@@ -23,10 +22,22 @@ const ProductPageRoot = styled('div')`
     background-color: ${colors.mainLight};
     padding: calc(${headerHeight.tablet} + ${spacing['4xl']}px + ${dimensions.navPaddingTopTablet}) ${spacing.xl}px calc(${headerHeight.tablet});
     width: 100%;
+    margin-top: calc(-${headerHeight.tablet} - ${spacing['4xl']}px);
   }
 
   ${mediaQuery.desktop} {
     padding-top: calc(${headerHeight.desktop} + ${spacing['4xl']}px + ${dimensions.navPaddingTopDesktop});
+    margin-top: calc(-${headerHeight.desktop} - ${spacing['4xl']}px);
+  }
+`;
+
+const ProductTitle = styled(FontStyle.h2)`
+  width: calc(100vw - ${spacing.xl * 2}px);
+  margin: ${spacing.lg}px auto ${spacing.md}px;
+  text-align: center;
+
+  ${mediaQuery.tabletFrom} {
+    display: none;
   }
 `;
 
@@ -82,6 +93,7 @@ class ProductPage extends Component {
           productImageFeaturedIndex,
         }) => (
           <ProductPageRoot>
+            <ProductTitle>{product.title}</ProductTitle>
             <Container>
               {( viewportIs !== 'desktop') && ( viewportIs !== 'tablet')  ? (
                 <ProductImagesMobile

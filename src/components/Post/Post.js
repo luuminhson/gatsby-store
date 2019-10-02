@@ -9,11 +9,19 @@ import Categories from './Categories';
 import BackgroundImage from 'gatsby-background-image';
 import type { Node } from '../../types';
 
-import { colors, mediaQuery, spacing } from '../../utils/styles';
+import { colors, mediaQuery, spacing, headerHeight } from '../../utils/styles';
 
 type Props = {
   post: Node
 };
+
+const PostWrapper = styled(`div`)`
+  margin-top: -${headerHeight.tablet};
+
+  ${mediaQuery.tabletFrom} {
+    margin-top: -${spacing['4xl']}px;
+  }
+`;
 
 const PostHero = styled(`div`)`
   position: relative;
@@ -191,13 +199,13 @@ const Post = ({ post }: Props) => {
   }
 
   return (
-    <div>
+    <PostWrapper>
       <PostHero>{postHeader()}</PostHero>
       <Content body={html} title={title} />
       <PostFooter>
         {tags && tagSlugs && <Tags tags={tags} tagSlugs={tagSlugs} />}
       </PostFooter>
-    </div>
+    </PostWrapper>
   );
 };
 

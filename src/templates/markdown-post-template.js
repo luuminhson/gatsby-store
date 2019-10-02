@@ -7,6 +7,7 @@ import Post from '../components/Post';
 import type { MarkdownRemark } from '../types';
 
 import InterfaceContext from '../context/InterfaceContext';
+import { delay } from 'q';
 
 type Props = {
   data: MarkdownRemark

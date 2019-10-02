@@ -17,11 +17,11 @@ const ProductListingContainer = styled(`div`)`
   margin: 0 auto;
 
   ${mediaQuery.tablet} {
-    padding: ${spacing.lg}px;
+    padding: 0 ${spacing.lg}px;
   }
 
   ${mediaQuery.desktop} {
-    padding: ${spacing.xl}px;
+    padding: 0 ${spacing.xl}px;
   }
 `;
 

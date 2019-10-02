@@ -30,7 +30,7 @@ const RelatedProductsWrapper = styled(`div`)`
 
     ${mediaQuery.tabletFrom} {
         margin: ${spacing['4xl']}px 0;
-        padding: 0 ${spacing['2xl']}px;
+        padding: 0 ${spacing.lg}px;
     }
 
     ${mediaQuery.desktop} {

@@ -4,9 +4,10 @@ import { graphql, StaticQuery } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { MobileNavigation } from '../Layout/Navigation';
+import Footer from '../Layout/Footer';
 
 import InterfaceContext from '../../context/InterfaceContext';
-import { mediaQuery, FontStyle, dimensions, spacing, headerHeight } from '../../utils/styles';
+import { mediaQuery, FontStyle, spacing } from '../../utils/styles';
 
 type Props = {
   title?: string,
@@ -28,11 +29,9 @@ const PageStyle = css`
 
 const PageInner = styled(`div`)`
   margin: 0 auto;
-  padding-bottom: ${spacing.xl}px;
   max-width: 100%;
 
   ${mediaQuery.tabletFrom} {
-    max-width: ${dimensions.indexPageWidth};
     padding-top: ${spacing['4xl']}px;
   }
 `;
@@ -42,92 +41,13 @@ const PageTitle = styled(FontStyle.h1)`
   text-align: center;
 `;
 
+const ProductPageTitle = css`
+  margin: 16px auto;
+`;
+
 export const PageBody = styled(`div`)`
   margin: 0 0 16px;
 `;
-
-const isIndexStyle = css``;
-
-const isStoreStyle = css`
-  ${PageInner} {
-    max-width: ${dimensions.storePageWidth};
-    padding-left: 0;
-    padding-right: 0;
-  }
-`;
-
-const isBlogStyle = css`
-  ${PageInner} {
-    margin: 0 auto;
-    padding-left: ${spacing.lg}px;
-    padding-right: ${spacing.lg}px;
-
-    ${mediaQuery.tabletFrom} {
-      max-width: ${dimensions.blogPageWidth};
-      padding-left: ${spacing.xl}px;
-      padding-right: ${spacing.xl}px;
-    }
-
-    ${mediaQuery.desktop} {
-      padding-left: ${spacing['4xl']}px;
-      padding-right: ${spacing['4xl']}px;
-    }
-  }
-`;
-
-const isPostStyle = css`
-  padding-top: 0;
-  
-  ${mediaQuery.tabletFrom} {
-    ${PageInner} {
-      max-width: 100%;
-      padding-top: 0;
-      margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet});
-    }
-  }
-
-  ${mediaQuery.desktop} {
-    ${PageInner} {
-      margin-top: calc(-${headerHeight.desktop} - ${dimensions.navPaddingTopDesktop});
-    }
-  }
-`;
-
-const isProductStyle = css`
-  padding-top: 0;
-
-  ${mediaQuery.tabletFrom} {
-    ${PageInner} {
-      max-width: 100%;
-      padding-top: 0;
-      margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet});
-    }
-  }
-
-  ${mediaQuery.desktop} {
-    ${PageInner} {
-      margin-top: calc(-${headerHeight.desktop} - ${dimensions.navPaddingTopDesktop});
-    }
-  }
-`;
-
-const isPageStyle = css``;
-
-const isMoreStyle = css`
-  ${PageInner} {
-    padding-top: ${spacing.sm}px;
-  }
-`;
-
-const withSidebarStyle = css`
-  ${mediaQuery.tabletFrom} {
-    ${PageInner} {
-      max-width: ${dimensions.blogWithSidebarPageWidth};
-    }
-  }
-`;
-
-const hasFeaturedImageStyle = css``;
 
 class PurePage extends React.Component<Props> {
 
@@ -153,15 +73,6 @@ class PurePage extends React.Component<Props> {
     return (
       <div css={[
         PageStyle,
-        pageIs === 'Index' && isIndexStyle,
-        pageIs === 'Store' && isStoreStyle,
-        pageIs === 'Blog' && isBlogStyle,
-        pageIs === 'Page' && isPageStyle,
-        pageIs === 'Product' && isProductStyle,
-        pageIs === 'Post' && isPostStyle,
-        pageIs === 'More' && isMoreStyle,
-        pageIs === 'Post' && hasFeaturedImage && hasFeaturedImageStyle,
-        withSidebar && withSidebarStyle,
         css
       ]}
         {...rest}
@@ -205,10 +116,11 @@ class PurePage extends React.Component<Props> {
           />
         }
         <PageInner>
-          {pageTitle && <PageTitle>{pageTitle}</PageTitle>}
+          {pageTitle && <PageTitle css={pageIs === 'Product' && ProductPageTitle}>{pageTitle}</PageTitle>}
           <PageBody>
             {children}
           </PageBody>
+          {viewportIs !== null && <Footer viewportIs={viewportIs} />}
         </PageInner>
       </div>
     );
@@ -235,13 +147,13 @@ export default props => (
     {({
       viewportIs,
       pageIs,
-      hasFeaturedImage
+      prevLink
     }) => (
         <Page
           {...props}
           viewportIs={viewportIs}
           pageIs={pageIs}
-          hasFeaturedImage={hasFeaturedImage}
+          from={prevLink}
         />
       )}
   </InterfaceContext.Consumer>
