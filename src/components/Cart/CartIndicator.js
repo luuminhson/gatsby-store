@@ -8,23 +8,26 @@ import OiIcon from '../OiIcon';
 
 const CartIndicatorRoot = styled(`div`)`
   background: ${colors.white};
-  border-radius: ${radius.large}px;
   color: ${colors.mainDark};
   display: flex;
-  justify-content: center;
   padding: ${spacing.lg}px;
   position: fixed;
-  top: calc(${dimensions.navHeightMobile} + 8px);
-  right: 24px;
+  top: 0;
+  right: 0;
+  width: 100vw;
   opacity: 0;
   will-change: transform;
-  transform: translate3d(0, 10%, 0);
+  transform: translate3d(0, -100%, 0);
   z-index: -1;
   box-shadow: 0 0 32px 0 rgba(0,0,0,0.12);
   transition: all 0.3s ease-in-out;
 
   ${mediaQuery.tabletFrom} {
+    width: auto;
+    border-radius: ${radius.large}px;
+    transform: translate3d(0, -50%, 0);
     top: calc(${dimensions.navHeightTablet} + 20px);
+    right: ${spacing.lg}px;
   }
 
   ${mediaQuery.desktop} {
@@ -72,11 +75,11 @@ class CartIndicator extends Component {
 
           setTimeout(
             () => this.setState({ visible: false }),
-            3000
+            4000
           );
           setTimeout(
             () => this.setState({ message: '' }),
-            3500
+            4500
           );
         }
       }
