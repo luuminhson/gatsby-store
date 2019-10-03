@@ -1,16 +1,23 @@
 // @flow
 import React from 'react';
 import { graphql } from 'gatsby';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import Page from '../components/Page';
 import type { MarkdownRemark } from '../types';
 
 import InterfaceContext from '../context/InterfaceContext';
+import { spacing } from '../utils/styles';
 
 type Props = {
   data: {
     markdownRemark: MarkdownRemark
   }
 };
+
+const PageTemplateWrapper = styled(`div`)`
+  padding: 0 ${spacing.lg}px ${spacing.lg}px;
+`;
 
 class PageTemplate extends React.Component<Props> {
 
@@ -28,8 +35,10 @@ class PageTemplate extends React.Component<Props> {
     const metaDescription = pageDescription !== null ? pageDescription : siteSubtitle;
 
     return (
-      <Page pageTitle={pageTitle} title={`${pageTitle} ‧ ${siteTitle}`} description={metaDescription} pageIs='Page'>
-        <div dangerouslySetInnerHTML={{ __html: pageBody }} />
+      <Page mainTitle={pageTitle} title={`${pageTitle} ‧ ${siteTitle}`} description={metaDescription} pageIs='Page'>
+        <PageTemplateWrapper>
+          <div dangerouslySetInnerHTML={{ __html: pageBody }} />
+        </PageTemplateWrapper>
       </Page>
     )
   }
