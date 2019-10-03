@@ -1,20 +1,43 @@
 import React, { Component } from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
+import { css, keyframes } from '@emotion/core';
 import PropTypes from 'prop-types';
 import { Link } from '../LinkWithPrev';
 import OiIcon from '../OiIcon';
 import CartNumber from '../Cart/CartNumber';
 
-import { colors, shadow, mediaQuery } from '../../utils/styles';
+import { colors, shadow, mediaQuery, dimensions } from '../../utils/styles';
 
-const navHeight = '52px';
+const botNavIn = keyframes`
+  0% {
+    transform: translateY(100%);
+  }
+  70% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
+
+const botNavOut = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+`;
 
 const BotNavWrapper = styled(`div`)`
     position: fixed;
     left: 0;
     bottom: 0;
+    animation: ${botNavIn} 1.5s ease forwards;
     z-index: 150;
 
     ${mediaQuery.tabletFrom} {
@@ -28,7 +51,7 @@ const BotNavInner = styled(`div`)`
     display: flex;
     align-items: stretch;
     width: 100vw;
-    height: ${navHeight};
+    height: ${dimensions.botNavHeight};
     background-color: ${colors.white};
     box-shadow: ${shadow.botNavShadow};
 `;
@@ -56,7 +79,7 @@ const NavItem = styled(`li`)`
 const NavItemLink = styled(Link)`
     flex: 1 0 100%;
     display: flex;
-    height: ${navHeight};
+    height: ${dimensions.botNavHeight};
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -89,13 +112,17 @@ const CartItemNumber = styled(CartNumber)`
 
 const isIndexStyle = css``;
 
-const isPostStyle = css``;
+const isPostStyle = css`
+    animation: ${botNavOut} 1.5s ease forwards;
+`;
 
 const isStoreStyle = css``;
 
 const isBlogStyle = css``;
 
-const isProductStyle = css``;
+const isProductStyle = css`
+    animation: ${botNavOut} 1.5s ease forwards;
+`;
 
 const isCartStyle = css``;
 
@@ -124,26 +151,24 @@ class PureBottomNavigation extends Component {
                     pageIs === 'More' && isMoreStyle
                 ]}
             >
-                { ( pageIs === 'Post' || pageIs === 'Product' ) ? null :
-                    <BotNavInner>
-                        <NavList>
-                            {botNav.map((item) => (
-                                <NavItem key={item.path}>
-                                    <NavItemLink
-                                        to={item.path}
-                                        css={BotNavLinkActiveStyle}
-                                        activeClassName='activeBotNavItem'
-                                        partiallyActive={item.path === '/' ? false : true}
-                                    >
-                                        <NavIcon icon={item.icon} />
-                                        <NavLabel>{item.label}</NavLabel>
-                                    </NavItemLink>
-                                </NavItem>
-                            ))}
-                        </NavList>
-                        <Link to='/cart'><CartItemNumber number={cartNumber} /></Link>
-                    </BotNavInner>
-                }
+                <BotNavInner>
+                    <NavList>
+                        {botNav.map((item) => (
+                            <NavItem key={item.path}>
+                                <NavItemLink
+                                    to={item.path}
+                                    css={BotNavLinkActiveStyle}
+                                    activeClassName='activeBotNavItem'
+                                    partiallyActive={item.path === '/' ? false : true}
+                                >
+                                    <NavIcon icon={item.icon} />
+                                    <NavLabel>{item.label}</NavLabel>
+                                </NavItemLink>
+                            </NavItem>
+                        ))}
+                    </NavList>
+                    <Link to='/cart'><CartItemNumber number={cartNumber} /></Link>
+                </BotNavInner>
             </BotNavWrapper>
         );
     }

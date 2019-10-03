@@ -116,6 +116,7 @@ export const dimensions = {
   navHeightMobile: '68px',
   navPaddingTopTablet: '20px',
   navPaddingTopDesktop: '40px',
+  botNavHeight: '52px',
   cartWidthDesktop: '480px',
   pictureBrowserAction: {
     widthDesktop: '200px',

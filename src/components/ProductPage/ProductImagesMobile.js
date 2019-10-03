@@ -4,12 +4,7 @@ import styled from '@emotion/styled';
 
 import ProductImage, { StyledImage } from './ProductImage';
 
-import {
-  breakpoints,
-  colors,
-  fontFamily,
-  radius,
-  spacing
+import { spacing, mediaQuery
 } from '../../utils/styles';
 
 const ProductImagesMobileRoot = styled(`div`)`
@@ -21,7 +16,7 @@ const ProductImagesMobileRoot = styled(`div`)`
     height: calc(100vw - ${spacing.lg}px);
   }
 
-  @media (min-width: ${breakpoints.tablet}px) {
+  ${mediaQuery.tabletFrom} {
     padding: ${spacing.xl}px;
     padding-bottom: ${spacing.lg}px;
   }
@@ -41,7 +36,7 @@ const ProductImagesMobileContent = styled(`div`)`
   ${StyledImage} {
     width: 100%;
 
-    @media (min-width: ${breakpoints.tablet}px) {
+    ${mediaQuery.tabletFrom} {
       margin-right: ${spacing.xl}px;
     }
   }

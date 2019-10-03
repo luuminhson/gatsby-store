@@ -161,6 +161,20 @@ const backBtnIn = keyframes`
     }
 `;
 
+const backBtnOut = keyframes`
+    0% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 1;
+        color: ${colors.white};
+    }
+    100% {
+        opacity: 0;
+        color: ${colors.white};
+    }
+`;
+
 const MobileNavBackButton = styled(`div`)`
     position: absolute;
     left: ${spacing.md + 4}px;
@@ -173,7 +187,8 @@ const MobileNavBackButton = styled(`div`)`
     align-items: center;
     justify-content: center;
     border-radius: 100px;
-    animation: ${backBtnIn} 2s ease forwards;
+    pointer-events: none;
+    animation: ${backBtnOut} 2s ease forwards;
 
     ${BackButton} {
         width: 48px;
@@ -186,14 +201,26 @@ const MobileNavBackButton = styled(`div`)`
 
         i {
             color: ${colors.white};
+            transition: color 2s ease;
         }
     }
 `;
 
-const productBackBtn = css`
+const enabledBackBtn = css`
+    pointer-events: auto;
+    animation: ${backBtnIn} 2s ease forwards;
+
     ${BackButton} {
         i {
             color: ${colors.mainDark};
+        }
+    }
+`;
+
+const postBackBtn = css`
+    ${BackButton} {
+        i {
+            color: ${colors.white};
         }
     }
 `;
@@ -297,7 +324,7 @@ export const MobileNavigation = ({
 }) => {
 
     const backLink = () => {
-        if ('' !== from) {
+        if (null !== from) {
             return from;
         }
 
@@ -306,9 +333,14 @@ export const MobileNavigation = ({
 
     return (
         <MobileNavWrapper className={className}>
-            {(pageIs === 'Post' || pageIs === 'Product') &&
-                <MobileNavBackButton css={pageIs === 'Product' && productBackBtn}>{backButton(backLink())}</MobileNavBackButton>
-            }
+            <MobileNavBackButton
+                css={[
+                    (pageIs === 'Post' || pageIs === 'Product') && enabledBackBtn,
+                    pageIs === 'Post' && postBackBtn,
+                ]}
+            >
+                {backButton(backLink())}
+            </MobileNavBackButton>
             {mainTitle ? <MobileNavTitle>{mainTitle}</MobileNavTitle> : <LogoDesktop />}
         </MobileNavWrapper>
     );

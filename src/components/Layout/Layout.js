@@ -66,16 +66,7 @@ injectGlobal`
 `;
 
 const LayoutWrapper = styled(`div`)`
-    padding-top: 0;
     overflow: hidden;
-
-    ${mediaQuery.tabletFrom} {
-      // padding-top: ${dimensions.navPaddingTopTablet};
-    }
-
-    ${mediaQuery.desktop} {
-      // padding-top: ${dimensions.navPaddingTopDesktop};
-    }
 `;
 
 const overlayOn = css`

@@ -31,8 +31,12 @@ const ProductPageRoot = styled('div')`
   }
 `;
 
-const ProductTitle = styled(FontStyle.h2)`
-  width: calc(100vw - ${spacing.xl * 2}px);
+const ProductTitle = styled(FontStyle.h3)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  width: calc(100vw - ${spacing.xl * 4}px);
   margin: ${spacing.lg}px auto ${spacing.md}px;
   text-align: center;
 

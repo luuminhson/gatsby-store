@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/core';
 
-import { breakpoints } from '../../utils/styles';
+import { breakpoints, headerHeight } from '../../utils/styles';
 
 const pageTransition = keyframes`
   from {

@@ -7,7 +7,7 @@ import { MobileNavigation } from '../Layout/Navigation';
 import Footer from '../Layout/Footer';
 
 import InterfaceContext from '../../context/InterfaceContext';
-import { mediaQuery, FontStyle, spacing } from '../../utils/styles';
+import { mediaQuery, FontStyle, spacing, dimensions } from '../../utils/styles';
 
 type Props = {
   title?: string,
@@ -46,7 +46,7 @@ const ProductPageTitle = css`
 `;
 
 export const PageBody = styled(`div`)`
-  margin: 0 0 16px;
+  margin: 0 0 ${dimensions.botNavHeight};
 `;
 
 class PurePage extends React.Component<Props> {
