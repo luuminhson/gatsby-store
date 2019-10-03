@@ -76,6 +76,7 @@ const overlayOn = css`
 
 const overlayOff = css`
   opacity: 0;
+  pointer-events: none;
   z-index: -1;
 `;
 

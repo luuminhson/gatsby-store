@@ -2,7 +2,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
 import Page from '../components/Page';
 import type { MarkdownRemark } from '../types';
 

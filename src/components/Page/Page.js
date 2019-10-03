@@ -39,6 +39,11 @@ const PageInner = styled(`div`)`
 const PageTitle = styled(FontStyle.h1)`
   margin: 40px auto;
   text-align: center;
+  display: none;
+
+  ${mediaQuery.tabletFrom} {
+    display: block;
+  }
 `;
 
 const ProductPageTitle = css`
