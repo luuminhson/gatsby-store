@@ -143,8 +143,7 @@ const MobileNavWrapper = styled(`div`)`
     height: ${headerHeight.tablet};
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 0 ${spacing.md + 4}px;
+    padding: 0 ${spacing.lg}px;
     z-index: 2000;
 `;
 
@@ -164,8 +163,8 @@ const backBtnOut = keyframes`
     0% {
         opacity: 1;
     }
-    30% {
-        opacity: 1;
+    50% {
+        opacity: 0;
         color: ${colors.white};
     }
     100% {
@@ -224,16 +223,72 @@ const postBackBtn = css`
     }
 `;
 
+const mainTitleIn = keyframes`
+    0% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+`;
+
+const mainTitleOut = keyframes`
+    0% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        z-index: -1;
+    }
+`;
+
 const MobileNavTitle = styled(FontStyle.h1)`
-    font-size: 2em;
+    font-size: 1.75em;
     width: 100%;
     text-align: center;
 `;
 
-const MobileNavLogo = css`
+const MobileNavLogo = styled(Logo)`
     svg {
+        width: 104px;
         height: 24px;
     }
+`;
+
+const MainTitleModule = styled(`div`)`
+    position: relative;
+    display: flex;
+    align-items: center;
+    animation: ${mainTitleIn} 2s ease forwards;
+
+    ${MobileNavTitle} {
+        padding-left: ${spacing.md}px;
+        margin-left: ${spacing.md}px;
+        position: relative;
+
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: block;
+            width: 1px;
+            height: 24px;
+            background-color: ${colors.neutral3};
+            opacity: 0.3;
+        }
+    }
+`;
+
+const detailScreenMainTitle = css`
+    animation: ${mainTitleOut} 2s ease forwards;
 `;
 
 const backButton = (to) => (
@@ -336,6 +391,13 @@ export const MobileNavigation = ({
         return '/';
     }
 
+    const mainTitleModule = (mainTitle) => (
+        <MainTitleModule css={(pageIs === 'Post' || pageIs === 'Product') && detailScreenMainTitle}>
+            <Link to='/' css={{lineHeight: 0}}><MobileNavLogo /></Link>
+            <MobileNavTitle>{mainTitle}</MobileNavTitle>
+        </MainTitleModule>
+    )
+
     return (
         <MobileNavWrapper className={className}>
             <MobileNavBackButton
@@ -346,7 +408,7 @@ export const MobileNavigation = ({
             >
                 {backButton(backLink())}
             </MobileNavBackButton>
-            {mainTitle ? <MobileNavTitle>{mainTitle}</MobileNavTitle> : <Logo css={MobileNavLogo} />}
+            {mainTitle ? mainTitleModule(mainTitle) : <MobileNavLogo />}
         </MobileNavWrapper>
     );
 }
