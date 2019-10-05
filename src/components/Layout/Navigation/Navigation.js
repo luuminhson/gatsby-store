@@ -185,8 +185,7 @@ const MobileNavBackButton = styled(`div`)`
     align-items: center;
     justify-content: center;
     border-radius: 100px;
-    pointer-events: none;
-    animation: ${backBtnOut} 2s ease forwards;
+    animation: ${backBtnIn} 1.5s ease forwards;
 
     ${BackButton} {
         width: 48px;
@@ -196,22 +195,6 @@ const MobileNavBackButton = styled(`div`)`
         display: flex;
         align-items: center;
         justify-content: center;
-
-        i {
-            color: ${colors.white};
-            transition: color 2s ease;
-        }
-    }
-`;
-
-const enabledBackBtn = css`
-    pointer-events: auto;
-    animation: ${backBtnIn} 2s ease forwards;
-
-    ${BackButton} {
-        i {
-            color: ${colors.mainDark};
-        }
     }
 `;
 
@@ -265,7 +248,6 @@ const MainTitleModule = styled(`div`)`
     position: relative;
     display: flex;
     align-items: center;
-    animation: ${mainTitleIn} 2s ease forwards;
 
     ${MobileNavTitle} {
         padding-left: ${spacing.md}px;
@@ -285,10 +267,6 @@ const MainTitleModule = styled(`div`)`
             opacity: 0.3;
         }
     }
-`;
-
-const detailScreenMainTitle = css`
-    animation: ${mainTitleOut} 2s ease forwards;
 `;
 
 const backButton = (to) => (
@@ -392,23 +370,22 @@ export const MobileNavigation = ({
     }
 
     const mainTitleModule = (mainTitle) => (
-        <MainTitleModule css={(pageIs === 'Post' || pageIs === 'Product') && detailScreenMainTitle}>
-            <Link to='/' css={{lineHeight: 0}}><MobileNavLogo /></Link>
+        <MainTitleModule>
+            <Link to='/' css={{ lineHeight: 0 }}><MobileNavLogo /></Link>
             <MobileNavTitle>{mainTitle}</MobileNavTitle>
         </MainTitleModule>
     )
 
     return (
         <MobileNavWrapper className={className}>
-            <MobileNavBackButton
-                css={[
-                    (pageIs === 'Post' || pageIs === 'Product') && enabledBackBtn,
-                    pageIs === 'Post' && postBackBtn,
-                ]}
-            >
-                {backButton(backLink())}
-            </MobileNavBackButton>
-            {mainTitle ? mainTitleModule(mainTitle) : <MobileNavLogo />}
+            {(pageIs === 'Post' || pageIs === 'Product') &&
+                <MobileNavBackButton css={pageIs === 'Post' && postBackBtn}>
+                    {backButton(backLink())}
+                </MobileNavBackButton>
+            }
+            {(pageIs === 'Post' || pageIs === 'Product') ? null :
+               ( mainTitle ? mainTitleModule(mainTitle): <MobileNavLogo /> )
+            }
         </MobileNavWrapper>
     );
 }

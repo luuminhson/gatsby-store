@@ -8,7 +8,7 @@ import { breakpoints, headerHeight } from '../../utils/styles';
 const pageTransition = keyframes`
   from {
     opacity: .8;
-    transform: translateY(4px);
+    transform: translate3d(0, 4px, 0);
   }
 `;
 
@@ -34,7 +34,7 @@ const PageContentRoot = styled(`main`)`
   padding-left: 0;
   transition: 0.75s;
   width: 100%;
-  animation: ${startFade} 1.2s ease forwards;
+  animation: ${startFade} 1.5s ease forwards;
 
   .covered {
     opacity: 0;
@@ -42,7 +42,7 @@ const PageContentRoot = styled(`main`)`
   }
 
   .entry {
-    // animation: ${pageTransition} .8s ease forwards;
+    animation: ${pageTransition} .5s ease forwards;
   }
 
   @media (min-width: ${breakpoints.desktop}px) {

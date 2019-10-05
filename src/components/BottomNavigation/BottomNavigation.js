@@ -120,9 +120,7 @@ const isStoreStyle = css``;
 
 const isBlogStyle = css``;
 
-const isProductStyle = css`
-    animation: ${botNavOut} 1.5s ease forwards;
-`;
+const isProductStyle = css``;
 
 const isCartStyle = css``;
 

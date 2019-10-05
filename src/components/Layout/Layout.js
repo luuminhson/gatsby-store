@@ -7,7 +7,6 @@ import { injectGlobal } from 'emotion';
 import StoreContext, { defaultStoreContext } from '../../context/StoreContext';
 import InterfaceContext, { defaultInterfaceContext } from '../../context/InterfaceContext';
 
-import Transition from './Transition';
 import OiIcon from '../OiIcon';
 import Cart from '../Cart';
 import CartIndicator from '../Cart/CartIndicator';
@@ -188,7 +187,7 @@ class PureLayout extends React.Component {
       },
       setPrevLink: (location, defaultLocation) => {
         const locationState = location.state;
-  
+
         if (locationState == null) {
           this.setState(state => ({
             interface: {
@@ -513,9 +512,7 @@ class PureLayout extends React.Component {
                                 productImagesBrowserStatus={productImagesBrowserStatus}
                                 location={location}
                               >
-                                <Transition location={location}>
-                                  {children}
-                                </Transition>
+                                {children}
                               </PageContent>
                               {currentProductImages.length > 0 && (
                                 <ProductImagesBrowser
@@ -527,7 +524,6 @@ class PureLayout extends React.Component {
                                   viewportIs={viewportIs}
                                 />
                               )}
-                              {/* {viewportIs !== null && <Footer viewportIs={viewportIs} />} */}
                             </>
                           )}
                         </Location>
