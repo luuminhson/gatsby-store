@@ -19,10 +19,10 @@ type Props = {
 const FeedWrapper = styled(`div`)`
   max-width: ${dimensions.blogPageWidth};
   margin: 0 auto;
-  padding: ${spacing.md - 4}px ${spacing.lg}px;
+  padding: ${spacing.md - 4}px ${spacing.lg}px ${spacing.xl}px;
 
   ${mediaQuery.tabletFrom} {
-    padding: ${spacing.md - 4}px ${spacing.xl}px;
+    padding: ${spacing.md - 4}px ${spacing.xl}px ${spacing['2xl']}px;
   }
 `;
 
@@ -54,9 +54,10 @@ class BlogTemplate extends React.Component<Props> {
 
     return (
       <Page mainTitle='Blog' withSidebar={hasSidebar} title={pageTitle} description={description} pageIs='Blog'>
+        {console.log(hasPrevPage)}
         <FeedWrapper>
           <Feed edges={edges} />
-          {hasNextPage &&
+          {(hasNextPage || hasPrevPage) &&
             <Pagination
               prevPagePath={prevPagePath}
               nextPagePath={nextPagePath}
@@ -64,7 +65,7 @@ class BlogTemplate extends React.Component<Props> {
               hasNextPage={hasNextPage}
             />
           }
-          {hasSidebar && <StaticSidebar />}
+          {/* {hasSidebar && <StaticSidebar />} */}
         </FeedWrapper>
       </Page>
     )

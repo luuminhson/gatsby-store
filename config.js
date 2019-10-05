@@ -6,7 +6,7 @@ module.exports = {
     subtitle: 'Fine Bags & Accessories',
     description: 'We create bags and accessories that aim to serve your well-living everyday with the spirit of being humble and focusing on orignal matters.',
     copyright: 'ORINS © All rights reserved.',
-    postsPerPage: 10,
+    postsPerPage: 5,
     googleAnalyticsId: '',
     menu: [
         {
