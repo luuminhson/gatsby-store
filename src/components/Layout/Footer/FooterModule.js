@@ -46,10 +46,10 @@ export const FooterModuleWrapper = styled(`div`)`
 
     :nth-of-type(1) {
         .expanded {
-            max-height: 213px;
+            max-height: 237px;
 
             ${mediaQuery.phoneSmall} {
-                max-height: 237px;
+                max-height: 261px;
             }
         }
     }

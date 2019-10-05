@@ -29,7 +29,7 @@ type Props = {
 
 const CustomFooter = styled(Footer)`
     background-color: ${colors.white};
-    padding: 0;
+    padding: ${spacing.sm}px 0 0;
 
     ${FooterModuleWrapper} {
             :nth-of-type(1) {

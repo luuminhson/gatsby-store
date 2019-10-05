@@ -198,7 +198,7 @@ const Footer = ({ viewportIs, ...rest }) => {
       <FooterWrapperInner>
         <Module viewportIs={viewportIs} title='About ORINS'>
           <AboutDesc>
-            <AboutText>We create bags and accessories that aim to serve your well-living everyday with the spirit of being humble and focusing on original matters.</AboutText>
+            <AboutText>ORINS is crafted from “Original Inside”. We create bags and accessories that aim to serve your well-living everyday with the spirit of being humble and focusing on original matters.</AboutText>
             <Link to='/about'>Read More</Link>
           </AboutDesc>
         </Module>
