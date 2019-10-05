@@ -134,7 +134,7 @@ class MoreTemplate extends React.Component<Props> {
                             <Link to='/terms-and-conditions'>Terms &amp; Conditions</Link>
                         </li>
                         <li>
-                            <span css={copyrightText}>Original Inside © 2019 - All right reserved</span>
+                            <span css={copyrightText}>ORINS © 2019 - All right reserved</span>
                         </li>
                         <li css={wishingANiceDay}>
                             <span css={wishText}>Wish you a nice day!</span>

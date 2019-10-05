@@ -99,7 +99,7 @@ class PurePage extends React.Component<Props> {
           <meta name="theme-color" content="#ffffff" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-          <meta name="apple-mobile-web-app-title" content="Original Inside" />
+          <meta name="apple-mobile-web-app-title" content="ORINS" />
 
           <meta property="og:url" content={siteUrl} />
           <meta property="og:type" content="website" />
@@ -109,7 +109,7 @@ class PurePage extends React.Component<Props> {
           <meta property="og:description" content={description} />
 
           <meta property="og:image" content={`${siteUrl}/instagram-doraforscale.jpg`} />
-          <meta property="og:image:alt" content="We are Original Inside." />
+          <meta property="og:image:alt" content="We are ORINS." />
           <meta property="og:image:width" content="1280" />
           <meta property="og:image:height" content="686" />
         </Helmet>

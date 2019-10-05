@@ -96,7 +96,7 @@ module.exports = {
               }
             `,
           output: '/rss.xml',
-          title: "Original Inside's RSS Feed",
+          title: "ORINS's RSS Feed",
           match: "^/blog/",
         }]
       }
@@ -190,8 +190,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'Original Inside',
-        short_name: 'Original Inside',
+        name: 'ORINS',
+        short_name: 'ORINS',
         start_url: '/',
         background_color: '#ffffff',
         theme_color: '#ffffff',

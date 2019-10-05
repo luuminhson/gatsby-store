@@ -196,7 +196,7 @@ const Footer = ({ viewportIs, ...rest }) => {
   return (
     <FooterWrapper {...rest}>
       <FooterWrapperInner>
-        <Module viewportIs={viewportIs} title='About Original Inside'>
+        <Module viewportIs={viewportIs} title='About ORINS'>
           <AboutDesc>
             <AboutText>We create bags and accessories that aim to serve your well-living everyday with the spirit of being humble and focusing on original matters.</AboutText>
             <Link to='/about'>Read More</Link>
@@ -234,7 +234,7 @@ const Footer = ({ viewportIs, ...rest }) => {
                 <Link to='/terms-and-conditions'>Terms &amp; Conditions</Link>
               </li>
               <li css={Copyright}>
-                <span css={copyrightText}>Original Inside © 2019 - All right reserved</span>
+                <span css={copyrightText}>ORINS © 2019 - All right reserved</span>
               </li>
               <li css={wishingANiceDay}>
                 <span css={wishText}>Wish you a nice day!</span>

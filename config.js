@@ -2,10 +2,10 @@
 
 module.exports = {
     siteUrl: 'https://originalinside.com',
-    title: 'Original Inside',
+    title: 'ORINS',
     subtitle: 'Fine Bags & Accessories',
     description: 'We create bags and accessories that aim to serve your well-living everyday with the spirit of being humble and focusing on orignal matters.',
-    copyright: 'Original Inside © All rights reserved.',
+    copyright: 'ORINS © All rights reserved.',
     postsPerPage: 10,
     googleAnalyticsId: '',
     menu: [
