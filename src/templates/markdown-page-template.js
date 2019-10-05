@@ -6,7 +6,7 @@ import Page from '../components/Page';
 import type { MarkdownRemark } from '../types';
 
 import InterfaceContext from '../context/InterfaceContext';
-import { spacing } from '../utils/styles';
+import { spacing, mediaQuery } from '../utils/styles';
 
 type Props = {
   data: {
@@ -16,6 +16,14 @@ type Props = {
 
 const PageTemplateWrapper = styled(`div`)`
   padding: 0 ${spacing.lg}px ${spacing.lg}px;
+
+  ${mediaQuery.tabletFrom} {
+    padding: 0 ${spacing.xl + 4}px ${spacing.xl}px;
+  }
+
+  ${mediaQuery.desktop} {
+    padding: 0 ${spacing['4xl']}px ${spacing.lg}px;
+  }
 `;
 
 class PageTemplate extends React.Component<Props> {

@@ -1,15 +1,24 @@
 // @flow
 import React from 'react';
 import { graphql } from 'gatsby';
+import styled from '@emotion/styled';
+import { css, keyframes } from '@emotion/core';
 import Page from '../components/Page';
 import Strip from '../components/Strip';
 import type { AllMarkdownRemark } from '../types';
 
 import InterfaceContext from '../context/InterfaceContext';
+import { mediaQuery, spacing } from '../utils/styles';
 
 type Props = {
   data: AllMarkdownRemark
 };
+
+const IndexWrapper = styled(`div`)`
+  ${mediaQuery.desktop} {
+    padding: 0 ${spacing.lg + 4}px;
+  }
+`;
 
 class IndexTemplate extends React.Component<Props> {
 
@@ -24,7 +33,9 @@ class IndexTemplate extends React.Component<Props> {
 
     return (
       <Page title={`${title} ‧ ${subtitle}`} description={description} pageIs='Index'>
-        <Strip edges={blogPost} sectionTitle='Articles' sectionLink='/blog' sectionLinkLabel='See All' />
+        <IndexWrapper>
+          <Strip edges={blogPost} sectionTitle='Articles' sectionLink='/blog' sectionLinkLabel='See All' />
+        </IndexWrapper>
       </Page>
     )
   }

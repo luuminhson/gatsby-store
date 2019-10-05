@@ -20,13 +20,13 @@ const ProductPageRoot = styled('div')`
     display: flex;
     justify-content: center;
     background-color: ${colors.mainLight};
-    padding: calc(${headerHeight.tablet} + ${spacing['4xl']}px + ${dimensions.navPaddingTopTablet}) ${spacing.xl}px calc(${headerHeight.tablet});
+    padding: calc(${headerHeight.tablet} + ${spacing['4xl']}px) ${spacing.xl}px calc(${headerHeight.tablet});
     width: 100%;
     margin-top: calc(-${headerHeight.tablet} - ${spacing['4xl']}px);
   }
 
   ${mediaQuery.desktop} {
-    padding-top: calc(${headerHeight.desktop} + ${spacing['4xl']}px + ${dimensions.navPaddingTopDesktop});
+    padding-top: calc(${headerHeight.desktop} + ${spacing['4xl']}px);
     margin-top: calc(-${headerHeight.desktop} - ${spacing['4xl']}px);
   }
 `;
