@@ -2,11 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, StaticQuery } from 'gatsby';
-import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 import { css, keyframes } from '@emotion/core';
-import Headroom from 'react-headroom';
-import Logo, { LogoDesktop } from './Logo';
+import { Link } from 'gatsby';
+import Logo from './Logo';
 import Menu from './Menu';
 import OiIcon from '../../OiIcon';
 import CartToggle from '../../Cart/CartToggle';
@@ -231,6 +230,12 @@ const MobileNavTitle = styled(FontStyle.h1)`
     text-align: center;
 `;
 
+const MobileNavLogo = css`
+    svg {
+        height: 24px;
+    }
+`;
+
 const backButton = (to) => (
     <BackButton to={to}>
         <OiIcon icon='oi-icon-arrow-back' />
@@ -255,7 +260,7 @@ class PureDesktopNavigation extends React.Component {
             menu
         } = data.site.siteMetadata;
 
-        const siteLogo = <Logo viewportIs={viewportIs} />;
+        const siteLogo = <Logo />;
 
         const navLeft = (
             <NavLeftWrapper>
@@ -341,7 +346,7 @@ export const MobileNavigation = ({
             >
                 {backButton(backLink())}
             </MobileNavBackButton>
-            {mainTitle ? <MobileNavTitle>{mainTitle}</MobileNavTitle> : <LogoDesktop />}
+            {mainTitle ? <MobileNavTitle>{mainTitle}</MobileNavTitle> : <Logo css={MobileNavLogo} />}
         </MobileNavWrapper>
     );
 }
