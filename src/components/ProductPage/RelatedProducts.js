@@ -100,7 +100,7 @@ const RelatedProducts = ({ edges, limit }: Props) => {
 
     return (
         <RelatedProductsWrapper>
-            <SectionTitleWrapper title='You Might Also Like' />
+            <SectionTitleWrapper>You Might Also Like</SectionTitleWrapper>
             <RelatedProductList>
                 <RelatedProductListInner>
                     {productList.map((edge) => (

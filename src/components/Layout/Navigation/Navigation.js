@@ -269,6 +269,16 @@ const MainTitleModule = styled(`div`)`
     }
 `;
 
+const MobileNavHome = css`
+    ${MobileNavLogo} {
+        svg {
+            fill: ${colors.white};
+            width: 122px;
+            height: 28px; 
+        }
+    }
+`;
+
 const backButton = (to) => (
     <BackButton to={to}>
         <OiIcon icon='oi-icon-arrow-back' />
@@ -377,7 +387,7 @@ export const MobileNavigation = ({
     )
 
     return (
-        <MobileNavWrapper className={className}>
+        <MobileNavWrapper className={className} css={pageIs === 'Index' && MobileNavHome}>
             {(pageIs === 'Post' || pageIs === 'Product') &&
                 <MobileNavBackButton css={pageIs === 'Post' && postBackBtn}>
                     {backButton(backLink())}

@@ -22,7 +22,7 @@ const scrollbarHiddenPadding = '4.8rem';
 
 const Wrapper = styled(`div`)`
     margin: 0;
-    height: 380px;
+    height: 310px;
     overflow: hidden;
 
     ${mediaQuery.tabletFrom} {
@@ -46,7 +46,8 @@ const StripWrapper = styled(`div`)`
         scroll-snap-type: none;
         overflow: visible;
         flex-wrap: wrap;
-        padding: 0 ${spacing.md}px 20px;
+        margin: 0 -${spacing.lg}px;
+        padding: 0 ${spacing.xs}px 20px;
     }
 `;
 
@@ -87,6 +88,10 @@ const StripItem = styled(`div`)`
         max-width: calc(33.3333%);
         padding: 0 1rem;
         margin-bottom: 36px;
+
+        &:last-child {
+            padding-right: 1rem;
+        }
 
         &.has-featured-image {
             .strip-item-inner {
@@ -170,9 +175,13 @@ const StripLayout = (edge) => {
     }
 }
 
-const Strip = ({ edges, sectionTitle, sectionLink, sectionLinkLabel }: Props) => (
-    <Wrapper>
-        <SectionTitle css={SectionTitleStyle} title={sectionTitle} actionLink={sectionLink} actionLabel={sectionLinkLabel} />
+const Strip = ({ edges, sectionTitle, subtitle, sectionLink, sectionLinkLabel, ...rest }: Props) => (
+    <Wrapper {...rest}>
+        {sectionTitle &&
+            <SectionTitle css={SectionTitleStyle} subtitle={subtitle} actionLink={sectionLink} actionLabel={sectionLinkLabel}>
+                {sectionTitle}
+            </SectionTitle>
+        }
         <StripWrapper>
             {edges.map((edge) => (
                 <StripItem className={edge.node.frontmatter.featuredImage && 'has-featured-image'} key={edge.node.fields.slug}>

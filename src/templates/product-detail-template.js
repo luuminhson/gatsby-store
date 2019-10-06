@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
+import styled from '@emotion/styled';
 import { Location } from '@reach/router';
 import Helmet from 'react-helmet';
 import Page from '../components/Page';
@@ -7,6 +8,11 @@ import Page from '../components/Page';
 import InterfaceContext from '../context/InterfaceContext';
 import ProductPage from '../components/ProductPage';
 import RelatedProducts from '../components/ProductPage/RelatedProducts';
+import { spacing } from '../utils/styles';
+
+const ProductDetailWrapper = styled(`div`)`
+  padding-bottom: ${spacing.xs}px;
+`;
 
 class ProductDetailTemplate extends Component {
 
@@ -38,7 +44,7 @@ class ProductDetailTemplate extends Component {
 
     return (
       <Page title={`${productTitle} — ${productCategory} ‧ ${site.siteMetadata.title}`} description={description} from={prevLink} pageIs='Product'>
-        <div>
+        <ProductDetailWrapper>
           <Helmet>
             <meta
               property="og:url"
@@ -67,7 +73,7 @@ class ProductDetailTemplate extends Component {
             setCurrentProductImages={setCurrentProductImages}
           />
           <RelatedProducts edges={relatedProducts.edges} limit={4} />
-        </div>
+        </ProductDetailWrapper>
       </Page>
     )
   }
@@ -118,6 +124,7 @@ export const query = graphql`
       title
       handle
       description
+      descriptionHtml
       productType
       variants {
         shopifyId
@@ -134,7 +141,7 @@ export const query = graphql`
             resize(width: 1000, height: 1000) {
               src
             }
-            fluid(maxWidth: 1000) {
+            fluid(maxWidth: 1000, quality: 100) {
               ...GatsbyImageSharpFluid
             }
           }
@@ -167,7 +174,7 @@ export const query = graphql`
                 resize(width: 910, height: 910) {
                   src
                 }
-                fluid(maxWidth: 910) {
+                fluid(maxWidth: 910, quality: 80) {
                   ...GatsbyImageSharpFluid
                 }
               }

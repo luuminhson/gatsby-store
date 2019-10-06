@@ -92,7 +92,7 @@ export const query = graphql`
                 resize(width: 910, height: 910) {
                   src
                 }
-                fluid(maxWidth: 910) {
+                fluid(maxWidth: 910, quality: 80) {
                   ...GatsbyImageSharpFluid
                 }
               }

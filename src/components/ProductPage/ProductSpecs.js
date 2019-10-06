@@ -45,11 +45,13 @@ const SalePrice = styled(FontStyle.h4)`
   opacity: 0.5;
 `;
 
+const ProductDescription = styled(`div`)``;
+
 const ProductSpecs = props => {
   const {
     product: {
       title,
-      description,
+      descriptionHtml,
       variants: [variant]
     }
   } = props;
@@ -65,7 +67,7 @@ const ProductSpecs = props => {
           <SalePrice>{priceWithCommas(compareAtPrice)} VND</SalePrice>
         }
       </PriceRow>
-      <FontStyle.body>{description}</FontStyle.body>
+      <ProductDescription dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
     </ProductSpecsRoot>
   );
 };

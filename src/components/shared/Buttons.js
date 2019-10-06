@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { Link } from 'gatsby';
+import { Link } from '../LinkWithPrev';
 
-import { colors, fontFamily, radius } from '../../utils/styles';
+import { colors, fontFamily, radius, fontWeight } from '../../utils/styles';
 
 export const ButtonBase = styled(`button`)`
   align-items: center;
@@ -16,11 +16,11 @@ export const ButtonBase = styled(`button`)`
   height: 50px;
   display: inline-flex;
   font-family: ${fontFamily.heading};
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 0.9rem;
+  font-weight: ${fontWeight.heading.normal};
   letter-spacing: 0.2px;
   justify-content: center;
-  padding: 0.85rem 1.125rem;
+  padding: 0.85rem 1.25rem;
   transition: 0.5s;
 
   :focus {
@@ -100,9 +100,6 @@ Button.propTypes = {
 export const PrimaryButton = styled(Button)`
   background: ${colors.mainClickable};
   color: ${colors.white};
-  display: flex;
-  font-size: 1rem;
-  justify-content: center;
 
   :focus {
     background: ${colors.mainClickable};
