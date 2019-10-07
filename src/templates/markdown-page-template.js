@@ -6,7 +6,7 @@ import Page from '../components/Page';
 import type { MarkdownRemark } from '../types';
 
 import InterfaceContext from '../context/InterfaceContext';
-import { spacing, mediaQuery } from '../utils/styles';
+import { spacing, mediaQuery, dimensions, FontStyle } from '../utils/styles';
 
 type Props = {
   data: {
@@ -16,13 +16,33 @@ type Props = {
 
 const PageTemplateWrapper = styled(`div`)`
   padding: 0 ${spacing.lg}px ${spacing.lg}px;
+  margin: 0 auto;
 
   ${mediaQuery.tabletFrom} {
+    max-width: ${dimensions.blogWithSidebarPageWidth};
     padding: 0 ${spacing.xl + 4}px ${spacing.xl}px;
   }
 
   ${mediaQuery.desktop} {
     padding: 0 ${spacing['4xl']}px ${spacing.lg}px;
+  }
+`;
+
+const PageTitleMobile = styled(FontStyle.h1)`
+  font-size: 1.8rem;
+
+  ${mediaQuery.tabletFrom} {
+    display: none;
+  }
+`;
+
+const PageBody = styled(`div`)`
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.4em;
+  }
+
+  p {
+    line-height: 1.8rem;
   }
 `;
 
@@ -42,9 +62,10 @@ class PageTemplate extends React.Component<Props> {
     const metaDescription = pageDescription !== null ? pageDescription : siteSubtitle;
 
     return (
-      <Page mainTitle={pageTitle} title={`${pageTitle} ‧ ${siteTitle}`} description={metaDescription} pageIs='Page'>
+      <Page mainTitle={null} pageTitle={pageTitle} title={`${pageTitle} ‧ ${siteTitle}`} description={metaDescription} pageIs='Page'>
         <PageTemplateWrapper>
-          <div dangerouslySetInnerHTML={{ __html: pageBody }} />
+          <PageTitleMobile>{pageTitle}</PageTitleMobile>
+          <PageBody dangerouslySetInnerHTML={{ __html: pageBody }} />
         </PageTemplateWrapper>
       </Page>
     )
