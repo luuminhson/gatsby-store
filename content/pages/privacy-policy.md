@@ -4,58 +4,102 @@ template: "page"
 slug: /privacy-policy
 ---
 
-ORINS hiểu dữ liệu về thông tin cá nhân và quyền riêng tư của bạn quan trọng nhường nào và luôn đặt điều đó lên ưu tiên cao nhất. Văn bản này chứa các thông tin chính thức của chúng tôi về việc sử dụng và bảo mật thông tin của bạn cũng như mọi khách hàng truy cập vào website này. Nếu bạn không đồng ý với những chính sách liệt kê trong văn bản này, bạn không nên sử dụng website của chúng tôi.
+ORINS tôn trọng dữ liệu và quyền riêng tư của bạn. Văn bản này chứa các thông tin chính thức của chúng tôi về việc sử dụng và bảo mật thông tin của bạn cũng như mọi khách hàng truy cập vào website này. Nếu bạn không đồng ý với những chính sách liệt kê trong văn bản này, bạn không nên sử dụng sản phẩm hoặc dịch vụ của chúng tôi.
 
-## Về việc thu thập thông tin cá nhân
+# I. Về việc thu thập thông tin
 
 Việc thu thập thông tin cá nhân của khách hàng trên website ORINS.design luôn được chúng tôi cố gắng giữ ở mức tối thiểu nhất có thể. Đó là một định hướng hoạt động của chúng tôi.
 
-Chúng tôi chia việc thu thập thông tin cá nhân của người dùng website làm ba giai đoạn: trước, trong khi và sau khi thanh toán.
+Dưới đây liệt kê các thông tin mà chúng tôi có thể thu thập từ bạn trong quá trình bạn sử dụng sản phẩm hoặc dịch vụ của ORINS.
 
-### Trước khi thanh toán
+## Thông tin giỏ hàng
+- Sản phẩm bạn chọn để đặt hàng
+- Tổng số tiền cho những sản phẩm bạn đã chọn
 
-Bạn không cần phải có tài khoản và đăng nhập để tra cứu thông tin trên website của chúng tôi.
+## Thông tin đặt hàng và thanh toán
+- Họ và tên (bắt buộc)
+- Địa chỉ email
+- Địa chỉ thanh toán
+- Địa chỉ giao hàng (bắt buộc)
+- Số điện thoại (bắt buộc)
+- Ghi chú về đơn hàng
 
-Chúng tôi cũng không sử dụng bất cứ hình thức liên kết với tài khoản của các dịch vụ online nào khác để yêu cầu bạn đăng nhập trước khi thanh toán. Chúng tôi chỉ sử dụng cookies trên trình duyệt web của bạn để lưu thông tin về giỏ hàng, nơi chứa các sản phẩm mà bạn chọn để đặt hàng. Khi bạn xoá cookies trên trình duyệt của mình, thông tin về sản phẩm đã lưu trong giỏ hàng sẽ biến mất.
+## Thông tin chăm sóc khách hàng
+- Thông tin bổ sung trong quá trình đặt hàng và giao hàng (địa chỉ thay đổi hoặc bổ sung, số tài khoản ngân hàng để hoàn tiền, thông tin người uỷ quyền nhận hàng…)
+- Thông tin phản hồi, góp ý từ khách hàng
 
-### Trong khi thanh toán
+## Các dữ liệu thống kê
+- Dữ liệu về đơn hàng đã tạo
+- Dữ liệu về việc truy cập website (thời gian, vị trí địa lý, loại trình duyệt, số lần truy cập …)
 
-Bạn không cần phải có tài khoản và đăng nhập để thanh toán cho đơn hàng trên website của chúng tôi.
+## Các thông tin khác
+- Tất cả các thông tin khác mà khách hàng chia sẻ hoặc cung cấp mặc dù không được yêu cầu
 
-Trong quá trình thanh toán, chúng tôi có yêu cầu bạn nhập một số thông tin cần thiết để phục vụ việc giao hàng như tên, địa chỉ và số điện thoại. Thiếu những thông tin này, việc giao hàng sẽ không thể hoàn tất.
+# II. Về việc bảo mật thông tin
+
+Các thông tin mà bạn cung cấp nêu trên đều được bảo mật trên hệ thống của chúng tôi. Website của chúng tôi sử dụng máy chủ có chế độ Tường Lửa (Fire Wall) và hình thức mã hoá tiêu chuẩn quốc tế Secure Socket Layer (SSL) để bảo mật cho các thông tin quan trọng như mật khẩu hoặc mã PIN thẻ tín dụng cũng như tránh rủi ro mất mát thông tin.
+
+Mặc dù được trang bị các hình thức bảo mật thông tin tiêu chuẩn, trên thực tế, chúng tôi không hề lưu giữ các thông tin về tài khoản cá nhân hoặc thông tin nhạy cảm của khách hàng, vì các lý do:
+
+- Chúng tôi không yêu cầu khách hàng phải tạo tài khoản trên website ORINS.design
+- Chúng tôi không liên kết với bất kỳ dịch vụ tài khoản online nào khác
+- Thông tin về giỏ hàng chỉ được lưu trong cookies của trình duyệt của người sử dụng, các thông tin này sẽ được tự động xoá sau khi đặt hàng thành công hoặc người dùng tự xoá.
+- Các dữ liệu thống kê về việc sử dụng website chỉ là các dữ liệu kỹ thuật, không có tính chất định danh người sử dụng.
+- Các hình thức thanh toán sử dụng tài khoản ngân hàng hay thẻ tín dụng đều được thực hiện thông qua các ngân hàng hoặc cổng thanh toán quốc tế. Các tổ chức này đều có hệ thống bảo mật cấp cao của riêng họ và chúng tôi không được phép truy cập hay lưu giữ những thông tin thanh toán được thực hiện.
+
+Với những yếu tố kể trên, thông tin mà người dùng cung cấp cho chúng tôi được bảo mật ở mức độ cao nhất có thể.
+
+# III. Về việc sử dụng thông tin
+
+Chúng tôi sử dụng các thông tin đã thu thập được vào các mục đích sau đây:
+
+- Hoàn tất đơn hàng cho người mua
+- Hỗ trợ và chăm sóc khách hàng
+- Thống kê tình hình kinh doanh
+- Nâng cao trải nghiệm người dùng và chất lượng sản phẩm, dịch vụ
+
+Dưới đây là chi tiết về các cách mà chúng tôi sử dụng thông tin.
 
 
-- Chúng tôi có yêu cầu bạn nhập đủ Họ và Tên để tránh nhầm lẫn khi giao hàng.
-- Chúng tôi có yêu cầu bạn nhập địa chỉ email để gửi thông tin đơn hàng sau khi đặt hàng thành công.
-- Chúng tôi có đề nghị bạn lựa chọn nhận tin tức và các chương trình khuyến mãi qua email mà bạn đã cung cấp. Lựa chọn này là không bắt buộc.
-- Chúng tôi có yêu cầu bạn nhập số điện thoại để liên hệ khi giao hàng. Ngoài ra, hệ thống sẽ gửi tin nhắn cập nhật thông tin đơn hàng vào số điện thoại mà bạn đã cung cấp. Thông tin này là bắt buộc.
+1. Chúng tôi sử dụng thông tin trong đơn hàng bạn đã tạo để chuẩn bị sản phẩm và giao hàng cho người mua.
+2. Trong một số trường hợp chúng tôi cần sử dụng thông tin mà bạn cung cấp về người khác (như khi bạn mua sản phẩm của chúng tôi để làm quà tặng) để thực hiện yêu cầu giao hàng của bạn.
+3. Việc lưu giữ thông tin cá nhân của bạn giúp chúng tôi đáp ứng tốt những yêu cầu hỗ trợ của bạn trong quá trình mua hàng hoặc sử dụng dịch vụ của chúng tôi. Ví dụ: gửi email hoặc SMS tự động xác nhận đơn hàng, hoặc gọi điện trực tiếp hỗ trợ tư vấn.
+4. Chúng tôi có thể sử dụng thông tin mua hàng của bạn dựa trên số điện thoại hoặc email để áp dụng các chương trình khuyến mãi hoặc ưu đãi phù hợp cho các lần mua hàng sau.
+5. Chúng tôi cũng có thể lưu giữ thông tin về việc trả hàng của người mua. Nhờ việc này, chúng tôi có thể quản lý chất lượng dịch vụ hoặc điều chỉnh việc phục vụ cho khách hàng.
+6. Trong một số trường hợp, chúng tôi có thể sử dụng email mà bạn đã cung cấp để gửi những thông tin đáng quan tâm về sản phẩm, dịch vụ của chúng tôi, hoặc xin ý kiến phản hồi về chất lượng dịch vụ.
+7. Chúng tôi không bao giờ gửi những thông tin không liên quan tới đơn hàng đã thực hiện tới số điện thoại của bạn.
 
-Các thông tin mà bạn cung cấp đều được bảo mật trên hệ thống website của chúng tôi. Các hình thức thanh toán qua thẻ tín dụng (nếu có) đều được mã hoá qua tiêu chuẩn quốc tế Secure Socket Layer (SSL).
+# IV. Về việc cung cấp thông tin
 
-### Sau khi thanh toán
+Trong một số trường hợp nhất định, chúng tôi cần phải cung cấp thông tin đã thu thập được cho bên thứ ba như được liệt kê dưới đây.
 
-Tuỳ thuộc vào quá trình đặt hàng và giao hàng, có thể chúng tôi sẽ yêu cầu bạn cung cấp thêm một số thông tin cần thiết để hoàn tất đơn hàng.
 
-Thông tin về đơn hàng, trong đó có lưu giữ một số thông tin cá nhân như đã nêu của bạn, sẽ được chúng tôi lưu lại trong hệ thống nhằm mục đích thống kê.
+1. Cung cấp thông tin tên, địa chỉ, số điện thoại của người nhận hàng cho dịch vụ giao hàng.
+2. Cung cấp các thông tin được yêu cầu tới ngân hàng hoặc cổng thanh toán điện tử đủ để xử lý giao dịch thanh toán.
+3. Cung cấp dữ liệu kỹ thuật về việc sử dụng website cho các dịch vụ phân tích thông tin (như Google Analytics).
 
-Trong một số trường hợp, chúng tôi có thể gửi thông tin, tin tức đáng quan tâm về sản phẩm của ORINS, các chương trình khuyến mãi dành riêng cho bạn, hoặc xin ý kiến phản hồi từ bạn; với điều kiện bạn đã đồng ý với lựa chọn này trong khi thanh toán. Bạn luôn có thể lựa chọn không nhận tin qua email nữa bằng cách nhấn vào link unsubscribe bên trong email.
+# V. Quyền của người sử dụng
 
-Chúng tôi không bao giờ gửi thêm bất cứ thông tin nào vào số điện thoại của bạn sau khi đơn hàng đã hoàn tất.
+Những quyền liệt kê dưới đây được áp dụng trong hoàn cảnh bạn có mong muốn mua sản phẩm hoặc sử dụng dịch vụ của chúng tôi.
 
-Bạn có thể gửi yêu cầu ngừng lưu thông tin cá nhân trên website của chúng tôi từ địa chỉ email hoặc số điện thoại bạn đã cung cấp. Chúng tôi sẽ xoá thông tin cá nhân của bạn ngay sau khi xác nhận.
 
-## Về việc cung cấp thông tin cá nhân
+1. Bạn có quyền không cung cấp email cá nhân trong quá trình đặt hàng
+2. Bạn có quyền không nhận thông tin không liên quan đến đơn hàng của bạn
+3. Bạn có quyền yêu cầu xoá thông tin cá nhân được lưu trong hệ thống của chúng tôi
 
-Trong quá trình hoàn tất đơn hàng, chúng tôi sẽ cung cấp thông tin cá nhân của bạn cho đơn vị giao hàng hoặc cổng thanh toán điện tử (nếu có).
+Chúng tôi sẽ đáp ứng mọi yêu cầu của bạn liên quan đến các quyền kể trên ngay sau khi xác nhận.
 
-Website ORINS.design có thể sử dụng thông tin truy cập từ trình duyệt web của bạn với mục đích thống kê qua một số dịch vụ của bên thứ ba (như Google Analytics). Tuy nhiên, những thông tin này không nói cho website ORINS.design biết bạn là ai.
+# VI. Lợi ích của người sử dụng
 
-## Về việc cập nhật chính sách
+Một lần nữa, giữ cho việc thu thập thông tin cá nhân của khách hàng ở mức tối thiểu là một định hướng hoạt động của chúng tôi.  Chúng tôi tin tưởng sẽ tạo ra được giá trị nguyên bản trong khái niệm lợi ích người dùng, được thể hiện qua các điểm dưới đây:
 
-Chính sách bảo mật và riêng tư của chúng tôi sẽ có thể được thay đổi và cập nhật và luôn đi kèm với thông báo chính thức trên website ORINS.design.
+
+1. Người cung cấp thông tin trên website của chúng tôi được bảo mật thông tin bằng các kỹ thuật tiêu chuẩn.
+2. Trải nghiệm của người mua sản phẩm hoặc sử dụng dịch vụ của chúng tôi được diễn ra hiệu quả, đơn giản và tiện lợi.
+3. Khách hàng không phải chia sẻ thông tin cá nhân cho các dịch vụ tài khoản được liên kết (như Facebook, Google), từ đó không bị làm phiền bởi quảng cáo hoặc email rác không mong muốn.
+
+# VII. Về việc cập nhật chính sách
+
+Chính sách bảo mật và riêng tư của chúng tôi sẽ có thể được thay đổi và cập nhật mà không cần phải báo trước. Tuy nhiên, chúng tôi vẫn sẽ thông báo chính thức trên website ORINS.design với những thay đổi quan trọng.
 
 Chúng tôi cũng luôn mong chờ ý kiến đóng góp từ bạn cũng như sẽ đáp ứng bất cứ yêu cầu nào của bạn liên quan đến thông tin cá nhân mà bạn đã cung cấp trên website này.
-
-## Lợi ích người dùng website
-
-Một lần nữa, giữ cho việc thu thập thông tin cá nhân của khách hàng ở mức tối thiểu là một định hướng hoạt động của chúng tôi. Việc lựa chọn bắt buộc phải đăng nhập để mua hàng, liên kết với các dịch vụ tài khoản online (như Facebook, Google), hay lưu giữ thêm nhiều thông tin của khách hàng với mục đích marketing là những điều dễ dàng, nhưng chúng tôi không lựa chọn làm như vậy. Với công nghệ phát triển trong thế giới mà chúng ta đang sống, dữ liệu của khách hàng là tối quan trọng với hầu hết các công ty thương mại điện tử, nhưng cũng vì vậy mà sự riêng tư của người dùng bị giảm hơn bao giờ hết. Chúng tôi tin tưởng rằng mối liên kết giữa chúng tôi và bạn không nhất thiết phải thông qua những dữ liệu cá nhân mà bạn cung cấp. Qua sự thoải mái và đơn giản trong trải nghiệm của bạn đối với sản phẩm của ORINS, chúng tôi hy vọng sẽ tạo ra được giá trị nguyên bản trong khái niệm lợi ích người dùng.
