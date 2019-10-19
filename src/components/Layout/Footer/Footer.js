@@ -190,6 +190,12 @@ const ModuleOthers = css`
   }
 `;
 
+const FooterWidgetLink = styled(Link)`
+  &.activeFootNavItem {
+    color: ${colors.mainClickable};
+  }
+`;
+
 const Footer = ({ viewportIs, ...rest }) => {
   const { contacts } = useSiteMetadata();
 
@@ -210,16 +216,16 @@ const Footer = ({ viewportIs, ...rest }) => {
         <Module viewportIs={viewportIs} title='Help'>
           <ul>
             <li>
-              <Link to='/faqs'>F.A.Qs</Link>
+              <FooterWidgetLink activeClassName='activeFootNavItem' to='/faqs'>F.A.Qs</FooterWidgetLink>
             </li>
             <li>
-              <Link to='/how-to-order'>How to Order</Link>
+              <FooterWidgetLink activeClassName='activeFootNavItem' to='/how-to-order'>How to Order</FooterWidgetLink>
             </li>
             <li>
-              <Link to='/shipping-and-return'>Shipping &amp; Return</Link>
+              <FooterWidgetLink activeClassName='activeFootNavItem' to='/shipping-and-return'>Shipping &amp; Return</FooterWidgetLink>
             </li>
             <li>
-              <Link to='/payment-methods'>Payment Methods</Link>
+              <FooterWidgetLink activeClassName='activeFootNavItem' to='/payment-methods'>Payment Methods</FooterWidgetLink>
             </li>
           </ul>
         </Module>
@@ -228,10 +234,10 @@ const Footer = ({ viewportIs, ...rest }) => {
           <Module viewportIs={viewportIs} alwaysExpand css={ModuleOthers} title='Others'>
             <ul>
               <li>
-                <Link to='/privacy-policy'>Privacy Policy</Link>
+                <FooterWidgetLink activeClassName='activeFootNavItem' to='/privacy-policy'>Privacy Policy</FooterWidgetLink>
               </li>
               <li>
-                <Link to='/terms-and-conditions'>Terms &amp; Conditions</Link>
+                <FooterWidgetLink activeClassName='activeFootNavItem' to='/terms-and-conditions'>Terms &amp; Conditions</FooterWidgetLink>
               </li>
               <li css={Copyright}>
                 <span css={copyrightText}>ORINS © 2019 - All right reserved</span>
