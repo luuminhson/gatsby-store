@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    siteUrl: 'https://originalinside.com',
+    siteUrl: 'https://orins.design',
     title: 'ORINS',
     subtitle: 'Fine Bags & Accessories',
     description: 'We create bags and accessories that aim to serve your well-living everyday with the spirit of being humble and focusing on orignal matters.',
@@ -10,11 +10,11 @@ module.exports = {
     googleAnalyticsId: '',
     menu: [
         {
-            label: 'Home',
+            label: 'Trang chủ',
             path: '/'
         },
         {
-            label: 'Store',
+            label: 'Cửa hàng',
             path: '/store'
         },
         {
@@ -22,24 +22,24 @@ module.exports = {
             path: '/blog'
         },
         {
-            label: 'About',
+            label: 'Giới thiệu',
             path: '/about'
         }
     ],
     botNav: [
         {
             icon: 'oi-icon-home',
-            label: 'Home',
+            label: 'Trang chủ',
             path: '/'
         },
         {
             icon: 'oi-icon-store',
-            label: 'Store',
+            label: 'Cửa hàng',
             path: '/store'
         },
         {
             icon: 'oi-icon-cart',
-            label: 'Cart',
+            label: 'Giỏ hàng',
             path: '/cart'
         },
         {
@@ -49,14 +49,14 @@ module.exports = {
         },
         {
             icon: 'oi-icon-menu',
-            label: 'More',
+            label: 'Thông tin',
             path: '/more'
         }
     ],
     contacts: {
         phone: '+84934410491',
-        email: 'hello@originalinside.com',
-        facebook: 'original.inside',
-        instagram: 'original.inside',
+        email: 'hello@orins.design',
+        facebook: 'orins.design',
+        instagram: 'orins.design',
     }
 };

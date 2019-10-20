@@ -87,7 +87,7 @@ class PurePage extends React.Component<Props> {
           <title>{title}</title>
           <meta name="description" content={description} />
 
-          <link rel="preconnect" href="https://originalinside.com" />
+          <link rel="preconnect" href="https://orins.design" />
           <link rel="canonical" href={siteUrl} />
           <link rel="apple-touch-startup-image" href="launch.png"></link>
           <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />

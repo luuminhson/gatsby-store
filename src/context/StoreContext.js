@@ -2,7 +2,7 @@ import React from 'react';
 import Client from 'shopify-buy';
 
 const client = Client.buildClient({
-  domain: 'original-inside.myshopify.com',
+  domain: 'checkout.orins.design',
   storefrontAccessToken: process.env.SHOPIFY_ACCESS_TOKEN
 });
 
