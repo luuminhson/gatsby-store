@@ -1,13 +1,11 @@
 ---
-title: "About us"
+title: "Giới thiệu"
 template: "page"
 slug: /about
 ---
 
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.
+ORINS là một cửa hàng nhỏ tại TP Hồ Chí Minh, Việt Nam. Chúng tôi thiết kế và sản xuất những vật dụng quen thuộc hàng ngày dùng để đựng và bảo vệ đồ: túi xách và phụ kiện.
 
-![Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi.](/media/image-2.jpg)
+ORINS là từ (chúng tôi tự mình) ghép của "Original Inside" - Điều nguyên bản bên trong. Bên trong mỗi sản phẩm, chúng tôi hướng tới cảm giác thoải mái và thân thiện của bạn khi đặt những món đồ vào. Bên trong mỗi sản phẩm, chúng tôi mong sẽ phục vụ được nhu cầu quen thuộc trong cuộc sống hàng ngày của bạn một cách đơn giản và bền vững.
 
-*Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi.*
-
-Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
+Chúng tôi tin rằng tinh thần khiêm nhường, kiên nhẫn mà hiệu quả sẽ mang tới nét đẹp tinh tế, khó đến mà khó đi. Đó là tinh thần của ORINS.
