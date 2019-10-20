@@ -101,7 +101,7 @@ const feedLayout = (edge) => {
             </FeedItemTitleLink>
           </FeedItemTitle>
           <FeedItemDescription>{edge.node.frontmatter.description}</FeedItemDescription>
-          <Readmore to={edge.node.fields.slug}>Read More</Readmore>
+          <Readmore to={edge.node.fields.slug}>Xem thêm</Readmore>
         </FeedItemContent>
       </div>
     );
@@ -114,7 +114,7 @@ const feedLayout = (edge) => {
           </FeedItemTitleLink>
         </FeedItemTitle>
         <FeedItemDescription>{edge.node.frontmatter.description}</FeedItemDescription>
-        <Readmore to={edge.node.fields.slug}>Read More</Readmore>
+        <Readmore to={edge.node.fields.slug}>Xem thêm</Readmore>
       </FeedItemContent>
     );
   }

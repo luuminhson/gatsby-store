@@ -123,21 +123,21 @@ class MoreTemplate extends React.Component<Props> {
         }
 
         return (
-            <Page mainTitle='Information' title={`Information ‧ ${siteTitle}`} description={siteSubtitle} pageIs='More'>
+            <Page mainTitle='Thông tin' title={`Thông tin ‧ ${siteTitle}`} description={siteSubtitle} pageIs='More'>
                 <CustomFooter viewportIs={viewportIs} />
                 <FooterModule viewportIs={viewportIs} alwaysExpand css={ModuleOthers} title='Others'>
                     <ul>
                         <li>
-                            <Link to='/privacy-policy'>Privacy Policy</Link>
+                            <Link to='/privacy-policy'>Chính sách bảo mật</Link>
                         </li>
                         <li>
-                            <Link to='/terms-and-conditions'>Terms &amp; Conditions</Link>
+                            <Link to='/terms-and-conditions'>Điều khoản &amp; Điều kiện</Link>
                         </li>
                         <li>
                             <span css={copyrightText}>ORINS © 2019 - All right reserved</span>
                         </li>
                         <li css={wishingANiceDay}>
-                            <span css={wishText}>Wish you a nice day!</span>
+                            <span css={wishText}>Chúc bạn một ngày vui!</span>
                             <span css={wishImgs}>
                                 <img src={bowingImg1} width='24' alt='Thank You from Oi' />
                                 <img src={bowingImg2} width='24' alt='Thank You from Miso' />

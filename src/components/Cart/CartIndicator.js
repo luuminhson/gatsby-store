@@ -57,7 +57,7 @@ class CartIndicator extends Component {
       if (this.props.adding) {
         this.setState({
           visible: true,
-          message: 'Updating cart...'
+          message: 'Đang cập nhật giỏ hàng...'
         });
       } else {
         if (this.props.itemsInCart > prevProps.itemsInCart) {
@@ -67,7 +67,7 @@ class CartIndicator extends Component {
           const message = (
             <>
               <CheckIcon icon='oi-icon-check' />
-              <span>{num} new item{ num > 1 ? 's' : ''} { num > 1 ? 'have' : 'has'} been added to the cart</span>
+              <span>{num} sản phẩm đã được thêm vào giỏ hàng.</span>
             </>
           );
 

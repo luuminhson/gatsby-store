@@ -301,15 +301,15 @@ class IndexTemplate extends React.Component<Props> {
           <HeroSection>
             <HeroImage fluid={heroImageSrc} />
             <TitleGroup>
-              <HeroTitle>Fine bags &amp; accessories for your well-living everyday.</HeroTitle>
-              <PrimaryButton to='/store'>Shop All Products</PrimaryButton>
+              <HeroTitle>Túi xách &amp; phụ kiện cho một cuộc sống đơn giản mỗi ngày.</HeroTitle>
+              <PrimaryButton to='/store'>Xem tất cả sản phẩm</PrimaryButton>
             </TitleGroup>
           </HeroSection>
 
           <FeaturedProductSection>
             <TitleGroup>
-              <SectionTitle subtitle='Just Come' actionLabel='View Details' actionLink={viewportIs === null && '/store/product/rain-shoulder'}>The Lazy Silk Leaf</SectionTitle>
-              {viewportIs !== null && <Button to='/store/product/rain-shoulder'>View Details</Button>}
+              <SectionTitle subtitle='Nổi bật' actionLabel='Xem chi tiết' actionLink={viewportIs === null && '/store/product/rain-shoulder'}>The Lazy Silk Leaf</SectionTitle>
+              {viewportIs !== null && <Button to='/store/product/rain-shoulder'>Xem chi tiết</Button>}
             </TitleGroup>
             <ImageGroup>
               <GroupLeft>
@@ -324,7 +324,7 @@ class IndexTemplate extends React.Component<Props> {
 
           <LastestProductsSection>
             <TitleGroup>
-              <SectionTitle subtitle='New' actionLabel='Visit Store' actionLink='/store'>Tote Bags</SectionTitle>
+              <SectionTitle subtitle='Sản phẩm mới' actionLabel='Xem cửa hàng' actionLink='/store'>Tote Bags</SectionTitle>
             </TitleGroup>
             <ProductsWrapper>
               <ProductListingContainer>
@@ -337,7 +337,7 @@ class IndexTemplate extends React.Component<Props> {
 
           <LastestBlogSection>
             <TitleGroup>
-              <SectionTitle subtitle='Latest' actionLabel='View All' actionLink='/blog'>From Blog</SectionTitle>
+              <SectionTitle subtitle='Bài viết mới nhất' actionLabel='Xem tất cả' actionLink='/blog'>Blog</SectionTitle>
             </TitleGroup>
             <IndexStrip edges={blogPost} />
           </LastestBlogSection>

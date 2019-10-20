@@ -189,10 +189,17 @@ const Cost = styled(`div`)`
   }
 `;
 
-const Shipping = styled(FontStyle.smallbody)`
+const Shipping = styled(FontStyle.body)`
   text-align: center;
   color: ${colors.neutral4};
   margin-top: ${spacing.lg}px;
+  display: flex;
+  align-items: center;
+
+  i {
+    color: ${colors.mainSupport};
+    margin-right: ${spacing.xs}px;
+  }
 `;
 
 const Total = styled(Cost)`
@@ -298,7 +305,7 @@ class Cart extends Component {
             >
               <Heading>
                 <Title>
-                  <span>Cart</span>
+                  <span>Giỏ hàng</span>
                   {itemsInCart > 0 && <ItemsNumber>{itemsInCart}</ItemsNumber>}
                 </Title>
                 <CartCloseBtn icon='oi-icon-close' onClick={toggle} />
@@ -317,23 +324,23 @@ class Cart extends Component {
                   <CartFooter>
                     <Costs>
                       <Cost>
-                        <span>Subtotal</span>{' '}
+                        <span>Tổng</span>{' '}
                         <strong>{priceWithCommas(checkout.subtotalPrice)} VND</strong>
                       </Cost>
                       {checkout.totalTax > 0 &&
                         <Cost>
-                          <span>Taxes:</span> <strong>{checkout.totalTax}</strong>
+                          <span>Thuế:</span> <strong>{checkout.totalTax}</strong>
                         </Cost>
                       }
-                      <Shipping>Shipping cost will be calculated at checkout.</Shipping>
+                      <Shipping><OiIcon icon='oi-icon-check' />Free ship toàn Việt Nam.</Shipping>
                       {/* <Total>
                         <span>Total Price:</span>
                         <strong>USD ${checkout.totalPrice}</strong>
                       </Total> */}
                     </Costs>
                     <ButtonGroup>
-                      <CheckOut href={checkout.webUrl}>Check out</CheckOut>
-                      <BackLink onClick={toggle}>Continue shopping</BackLink>
+                      <CheckOut href={checkout.webUrl}>Đặt hàng →</CheckOut>
+                      <BackLink onClick={toggle}>← Tiếp tục mua hàng</BackLink>
                     </ButtonGroup>
                   </CartFooter>
                 </>

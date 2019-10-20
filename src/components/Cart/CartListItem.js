@@ -156,7 +156,7 @@ export default ({
         </Meta>
         <RemoveItem onClick={handleRemoveItem}>
           <Remove icon='oi-icon-close' />
-          <span>Remove</span>
+          <span>Xoá</span>
         </RemoveItem>
       </Info>
       <Quantity

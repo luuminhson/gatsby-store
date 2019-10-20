@@ -202,48 +202,48 @@ const Footer = ({ viewportIs, ...rest }) => {
   return (
     <FooterWrapper {...rest}>
       <FooterWrapperInner>
-        <Module viewportIs={viewportIs} title='About ORINS'>
+        <Module viewportIs={viewportIs} title='ORINS là gì?'>
           <AboutDesc>
-            <AboutText>ORINS is crafted from “Original Inside”. We create bags and accessories that aim to serve your well-living everyday with the spirit of being humble and focusing on original matters.</AboutText>
-            <Link to='/about'>Read More</Link>
+            <AboutText>ORINS là từ ghép của “Original Inside” - Điều bên trong nguyên bản.  Chúng tôi thiết kế, sản xuất túi xách và phụ kiện nhằm phục vụ cho sự tiện lợi trong cuộc sống hàng ngày với tinh thần luôn luôn khiêm nhường và hướng tới những giá trị nguyên bản.</AboutText>
+            <Link to='/about'>Xem thêm</Link>
           </AboutDesc>
         </Module>
 
-        <Module viewportIs={viewportIs} title='Contact'>
+        <Module viewportIs={viewportIs} title='Liên hệ'>
           <Contact contacts={contacts} />
         </Module>
 
-        <Module viewportIs={viewportIs} title='Help'>
+        <Module viewportIs={viewportIs} title='Trợ giúp'>
           <ul>
             <li>
-              <FooterWidgetLink activeClassName='activeFootNavItem' to='/faqs'>F.A.Qs</FooterWidgetLink>
+              <FooterWidgetLink activeClassName='activeFootNavItem' to='/faqs'>Câu hỏi thường gặp</FooterWidgetLink>
             </li>
             <li>
-              <FooterWidgetLink activeClassName='activeFootNavItem' to='/how-to-order'>How to Order</FooterWidgetLink>
+              <FooterWidgetLink activeClassName='activeFootNavItem' to='/how-to-order'>Hướng dẫn đặt hàng</FooterWidgetLink>
             </li>
             <li>
-              <FooterWidgetLink activeClassName='activeFootNavItem' to='/shipping-and-return'>Shipping &amp; Return</FooterWidgetLink>
+              <FooterWidgetLink activeClassName='activeFootNavItem' to='/shipping-and-return'>Giao hàng &amp; Đổi trả</FooterWidgetLink>
             </li>
             <li>
-              <FooterWidgetLink activeClassName='activeFootNavItem' to='/payment-methods'>Payment Methods</FooterWidgetLink>
+              <FooterWidgetLink activeClassName='activeFootNavItem' to='/payment-methods'>Phương thức thanh toán</FooterWidgetLink>
             </li>
           </ul>
         </Module>
 
         {viewportIs !== null &&
-          <Module viewportIs={viewportIs} alwaysExpand css={ModuleOthers} title='Others'>
+          <Module viewportIs={viewportIs} alwaysExpand css={ModuleOthers} title='Thông tin khác'>
             <ul>
               <li>
-                <FooterWidgetLink activeClassName='activeFootNavItem' to='/privacy-policy'>Privacy Policy</FooterWidgetLink>
+                <FooterWidgetLink activeClassName='activeFootNavItem' to='/privacy-policy'>Chính sách bảo mật</FooterWidgetLink>
               </li>
               <li>
-                <FooterWidgetLink activeClassName='activeFootNavItem' to='/terms-and-conditions'>Terms &amp; Conditions</FooterWidgetLink>
+                <FooterWidgetLink activeClassName='activeFootNavItem' to='/terms-and-conditions'>Điều khoản &amp; Điều kiện</FooterWidgetLink>
               </li>
               <li css={Copyright}>
                 <span css={copyrightText}>ORINS © 2019 - All right reserved</span>
               </li>
               <li css={wishingANiceDay}>
-                <span css={wishText}>Wish you a nice day!</span>
+                <span css={wishText}>Chúc bạn một ngày vui!</span>
                 <span css={wishImgs}>
                   <img src={bowingImg1} width='24' alt='Thank You from Oi' />
                   <img src={bowingImg2} width='24' alt='Thank You from Miso' />

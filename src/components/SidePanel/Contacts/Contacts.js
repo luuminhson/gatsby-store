@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import getContactHref from '../../../utils/get-contact-href';
 import getIcon from '../../../utils/get-icon';
 import OiIcon from '../../OiIcon';
-import { spacing, colors } from '../../../utils/styles';
+import { colors } from '../../../utils/styles';
 
 type Props = {
   contacts: {

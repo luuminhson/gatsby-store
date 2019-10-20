@@ -36,7 +36,7 @@ class StoreTemplate extends React.Component<Props> {
     const { title, description } = this.props.data.site.siteMetadata;
 
     return (
-      <Page mainTitle='Store' title={`Store ‧ ${title}`} description={description} pageIs='Store'>
+      <Page mainTitle='Cửa hàng' title={`Cửa hàng ‧ ${title}`} description={description} pageIs='Store'>
         <ProductListingContainer>
           {this.props.data.products.edges.map(({ node: product }) => (
             <ProductListingItem key={product.id} product={product} />

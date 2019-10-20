@@ -16,7 +16,7 @@ class CartTemplate extends React.Component<Props> {
         const { title, description } = this.props.data.site.siteMetadata;
 
         return (
-            <Page mainTitle='Cart' title={`Cart ‧ ${title}`} description={description} pageIs='Cart'>
+            <Page mainTitle='Giỏ hàng' title={`Giỏ hàng ‧ ${title}`} description={description} pageIs='Cart'>
                 <CartPage />
             </Page>
         )

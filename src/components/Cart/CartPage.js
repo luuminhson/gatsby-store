@@ -18,6 +18,7 @@ import {
   fontFamily,
   fontWeight
 } from '../../utils/styles';
+import OiIcon from '../OiIcon';
 
 const CartPageRoot = styled(`div`)`
   position: relative;
@@ -146,10 +147,18 @@ const Cost = styled(`div`)`
   }
 `;
 
-const Shipping = styled(FontStyle.smallbody)`
+const Shipping = styled(FontStyle.body)`
   text-align: center;
   color: ${colors.neutral4};
   margin-top: ${spacing.lg}px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  i {
+    color: ${colors.mainSupport};
+    margin-right: ${spacing.xs}px;
+  }
 `;
 
 const ButtonGroup = styled(`div`)`
@@ -197,7 +206,7 @@ class CartPage extends Component {
               <Mask />
               {itemsInCart > 0 &&
                 <Heading>
-                  <Title>You currently have {itemsInCart} product{itemsInCart > 1 && 's'} in cart.</Title>
+                  <Title>Bạn đang có {itemsInCart} sản phẩm trong giỏ hàng.</Title>
                 </Heading>
               }
               {checkout.lineItems.length > 0 ? (
@@ -214,18 +223,18 @@ class CartPage extends Component {
                   <CartFooter>
                     <Costs>
                       <Cost>
-                        <span>Subtotal</span>{' '}
+                        <span>Tổng</span>{' '}
                         <strong>{priceWithCommas(checkout.subtotalPrice)} VND</strong>
                       </Cost>
                       {checkout.totalTax > 0 &&
                         <Cost>
-                          <span>Taxes:</span> <strong>{checkout.totalTax}</strong>
+                          <span>Thuế:</span> <strong>{checkout.totalTax}</strong>
                         </Cost>
                       }
-                      <Shipping>Shipping cost will be calculated at checkout.</Shipping>
+                      <Shipping><OiIcon icon='oi-icon-check' />Free ship toàn Việt Nam.</Shipping>
                     </Costs>
                     <ButtonGroup>
-                      <CheckOut href={checkout.webUrl}>Check out</CheckOut>
+                      <CheckOut href={checkout.webUrl}>Đặt hàng →</CheckOut>
                     </ButtonGroup>
                   </CartFooter>
                 </>

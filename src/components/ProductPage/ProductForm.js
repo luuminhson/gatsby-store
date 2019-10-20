@@ -222,7 +222,7 @@ class ProductForm extends Component {
               disabled={isOutOfStock}
               fullWidth={!hasVariants}
             >
-              {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
+              {isOutOfStock ? 'Tạm hết hàng' : 'Chọn mua'}
             </AddToCartButton>
           </Form>
         )}

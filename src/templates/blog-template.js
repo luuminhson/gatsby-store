@@ -50,11 +50,10 @@ class BlogTemplate extends React.Component<Props> {
     } = pageContext;
 
     const { edges } = data.postList;
-    const pageTitle = currentPage > 0 ? `Blog - Page ${currentPage} ‧ ${title}` : `Blog ‧ ${title}`;
+    const pageTitle = currentPage > 0 ? `Blog - Trang ${currentPage} ‧ ${title}` : `Blog ‧ ${title}`;
 
     return (
       <Page mainTitle='Blog' withSidebar={hasSidebar} title={pageTitle} description={description} pageIs='Blog'>
-        {console.log(hasPrevPage)}
         <FeedWrapper>
           <Feed edges={edges} />
           {(hasNextPage || hasPrevPage) &&
