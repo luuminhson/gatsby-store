@@ -46,6 +46,7 @@
     "netlify-cms-app": "^2.9.7",
     "prismjs": "^1.17.1",
     "react": "^16.8.0-alpha.0",
+    "react-animate-on-scroll": "^2.1.5",
     "react-apollo": "^2.2.4",
     "react-dom": "^16.8.0-alpha.0",
     "react-headroom": "^2.2.8",

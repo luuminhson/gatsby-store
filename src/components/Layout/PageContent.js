@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/core';
 
-import { breakpoints, headerHeight } from '../../utils/styles';
+import { breakpoints } from '../../utils/styles';
 
 const pageTransition = keyframes`
   from {
     opacity: .8;
-    transform: translate3d(0, 4px, 0);
+    // transform: translate3d(0, 4px, 0);
   }
 `;
 

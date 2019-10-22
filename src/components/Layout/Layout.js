@@ -14,12 +14,28 @@ import { DesktopNavigation } from './Navigation';
 import BottomNavigation from '../BottomNavigation';
 import SidePanel from '../SidePanel';
 import PageContent from './PageContent';
-import Footer from './Footer';
 import ProductImagesBrowser from '../ProductPage/ProductImagesBrowser';
 
 import { breakpoints, mediaQuery, fontFamily, colors, dimensions } from '../../utils/styles';
 
 injectGlobal`
+    @keyframes fadeInMobile {
+      from {
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeInDesktop {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 40px, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
     html {
       box-sizing: border-box;
     }
@@ -61,6 +77,19 @@ injectGlobal`
       font-weight: 600;
       margin-top: 1.6em;
       margin-bottom: 0.8em;
+    }
+
+    .animated {
+      animation-duration: 1s;
+      animation-fill-mode: both;
+
+      &.fadeIn {
+        animation-name: fadeInMobile;
+
+        ${mediaQuery.tabletFrom} {
+          animation-name: fadeInDesktop;
+        }
+      }
     }
 `;
 

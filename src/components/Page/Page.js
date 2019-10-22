@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import { graphql, StaticQuery } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import ScrollAnimation from 'react-animate-on-scroll';
 import { MobileNavigation } from '../Layout/Navigation';
 import Footer from '../Layout/Footer';
 
@@ -125,7 +126,11 @@ class PurePage extends React.Component<Props> {
           <PageBody>
             {children}
           </PageBody>
-          {viewportIs !== null && <Footer viewportIs={viewportIs} />}
+          {viewportIs !== null &&
+            <ScrollAnimation animateOnce animateIn='fadeIn'>
+              <Footer viewportIs={viewportIs} />
+            </ScrollAnimation>
+          }
         </PageInner>
       </div>
     );

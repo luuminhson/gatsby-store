@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import ScrollAnimation from 'react-animate-on-scroll';
 import { Link } from '../LinkWithPrev';
 import Image from 'gatsby-image';
 
@@ -22,7 +23,7 @@ const TRANSITION_DURATION = '250ms';
 const ProductListingItemLink = styled(Link)`
   flex-basis: 100%;
   margin: ${spacing.sm}px;
-  overflow: hidden;
+  // overflow: hidden;
   text-decoration: none;
   box-sizing: border-box;
   transition: all ${TRANSITION_DURATION};
@@ -138,21 +139,23 @@ const ProductListingItem = props => {
       {() => {
         return (
           <ProductListingItemLink to={`/store/product/${handle}`}>
-            <Item>
-              <Preview>
-                { compareAtPrice && compareAtPrice !== null &&
-                  <SaleBadge>Sale</SaleBadge>
-                }
-                <Image fluid={fluid} />
-              </Preview>
-              <ProductTitle>{title}</ProductTitle>
-              <PriceRow>
-                <Price>{priceWithCommas(price)} VND</Price>
-                {compareAtPrice && compareAtPrice !== null &&
-                  <SalePrice>{priceWithCommas(compareAtPrice)} VND</SalePrice>
-                }
-              </PriceRow>
-            </Item>
+            <ScrollAnimation animateOnce animateIn='fadeIn'>
+              <Item>
+                <Preview>
+                  {compareAtPrice && compareAtPrice !== null &&
+                    <SaleBadge>Sale</SaleBadge>
+                  }
+                  <Image fluid={fluid} />
+                </Preview>
+                <ProductTitle>{title}</ProductTitle>
+                <PriceRow>
+                  <Price>{priceWithCommas(price)} VND</Price>
+                  {compareAtPrice && compareAtPrice !== null &&
+                    <SalePrice>{priceWithCommas(compareAtPrice)} VND</SalePrice>
+                  }
+                </PriceRow>
+              </Item>
+            </ScrollAnimation>
           </ProductListingItemLink>
         );
       }}

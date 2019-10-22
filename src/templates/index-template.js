@@ -2,6 +2,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import styled from '@emotion/styled';
+import ScrollAnimation from 'react-animate-on-scroll';
 import Page from '../components/Page';
 import SectionTitle from '../components/SectionTitle';
 import Strip from '../components/Strip';
@@ -62,14 +63,16 @@ const HeroImage = styled(Img)`
 `;
 
 const HeroTitle = styled(FontStyle.h1)`
-  font-size: 1.2rem;
-  line-height: 1.6rem;
-  margin-bottom: ${spacing.md}px;
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  max-width: 68vw;
+  margin-bottom: ${spacing.lg}px;
 
   ${mediaQuery.tabletFrom} {
     font-size: 1.6rem;
     line-height: 2.4rem;
-    margin-bottom: ${spacing.lg}px;
+    max-width: none;
+    margin-bottom: ${spacing.xl}px;
   }
 
   ${mediaQuery.desktop} {
@@ -218,7 +221,7 @@ const ProductListingContainer = styled(`div`)`
     margin: ${spacing.sm}px 0 ${spacing['2xl']}px;
 
     &:last-child {
-        max-width: calc(60vw + ${spacing.xs}px);
+        max-width: calc(60vw + ${spacing.sm}px);
         padding-right: ${spacing.lg}px;
     }
 
@@ -298,49 +301,57 @@ class IndexTemplate extends React.Component<Props> {
     return (
       <Page title={`${title} ‧ ${subtitle}`} description={description} pageIs='Index'>
         <IndexWrapper>
-          <HeroSection>
-            <HeroImage fluid={heroImageSrc} />
-            <TitleGroup>
-              <HeroTitle>Túi xách &amp; phụ kiện cho một cuộc sống đơn giản mỗi ngày.</HeroTitle>
-              <PrimaryButton to='/store'>Xem tất cả sản phẩm</PrimaryButton>
-            </TitleGroup>
-          </HeroSection>
+          <ScrollAnimation animateOnce animateIn='fadeIn'>
+            <HeroSection>
+              <HeroImage fluid={heroImageSrc} />
+              <TitleGroup>
+                <HeroTitle>Cho cuộc sống đơn giản mỗi ngày.</HeroTitle>
+                <PrimaryButton to='/store'>Xem tất cả sản phẩm</PrimaryButton>
+              </TitleGroup>
+            </HeroSection>
+          </ScrollAnimation>
 
-          <FeaturedProductSection>
-            <TitleGroup>
-              <SectionTitle subtitle='Nổi bật' actionLabel='Xem chi tiết' actionLink={viewportIs === null && '/store/product/rain-shoulder'}>The Lazy Silk Leaf</SectionTitle>
-              {viewportIs !== null && <Button to='/store/product/rain-shoulder'>Xem chi tiết</Button>}
-            </TitleGroup>
-            <ImageGroup>
-              <GroupLeft>
-                <FeaturedImage fluid={featuredImgs[0]} />
-                <FeaturedImage fluid={featuredImgs[1]} />
-              </GroupLeft>
-              <GroupRight>
-                <FeaturedImage fluid={featuredImgs[2]} />
-              </GroupRight>
-            </ImageGroup>
-          </FeaturedProductSection>
+          <ScrollAnimation animateOnce animateIn='fadeIn'>
+            <FeaturedProductSection>
+              <TitleGroup>
+                <SectionTitle subtitle='Nổi bật' actionLabel='Xem chi tiết' actionLink={viewportIs === null && '/store/product/rain-shoulder'}>The Lazy Silk Leaf</SectionTitle>
+                {viewportIs !== null && <Button to='/store/product/rain-shoulder'>Xem chi tiết</Button>}
+              </TitleGroup>
+              <ImageGroup>
+                <GroupLeft>
+                  <FeaturedImage fluid={featuredImgs[0]} />
+                  <FeaturedImage fluid={featuredImgs[1]} />
+                </GroupLeft>
+                <GroupRight>
+                  <FeaturedImage fluid={featuredImgs[2]} />
+                </GroupRight>
+              </ImageGroup>
+            </FeaturedProductSection>
+          </ScrollAnimation>
 
-          <LastestProductsSection>
-            <TitleGroup>
-              <SectionTitle subtitle='Sản phẩm mới' actionLabel='Xem cửa hàng' actionLink='/store'>Tote Bags</SectionTitle>
-            </TitleGroup>
-            <ProductsWrapper>
-              <ProductListingContainer>
-                {latestProductList.map(({ node: product }) => (
-                  <ProductListingItem key={product.id} product={product} />
-                ))}
-              </ProductListingContainer>
-            </ProductsWrapper>
-          </LastestProductsSection>
+          <ScrollAnimation animateOnce animateIn='fadeIn'>
+            <LastestProductsSection>
+              <TitleGroup>
+                <SectionTitle subtitle='Sản phẩm mới' actionLabel='Xem cửa hàng' actionLink='/store'>Tote Bags</SectionTitle>
+              </TitleGroup>
+              <ProductsWrapper>
+                <ProductListingContainer>
+                  {latestProductList.map(({ node: product }) => (
+                    <ProductListingItem key={product.id} product={product} />
+                  ))}
+                </ProductListingContainer>
+              </ProductsWrapper>
+            </LastestProductsSection>
+          </ScrollAnimation>
 
-          <LastestBlogSection>
-            <TitleGroup>
-              <SectionTitle subtitle='Bài viết mới nhất' actionLabel='Xem tất cả' actionLink='/blog'>Blog</SectionTitle>
-            </TitleGroup>
-            <IndexStrip edges={blogPost} />
-          </LastestBlogSection>
+          <ScrollAnimation animateOnce animateIn='fadeIn'>
+            <LastestBlogSection>
+              <TitleGroup>
+                <SectionTitle subtitle='Bài viết mới nhất' actionLabel='Xem tất cả' actionLink='/blog'>Blog</SectionTitle>
+              </TitleGroup>
+              <IndexStrip edges={blogPost} />
+            </LastestBlogSection>
+          </ScrollAnimation>
         </IndexWrapper>
       </Page>
     )

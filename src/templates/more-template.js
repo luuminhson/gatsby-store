@@ -3,15 +3,16 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import ScrollAnimation from 'react-animate-on-scroll';
 import { Link } from '../components/LinkWithPrev';
 import Page from '../components/Page';
 import Footer from '../components/Layout/Footer';
 import FooterModule,
 {
-    ModuleTitle,
-    ModuleContent,
-    FooterModuleWrapper,
-    FooterModuleInner
+  ModuleTitle,
+  ModuleContent,
+  FooterModuleWrapper,
+  FooterModuleInner
 } from '../components/Layout/Footer/FooterModule';
 import type { MarkdownRemark } from '../types';
 
@@ -22,9 +23,9 @@ import bowingImg1 from '../imgs/thanks.gif';
 import bowingImg2 from '../imgs/bow.gif';
 
 type Props = {
-    data: {
-        markdownRemark: MarkdownRemark
-    }
+  data: {
+    markdownRemark: MarkdownRemark
+  }
 };
 
 const CustomFooter = styled(Footer)`
@@ -108,61 +109,63 @@ const ModuleOthers = css`
 
 class MoreTemplate extends React.Component<Props> {
 
-    componentDidMount() {
-        this.props.setPage();
+  componentDidMount() {
+    this.props.setPage();
+  }
+
+  render() {
+
+    const { data, viewportIs } = this.props;
+
+    const { title: siteTitle, description: siteSubtitle } = data.site.siteMetadata;
+
+    if (viewportIs !== null) {
+      return null;
     }
 
-    render() {
-
-        const { data, viewportIs } = this.props;
-
-        const { title: siteTitle, description: siteSubtitle } = data.site.siteMetadata;
-
-        if ( viewportIs !== null ) {
-            return null;
-        }
-
-        return (
-            <Page mainTitle='Thông tin' title={`Thông tin ‧ ${siteTitle}`} description={siteSubtitle} pageIs='More'>
-                <CustomFooter viewportIs={viewportIs} />
-                <FooterModule viewportIs={viewportIs} alwaysExpand css={ModuleOthers} title='Others'>
-                    <ul>
-                        <li>
-                            <Link to='/privacy-policy'>Chính sách bảo mật</Link>
-                        </li>
-                        <li>
-                            <Link to='/terms-and-conditions'>Điều khoản &amp; Điều kiện</Link>
-                        </li>
-                        <li>
-                            <span css={copyrightText}>ORINS © 2019 - All right reserved</span>
-                        </li>
-                        <li css={wishingANiceDay}>
-                            <span css={wishText}>Chúc bạn một ngày vui!</span>
-                            <span css={wishImgs}>
-                                <img src={bowingImg1} width='24' alt='Thank You from Oi' />
-                                <img src={bowingImg2} width='24' alt='Thank You from Miso' />
-                            </span>
-                        </li>
-                    </ul>
-                </FooterModule>
-            </Page>
-        )
-    }
+    return (
+      <Page mainTitle='Thông tin' title={`Thông tin ‧ ${siteTitle}`} description={siteSubtitle} pageIs='More'>
+        <ScrollAnimation animateOnce animateIn='fadeIn'>
+          <CustomFooter viewportIs={viewportIs} />
+          <FooterModule viewportIs={viewportIs} alwaysExpand css={ModuleOthers} title='Others'>
+            <ul>
+              <li>
+                <Link to='/privacy-policy'>Chính sách bảo mật</Link>
+              </li>
+              <li>
+                <Link to='/terms-and-conditions'>Điều khoản &amp; Điều kiện</Link>
+              </li>
+              <li>
+                <span css={copyrightText}>ORINS © 2019 - All right reserved</span>
+              </li>
+              <li css={wishingANiceDay}>
+                <span css={wishText}>Chúc bạn một ngày vui!</span>
+                <span css={wishImgs}>
+                  <img src={bowingImg1} width='24' alt='Thank You from Oi' />
+                  <img src={bowingImg2} width='24' alt='Thank You from Miso' />
+                </span>
+              </li>
+            </ul>
+          </FooterModule>
+        </ScrollAnimation>
+      </Page>
+    )
+  }
 }
 
 export default props => (
-    <InterfaceContext.Consumer>
-        {({
-            setToMorePage,
-            viewportIs
-        }) => (
-                <MoreTemplate
-                    {...props}
-                    setPage={setToMorePage}
-                    viewportIs={viewportIs}
-                />
-            )}
-    </InterfaceContext.Consumer>
+  <InterfaceContext.Consumer>
+    {({
+      setToMorePage,
+      viewportIs
+    }) => (
+        <MoreTemplate
+          {...props}
+          setPage={setToMorePage}
+          viewportIs={viewportIs}
+        />
+      )}
+  </InterfaceContext.Consumer>
 )
 
 export const query = graphql`
