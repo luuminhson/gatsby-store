@@ -109,7 +109,7 @@ class PurePage extends React.Component<Props> {
           <meta property="og:site_name" content={title} />
           <meta property="og:description" content={description} />
 
-          <meta property="og:image" content={`${siteUrl}/img-share-link.png`} />
+          <meta property="og:image" content={`${siteUrl}/img-share-link.jpg`} />
           <meta property="og:image:alt" content="We are ORINS." />
           <meta property="og:image:width" content="1280" />
           <meta property="og:image:height" content="686" />
