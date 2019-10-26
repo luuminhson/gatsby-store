@@ -53,8 +53,8 @@ const MenuListItem = styled(`li`)`
 
 const MenuItemLink = styled(Link)`
   font-family: ${fontFamily.heading};
-  font-weight: ${fontWeight.heading.medium};
-  font-size: 0.9rem;
+  font-weight: ${fontWeight.heading.bold};
+  font-size: 0.95rem;
   padding: 0 20px;
   height: 48px;
   line-height: 48px;

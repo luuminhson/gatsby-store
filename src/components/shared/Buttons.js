@@ -16,9 +16,10 @@ export const ButtonBase = styled(`button`)`
   height: 50px;
   display: inline-flex;
   font-family: ${fontFamily.heading};
+  font-weight: ${fontWeight.heading.bold};
   font-size: 0.9rem;
-  font-weight: ${fontWeight.heading.normal};
-  letter-spacing: 0.2px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   justify-content: center;
   padding: 0.85rem 1.25rem;
   transition: 0.5s;

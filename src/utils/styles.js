@@ -172,7 +172,7 @@ const monospaceFontStack = [
 
 export const fontFamily = {
   body: `Source Sans Pro, ${defaultFontStack}`,
-  heading: `Merriweather Sans, ${defaultFontStack}`,
+  heading: `Fira Sans, ${defaultFontStack}`,
   monospace: monospaceFontStack
 };
 
@@ -213,8 +213,8 @@ const lineHeight = {
 export const fontWeight = {
   heading: {
     normal: 400,
-    medium: 700,
-    bold: 800,
+    medium: 500,
+    bold: 600,
   },
   body: {
     normal: 400,
@@ -231,7 +231,7 @@ const headingLetterSpacing = '0';
 const headingCommonStyle = (`
   color: ${colors.mainDark};  
   font-family: ${fontFamily.heading};
-  font-weight: ${fontWeight.heading.medium};
+  font-weight: ${fontWeight.heading.bold};
   letter-spacing: ${headingLetterSpacing};
   margin: 0;
 `);

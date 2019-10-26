@@ -122,9 +122,15 @@ class PurePage extends React.Component<Props> {
           />
         }
         <PageInner>
-          {pageTitle && <PageTitle css={pageIs === 'Product' && ProductPageTitle}>{pageTitle}</PageTitle>}
+          {pageTitle &&
+            <ScrollAnimation animateOnce animateIn='fadeIn'>
+              <PageTitle css={pageIs === 'Product' && ProductPageTitle}>{pageTitle}</PageTitle>
+            </ScrollAnimation>
+          }
           <PageBody>
-            {children}
+            <ScrollAnimation animateOnce animateIn='fadeIn'>
+              {children}
+            </ScrollAnimation>
           </PageBody>
           {viewportIs !== null &&
             <ScrollAnimation animateOnce animateIn='fadeIn'>
