@@ -5,6 +5,8 @@ import styled from '@emotion/styled';
 import { fontWeight, FontStyle, spacing, mediaQuery } from '../../utils/styles';
 import { priceWithCommas } from '../../utils/helpers';
 
+import StoreContext from '../../context/StoreContext';
+
 const ProductSpecsRoot = styled(`div`)`
   padding: 0 ${spacing.xl}px;
 
@@ -52,23 +54,47 @@ const ProductSpecs = props => {
     product: {
       title,
       descriptionHtml,
-      variants: [variant]
+      variants
     }
   } = props;
 
-  const { price, compareAtPrice } = variant;
+  const variantsFiltered = ( currentVariant ) => (
+    variants.filter( id => {
+      return id.shopifyId == currentVariant;
+    })
+  );
+
+  const selectedVariant = ( variant ) => ( variantsFiltered(variant).map( i => (i)) );
+
+  const price = (variant) => (
+    selectedVariant(variant).length === 0
+    ? variants[0].price
+    : selectedVariant(variant)[0].price
+  )
+
+  const compareAtPrice = (variant) => (
+    selectedVariant(variant).length === 0
+    ? variants[0].compareAtPrice
+    : selectedVariant(variant)[0].compareAtPrice
+  )
 
   return (
+    <StoreContext.Consumer>
+        {({
+          currentVariant
+        }) => (
     <ProductSpecsRoot>
       <ProductTitle>{title}</ProductTitle>
       <PriceRow>
-        <Price>{priceWithCommas(price)} VND</Price>
-        {compareAtPrice && compareAtPrice !== null &&
-          <SalePrice>{priceWithCommas(compareAtPrice)} VND</SalePrice>
+        <Price>{priceWithCommas(price(currentVariant))} VND</Price>
+        {compareAtPrice(currentVariant) && compareAtPrice(currentVariant) !== null &&
+          <SalePrice>{priceWithCommas(compareAtPrice(currentVariant))} VND</SalePrice>
         }
       </PriceRow>
       <ProductDescription dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
     </ProductSpecsRoot>
+    )}
+    </StoreContext.Consumer>
   );
 };
 

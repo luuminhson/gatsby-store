@@ -76,7 +76,7 @@ const QtyFieldset = styled(Fieldset)`
 
 const VariantFieldset = styled(Fieldset)`
   flex-basis: 100%;
-  margin-bottom: ${spacing.md}px;
+  margin-bottom: ${spacing.xl}px;
 
   ${Label} {
     justify-content: space-between;
@@ -104,7 +104,11 @@ class ProductForm extends Component {
     errors: []
   };
 
-  handleChange = event => {
+  variantsFilter = id => {
+    return id == 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8yMzgxOTU4OTIyMjQ4MQ=='
+  }
+
+  handleChange = (setVariant) => event => {
     event.preventDefault();
 
     if (event.target.value) {
@@ -122,6 +126,8 @@ class ProductForm extends Component {
     }
 
     this.setState({ [event.target.name]: event.target.value });
+
+    setVariant(event.target.value);
   };
 
   handleSubmit = callback => event => {
@@ -166,7 +172,11 @@ class ProductForm extends Component {
 
     return (
       <StoreContext.Consumer>
-        {({ addVariantToCart }) => (
+        {({
+          addVariantToCart,
+          currentVariant,
+          setCurrentVariant
+        }) => (
           <Form onSubmit={this.handleSubmit(addVariantToCart)} noValidate>
             <Errors show={errors.length}>
               <ErrorSign>
@@ -183,28 +193,29 @@ class ProductForm extends Component {
             </Errors>
             <QtyFieldset>
               <Input
-                type="number"
-                id="quantity"
-                name="quantity"
-                min="1"
-                step="1"
-                inputmode="numeric"
-                pattern="[0-9]*"
+                type='number'
+                id='quantity'
+                name='quantity'
+                min='1'
+                step='1'
+                inputmode='numeric'
+                pattern='[0-9]*'
                 onChange={this.handleChange}
                 value={this.state.quantity}
               />
             </QtyFieldset>
             {hasVariants && (
               <VariantFieldset>
+                <label htmlFor='variant'>Product Options</label>
                 <Select
-                  id="variant"
+                  id='variant'
                   value={this.state.variant}
-                  name="variant"
-                  onChange={this.handleChange}
+                  name='variant'
+                  onChange={this.handleChange(setCurrentVariant)}
                 >
-                  <option disabled value="">
+                  {/* <option disabled value="">
                     Product Options...
-                  </option>
+                  </option> */}
                   {variants.map(variant => (
                     <option
                       disabled={!variant.availableForSale}

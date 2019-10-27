@@ -16,7 +16,7 @@ import SidePanel from '../SidePanel';
 import PageContent from './PageContent';
 import ProductImagesBrowser from '../ProductPage/ProductImagesBrowser';
 
-import { breakpoints, mediaQuery, fontFamily, colors, dimensions } from '../../utils/styles';
+import { breakpoints, mediaQuery, fontFamily, colors, dimensions, spacing, fontWeight } from '../../utils/styles';
 
 injectGlobal`
     @keyframes fadeInMobile {
@@ -65,6 +65,11 @@ injectGlobal`
         padding: 0 0.3125rem;
         margin-bottom: 0.625rem;
       }
+    }
+
+    label {
+      margin-bottom: ${spacing.sm}px;
+      font-weight: ${fontWeight.body.medium};
     }
 
     a {
@@ -311,6 +316,14 @@ class PureLayout extends React.Component {
     },
     store: {
       ...defaultStoreContext,
+      setCurrentVariant: (variant) => {
+        this.setState(state => ({
+          store: {
+            ...state.store,
+            currentVariant: variant
+          }
+        }));
+      },
       addVariantToCart: (variantId, quantity) => {
         if (variantId === '' || !quantity) {
           console.error('Both a size and quantity are required.');

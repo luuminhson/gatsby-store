@@ -13,6 +13,8 @@ export const defaultStoreContext = {
   checkout: { lineItems: [] },
   products: [],
   shop: {},
+  currentVariant: null,
+  setCurrentVariant: () => {},
   addVariantToCart: () => {},
   removeLineItem: () => {},
   updateLineItem: () => {}
