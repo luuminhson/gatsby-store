@@ -114,7 +114,7 @@ class ProductPage extends Component {
               )}
               <Details>
                 <ProductSpecs product={product} />
-                <ProductForm id={id} variants={variants} />
+                <ProductForm id={id} product={product} variants={variants} />
               </Details>
             </Container>
           </ProductPageRoot>

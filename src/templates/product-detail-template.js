@@ -132,6 +132,15 @@ export const query = graphql`
         price
         compareAtPrice
         availableForSale
+        selectedOptions {
+          name
+          value
+        }
+      }
+      options {
+        id
+        name
+        values
       }
       images {
         id
