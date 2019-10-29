@@ -166,7 +166,15 @@ class ProductForm extends Component {
     return variantItem;
   }
 
-  handleChange2 = (index, variants, callback) => event => {
+  handleChange2 = (
+    index,
+    variants,
+    callbackVariants,
+    imageFeatured,
+    featureProductImage,
+    imageFeaturedIndex,
+    featureProductImageIndex
+  ) => event => {
     event.preventDefault();
 
     if (event.target.value) {
@@ -193,12 +201,24 @@ class ProductForm extends Component {
 
     // set variant to store context
 
-    callback(variants[this.loopComparison(this.state.options, variants)].shopifyId);
+    callbackVariants(variants[this.loopComparison(this.state.options, variants)].shopifyId);
+
+    featureProductImage(imageFeatured);
+
+    featureProductImageIndex(imageFeaturedIndex);
 
   };
 
   render() {
-    const { product, compactVariants } = this.props;
+    const {
+      product,
+      compactVariants,
+      imageFeatured,
+      featureProductImage,
+      imageFeaturedIndex,
+      featureProductImageIndex
+    } = this.props;
+
     const { errors } = this.state;
 
     const hasVariants = product.variants.length > 1;
@@ -273,7 +293,15 @@ class ProductForm extends Component {
                       <Select
                         id={option.id}
                         name={option.name}
-                        onChange={this.handleChange2(index, product.variants, setCurrentVariant)}
+                        onChange={this.handleChange2(
+                          index,
+                          product.variants,
+                          setCurrentVariant,
+                          imageFeatured,
+                          featureProductImage,
+                          imageFeaturedIndex,
+                          featureProductImageIndex
+                        )}
                       >
                         {option.values.map(value => (
                           <option

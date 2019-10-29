@@ -190,6 +190,8 @@ class ProductPage extends Component {
     return (
       <InterfaceContext.Consumer>
         {({
+          featureProductImage,
+          featureProductImageIndex,
           productImageFeaturedIndex,
         }) => (
             <StoreContext.Consumer>
@@ -224,7 +226,15 @@ class ProductPage extends Component {
                             <SalePrice>{priceWithCommas(compareAtPrice(currentVariant))} VND</SalePrice>
                           }
                         </PriceRow>
-                        <ProductForm id={id} product={product} compactVariants={false} />
+                        <ProductForm
+                          id={id}
+                          product={product}
+                          compactVariants={false}
+                          imageFeatured={currentVariant && currentVariant.image}
+                          featureProductImage={featureProductImage}
+                          imageFeaturedIndex={0}
+                          featureProductImageIndex={featureProductImageIndex}
+                        />
                         <ProductDescription dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
                       </Details>
                     </Container>
