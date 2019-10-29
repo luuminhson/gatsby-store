@@ -16,10 +16,8 @@ const Form = styled(`form`)`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: ${spacing['2xl']}px ${spacing.xl}px 0;
 
   ${mediaQuery.tablet} {
-    padding: ${spacing['2xl']}px ${spacing.xl}px 0;
     justify-content: flex-start;
   }
 
@@ -100,10 +98,10 @@ const AddToCartButton = styled(Submit)`
 
 class ProductForm extends Component {
   state = {
-    variant: this.props.variants[0].shopifyId,
+    variant: this.props.product.variants[0].shopifyId,
     quantity: 1,
     errors: [],
-    options: _.sortBy(this.props.product.options.map( (options) => (
+    options: _.sortBy(this.props.product.options.map((options) => (
       {
         name: options.name,
         value: options.values[0]
@@ -200,17 +198,17 @@ class ProductForm extends Component {
   };
 
   render() {
-    const { product, variants } = this.props;
-    const { errors, options } = this.state;
+    const { product, compactVariants } = this.props;
+    const { errors } = this.state;
 
-    const hasVariants = variants.length > 1;
+    const hasVariants = product.variants.length > 1;
 
     /*
      * For products without variants, we disable the whole Add to Cart button
      * and change the text. This flag prevents us from duplicating the logic in
      * multiple places.
      */
-    const isOutOfStock = !hasVariants && !variants[0].availableForSale;
+    const isOutOfStock = !hasVariants && !product.variants[0].availableForSale;
 
     return (
       <StoreContext.Consumer>
@@ -247,6 +245,49 @@ class ProductForm extends Component {
                 />
               </QtyFieldset>
 
+              {hasVariants && compactVariants ? (
+                <VariantFieldset>
+                  <label htmlFor='variant'>Product Options</label>
+                  <Select
+                    id='variant'
+                    value={this.state.variant}
+                    name='variant'
+                    onChange={this.handleChange(setCurrentVariant)}
+                  >
+                    {product.variants.map(variant => (
+                      <option
+                        disabled={!variant.availableForSale}
+                        value={variant.shopifyId}
+                        key={variant.shopifyId}
+                      >
+                        {variant.title}
+                      </option>
+                    ))}
+                  </Select>
+                </VariantFieldset>
+              ) : (
+                  product.options.map((option, index) => (
+                    <VariantFieldset key={index}>
+                      <label htmlFor={option.id}>{option.name}</label>
+                      <Select
+                        id={option.id}
+                        name={option.name}
+                        onChange={this.handleChange2(index, product.variants, setCurrentVariant)}
+                      >
+                        {option.values.map(value => (
+                          <option
+                            value={value}
+                            key={`${option.name}-${value}`}
+                          >
+                            {`${value}`}
+                          </option>
+                        ))}
+                      </Select>
+                    </VariantFieldset>
+                  ))
+                )
+              }
+
               {/* {hasVariants && (
                 <VariantFieldset>
                   <label htmlFor='variant'>Product Options</label>
@@ -269,14 +310,14 @@ class ProductForm extends Component {
                 </VariantFieldset>
               )} */}
 
-              { hasVariants && (
+              {/* { hasVariants && (
                 product.options.map( (option, index) => (
                   <VariantFieldset key={index}>
                     <label htmlFor={option.id}>{option.name}</label>
                     <Select
                       id={option.id}
                       name={option.name}
-                      onChange={this.handleChange2(index, variants, setCurrentVariant)}
+                      onChange={this.handleChange2(index, product.variants, setCurrentVariant)}
                     >
                       {option.values.map(value => (
                         <option
@@ -288,8 +329,8 @@ class ProductForm extends Component {
                       ))}
                     </Select>
                   </VariantFieldset>
-                )))
-              }
+                ))
+              )} */}
 
               <AddToCartButton
                 type="submit"
@@ -307,7 +348,7 @@ class ProductForm extends Component {
 
 ProductForm.propTypes = {
   id: PropTypes.string.isRequired,
-  variants: PropTypes.array.isRequired,
+  compactVariants: PropTypes.bool,
   product: PropTypes.object.isRequired
 };
 

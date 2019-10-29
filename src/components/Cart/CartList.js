@@ -2,8 +2,6 @@ import React from 'react';
 import styled from '@emotion/styled';
 import CartListItem from './CartListItem';
 
-import { colors, spacing } from '../../utils/styles';
-
 const CartListRoot = styled('ul')`
   list-style: none;
   margin: 0;

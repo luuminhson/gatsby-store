@@ -132,6 +132,20 @@ export const query = graphql`
         price
         compareAtPrice
         availableForSale
+        image {
+          id
+          altText
+          localFile {
+            childImageSharp {
+              resize(width: 1000, height: 1000) {
+                src
+              }
+              fluid(maxWidth: 1000, quality: 100) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
         selectedOptions {
           name
           value
