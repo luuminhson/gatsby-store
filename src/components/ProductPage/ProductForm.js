@@ -245,27 +245,28 @@ class ProductForm extends Component {
                 />
               </QtyFieldset>
 
-              {hasVariants && compactVariants ? (
-                <VariantFieldset>
-                  <label htmlFor='variant'>Product Options</label>
-                  <Select
-                    id='variant'
-                    value={this.state.variant}
-                    name='variant'
-                    onChange={this.handleChange(setCurrentVariant)}
-                  >
-                    {product.variants.map(variant => (
-                      <option
-                        disabled={!variant.availableForSale}
-                        value={variant.shopifyId}
-                        key={variant.shopifyId}
-                      >
-                        {variant.title}
-                      </option>
-                    ))}
-                  </Select>
-                </VariantFieldset>
-              ) : (
+              {hasVariants && (
+                compactVariants ? (
+                  <VariantFieldset>
+                    <label htmlFor='variant'>Product Options</label>
+                    <Select
+                      id='variant'
+                      value={this.state.variant}
+                      name='variant'
+                      onChange={this.handleChange(setCurrentVariant)}
+                    >
+                      {product.variants.map(variant => (
+                        <option
+                          disabled={!variant.availableForSale}
+                          value={variant.shopifyId}
+                          key={variant.shopifyId}
+                        >
+                          {variant.title}
+                        </option>
+                      ))}
+                    </Select>
+                  </VariantFieldset>
+                ) : (
                   product.options.map((option, index) => (
                     <VariantFieldset key={index}>
                       <label htmlFor={option.id}>{option.name}</label>
@@ -284,53 +285,11 @@ class ProductForm extends Component {
                         ))}
                       </Select>
                     </VariantFieldset>
-                  ))
+                    )
+                  )
                 )
+              )
               }
-
-              {/* {hasVariants && (
-                <VariantFieldset>
-                  <label htmlFor='variant'>Product Options</label>
-                  <Select
-                    id='variant'
-                    value={this.state.variant}
-                    name='variant'
-                    onChange={this.handleChange(setCurrentVariant)}
-                  >
-                    {variants.map(variant => (
-                      <option
-                        disabled={!variant.availableForSale}
-                        value={variant.shopifyId}
-                        key={variant.shopifyId}
-                      >
-                        {variant.title}
-                      </option>
-                    ))}
-                  </Select>
-                </VariantFieldset>
-              )} */}
-
-              {/* { hasVariants && (
-                product.options.map( (option, index) => (
-                  <VariantFieldset key={index}>
-                    <label htmlFor={option.id}>{option.name}</label>
-                    <Select
-                      id={option.id}
-                      name={option.name}
-                      onChange={this.handleChange2(index, product.variants, setCurrentVariant)}
-                    >
-                      {option.values.map(value => (
-                        <option
-                          value={value}
-                          key={`${option.name}-${value}`}
-                        >
-                          {`${value}`}
-                        </option>
-                      ))}
-                    </Select>
-                  </VariantFieldset>
-                ))
-              )} */}
 
               <AddToCartButton
                 type="submit"
