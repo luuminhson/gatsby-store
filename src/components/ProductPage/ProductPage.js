@@ -183,6 +183,10 @@ class ProductPage extends Component {
       processedImages.splice(0, 0, variantImages[getCurrentVariantIndex(currentVariant)])
     };
 
+    const hasVariants = variants.length > 1;
+
+    const finalImages = hasVariants ? processedImages : originalImages;
+
     return (
       <InterfaceContext.Consumer>
         {({
@@ -200,12 +204,12 @@ class ProductPage extends Component {
                     <Container>
                       {(viewportIs !== 'desktop') && (viewportIs !== 'tablet') ? (
                         <ProductImagesMobile
-                          images={processedImages}
+                          images={finalImages}
                           imageOnClick={toggleProductImagesBrowser}
                         />
                       ) : (
                           <ProductImagesDesktop
-                            images={processedImages}
+                            images={finalImages}
                             imageOnClick={toggleProductImagesBrowser}
                             imageFeatured={productImageFeatured}
                             imageFeaturedIndex={productImageFeaturedIndex}
