@@ -22,7 +22,7 @@ export const ButtonBase = styled(`button`)`
   text-transform: uppercase;
   justify-content: center;
   padding: 0.85rem 1.25rem;
-  transition: 0.5s;
+  transition: 0.2s ease-in-out;
 
   :focus {
     background: ${colors.neutral2};
@@ -38,7 +38,7 @@ export const ButtonBase = styled(`button`)`
 
   @media (hover: hover) {
     &:hover {
-      background: ${colors.neutral1};
+      background: ${colors.neutral2};
     }
   }
 `;
@@ -101,6 +101,7 @@ Button.propTypes = {
 export const PrimaryButton = styled(Button)`
   background: ${colors.mainClickable};
   color: ${colors.white};
+  box-shadow: 0 20px 16px -16px rgba(0,0,0,0.24), 0 2px 4px rgba(0,0,0,0.12);
 
   :focus {
     background: ${colors.mainClickable};
@@ -109,6 +110,8 @@ export const PrimaryButton = styled(Button)`
   @media (hover: hover) {
     &:hover {
       background: ${colors.mainClickable};
+      transform: translate3d(0, 1px, 0);
+      box-shadow: 0 12px 8px -8px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.2);
     }
   }
 `;
