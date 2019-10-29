@@ -204,12 +204,12 @@ class ProductPage extends Component {
                     <Container>
                       {(viewportIs !== 'desktop') && (viewportIs !== 'tablet') ? (
                         <ProductImagesMobile
-                          images={finalImages}
+                          images={finalImages[0] !== undefined ? finalImages : originalImages}
                           imageOnClick={toggleProductImagesBrowser}
                         />
                       ) : (
                           <ProductImagesDesktop
-                            images={finalImages}
+                            images={finalImages[0] !== undefined ? finalImages : originalImages}
                             imageOnClick={toggleProductImagesBrowser}
                             imageFeatured={productImageFeatured}
                             imageFeaturedIndex={productImageFeaturedIndex}
