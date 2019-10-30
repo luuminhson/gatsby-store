@@ -25,7 +25,7 @@ const Thumbnails = styled(ProductThumbnails)`
   }
 `;
 
-const ProductImagesDesktop = ({ images, imageFeatured, imageOnClick, imageFeaturedIndex }) => {
+const ProductImagesDesktop = ({ images, imageFeatured, imageFeaturedIndex }) => {
   const image = images[0];
 
   return (
@@ -33,7 +33,6 @@ const ProductImagesDesktop = ({ images, imageFeatured, imageOnClick, imageFeatur
       { images.length !== 1 && <Thumbnails images={images} activeIdx={imageFeaturedIndex} /> }
       <ProductImage
         image={imageFeatured ? imageFeatured : image}
-        onClick={imageOnClick}
         idx={imageFeaturedIndex}
         single={ images.length === 1 ? true : false }
       />

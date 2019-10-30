@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/core';
 
-import { breakpoints } from '../../utils/styles';
+import { breakpoints, mediaQuery, headerHeight } from '../../utils/styles';
 
 const pageTransition = keyframes`
   from {
@@ -28,6 +28,7 @@ const startFade = keyframes`
 `;
 
 const PageContentRoot = styled(`main`)`
+  position: relative;
   display: flex;
   flex-direction: column;
   opacity: 1;
@@ -36,16 +37,15 @@ const PageContentRoot = styled(`main`)`
   width: 100%;
   animation: ${startFade} 1.5s ease forwards;
 
-  .covered {
-    opacity: 0;
-    position: fixed;
+  &.covered {
+    z-index: 10000;
   }
 
   .entry {
     animation: ${pageTransition} .5s ease forwards;
   }
 
-  @media (min-width: ${breakpoints.desktop}px) {
+  ${mediaQuery.tabletFrom} {
 
     .moved {
       filter: blur(1px);
@@ -53,8 +53,14 @@ const PageContentRoot = styled(`main`)`
       transform: translateX(-400px);
     }
 
-    .covered {
-      display: none;
+    &.covered {
+      // height: calc(100vh - ${headerHeight.tablet});
+    }
+  }
+
+  ${mediaQuery.desktop} {
+    &.covered {
+      // height: calc(100vh - ${headerHeight.desktop});
     }
   }
 `;
@@ -69,23 +75,8 @@ class PageContent extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const imageBrowserStatusChanged =
-      this.props.productImagesBrowserStatus !==
-      prevProps.productImagesBrowserStatus;
 
-    if (imageBrowserStatusChanged) {
-      if (this.props.productImagesBrowserStatus === 'open') {
-        setTimeout(() => {
-          this.setState(state => ({
-            className: state.className + ' covered'
-          }));
-        }, 500);
-      } else {
-        this.setState(state => ({
-          className: state.className.replace(' covered', '')
-        }));
-      }
-    }
+    // Add class 'entry' to handle animation when page path changes
 
     if (this.props.location.pathname !== prevProps.location.pathname) {
       this.setState(state => ({ className: state.className + 'entry ' }));
@@ -103,8 +94,8 @@ class PageContent extends Component {
     const { className } = this.state;
 
     return (
-      <PageContentRoot>
-        <PageContentInner className={className}>
+      <PageContentRoot className={className}>
+        <PageContentInner>
           {children}
         </PageContentInner>
       </PageContentRoot>
@@ -116,7 +107,6 @@ PageContent.propTypes = {
   cartStatus: PropTypes.string.isRequired,
   location: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
-  productImagesBrowserStatus: PropTypes.string.isRequired,
   viewportIs: PropTypes.string
 };
 

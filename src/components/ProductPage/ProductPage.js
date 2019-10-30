@@ -116,7 +116,7 @@ const ProductDescription = styled(`div`)`
 class ProductPage extends Component {
 
   componentDidMount() {
-    const images = this.props.product.images;
+    const images = this.props.finalImages;
     const firstVariant = this.props.product.variants[0].shopifyId;
 
     this.props.setCurrentProductImages(images);
@@ -132,13 +132,10 @@ class ProductPage extends Component {
         variants,
         descriptionHtml,
         images: originalImages
-      }
-    } = this.props;
-
-    const {
+      },
       viewportIs,
       productImageFeatured,
-      toggleProductImagesBrowser
+      finalImages
     } = this.props;
 
     const selectedVariant = (currentVariant) => (
@@ -159,34 +156,6 @@ class ProductPage extends Component {
         : selectedVariant(variant)[0].compareAtPrice
     )
 
-    // Process the product images
-    // Display the current variant image first, then all non-variant images
-
-    const getCurrentVariantIndex = (currentVariant) => (
-      _.findIndex(variants, item => (
-        item.shopifyId == currentVariant
-      ))
-    );
-
-    const processedImages = _.uniq(originalImages.map( i => (i)));
-
-    const variantImages = variants.map( i => ( i.image ));
-
-    const variantImageIds = variants.map( i => ( i.image.id ));
-
-    const filterImages = (currentVariant) => {
-      for (let i = 0; i < processedImages.length; i++ ) {
-        _.remove(processedImages, item => {
-          return item.id == variantImageIds[i];
-        })
-      }
-      processedImages.splice(0, 0, variantImages[getCurrentVariantIndex(currentVariant)])
-    };
-
-    const hasVariants = variants.length > 1;
-
-    const finalImages = hasVariants ? processedImages : originalImages;
-
     return (
       <InterfaceContext.Consumer>
         {({
@@ -200,23 +169,22 @@ class ProductPage extends Component {
               }) => (
                   <ProductPageRoot>
 
-                    { currentVariant && currentVariant !== null && filterImages(currentVariant) }
-
                     <ProductTitle>{title}</ProductTitle>
                     <Container>
                       {(viewportIs !== 'desktop') && (viewportIs !== 'tablet') ? (
                         <ProductImagesMobile
                           images={finalImages[0] !== undefined ? finalImages : originalImages}
-                          imageOnClick={toggleProductImagesBrowser}
                         />
                       ) : (
                           <ProductImagesDesktop
                             images={finalImages[0] !== undefined ? finalImages : originalImages}
-                            imageOnClick={toggleProductImagesBrowser}
+
                             imageFeatured={productImageFeatured}
                             imageFeaturedIndex={productImageFeaturedIndex}
                           />
                       )}
+
+                      {/* {console.log(finalImages)} */}
 
                       <Details>
                         <ProductSpecTitle>{title}</ProductSpecTitle>
@@ -252,11 +220,12 @@ export default props => (
         {({
           setCurrentVariant
         }) => {
-          const { product } = props;
+          const { product, finalImages } = props;
           return (
               <ProductPage
                 {...props}
                 product={product}
+                finalImages={finalImages}
                 setCurrentVariant={setCurrentVariant}
               />
           )
@@ -266,8 +235,6 @@ export default props => (
 
 ProductPage.propTypes = {
   product: PropTypes.object.isRequired,
-  productImagesBrowserStatus: PropTypes.string.isRequired,
-  toggleProductImagesBrowser: PropTypes.func.isRequired,
   setCurrentProductImages: PropTypes.func.isRequired,
   productImageFeatured: PropTypes.object,
   viewportIs: PropTypes.string

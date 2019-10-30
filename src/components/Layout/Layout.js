@@ -14,7 +14,6 @@ import { DesktopNavigation } from './Navigation';
 import BottomNavigation from '../BottomNavigation';
 import SidePanel from '../SidePanel';
 import PageContent from './PageContent';
-import ProductImagesBrowser from '../ProductPage/ProductImagesBrowser';
 
 import { breakpoints, mediaQuery, fontFamily, colors, dimensions, spacing, fontWeight } from '../../utils/styles';
 
@@ -100,6 +99,15 @@ injectGlobal`
 
 const LayoutWrapper = styled(`div`)`
     overflow: hidden;
+    position: relative;
+
+    &.covered {
+      // position: fixed;
+      // top: 0;
+      // left: 0;
+      // width: 100vw;
+      // height: 100vh;
+    }
 `;
 
 const overlayOn = css`
@@ -180,17 +188,6 @@ class PureLayout extends React.Component {
             ...state.interface,
             sidebarStatus:
               this.state.interface.sidebarStatus === true ? false : true
-          }
-        }));
-      },
-      toggleProductImagesBrowser: img => {
-        this.setState(state => ({
-          interface: {
-            ...state.interface,
-            productImagesBrowserStatus: img ? 'open' : 'closed',
-            productImageFeatured: img
-              ? img
-              : state.interface.productImageFeatured
           }
         }));
       },
@@ -384,6 +381,7 @@ class PureLayout extends React.Component {
           });
       }
     },
+    className: ''
   };
 
   async initializeCheckout() {
@@ -484,9 +482,10 @@ class PureLayout extends React.Component {
 
   render() {
     const { children } = this.props;
+    const { className } = this.state;
 
     return (
-      <LayoutWrapper>
+      <LayoutWrapper className={className}>
         <StoreContext.Provider value={this.state.store}>
           <InterfaceContext.Provider value={this.state.interface}>
             <InterfaceContext.Consumer>
@@ -497,11 +496,6 @@ class PureLayout extends React.Component {
                 sidebarStatus,
                 toggleCart,
                 toggleSidebar,
-                productImagesBrowserStatus,
-                currentProductImages,
-                productImageFeatured,
-                productImageFeaturedIndex,
-                toggleProductImagesBrowser,
                 hasFeaturedImage
               }) => (
                   <StoreContext.Consumer>
@@ -528,7 +522,6 @@ class PureLayout extends React.Component {
                                 viewportIs={viewportIs}
                                 status={cartStatus}
                                 toggle={toggleCart}
-                                productImagesBrowserStatus={productImagesBrowserStatus}
                               />
                               <SidePanelWrapper css={sidebarStatus === true && SidebarOn}>
                                 <OiIcon icon='oi-icon-close' css={SidePanelCloseBtn} onClick={toggleSidebar} />
@@ -551,21 +544,10 @@ class PureLayout extends React.Component {
                               <PageContent
                                 cartStatus={cartStatus}
                                 viewportIs={viewportIs}
-                                productImagesBrowserStatus={productImagesBrowserStatus}
                                 location={location}
                               >
                                 {children}
                               </PageContent>
-                              {currentProductImages.length > 0 && (
-                                <ProductImagesBrowser
-                                  images={currentProductImages}
-                                  position={productImagesBrowserStatus}
-                                  imageFeatured={productImageFeatured}
-                                  imageFeaturedIndex={productImageFeaturedIndex}
-                                  toggle={toggleProductImagesBrowser}
-                                  viewportIs={viewportIs}
-                                />
-                              )}
                             </>
                           )}
                         </Location>

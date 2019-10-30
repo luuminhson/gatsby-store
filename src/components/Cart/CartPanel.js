@@ -242,30 +242,11 @@ class Cart extends Component {
 
   componentDidUpdate(prevProps) {
     const componentStatusChanged = prevProps.status !== this.props.status;
-    const imageBrowserStatusChanged =
-      this.props.productImagesBrowserStatus !==
-      prevProps.productImagesBrowserStatus;
 
     if (componentStatusChanged) {
       this.setState({
         className: this.props.status
       });
-    }
-
-    if (this.props.viewportIs === 'desktop') {
-      if (imageBrowserStatusChanged) {
-        if (this.props.productImagesBrowserStatus === 'open') {
-          setTimeout(() => {
-            this.setState(state => ({
-              className: state.className + ' covered'
-            }));
-          }, 500);
-        } else {
-          this.setState(state => ({
-            className: state.className.replace('covered', '')
-          }));
-        }
-      }
     }
   }
 
@@ -358,7 +339,6 @@ class Cart extends Component {
 Cart.propTypes = {
   toggle: PropTypes.func.isRequired,
   viewportIs: PropTypes.string,
-  productImagesBrowserStatus: PropTypes.string
 };
 
 export default Cart;

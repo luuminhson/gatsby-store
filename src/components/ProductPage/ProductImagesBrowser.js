@@ -65,15 +65,16 @@ const ProductImagesBrowserRoot = styled(`div`)`
   transform: scale(0.8);
   transform-origin: center center;
   width: 100vw;
+  height: 100vh;
   will-change: opacity, transform, left;
   z-index: 10000;
 
   &.open {
-    animation: ${entry} 300ms ease-out forwards;
+    animation: ${entry} 0s ease-out forwards;
   }
 
   &.closed {
-    animation: ${exit} 200ms ease-out forwards;
+    animation: ${exit} 0s ease-out forwards;
   }
 
   ${mediaQuery.tabletFrom} { {

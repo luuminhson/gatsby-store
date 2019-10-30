@@ -6,9 +6,13 @@ import Helmet from 'react-helmet';
 import Page from '../components/Page';
 
 import InterfaceContext from '../context/InterfaceContext';
+import StoreContext from '../context/StoreContext';
+
 import ProductPage from '../components/ProductPage';
 import RelatedProducts from '../components/ProductPage/RelatedProducts';
 import { spacing } from '../utils/styles';
+
+const _ = require('lodash');
 
 const ProductDetailWrapper = styled(`div`)`
   padding-bottom: ${spacing.xs}px;
@@ -26,7 +30,14 @@ class ProductDetailTemplate extends Component {
     const {
       site,
       shopifyProduct: product,
-      shopifyProduct: { title: productTitle, description: fullDescription, productType: productCategory, handle },
+      shopifyProduct: {
+        title: productTitle,
+        description: fullDescription,
+        productType: productCategory,
+        handle,
+        variants,
+        images: originalImages
+      },
       relatedProducts,
     } = this.props.data;
 
@@ -35,46 +46,81 @@ class ProductDetailTemplate extends Component {
 
     const {
       viewportIs,
-      productImagesBrowserStatus,
       productImageFeatured,
-      toggleProductImagesBrowser,
       setCurrentProductImages,
       prevLink
     } = this.props;
 
-    return (
-      <Page title={`${productTitle} — ${productCategory} ‧ ${site.siteMetadata.title}`} description={description} from={prevLink} pageIs='Product'>
-        <ProductDetailWrapper>
-          <Helmet>
-            <meta
-              property="og:url"
-              content={`${site.siteMetadata.siteUrl}/store/product/${handle}`}
-            />
-            <meta property="og:locale" content="en" />
-            <meta property="og:title" content={productTitle} />
-            <meta property="og:site_name" content="Gatsby Swag Store" />
-            <meta property="og:description" content={description} />
+    // Process the product images
+    // Display the current variant image first, then all non-variant images
 
-            {/* TODO: add the image */}
-            <meta
-              property="og:image"
-              content={`${site.siteMetadata.siteUrl}${image}`}
-            />
-            <meta property="og:image:alt" content={productTitle} />
-            <meta property="og:image:width" content="600" />
-            <meta property="og:image:height" content="600" />
-          </Helmet>
-          <ProductPage
-            product={product}
-            viewportIs={viewportIs}
-            productImagesBrowserStatus={productImagesBrowserStatus}
-            productImageFeatured={productImageFeatured}
-            toggleProductImagesBrowser={toggleProductImagesBrowser}
-            setCurrentProductImages={setCurrentProductImages}
-          />
-          <RelatedProducts edges={relatedProducts.edges} limit={4} />
-        </ProductDetailWrapper>
-      </Page>
+    const getCurrentVariantIndex = (currentVariant) => (
+      _.findIndex(variants, item => (
+        item.shopifyId == currentVariant
+      ))
+    );
+
+    const processedImages = _.uniq(originalImages.map(i => (i)));
+
+    const variantImages = variants.map(i => (i.image));
+
+    const variantImageIds = variants.map(i => (i.image.id));
+
+    const filterImages = (currentVariant) => {
+      for (let i = 0; i < processedImages.length; i++) {
+        _.remove(processedImages, item => {
+          return item.id == variantImageIds[i];
+        })
+      }
+      processedImages.splice(0, 0, variantImages[getCurrentVariantIndex(currentVariant)])
+    };
+
+    const hasVariants = variants.length > 1;
+
+    const finalImages = hasVariants ? processedImages : originalImages;
+
+    return (
+      <StoreContext.Consumer>
+        {({
+          currentVariant
+        }) => (
+            <Page title={`${productTitle} — ${productCategory} ‧ ${site.siteMetadata.title}`} description={description} from={prevLink} pageIs='Product'>
+              <ProductDetailWrapper>
+
+                {currentVariant && currentVariant !== null && filterImages(currentVariant)}
+
+                <Helmet>
+                  <meta
+                    property="og:url"
+                    content={`${site.siteMetadata.siteUrl}/store/product/${handle}`}
+                  />
+                  <meta property="og:locale" content="en" />
+                  <meta property="og:title" content={productTitle} />
+                  <meta property="og:site_name" content="Gatsby Swag Store" />
+                  <meta property="og:description" content={description} />
+
+                  {/* TODO: add the image */}
+                  <meta
+                    property="og:image"
+                    content={`${site.siteMetadata.siteUrl}${image}`}
+                  />
+                  <meta property="og:image:alt" content={productTitle} />
+                  <meta property="og:image:width" content="600" />
+                  <meta property="og:image:height" content="600" />
+                </Helmet>
+
+                <ProductPage
+                  product={product}
+                  finalImages={finalImages}
+                  viewportIs={viewportIs}
+                  productImageFeatured={productImageFeatured}
+                  setCurrentProductImages={setCurrentProductImages}
+                />
+                <RelatedProducts edges={relatedProducts.edges} limit={4} />
+              </ProductDetailWrapper>
+            </Page>
+          )}
+      </StoreContext.Consumer>
     )
   }
 }
@@ -85,19 +131,19 @@ export default props => (
       <InterfaceContext.Consumer>
         {({
           viewportIs,
-          productImagesBrowserStatus,
           productImageFeatured,
-          toggleProductImagesBrowser,
+          currentProductImages,
           setCurrentProductImages,
+          productImageFeaturedIndex,
           setToProductPage,
           prevLink,
           setPrevLink }) => (
             <ProductDetailTemplate
               {...props}
               viewportIs={viewportIs}
-              productImagesBrowserStatus={productImagesBrowserStatus}
               productImageFeatured={productImageFeatured}
-              toggleProductImagesBrowser={toggleProductImagesBrowser}
+              productImageFeaturedIndex={productImageFeaturedIndex}
+              currentProductImages={currentProductImages}
               setCurrentProductImages={setCurrentProductImages}
               setPage={setToProductPage}
               setBackLink={() => setPrevLink(location, '/store')}

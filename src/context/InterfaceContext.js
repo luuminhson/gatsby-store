@@ -12,8 +12,6 @@ export const defaultInterfaceContext = {
   featureProductImageIndex: () => {},
   currentProductImages: [],
   setCurrentProductImages: () => {},
-  productImagesBrowserStatus: 'initial',
-  toggleProductImagesBrowser: () => {},
   pageIs: null,
   hasFeaturedImage: false,
   prevLink: null,

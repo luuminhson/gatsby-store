@@ -144,7 +144,7 @@ const MobileNavWrapper = styled(`div`)`
     display: flex;
     align-items: center;
     padding: 0 ${spacing.lg}px;
-    z-index: 2000;
+    z-index: 100;
 `;
 
 const backBtnIn = keyframes`

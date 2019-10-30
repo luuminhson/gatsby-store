@@ -81,19 +81,6 @@ const ProductImageWrapper = styled(`div`)`
   }
 `;
 
-const ProductImageLink = styled(`a`)`
-  display: block;
-  width: 100%;
-
-  &.change {
-    animation: ${change} ${IMAGE_CHANGE_ANIM_DURATION}ms ease-out forwards;
-  }
-
-  ${mediaQuery.tabletFrom} {
-    cursor: zoom-in;
-  }
-`;
-
 export const StyledImage = styled(Image)`
   background-color: ${colors.mainLight};
   border-radius: ${radius.large}px;
@@ -104,25 +91,6 @@ export const StyledImage = styled(Image)`
 `;
 
 class ProductImage extends Component {
-  imageLink;
-
-  componentDidUpdate = prevProps => {
-    if (prevProps.image.id !== this.props.image.id) {
-      this.imageLink.classList.add('change');
-
-      setTimeout(
-        () => this.imageLink.classList.remove('change'),
-        IMAGE_CHANGE_ANIM_DURATION
-      );
-    }
-  };
-
-  handleClick = ( callbackImage, calbackIdx ) => event => {
-    event.preventDefault();
-
-    callbackImage(this.props.image);
-    calbackIdx(this.props.idx);
-  };
 
   render() {
     const {
@@ -131,30 +99,15 @@ class ProductImage extends Component {
           childImageSharp: { fluid }
         }
       },
-      onClick,
       single
     } = this.props;
 
     return (
-      <InterfaceContext.Consumer>
-        {({
-          featureProductImageIndex
-        }) => (
-        <ProductImageWrapper className={single ? 'single' : null}>
-          <ProductImageInner>
-            <ProductImageLink
-              ref={el => {
-                this.imageLink = el;
-              }}
-              href={fluid.src}
-              onClick={this.handleClick(onClick, featureProductImageIndex)}
-            >
-              <StyledImage fluid={fluid} alt="" />
-            </ProductImageLink>
-          </ProductImageInner>
-        </ProductImageWrapper>
-      )}
-      </InterfaceContext.Consumer>
+      <ProductImageWrapper className={single ? 'single' : null}>
+        <ProductImageInner>
+          <StyledImage fluid={fluid} alt="" />
+        </ProductImageInner>
+      </ProductImageWrapper>
     );
   }
 }
