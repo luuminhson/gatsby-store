@@ -201,6 +201,7 @@ export const query = graphql`
         id
         name
         values
+        shopifyId
       }
       images {
         id

@@ -6,7 +6,7 @@ import OiIcon from '../OiIcon';
 
 import { Fieldset, Input, Label, Select, Submit } from '../shared/FormElements';
 
-import { colors, spacing, radius, mediaQuery } from '../../utils/styles';
+import { colors, spacing, radius, mediaQuery, FontStyle, fontFamily, fontWeight } from '../../utils/styles';
 
 import StoreContext from '../../context/StoreContext';
 
@@ -14,16 +14,8 @@ const _ = require('lodash');
 
 const Form = styled(`form`)`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  ${mediaQuery.tablet} {
-    justify-content: flex-start;
-  }
-
-  ${mediaQuery.desktop} {
-    justify-content: flex-start;
-  }
+  flex-direction: column;
+  align-items: stretch;
 `;
 
 const Errors = styled(`div`)`
@@ -76,23 +68,120 @@ const QtyFieldset = styled(Fieldset)`
 
 const VariantFieldset = styled(Fieldset)`
   flex-basis: 100%;
+  display: flex;
+  justify-content: flex-end;
   margin-bottom: ${spacing.xl}px;
+`;
 
-  ${Label} {
-    justify-content: space-between;
+const ProductOptions = styled(`div`)`
+  display: flex;
+  justify-content: flex-start;
+`;
+
+const ProductOptionSelector = styled(`div`)`
+  flex: 1 0 50%;
+  padding-right: ${spacing.lg}px;
+`;
+
+const OptionSelectorTitle = styled(`legend`)`
+  font-family: ${fontFamily.heading};
+  font-size: 1rem;
+  font-weight: ${fontWeight.heading.medium};
+  margin-bottom: ${spacing.sm}px;
+
+  span {
+    color: ${colors.neutral4};
+    font-weight: ${fontWeight.heading.normal};
+  }
+`;
+
+const OptionList = styled(`div`)`
+  display: flex;
+`;
+
+const OptionItem = styled(`div`)`
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  margin-right: ${spacing.xs}px;
+`;
+
+const OptionLabel = styled(Label)`
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  line-height: 36px;
+  color: ${colors.neutral5};
+
+  .option-color & {
+    display: none;
+  }
+`;
+
+const OptionRadioInput = styled(`input`)`
+  appearance: none;
+  outline: none;
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: ${colors.neutral2};
+  border-radius: ${radius.large}px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    transform-origin: 50% 50%;
+    opacity: 0;
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    border: 2px solid ${colors.neutral3};
+    box-shadow: inset 0 0 0 2px ${colors.white};
+    border-radius: ${radius.large}px;
+    transition: all 0.1s ease-in-out;
+  }
+
+  &:checked {
+
+    &:before {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+
+  // Color Stripped
+
+  [class*=optionid-Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0T3B0aW9uLzQxNzM4MjM3NzA3MDU] & {
+    &.color-stripped {
+      background-color: #C1C6D1;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36' fill='none'%3E%3Crect width='36' height='36' fill='%23F6F7F9'/%3E%3Crect y='5' width='36' height='2' fill='%2334353C'/%3E%3Crect y='13' width='36' height='2' fill='%2334353C'/%3E%3Crect y='21' width='36' height='2' fill='%2334353C'/%3E%3Crect y='29' width='36' height='2' fill='%2334353C'/%3E%3C/svg%3E");
+    }
+
+    &.color-light {
+      background-color: #FFE398;
+    }
   }
 `;
 
 const AddToCartButton = styled(Submit)`
-  align-self: flex-end;
   flex-grow: 1;
-  height: ${props => (props.fullWidth ? 'auto' : '')};
   flex-basis: 100%;
 
   ${mediaQuery.tabletFrom} {
     flex-basis: auto;
-    width: auto;
-    max-width: 240px;
   }
 `;
 
@@ -169,13 +258,8 @@ class ProductForm extends Component {
   handleChange2 = (
     index,
     variants,
-    callbackVariants,
-    imageFeatured,
-    featureProductImage,
-    imageFeaturedIndex,
-    featureProductImageIndex
+    callbackVariants
   ) => event => {
-    event.preventDefault();
 
     if (event.target.value) {
       const errors = this.state.errors;
@@ -203,20 +287,12 @@ class ProductForm extends Component {
 
     callbackVariants(variants[this.loopComparison(this.state.options, variants)].shopifyId);
 
-    featureProductImage(imageFeatured);
-
-    featureProductImageIndex(imageFeaturedIndex);
-
   };
 
   render() {
     const {
       product,
-      compactVariants,
-      imageFeatured,
-      featureProductImage,
-      imageFeaturedIndex,
-      featureProductImageIndex
+      compactVariants
     } = this.props;
 
     const { errors } = this.state;
@@ -234,6 +310,7 @@ class ProductForm extends Component {
       <StoreContext.Consumer>
         {({
           addVariantToCart,
+          currentVariant,
           setCurrentVariant
         }) => (
             <Form onSubmit={this.handleSubmit(addVariantToCart)} noValidate>
@@ -287,35 +364,36 @@ class ProductForm extends Component {
                     </Select>
                   </VariantFieldset>
                 ) : (
-                  product.options.map((option, index) => (
-                    <VariantFieldset key={index}>
-                      <label htmlFor={option.id}>{option.name}</label>
-                      <Select
-                        id={option.id}
-                        name={option.name}
-                        onChange={this.handleChange2(
-                          index,
-                          product.variants,
-                          setCurrentVariant,
-                          imageFeatured,
-                          featureProductImage,
-                          imageFeaturedIndex,
-                          featureProductImageIndex
-                        )}
-                      >
-                        {option.values.map(value => (
-                          <option
-                            value={value}
-                            key={`${option.name}-${value}`}
-                          >
-                            {`${value}`}
-                          </option>
-                        ))}
-                      </Select>
-                    </VariantFieldset>
-                    )
+                    <ProductOptions>
+                      {product.options.map((option, idx) => (
+                        <ProductOptionSelector className={`optionid-${option.shopifyId} ${`option-${option.name.toLowerCase().replace(/\s/g, '')}`}`} key={idx}>
+                          <VariantFieldset>
+                            <OptionSelectorTitle>{`${option.name}: `}<span>{this.state.options[idx].value}</span></OptionSelectorTitle>
+                            <OptionList>
+                              {option.values.map((value, index) => (
+                                <OptionItem key={`${option.name}-${value}-${index}`}>
+                                  <OptionRadioInput
+                                    className={`${option.name.toLowerCase().replace(/\s/g, '')}-${value.toLowerCase().replace(/\s/g, '')}`}
+                                    type='radio'
+                                    id={`${option.name}-${value}`}
+                                    name={option.name}
+                                    value={value}
+                                    defaultChecked={index == 0}
+                                    onChange={this.handleChange2(
+                                      idx,
+                                      product.variants,
+                                      setCurrentVariant
+                                    )}
+                                  /><OptionLabel htmlFor={`${option.name}-${value}`}>{`${value}`}</OptionLabel>
+                                </OptionItem>
+                              ))}
+                            </OptionList>
+                          </VariantFieldset>
+                        </ProductOptionSelector>
+                      )
+                      )}
+                    </ProductOptions>
                   )
-                )
               )
               }
 

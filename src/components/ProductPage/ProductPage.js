@@ -184,8 +184,6 @@ class ProductPage extends Component {
                           />
                       )}
 
-                      {/* {console.log(finalImages)} */}
-
                       <Details>
                         <ProductSpecTitle>{title}</ProductSpecTitle>
                         <PriceRow>
