@@ -36,7 +36,7 @@ class PostTemplate extends Component<Props> {
     const { prevLink } = this.props;
 
     return (
-      <Page mainTitle=' ' title={`${postTitle} ‧ ${site.siteMetadata.title}`} description={metaDescription} from={prevLink} pageIs='Post'>
+      <Page title={`${postTitle} ‧ ${site.siteMetadata.title}`} description={metaDescription} from={prevLink} pageIs='Post'>
         <Post post={this.props.data.markdownRemark} />
       </Page>
     )

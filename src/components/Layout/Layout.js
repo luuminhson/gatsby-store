@@ -10,7 +10,7 @@ import InterfaceContext, { defaultInterfaceContext } from '../../context/Interfa
 import OiIcon from '../OiIcon';
 import Cart from '../Cart';
 import CartIndicator from '../Cart/CartIndicator';
-import { DesktopNavigation } from './Navigation';
+import { DesktopNavigation, MobileNavigation } from './Navigation';
 import BottomNavigation from '../BottomNavigation';
 import SidePanel from '../SidePanel';
 import PageContent from './PageContent';
@@ -496,7 +496,8 @@ class PureLayout extends React.Component {
                 sidebarStatus,
                 toggleCart,
                 toggleSidebar,
-                hasFeaturedImage
+                hasFeaturedImage,
+                prevLink
               }) => (
                   <StoreContext.Consumer>
                     {({ checkout, adding }) => {
@@ -525,22 +526,28 @@ class PureLayout extends React.Component {
                               />
                               <SidePanelWrapper css={sidebarStatus === true && SidebarOn}>
                                 <OiIcon icon='oi-icon-close' css={SidePanelCloseBtn} onClick={toggleSidebar} />
-                                <SidePanel />
+                                <SidePanel toggleSidebar={toggleSidebar} />
                               </SidePanelWrapper>
-                              {viewportIs !== null &&
+                              {viewportIs !== null ?
                                 <DesktopNavigation
                                   viewportIs={viewportIs}
                                   toggleCart={toggleCart}
                                   burgerClick={toggleSidebar}
                                   onFeaturedImage={hasFeaturedImage}
+                                /> :
+                                <MobileNavigation
+                                  pageIs={pageIs}
+                                  from={prevLink}
+                                  toggleSidebar={toggleSidebar}
+                                  cartNumber={itemsInCart}
                                 />
                               }
-                              {viewportIs === null &&
+                              {/* {viewportIs === null &&
                                 <BottomNavigation
                                   pageIs={pageIs}
                                   cartNumber={itemsInCart}
                                 />
-                              }
+                              } */}
                               <PageContent
                                 cartStatus={cartStatus}
                                 viewportIs={viewportIs}

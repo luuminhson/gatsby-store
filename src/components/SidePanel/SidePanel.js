@@ -47,13 +47,13 @@ const ContactModule = styled(Contacts)`
   }
 `;
 
-const SidePanel = ({ className }: Props) => {
+const SidePanel = ({ className, toggleSidebar }: Props) => {
   const { contacts, menu } = useSiteMetadata();
 
   return (
     <SidePanelWrapper className={className}>
       <div className='sidebar__inner'>
-        <SidePanelMenu menu={menu} />
+        <SidePanelMenu menu={menu} toggleSidebar={toggleSidebar} />
         <ContactModule contacts={contacts} />
       </div>
     </SidePanelWrapper>

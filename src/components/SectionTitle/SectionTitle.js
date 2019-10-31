@@ -2,10 +2,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { Button, FlatButton } from '../shared/Buttons';
+import { Button } from '../shared/Buttons';
 import { FontStyle, spacing, colors } from '../../utils/styles';
-
-import InterfaceContext from '../../context/InterfaceContext';
 
 const SectionWrapper = styled(`div`)`
     display: flex;
@@ -27,14 +25,6 @@ const SubTitle = styled(FontStyle.h4)`
     margin-bottom: ${spacing.xs}px;
 `;
 
-const MainTitle = styled(FontStyle.h3)`
-
-`;
-
-const ActionLink = styled(FlatButton)`
-    margin-right: -${spacing.md}px;
-`;
-
 const CenteredStyle = css`
     justify-content: center;
 
@@ -45,24 +35,20 @@ const CenteredStyle = css`
 `;
 
 const SectionTitle = ({ children, subtitle, centered, actionLink, actionLabel, className, props }) => (
-    <InterfaceContext.Consumer>
-        {({ viewportIs }) => (
-                <SectionWrapper className={className} css={centered && CenteredStyle} {...props}>
-                    <TitleGroup>
-                        {subtitle && <SubTitle>{subtitle}</SubTitle>}
-                        <MainTitle>
-                            {children}
-                        </MainTitle>
-                    </TitleGroup>
-                    {actionLink && (
-                        <Button to={actionLink}>
-                            {actionLabel}
-                        </Button>
-                    )
-                    }
-                </SectionWrapper>
-            )}
-    </InterfaceContext.Consumer>
+    <SectionWrapper className={className} css={centered && CenteredStyle} {...props}>
+        <TitleGroup>
+            {subtitle && <SubTitle>{subtitle}</SubTitle>}
+            <FontStyle.h3>
+                {children}
+            </FontStyle.h3>
+        </TitleGroup>
+        {actionLink && (
+            <Button to={actionLink}>
+                {actionLabel}
+            </Button>
+        )
+        }
+    </SectionWrapper>
 );
 
 export default SectionTitle;

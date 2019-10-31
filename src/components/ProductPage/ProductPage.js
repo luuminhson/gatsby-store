@@ -16,7 +16,7 @@ const _ = require('lodash');
 
 const ProductPageRoot = styled('div')`
   padding-bottom: ${spacing.md}px;
-  margin: -${headerHeight.tablet} auto 0;
+  margin: 0 auto ;
 
   ${mediaQuery.tabletFrom} {
     align-items: center;
@@ -49,11 +49,8 @@ const ProductTitle = styled(FontStyle.h3)`
 `;
 
 const ProductSpecTitle = styled(FontStyle.h1)`
-  display: none;
-
-  ${mediaQuery.tabletFrom} {
-    display: block;
-  }
+  font-size: 1.6rem;
+  line-height: 2rem;
 `;
 
 const Container = styled(`div`)`
@@ -89,7 +86,7 @@ const PriceRow = styled(`div`)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-top: ${spacing.md}px;
+  margin-top: ${spacing.xs}px;
   margin-bottom: ${spacing.lg}px;
 
   ${mediaQuery.tabletFrom} {
@@ -100,6 +97,8 @@ const PriceRow = styled(`div`)`
 
 const Price = styled(FontStyle.h3)`
   font-weight: ${fontWeight.heading.medium};  
+  color: ${colors.neutral4};
+  letter-spacing: 0.5px;
   margin-right: 8px;
 `;
 
@@ -168,8 +167,6 @@ class ProductPage extends Component {
                 currentVariant
               }) => (
                   <ProductPageRoot>
-
-                    <ProductTitle>{title}</ProductTitle>
                     <Container>
                       {(viewportIs !== 'desktop') && (viewportIs !== 'tablet') ? (
                         <ProductImagesMobile

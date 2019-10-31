@@ -124,7 +124,7 @@ class MoreTemplate extends React.Component<Props> {
     }
 
     return (
-      <Page mainTitle='Thông tin' title={`Thông tin ‧ ${siteTitle}`} description={siteSubtitle} pageIs='More'>
+      <Page pageTitle='Thông tin' title={`Thông tin ‧ ${siteTitle}`} description={siteSubtitle} pageIs='More'>
         <ScrollAnimation animateOnce animateIn='fadeIn'>
           <CustomFooter viewportIs={viewportIs} />
           <FooterModule viewportIs={viewportIs} alwaysExpand css={ModuleOthers} title='Others'>

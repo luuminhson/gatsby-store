@@ -62,7 +62,7 @@ class PageTemplate extends React.Component<Props> {
     const metaDescription = pageDescription !== null ? pageDescription : siteSubtitle;
 
     return (
-      <Page mainTitle={null} pageTitle={pageTitle} title={`${pageTitle} ‧ ${siteTitle}`} description={metaDescription} pageIs='Page'>
+      <Page pageTitle={pageTitle} title={`${pageTitle} ‧ ${siteTitle}`} description={metaDescription} pageIs='Page'>
         <PageTemplateWrapper>
           <PageTitleMobile>{pageTitle}</PageTitleMobile>
           <PageBody dangerouslySetInnerHTML={{ __html: pageBody }} />

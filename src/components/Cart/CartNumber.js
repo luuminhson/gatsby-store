@@ -27,7 +27,7 @@ const ItemsNumber = styled(`span`)`
   justify-content: center;
   align-items: center;
   font-size: 0.8rem;
-  font-weight: ${fontWeight.body.normal};
+  font-weight: ${fontWeight.body.medium};
   min-width: 18px;
   height: 18px;
   line-height: 18px;

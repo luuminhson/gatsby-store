@@ -54,7 +54,7 @@ class TagsListTemplate extends React.Component<Props> {
     const tags = data.tagList.group;
 
     return (
-      <Page pageTitle='Tags' mainTitle='Tags' title={`Tags ‧ ${title}`} description={description} pageIs='Blog'>
+      <Page pageTitle='Tags' title={`Tags ‧ ${title}`} description={description} pageIs='Blog'>
         <TagTemplateWrapper>
           <ul>
             {tags.map((tag) => (

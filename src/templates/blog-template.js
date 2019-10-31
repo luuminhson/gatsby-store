@@ -53,7 +53,7 @@ class BlogTemplate extends React.Component<Props> {
     const pageTitle = currentPage > 0 ? `Blog - Trang ${currentPage} ‧ ${title}` : `Blog ‧ ${title}`;
 
     return (
-      <Page mainTitle='Blog' withSidebar={hasSidebar} title={pageTitle} description={description} pageIs='Blog'>
+      <Page pageTitle='Blog' withSidebar={hasSidebar} title={pageTitle} description={description} pageIs='Blog'>
         <FeedWrapper>
           <Feed edges={edges} />
           {(hasNextPage || hasPrevPage) &&

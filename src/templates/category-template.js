@@ -51,7 +51,7 @@ class CategoryTemplate extends React.Component<Props> {
     const pageTitle = currentPage > 0 ? `${category} — Page ${currentPage} ‧ ${siteTitle}` : `${category} ‧ ${siteTitle}`;
 
     return (
-      <Page pageTitle={category} mainTitle={category} title={pageTitle} description={siteSubtitle} pageIs='Blog'>
+      <Page pageTitle={category} title={pageTitle} description={siteSubtitle} pageIs='Blog'>
         <FeedWrapper>
           <Feed edges={edges} />
           <Pagination

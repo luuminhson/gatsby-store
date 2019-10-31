@@ -51,7 +51,7 @@ class TagTemplate extends React.Component<Props> {
     const pageTitle = currentPage > 0 ? `All Posts tagged as "${tag}" — Page ${currentPage} ‧ ${siteTitle}` : `All Posts tagged as "${tag}" ‧ ${siteTitle}`;
 
     return (
-      <Page pageTitle={'Tag: ' + tag} mainTitle={'Tag: ' + tag} title={pageTitle} description={siteSubtitle} pageIs='Blog'>
+      <Page pageTitle={'Tag: ' + tag} title={pageTitle} description={siteSubtitle} pageIs='Blog'>
         <FeedWrapper>
           <Feed edges={edges} />
           <Pagination

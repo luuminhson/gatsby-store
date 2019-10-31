@@ -53,7 +53,7 @@ class CategoriesListTemplate extends React.Component<Props> {
     const categories = data.categoryList.group;
 
     return (
-      <Page pageTitle='Categories' mainTitle='Categories' title={`Categories ‧ ${title}`} description={description} pageIs='Blog'>
+      <Page pageTitle='Categories' title={`Categories ‧ ${title}`} description={description} pageIs='Blog'>
         <CategoriesTemplateWrapper>
           <ul>
             {categories.map((category) => (

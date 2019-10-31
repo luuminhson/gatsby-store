@@ -4,7 +4,6 @@ import { graphql, StaticQuery } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import ScrollAnimation from 'react-animate-on-scroll';
-import { MobileNavigation } from '../Layout/Navigation';
 import Footer from '../Layout/Footer';
 
 import InterfaceContext from '../../context/InterfaceContext';
@@ -40,11 +39,6 @@ const PageInner = styled(`div`)`
 const PageTitle = styled(FontStyle.h1)`
   margin: 40px auto;
   text-align: center;
-  display: none;
-
-  ${mediaQuery.tabletFrom} {
-    display: block;
-  }
 `;
 
 const ProductPageTitle = css`
@@ -67,10 +61,9 @@ class PurePage extends React.Component<Props> {
       title,
       description,
       pageTitle,
-      mainTitle,
       withSidebar,
       css,
-      from,
+      toggleCart,
       ...rest
     } = this.props;
 
@@ -114,13 +107,6 @@ class PurePage extends React.Component<Props> {
           <meta property="og:image:width" content="1280" />
           <meta property="og:image:height" content="686" />
         </Helmet>
-        {viewportIs === null &&
-          <MobileNavigation
-            pageIs={pageIs}
-            mainTitle={mainTitle}
-            from={from}
-          />
-        }
         <PageInner>
           {pageTitle &&
             <ScrollAnimation animateOnce animateIn='fadeIn'>
@@ -132,11 +118,9 @@ class PurePage extends React.Component<Props> {
               {children}
             </PageBody>
           </ScrollAnimation>
-          {viewportIs !== null &&
-            <ScrollAnimation animateOnce animateIn='fadeIn'>
-              <Footer viewportIs={viewportIs} />
-            </ScrollAnimation>
-          }
+          <ScrollAnimation animateOnce animateIn='fadeIn'>
+            <Footer viewportIs={viewportIs} />
+          </ScrollAnimation>
         </PageInner>
       </div>
     );
@@ -163,13 +147,13 @@ export default props => (
     {({
       viewportIs,
       pageIs,
-      prevLink
+      toggleCart
     }) => (
         <Page
           {...props}
           viewportIs={viewportIs}
           pageIs={pageIs}
-          from={prevLink}
+          toggleCart={toggleCart}
         />
       )}
   </InterfaceContext.Consumer>

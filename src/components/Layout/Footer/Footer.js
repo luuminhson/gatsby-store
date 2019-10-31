@@ -230,28 +230,26 @@ const Footer = ({ viewportIs, ...rest }) => {
           </ul>
         </Module>
 
-        {viewportIs !== null &&
-          <Module viewportIs={viewportIs} alwaysExpand css={ModuleOthers} title='Thông tin khác'>
-            <ul>
-              <li>
-                <FooterWidgetLink activeClassName='activeFootNavItem' to='/privacy-policy'>Chính sách bảo mật</FooterWidgetLink>
-              </li>
-              <li>
-                <FooterWidgetLink activeClassName='activeFootNavItem' to='/terms-and-conditions'>Điều khoản &amp; Điều kiện</FooterWidgetLink>
-              </li>
-              <li css={Copyright}>
-                <span css={copyrightText}>ORINS © 2019 - All right reserved</span>
-              </li>
-              <li css={wishingANiceDay}>
-                <span css={wishText}>Chúc bạn một ngày vui!</span>
-                <span css={wishImgs}>
-                  <img src={bowingImg1} width='24' alt='Thank You from Oi' />
-                  <img src={bowingImg2} width='24' alt='Thank You from Miso' />
-                </span>
-              </li>
-            </ul>
-          </Module>
-        }
+        <Module viewportIs={viewportIs} alwaysExpand css={ModuleOthers} title='Thông tin khác'>
+          <ul>
+            <li>
+              <FooterWidgetLink activeClassName='activeFootNavItem' to='/privacy-policy'>Chính sách bảo mật</FooterWidgetLink>
+            </li>
+            <li>
+              <FooterWidgetLink activeClassName='activeFootNavItem' to='/terms-and-conditions'>Điều khoản &amp; Điều kiện</FooterWidgetLink>
+            </li>
+            <li css={Copyright}>
+              <span css={copyrightText}>ORINS © 2019 - All right reserved</span>
+            </li>
+            <li css={wishingANiceDay}>
+              <span css={wishText}>Chúc bạn một ngày vui!</span>
+              <span css={wishImgs}>
+                <img src={bowingImg1} width='24' alt='Thank You from Oi' />
+                <img src={bowingImg2} width='24' alt='Thank You from Miso' />
+              </span>
+            </li>
+          </ul>
+        </Module>
 
       </FooterWrapperInner>
     </FooterWrapper>

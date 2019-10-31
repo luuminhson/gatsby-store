@@ -92,7 +92,7 @@ const MenuLinkActiveStyle = css`
   }
 `;
 
-const Menu = ({ menu, isPost, unfixed, onFeaturedImage, ...rest }: Props) => (
+const Menu = ({ menu, isPost, unfixed, onFeaturedImage, toggleSidebar, ...rest }: Props) => (
   <MenuWrapper css={[
     unfixed && UnfixedStyle,
     onFeaturedImage && onFeaturedImageStyle,
@@ -104,6 +104,7 @@ const Menu = ({ menu, isPost, unfixed, onFeaturedImage, ...rest }: Props) => (
             <MenuListItem key={item.path}>
               <MenuItemLink
                 to={item.path}
+                onClick={toggleSidebar}
                 css={MenuLinkActiveStyle}
                 activeClassName='activeMenuItem'
                 partiallyActive={item.path === '/' ? false : true}

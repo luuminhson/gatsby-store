@@ -17,7 +17,7 @@ class CartTemplate extends React.Component<Props> {
         const { title, description } = this.props.data.site.siteMetadata;
 
         return (
-            <Page mainTitle='Giỏ hàng' title={`Giỏ hàng ‧ ${title}`} description={description} pageIs='Cart'>
+            <Page pageTitle='Giỏ hàng' title={`Giỏ hàng ‧ ${title}`} description={description} pageIs='Cart'>
                 <ScrollAnimation animateOnce animateIn='fadeIn'>
                     <CartPage />
                 </ScrollAnimation>

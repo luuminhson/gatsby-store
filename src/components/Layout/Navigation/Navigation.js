@@ -9,7 +9,8 @@ import Logo from './Logo';
 import Menu from './Menu';
 import OiIcon from '../../OiIcon';
 import CartToggle from '../../Cart/CartToggle';
-import { FontStyle, fontFamily, dimensions, mediaQuery, spacing, colors, breakpoints, headerHeight } from '../../../utils/styles';
+import CartNumber from '../../Cart/CartNumber';
+import { dimensions, mediaQuery, spacing, colors, breakpoints, headerHeight } from '../../../utils/styles';
 
 /* --------------------------- STYLES --------------------------- */
 
@@ -66,35 +67,6 @@ const NavigationInner = styled(`div`)`
     }
 `;
 
-const BackButton = styled(Link)`
-    font-family: ${fontFamily.heading};
-    width: 60px;
-    height: ${dimensions.navHeightMobile};
-    line-height: ${dimensions.navHeightMobile};
-    font-size: 1.75rem;
-    font-weight: 400;
-    color: ${colors.mainDark};
-    padding-left: 12px;
-    margin-left: -0.75rem;
-    box-sizing: border-box;
-
-    span {
-        display: none;
-    }
-
-    ${mediaQuery.tabletFrom} {
-        width: auto;
-        display: flex;
-        align-items: center;
-
-        span {
-            font-size: 1rem;
-            display: inline-block;
-            margin-left: ${spacing.sm}px;
-        }
-    }
-`;
-
 const NavLeftWrapper = styled(`div`)`
     flex: 0 0 auto;
     display: flex;
@@ -142,149 +114,50 @@ const MobileNavWrapper = styled(`div`)`
     width: 100%;
     height: ${headerHeight.tablet};
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 0 ${spacing.lg}px;
     z-index: 100;
 `;
 
-const backBtnIn = keyframes`
-    0% {
-        opacity: 0;
-    }
-    70% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
+const MobileNavLogo = styled(Logo)`
+    svg {
+        width: 87px;
+        height: 20px;
     }
 `;
 
-const backBtnOut = keyframes`
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-        color: ${colors.white};
-    }
-    100% {
-        opacity: 0;
-        color: ${colors.white};
+const MovileNavIconWrapper = styled(`div`)`
+    position: relative;
+    padding: ${spacing.sm}px;
+
+    > * {
+        display: block;
+        width: 24px;
+        height: 24px;
     }
 `;
 
-const MobileNavBackButton = styled(`div`)`
-    position: absolute;
-    left: ${spacing.md + 4}px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: inline-flex;
-    background: rgba(255,255,255,0.08);
-    width: 48px;
-    height: 48px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100px;
-    animation: ${backBtnIn} 1.5s ease forwards;
-
-    ${BackButton} {
-        width: 48px;
-        height: 48px;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+const CartItemNumber = styled(CartNumber)`
+  position: absolute;
+  top: 6px;
+  right: 4px;
+  z-index: 2900;
 `;
 
-const postBackBtn = css`
-    ${BackButton} {
+const MobileNavWhite = css`
+    ${MobileNavLogo} {
+        svg {
+            fill: ${colors.white};
+        }
+    }
+
+    ${MovileNavIconWrapper} {
         i {
             color: ${colors.white};
         }
     }
 `;
-
-const mainTitleIn = keyframes`
-    0% {
-        opacity: 0;
-    }
-    30% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-`;
-
-const mainTitleOut = keyframes`
-    0% {
-        opacity: 1;
-    }
-    30% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 0;
-        z-index: -1;
-    }
-`;
-
-const MobileNavTitle = styled(FontStyle.h1)`
-    font-size: 1.75em;
-    width: 100%;
-    text-align: center;
-`;
-
-const MobileNavLogo = styled(Logo)`
-    svg {
-        width: 104px;
-        height: 24px;
-    }
-`;
-
-const MainTitleModule = styled(`div`)`
-    position: relative;
-    display: flex;
-    align-items: center;
-
-    ${MobileNavTitle} {
-        padding-left: ${spacing.md}px;
-        margin-left: ${spacing.md}px;
-        position: relative;
-
-        &:after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            display: block;
-            width: 1px;
-            height: 24px;
-            background-color: ${colors.neutral3};
-            opacity: 0.3;
-        }
-    }
-`;
-
-const MobileNavHome = css`
-    ${MobileNavLogo} {
-        svg {
-            fill: ${colors.white};
-            width: 122px;
-            height: 28px; 
-        }
-    }
-`;
-
-const backButton = (to) => (
-    <BackButton to={to}>
-        <OiIcon icon='oi-icon-arrow-back' />
-        <span>Back</span>
-    </BackButton>
-);
 
 /* --------------------------- DESKTOP NAVIGATION --------------------------- */
 
@@ -293,7 +166,6 @@ class PureDesktopNavigation extends React.Component {
     render() {
         const {
             data,
-            viewportIs,
             toggleCart,
             onFeaturedImage,
             className
@@ -366,8 +238,9 @@ DesktopNavigation.propTypes = {
 
 export const MobileNavigation = ({
     from,
-    mainTitle,
     pageIs,
+    cartNumber,
+    toggleSidebar,
     className
 }) => {
 
@@ -375,27 +248,45 @@ export const MobileNavigation = ({
         if (null !== from) {
             return from;
         }
-
         return '/';
     }
 
-    const mainTitleModule = (mainTitle) => (
-        <MainTitleModule>
+    // Back Button for backup
+
+    const backButton = (
+        <MovileNavIconWrapper>
+            <Link to={backLink()}>
+                <OiIcon icon='oi-icon-arrow-back' />
+            </Link>
+        </MovileNavIconWrapper>
+    );
+
+    const navLeft = (
+        <NavLeftWrapper>
             <Link to='/' css={{ lineHeight: 0 }}><MobileNavLogo /></Link>
-            <MobileNavTitle>{mainTitle}</MobileNavTitle>
-        </MainTitleModule>
+        </NavLeftWrapper>
     )
 
+    const navRight = (
+        <NavRightWrapper>
+            <MovileNavIconWrapper>
+                <Link to='/cart'>
+                    <OiIcon icon='oi-icon-cart' />
+                    <CartItemNumber number={cartNumber} />
+                </Link>
+            </MovileNavIconWrapper>
+            <MovileNavIconWrapper>
+                <div onClick={toggleSidebar}>
+                    <OiIcon icon='oi-icon-menu' />
+                </div>
+            </MovileNavIconWrapper>
+        </NavRightWrapper>
+    );
+
     return (
-        <MobileNavWrapper className={className} css={pageIs === 'Index' && MobileNavHome}>
-            {(pageIs === 'Post' || pageIs === 'Product') &&
-                <MobileNavBackButton css={pageIs === 'Post' && postBackBtn}>
-                    {backButton(backLink())}
-                </MobileNavBackButton>
-            }
-            {(pageIs === 'Post' || pageIs === 'Product') ? null :
-               ( mainTitle ? mainTitleModule(mainTitle): <MobileNavLogo /> )
-            }
+        <MobileNavWrapper className={className} css={(pageIs === 'Index' || pageIs === 'Post') && MobileNavWhite}>
+            {navLeft}
+            {navRight}
         </MobileNavWrapper>
     );
 }
