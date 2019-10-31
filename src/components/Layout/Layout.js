@@ -10,7 +10,7 @@ import InterfaceContext, { defaultInterfaceContext } from '../../context/Interfa
 import OiIcon from '../OiIcon';
 import Cart from '../Cart';
 import CartIndicator from '../Cart/CartIndicator';
-import { DesktopNavigation, MobileNavigation } from './Navigation';
+import Navigation from './Navigation';
 import BottomNavigation from '../BottomNavigation';
 import SidePanel from '../SidePanel';
 import PageContent from './PageContent';
@@ -100,13 +100,14 @@ injectGlobal`
 const LayoutWrapper = styled(`div`)`
     overflow: hidden;
     position: relative;
+    padding-top: ${dimensions.navPaddingTopPhone}px;
 
-    &.covered {
-      // position: fixed;
-      // top: 0;
-      // left: 0;
-      // width: 100vw;
-      // height: 100vh;
+    ${mediaQuery.tabletFrom} {
+      padding-top: ${dimensions.navPaddingTopTablet}px;
+    }
+
+    ${mediaQuery.desktop} {
+      padding-top: ${dimensions.navPaddingTopDesktop}px;
     }
 `;
 
@@ -528,20 +529,16 @@ class PureLayout extends React.Component {
                                 <OiIcon icon='oi-icon-close' css={SidePanelCloseBtn} onClick={toggleSidebar} />
                                 <SidePanel toggleSidebar={toggleSidebar} />
                               </SidePanelWrapper>
-                              {viewportIs !== null ?
-                                <DesktopNavigation
-                                  viewportIs={viewportIs}
-                                  toggleCart={toggleCart}
-                                  burgerClick={toggleSidebar}
-                                  onFeaturedImage={hasFeaturedImage}
-                                /> :
-                                <MobileNavigation
-                                  pageIs={pageIs}
-                                  from={prevLink}
-                                  toggleSidebar={toggleSidebar}
-                                  cartNumber={itemsInCart}
-                                />
-                              }
+                              <Navigation
+                                from={prevLink}
+                                pageIs={pageIs}
+                                viewportIs={viewportIs}
+                                cartNumber={itemsInCart}
+                                toggleCart={toggleCart}
+                                toggleSidebar={toggleSidebar}
+                                burgerClick={toggleSidebar}
+                                onFeaturedImage={hasFeaturedImage}
+                              />
                               {/* {viewportIs === null &&
                                 <BottomNavigation
                                   pageIs={pageIs}

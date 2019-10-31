@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import { graphql, StaticQuery } from 'gatsby';
 import styled from '@emotion/styled';
 import { css, keyframes } from '@emotion/core';
+import Headroom from 'react-headroom';
 import { Link } from 'gatsby';
 import Logo from './Logo';
 import Menu from './Menu';
 import OiIcon from '../../OiIcon';
 import CartToggle from '../../Cart/CartToggle';
 import CartNumber from '../../Cart/CartNumber';
-import { dimensions, mediaQuery, spacing, colors, breakpoints, headerHeight } from '../../../utils/styles';
+import { dimensions, mediaQuery, spacing, colors, breakpoints, headerHeight, shadow } from '../../../utils/styles';
 
 /* --------------------------- STYLES --------------------------- */
 
@@ -54,16 +55,10 @@ const NavigationInner = styled(`div`)`
     display: flex;
     align-items: stretch;
     justify-content: space-between;
-    margin: 0 auto;
-    // max-width: ${breakpoints.fhd}px;
     transition: height 0.2s ease-in-out;
 
     ${mediaQuery.tabletFrom} {
         height: ${dimensions.navHeightTablet};
-    }
-
-    ${mediaQuery.desktop} {
-        height: ${dimensions.navHeightDesktop};
     }
 `;
 
@@ -73,14 +68,14 @@ const NavLeftWrapper = styled(`div`)`
     align-items: center;
 `;
 
+const DesktopNavLogo = styled(Logo)``;
+
 const NavCenterWrapper = styled(`div`)`
-    max-width: 56%;
     display: flex;
     align-items: center;
     position: relative;
 
     ${mediaQuery.tabletFrom} {
-        max-width: 100%;
         position: absolute;
         left: 50%;
         top: 50%;
@@ -92,6 +87,11 @@ const NavRightWrapper = styled(`div`)`
     flex: 0 0 auto;
     display: flex;
     align-items: center;
+    margin-right: -${spacing.xs}px;
+
+    ${mediaQuery.tabletFrom} {
+        margin-right: 0;
+    }
 `;
 
 const CartToggleIcon = styled(CartToggle)`
@@ -100,25 +100,15 @@ const CartToggleIcon = styled(CartToggle)`
 
 const MainMenu = styled(Menu)`
     ${mediaQuery.tabletFrom} {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+        // position: absolute;
+        // left: 50%;
+        // top: 50%;
+        // display: block;
+        // transform: translate(-50%, -50%);
     }
 `;
 
 // MOBILE NAV STYLES
-
-const MobileNavWrapper = styled(`div`)`
-    position: relative;
-    width: 100%;
-    height: ${headerHeight.tablet};
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 ${spacing.lg}px;
-    z-index: 100;
-`;
 
 const MobileNavLogo = styled(Logo)`
     svg {
@@ -145,47 +135,160 @@ const CartItemNumber = styled(CartNumber)`
   z-index: 2900;
 `;
 
-const MobileNavWhite = css`
+const NavWhite = css`
+    ${DesktopNavLogo},
     ${MobileNavLogo} {
         svg {
             fill: ${colors.white};
         }
     }
 
+    ${CartToggleIcon},
     ${MovileNavIconWrapper} {
         i {
             color: ${colors.white};
+        }
+    }
+
+    ${MainMenu} {
+        ul > li > a {
+            color: ${colors.white};
+
+            &.activeMenuItem {
+                color: ${colors.mainClickable};
+            }
+        }
+    }
+`;
+
+// HEADROOM STYLE
+
+const HeadroomWrapper = styled(Headroom)`
+    width: 100%;
+    position: relative;
+    z-index: 100;
+`;
+
+const unpinnedStyle = css``;
+
+const pinnedStyle = css`
+    ${NavigationWrapper} {
+        background-color: ${colors.white};
+        box-shadow: ${shadow.navShadow};
+        
+        ${NavigationInner} {
+            height: ${dimensions.navHeightMobile};
+
+            ${mediaQuery.tabletFrom} {
+                height: ${dimensions.navHeightTablet};
+            }
+        }
+
+        ${MobileNavLogo} {
+            svg {
+                fill: ${colors.mainBranding};
+            }
+        }
+    
+        ${MovileNavIconWrapper} {
+            i {
+                color: ${colors.mainDark};
+            }
+        }
+    }
+`;
+
+const unfixedStyle = css`
+    ${NavigationWrapper} {
+        ${NavigationInner} {
+            height: ${dimensions.navHeightMobile};
+
+            ${mediaQuery.tabletFrom} {
+                height: ${dimensions.navHeightTablet};
+            }
         }
     }
 `;
 
 /* --------------------------- DESKTOP NAVIGATION --------------------------- */
 
-class PureDesktopNavigation extends React.Component {
+class PureNavigation extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            unfixed: true,
+            pinned: false,
+            unpinned: false
+        };
+    }
+
+    headRoomUnfix = () => {
+        this.setState({
+            pinned: false,
+            unpinned: false,
+            unfixed: true
+        });
+    }
+
+    headRoomUnpin = () => {
+        this.setState({
+            unfixed: false,
+            pinned: false,
+            unpinned: true
+        });
+    }
+
+    headRoomPin = () => {
+        this.setState({
+            unfixed: false,
+            unpinned: false,
+            pinned: true
+        });
+    }
 
     render() {
         const {
             data,
             toggleCart,
-            onFeaturedImage,
+            from,
+            pageIs,
+            viewportIs,
+            cartNumber,
+            toggleSidebar,
             className
         } = this.props;
 
-        const {
-            menu
-        } = data.site.siteMetadata;
+        const { unfixed, pinned, unpinned } = this.state;
 
-        const siteLogo = <Logo />;
+        const { menu } = data.site.siteMetadata;
+
+        // Back Button for backup
+
+        const backLink = () => {
+            if (null !== from) {
+                return from;
+            }
+            return '/';
+        }
+
+        const backButton = (
+            <MovileNavIconWrapper>
+                <Link to={backLink()}>
+                    <OiIcon icon='oi-icon-arrow-back' />
+                </Link>
+            </MovileNavIconWrapper>
+        );
 
         const navLeft = (
             <NavLeftWrapper>
-                <Link to='/'>{siteLogo}</Link>
+                <Link to='/'><DesktopNavLogo /></Link>
             </NavLeftWrapper>
         );
 
         const navCenter = (
             <NavCenterWrapper>
-                <MainMenu menu={menu} onFeaturedImage={onFeaturedImage} />
+                <MainMenu menu={menu} />
             </NavCenterWrapper>
         );
 
@@ -195,19 +298,73 @@ class PureDesktopNavigation extends React.Component {
             </NavRightWrapper>
         );
 
+        const mobileNavLeft = (
+            <NavLeftWrapper>
+                <Link to='/' css={{ lineHeight: 0 }}><MobileNavLogo /></Link>
+            </NavLeftWrapper>
+        )
+
+        const mobileNavRight = (
+            <NavRightWrapper>
+                <MovileNavIconWrapper>
+                    <Link to='/cart'>
+                        <OiIcon icon='oi-icon-cart' />
+                        <CartItemNumber number={cartNumber} />
+                    </Link>
+                </MovileNavIconWrapper>
+                <MovileNavIconWrapper>
+                    <div onClick={toggleSidebar}>
+                        <OiIcon icon='oi-icon-menu' />
+                    </div>
+                </MovileNavIconWrapper>
+            </NavRightWrapper>
+        );
+
+        const pinStart = viewportIs === 'desktop' ? dimensions.navPaddingTopDesktop : (viewportIs === 'tablet' ? dimensions.navPaddingTopTablet : dimensions.navPaddingTopPhone);
+
         return (
-            <NavigationWrapper className={className}>
-                <NavigationInner>
-                    {navLeft}
-                    {navCenter}
-                    {navRight}
-                </NavigationInner>
-            </NavigationWrapper>
+            <HeadroomWrapper
+                upTolerance={8}
+                downTolerance={8}
+                pinStart={pinStart}
+                onUnfix={this.headRoomUnfix}
+                onUnpin={this.headRoomUnpin}
+                onPin={this.headRoomPin}
+                css={[
+                    unpinned && unpinnedStyle,
+                    pinned && pinnedStyle,
+                    unfixed && unfixedStyle
+                ]}
+            >
+                {viewportIs === null ?
+                    <NavigationWrapper className={className} css={(pageIs === 'Index' || pageIs === 'Post') && NavWhite}>
+                        <NavigationInner>
+                            {mobileNavLeft}
+                            {mobileNavRight}
+                        </NavigationInner>
+                    </NavigationWrapper>
+                    :
+                    <NavigationWrapper className={className} css={pageIs === 'Post' && NavWhite}>
+                        <NavigationInner>
+                            {navLeft}
+                            {navCenter}
+                            {navRight}
+                        </NavigationInner>
+                    </NavigationWrapper>
+                }
+
+            </HeadroomWrapper>
         );
     }
 }
 
-export const DesktopNavigation = (props) => (
+PureNavigation.propTypes = {
+    viewportIs: PropTypes.string,
+    toggleCart: PropTypes.func.isRequired,
+    burgerClick: PropTypes.func.isRequired,
+};
+
+const Navigation = (props) => (
     <StaticQuery
         query={graphql`
         query NavigationQuery {
@@ -224,69 +381,8 @@ export const DesktopNavigation = (props) => (
           }
         }
       `}
-        render={(data) => <PureDesktopNavigation {...props} data={data} />}
+        render={(data) => <PureNavigation {...props} data={data} />}
     />
 );
 
-DesktopNavigation.propTypes = {
-    viewportIs: PropTypes.string,
-    toggleCart: PropTypes.func.isRequired,
-    burgerClick: PropTypes.func.isRequired,
-};
-
-/* --------------------------- MOBILE NAVIGATION --------------------------- */
-
-export const MobileNavigation = ({
-    from,
-    pageIs,
-    cartNumber,
-    toggleSidebar,
-    className
-}) => {
-
-    const backLink = () => {
-        if (null !== from) {
-            return from;
-        }
-        return '/';
-    }
-
-    // Back Button for backup
-
-    const backButton = (
-        <MovileNavIconWrapper>
-            <Link to={backLink()}>
-                <OiIcon icon='oi-icon-arrow-back' />
-            </Link>
-        </MovileNavIconWrapper>
-    );
-
-    const navLeft = (
-        <NavLeftWrapper>
-            <Link to='/' css={{ lineHeight: 0 }}><MobileNavLogo /></Link>
-        </NavLeftWrapper>
-    )
-
-    const navRight = (
-        <NavRightWrapper>
-            <MovileNavIconWrapper>
-                <Link to='/cart'>
-                    <OiIcon icon='oi-icon-cart' />
-                    <CartItemNumber number={cartNumber} />
-                </Link>
-            </MovileNavIconWrapper>
-            <MovileNavIconWrapper>
-                <div onClick={toggleSidebar}>
-                    <OiIcon icon='oi-icon-menu' />
-                </div>
-            </MovileNavIconWrapper>
-        </NavRightWrapper>
-    );
-
-    return (
-        <MobileNavWrapper className={className} css={(pageIs === 'Index' || pageIs === 'Post') && MobileNavWhite}>
-            {navLeft}
-            {navRight}
-        </MobileNavWrapper>
-    );
-}
+export default Navigation;

@@ -74,8 +74,8 @@ const MenuLinkActiveStyle = css`
   }
 `;
 
-const Menu = ({ menu }: Props) => (
-  <MenuWrapper>
+const Menu = ({ menu, ...rest }: Props) => (
+  <MenuWrapper {...rest}>
       <MenuWrapperInner>
         <MenuList>
           {menu.map((item) => (
