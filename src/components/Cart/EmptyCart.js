@@ -1,21 +1,22 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import CartEmptyImgSrc from '../../imgs/tumbleweed.gif';
-import { colors, spacing } from '../../utils/styles';
+import { colors, spacing, mediaQuery } from '../../utils/styles';
 
 const EmptyCartRoot = styled('div')`
-  align-items: center;
   display: flex;
   flex-direction: column;
-  height: 240px;
-  justify-content: center;
+  padding: 0 ${spacing.lg}px;
+
+  ${mediaQuery.tabletFrom} {
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const EmptyCartCopy = styled('div')`
   color: ${colors.mainDark};
   margin-top: ${spacing.lg}px;
-  max-width: 280px;
-  text-align: center;
 
   p {
     margin: 0;
@@ -31,7 +32,7 @@ const EmptyCart = () => (
   <EmptyCartRoot>
     <CartEmptyImg src={CartEmptyImgSrc} width='64' height='64' alt='Cart Empty' />
     <EmptyCartCopy>
-      <p>Your cart currently does not have any product yet.</p>
+      <p>Bạn chưa có sản phẩm nào trong giỏ hàng.</p>
     </EmptyCartCopy>
   </EmptyCartRoot>
 );

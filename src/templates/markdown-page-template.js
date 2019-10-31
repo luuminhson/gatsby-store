@@ -28,14 +28,6 @@ const PageTemplateWrapper = styled(`div`)`
   }
 `;
 
-const PageTitleMobile = styled(FontStyle.h1)`
-  font-size: 1.8rem;
-
-  ${mediaQuery.tabletFrom} {
-    display: none;
-  }
-`;
-
 const PageBody = styled(`div`)`
   h1, h2, h3, h4, h5, h6 {
     line-height: 1.4em;
@@ -64,7 +56,6 @@ class PageTemplate extends React.Component<Props> {
     return (
       <Page pageTitle={pageTitle} title={`${pageTitle} ‧ ${siteTitle}`} description={metaDescription} pageIs='Page'>
         <PageTemplateWrapper>
-          <PageTitleMobile>{pageTitle}</PageTitleMobile>
           <PageBody dangerouslySetInnerHTML={{ __html: pageBody }} />
         </PageTemplateWrapper>
       </Page>

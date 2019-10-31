@@ -37,8 +37,15 @@ const PageInner = styled(`div`)`
 `;
 
 const PageTitle = styled(FontStyle.h1)`
-  margin: 40px auto;
-  text-align: center;
+  font-size: 1.6rem;
+  margin: 0 auto ${spacing.md}px;
+  padding: 0 ${spacing.lg}px;
+
+  ${mediaQuery.tabletFrom} {
+    margin: 0 auto ${spacing['4xl']}px;
+    text-align: center;
+    padding: 0 ${spacing.xl}px;
+  }
 `;
 
 const ProductPageTitle = css`
