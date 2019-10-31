@@ -22,7 +22,6 @@ const SubTitle = styled(FontStyle.h4)`
     font-size: 0.9rem !important;
     text-transform: uppercase;
     color: ${colors.neutral3};
-    margin-bottom: ${spacing.xs}px;
 `;
 
 const CenteredStyle = css`

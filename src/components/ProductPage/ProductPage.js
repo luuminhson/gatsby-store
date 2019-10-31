@@ -25,12 +25,12 @@ const ProductPageRoot = styled('div')`
     background-color: ${colors.mainLight};
     padding: calc(${headerHeight.tablet} + ${spacing['4xl']}px) ${spacing.xl}px calc(${headerHeight.tablet});
     width: 100%;
-    margin-top: calc(-${headerHeight.tablet} - ${spacing['4xl']}px);
+    margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet}px - ${spacing['4xl']}px);
   }
 
   ${mediaQuery.desktop} {
     padding-top: calc(${headerHeight.desktop} + ${spacing['4xl']}px);
-    margin-top: calc(-${headerHeight.desktop} - ${spacing['4xl']}px);
+    margin-top: calc(-${headerHeight.desktop} - ${dimensions.navPaddingTopDesktop}px - ${spacing['4xl']}px);
   }
 `;
 
@@ -69,7 +69,7 @@ const Container = styled(`div`)`
 
 const Details = styled(`div`)`
   position: relative;
-  padding: ${spacing.md}px ${spacing.xl}px 0;
+  padding: ${spacing.sm}px ${spacing.lg}px 0;
 
   ${mediaQuery.tabletFrom} {
     flex: 1 0 50%;

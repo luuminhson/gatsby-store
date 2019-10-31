@@ -9,7 +9,7 @@ import Categories from './Categories';
 import BackgroundImage from 'gatsby-background-image';
 import type { Node } from '../../types';
 
-import { colors, mediaQuery, spacing, headerHeight } from '../../utils/styles';
+import { mediaQuery, colors, spacing, headerHeight, dimensions } from '../../utils/styles';
 
 type Props = {
   post: Node
@@ -19,7 +19,7 @@ const PostWrapper = styled(`div`)`
   margin-top: -${headerHeight.tablet};
 
   ${mediaQuery.tabletFrom} {
-    margin-top: -${spacing['4xl']}px;
+    margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet}px - ${spacing['4xl']}px);
   }
 `;
 
@@ -63,7 +63,7 @@ const HeaderContent = styled(`div`)`
   ${mediaQuery.tabletFrom} {
       max-width: 600px;
       padding: 20px 0 0;
-      margin-top: ${spacing['4xl']}px;
+      margin-top: ${spacing['8xl']}px;
     }
   }
 `;

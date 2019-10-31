@@ -46,8 +46,8 @@ const StripWrapper = styled(`div`)`
         scroll-snap-type: none;
         overflow: visible;
         flex-wrap: wrap;
-        margin: 0 -${spacing.lg}px;
-        padding: 0 ${spacing.xs}px 20px;
+        margin: 0 -${spacing.sm}px;
+        padding: 0 0 20px;
     }
 `;
 
@@ -86,11 +86,11 @@ const StripItem = styled(`div`)`
     ${mediaQuery.tabletFrom} {
         flex-basis: 33.3333%;
         max-width: calc(33.3333%);
-        padding: 0 1rem;
+        padding: 0 ${spacing.sm}px;
         margin-bottom: 36px;
 
         &:last-child {
-            padding-right: 1rem;
+            padding-right: ${spacing.sm}px;
         }
 
         &.has-featured-image {

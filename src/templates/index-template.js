@@ -21,7 +21,7 @@ type Props = {
 const IndexWrapper = styled(`div`)`
   margin: 0 auto;
   margin-top: -${headerHeight.tablet};
-  padding-bottom: ${spacing['2xl']}px;
+  padding-bottom: ${spacing.lg}px;
 
   ${mediaQuery.tabletFrom} {
     margin-top: 0;
@@ -101,7 +101,7 @@ const HeroSection = styled(`section`)`
   }
 
   ${mediaQuery.tabletFrom} {
-    margin-bottom: 15%;
+    margin-top: 5%;
 
     &:after {
       display: none;
@@ -143,7 +143,7 @@ const GroupLeft = styled(`div`)`
   flex: 1 0 50%;
 
   ${FeaturedImage} {
-    margin: 0 ${spacing.xl}px ${spacing.xl}px 0;
+    margin: 0 ${spacing.lg}px ${spacing.lg}px 0;
   }
 `;
 
@@ -154,7 +154,7 @@ const GroupRight = styled(`div`)`
 
   ${FeaturedImage} {
     width: 100%;
-    margin-bottom: ${spacing.xl}px;
+    margin-bottom: ${spacing.lg}px;
   }
 `;
 

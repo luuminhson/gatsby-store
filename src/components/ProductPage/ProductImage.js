@@ -25,8 +25,8 @@ const imageItemWidth = '80vw';
 
 const ProductImageInner = styled(`div`)`
   overflow: hidden;
-  width: calc(${imageItemWidth} - ${spacing.md * 2}px);
-  height: calc(${imageItemWidth} - ${spacing.md * 2}px);
+  width: calc(${imageItemWidth} - ${spacing.sm * 2}px);
+  height: calc(${imageItemWidth} - ${spacing.sm * 2}px);
 `;
 
 const ProductImageWrapper = styled(`div`)`
@@ -34,7 +34,7 @@ const ProductImageWrapper = styled(`div`)`
   max-width: ${imageItemWidth};
   scroll-snap-align: center;
   position: relative;
-  padding: ${spacing.md}px;
+  padding: ${spacing.sm}px;
   margin-bottom: ${spacing.lg}px;
 
   &:last-child {

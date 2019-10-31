@@ -30,7 +30,7 @@ const ProductImagesMobileContent = styled(`div`)`
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
-  padding: 0 ${spacing.md}px;
+  padding: 0 ${spacing.sm}px;
   transform: translateZ(0);
 
   ${StyledImage} {

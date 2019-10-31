@@ -5,7 +5,7 @@ import type { Edges } from '../../types';
 
 import ProductListingItem from '../ProductListingItem';
 import SectionTitle from '../SectionTitle';
-import { spacing, mediaQuery } from '../../utils/styles';
+import { spacing, mediaQuery, colors } from '../../utils/styles';
 
 type Props = {
     edges: Edges,
@@ -16,17 +16,16 @@ const _ = require('lodash');
 
 const SectionTitleWrapper = styled(SectionTitle)`
     margin-bottom: ${spacing.md}px;
-    padding: 0 ${spacing.xl}px;
+    padding: 0 ${spacing.lg}px;
 
     ${mediaQuery.tabletFrom} {
         margin-bottom: ${spacing.xl}px;
-        padding: 0 ${spacing.md}px;
+        padding: 0 ${spacing.xs}px;
     }
 `;
 
 const RelatedProductsWrapper = styled(`div`)`
-    margin: ${spacing['2xl']}px 0;
-    padding: 0;
+    margin: ${spacing.lg}px 0;
 
     ${mediaQuery.tabletFrom} {
         margin: ${spacing['4xl']}px 0;
@@ -55,7 +54,7 @@ const RelatedProductListInner = styled(`div`)`
     box-sizing: border-box;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
-    padding: 0 ${spacing.lg + 4}px;
+    padding: 0 ${spacing.lg}px;
     margin: 0 -${spacing.sm}px;
     transform: translateZ(0);
 
@@ -70,12 +69,12 @@ const RelatedProductItem = styled(`div`)`
     max-width: 60vw;
     scroll-snap-align: center;
     position: relative;
-    padding: ${spacing.md}px;
+    padding: ${spacing.sm}px;
     margin-bottom: ${spacing.lg}px;
 
     &:last-child {
-        max-width: calc(60vw + ${spacing.xl - 4}px);
-        padding-right: 44px;
+        max-width: calc(60vw + ${spacing.lg}px);
+        padding-right: ${spacing.lg + spacing.sm}px;
     }
 
     > a {
@@ -88,7 +87,7 @@ const RelatedProductItem = styled(`div`)`
         max-width: none;
 
         &:last-child {
-            padding-right: ${spacing.md}px;
+            padding-right: ${spacing.sm}px;
         }
     }
 `;
