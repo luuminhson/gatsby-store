@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import ScrollAnimation from 'react-animate-on-scroll';
+import ScrollAnimation from '../components/shared/ScrollAnimation';
 import { Link } from '../components/LinkWithPrev';
 import Page from '../components/Page';
 import Footer from '../components/Layout/Footer';
@@ -125,7 +125,7 @@ class MoreTemplate extends React.Component<Props> {
 
     return (
       <Page pageTitle='Thông tin' title={`Thông tin ‧ ${siteTitle}`} description={siteSubtitle} pageIs='More'>
-        <ScrollAnimation animateOnce animateIn='fadeIn'>
+        <ScrollAnimation>
           <CustomFooter viewportIs={viewportIs} />
           <FooterModule viewportIs={viewportIs} alwaysExpand css={ModuleOthers} title='Others'>
             <ul>

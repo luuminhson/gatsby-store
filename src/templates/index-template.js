@@ -2,7 +2,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import styled from '@emotion/styled';
-import ScrollAnimation from 'react-animate-on-scroll';
+import ScrollAnimation from '../components/shared/ScrollAnimation';
 import Page from '../components/Page';
 import SectionTitle from '../components/SectionTitle';
 import Strip from '../components/Strip';
@@ -301,7 +301,7 @@ class IndexTemplate extends React.Component<Props> {
     return (
       <Page title={`${title} ‧ ${subtitle}`} description={description} pageIs='Index'>
         <IndexWrapper>
-          <ScrollAnimation animateOnce animateIn='fadeIn'>
+          <ScrollAnimation>
             <HeroSection>
               <HeroImage fluid={heroImageSrc} />
               <TitleGroup>
@@ -311,7 +311,7 @@ class IndexTemplate extends React.Component<Props> {
             </HeroSection>
           </ScrollAnimation>
 
-          <ScrollAnimation animateOnce animateIn='fadeIn'>
+          <ScrollAnimation>
             <FeaturedProductSection>
               <TitleGroup>
                 <SectionTitle subtitle='Nổi bật' actionLabel='Xem chi tiết' actionLink={viewportIs === null && '/store/product/rain-shoulder'}>The Lazy Silk Leaf</SectionTitle>
@@ -329,7 +329,7 @@ class IndexTemplate extends React.Component<Props> {
             </FeaturedProductSection>
           </ScrollAnimation>
 
-          <ScrollAnimation animateOnce animateIn='fadeIn'>
+          <ScrollAnimation>
             <LastestProductsSection>
               <TitleGroup>
                 <SectionTitle subtitle='Sản phẩm mới' actionLabel='Xem cửa hàng' actionLink='/store'>Tote Bags</SectionTitle>
@@ -344,7 +344,7 @@ class IndexTemplate extends React.Component<Props> {
             </LastestProductsSection>
           </ScrollAnimation>
 
-          <ScrollAnimation animateOnce animateIn='fadeIn'>
+          <ScrollAnimation>
             <LastestBlogSection>
               <TitleGroup>
                 <SectionTitle subtitle='Bài viết mới nhất' actionLabel='Xem tất cả' actionLink='/blog'>Blog</SectionTitle>

@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import ScrollAnimation from 'react-animate-on-scroll';
+import ScrollAnimation from '../shared/ScrollAnimation';
 import { Link } from '../LinkWithPrev';
 import Img from 'gatsby-image';
 import { FlatButton } from '../shared/Buttons';
@@ -127,8 +127,6 @@ const Feed = ({ edges }: Props) => (
       <FeedItem
         css={edge.node.frontmatter.featuredImage && hasFeaturedImage}
         key={edge.node.fields.slug}
-        animateOnce
-        animateIn='fadeIn'
       >
         {feedLayout(edge)}
       </FeedItem>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import ScrollAnimation from 'react-animate-on-scroll';
+import ScrollAnimation from '../shared/ScrollAnimation';
 import { Link } from '../LinkWithPrev';
 import Image from 'gatsby-image';
 
@@ -139,7 +139,7 @@ const ProductListingItem = props => {
       {() => {
         return (
           <ProductListingItemLink to={`/store/product/${handle}`}>
-            <ScrollAnimation animateOnce animateIn='fadeIn'>
+            <ScrollAnimation>
               <Item>
                 <Preview>
                   {compareAtPrice && compareAtPrice !== null &&

@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import ScrollAnimation from 'react-animate-on-scroll';
+import ScrollAnimation from '../components/shared/ScrollAnimation';
 import Page from '../components/Page';
 import CartPage from '../components/Cart/CartPage';
 
@@ -18,7 +18,7 @@ class CartTemplate extends React.Component<Props> {
 
         return (
             <Page pageTitle='Giỏ hàng' title={`Giỏ hàng ‧ ${title}`} description={description} pageIs='Cart'>
-                <ScrollAnimation animateOnce animateIn='fadeIn'>
+                <ScrollAnimation>
                     <CartPage />
                 </ScrollAnimation>
             </Page>

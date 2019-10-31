@@ -34,20 +34,6 @@ const ProductPageRoot = styled('div')`
   }
 `;
 
-const ProductTitle = styled(FontStyle.h3)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  width: calc(100vw - ${spacing.xl * 4}px);
-  margin: ${spacing.lg}px auto ${spacing.md}px;
-  text-align: center;
-
-  ${mediaQuery.tabletFrom} {
-    display: none;
-  }
-`;
-
 const ProductSpecTitle = styled(FontStyle.h1)`
   font-size: 1.6rem;
   line-height: 2rem;

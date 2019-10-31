@@ -5,7 +5,7 @@ import type { Edges } from '../../types';
 
 import ProductListingItem from '../ProductListingItem';
 import SectionTitle from '../SectionTitle';
-import { spacing, mediaQuery, colors } from '../../utils/styles';
+import { spacing, mediaQuery } from '../../utils/styles';
 
 type Props = {
     edges: Edges,

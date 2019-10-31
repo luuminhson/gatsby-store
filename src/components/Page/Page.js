@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import { graphql, StaticQuery } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import ScrollAnimation from 'react-animate-on-scroll';
+import ScrollAnimation from '../shared/ScrollAnimation';
 import Footer from '../Layout/Footer';
 
 import InterfaceContext from '../../context/InterfaceContext';
@@ -109,16 +109,16 @@ class PurePage extends React.Component<Props> {
         </Helmet>
         <PageInner>
           {pageTitle &&
-            <ScrollAnimation animateOnce animateIn='fadeIn'>
+            <ScrollAnimation>
               <PageTitle css={pageIs === 'Product' && ProductPageTitle}>{pageTitle}</PageTitle>
             </ScrollAnimation>
           }
-          <ScrollAnimation animateOnce animateIn='fadeIn'>
+          <ScrollAnimation>
             <PageBody>
               {children}
             </PageBody>
           </ScrollAnimation>
-          <ScrollAnimation animateOnce animateIn='fadeIn'>
+          <ScrollAnimation>
             <Footer viewportIs={viewportIs} />
           </ScrollAnimation>
         </PageInner>
