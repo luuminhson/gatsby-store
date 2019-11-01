@@ -6,11 +6,12 @@ import { colors, spacing, mediaQuery } from '../../utils/styles';
 const EmptyCartRoot = styled('div')`
   display: flex;
   flex-direction: column;
-  padding: 0 ${spacing.lg}px;
+  padding: ${spacing.lg}px;
 
   ${mediaQuery.tabletFrom} {
     justify-content: center;
     align-items: center;
+    padding: ${spacing['4xl']}px;
   }
 `;
 

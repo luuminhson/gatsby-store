@@ -93,7 +93,7 @@ const Heading = styled(`header`)`
   }
 `;
 
-const Title = styled(FontStyle.h2)`
+const Title = styled(FontStyle.h3)`
   flex-grow: 1;
   text-align: center;
   position: relative;
