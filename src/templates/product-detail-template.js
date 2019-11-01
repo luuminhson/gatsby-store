@@ -48,7 +48,8 @@ class ProductDetailTemplate extends Component {
       viewportIs,
       productImageFeatured,
       setCurrentProductImages,
-      prevLink
+      prevLink,
+      location
     } = this.props;
 
     // Process the product images
@@ -116,7 +117,7 @@ class ProductDetailTemplate extends Component {
                   productImageFeatured={productImageFeatured}
                   setCurrentProductImages={setCurrentProductImages}
                 />
-                <RelatedProducts edges={relatedProducts.edges} limit={4} />
+                <RelatedProducts edges={relatedProducts.edges} limit={4} location={location} />
               </ProductDetailWrapper>
             </Page>
           )}
@@ -148,6 +149,7 @@ export default props => (
               setPage={setToProductPage}
               setBackLink={() => setPrevLink(location, '/store')}
               prevLink={prevLink}
+              location={location}
             />
           )}
       </InterfaceContext.Consumer>

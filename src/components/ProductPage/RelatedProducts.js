@@ -92,25 +92,46 @@ const RelatedProductItem = styled(`div`)`
     }
 `;
 
-const RelatedProducts = ({ edges, limit }: Props) => {
+class RelatedProducts extends React.Component<Props> {
+    state = {
+        update: false
+    };
 
-    const randomRelatedProducts = _.sampleSize(edges, limit);
-    const productList = limit ? randomRelatedProducts : edges;
+    componentDidUpdate(prevProps) {
 
-    return (
-        <RelatedProductsWrapper>
-            <SectionTitleWrapper>Có thể bạn sẽ thích</SectionTitleWrapper>
-            <RelatedProductList>
-                <RelatedProductListInner>
-                    {productList.map((edge) => (
-                        <RelatedProductItem key={edge.node.id}>
-                            <ProductListingItem product={edge.node} />
-                        </RelatedProductItem>
-                    ))}
-                </RelatedProductListInner>
-            </RelatedProductList>
-        </RelatedProductsWrapper>
-    )
-};
+        // Only update sample size when location changes
+
+        if (this.props.location.pathname !== prevProps.location.pathname) {
+            this.setState({ update: true });
+
+            setTimeout(() => {
+                this.setState({ update: false });
+            }, 500);
+        }
+    }
+
+    render() {
+        const { edges, limit } = this.props;
+        const { update } = this.state;
+
+        const randomRelatedProducts = _.sampleSize(edges, limit);
+        const productList = update && limit ? randomRelatedProducts : edges;
+
+        return (
+            <RelatedProductsWrapper>
+                <SectionTitleWrapper>Có thể bạn sẽ thích</SectionTitleWrapper>
+                <RelatedProductList>
+                    <RelatedProductListInner>
+                        {productList.map((edge) => (
+                            <RelatedProductItem key={edge.node.id}>
+                                <ProductListingItem product={edge.node} />
+                            </RelatedProductItem>
+                        ))}
+                    </RelatedProductListInner>
+                </RelatedProductList>
+            </RelatedProductsWrapper>
+        )
+    }
+}
 
 export default RelatedProducts;
