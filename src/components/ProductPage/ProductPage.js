@@ -23,29 +23,27 @@ const ProductPageRoot = styled('div')`
     display: flex;
     justify-content: center;
     background-color: ${colors.mainLight};
-    padding: calc(${headerHeight.tablet} + ${spacing['4xl']}px) ${spacing.xl}px calc(${headerHeight.tablet});
+    padding: calc(${headerHeight.tablet} + ${dimensions.navPaddingTopTablet}px + ${spacing['4xl']}px) ${spacing.xl}px ${dimensions.navHeightTablet};
     width: 100%;
     margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet}px - ${spacing['4xl']}px);
   }
 
   ${mediaQuery.desktop} {
-    padding-top: calc(${headerHeight.desktop} + ${spacing['4xl']}px);
+    padding-top: calc(${headerHeight.desktop} + ${dimensions.navPaddingTopDesktop}px + ${spacing['4xl']}px);
     margin-top: calc(-${headerHeight.desktop} - ${dimensions.navPaddingTopDesktop}px - ${spacing['4xl']}px);
   }
 `;
 
-const ProductSpecTitle = styled(FontStyle.h1)`
-  font-size: 1.6rem;
-  line-height: 2rem;
+const ProductSpecTitle = styled(FontStyle.h2)`
 `;
 
-const Container = styled(`div`)`
+const MainContainer = styled(`div`)`
   ${mediaQuery.tabletFrom} {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: stretch;
     width: 100%;
-    max-width: ${breakpoints.fhd}px;
+    max-width: ${breakpoints.hd}px;
   }
 
   ${mediaQuery.tabletPortrait} {
@@ -53,18 +51,34 @@ const Container = styled(`div`)`
   }
 `;
 
-const Details = styled(`div`)`
-  position: relative;
-  padding: ${spacing.sm}px ${spacing.lg}px 0;
+const ProductImagesContainer = styled(`div`)`
+  flex: 0 1 50%;
+  display: flex;
+  align-items: stretch;
 
   ${mediaQuery.tabletFrom} {
-    flex: 1 0 50%;
-    padding: ${spacing['2xl']}px ${spacing.xl}px 0;
-    margin-top: ${spacing.xl}px;
+    flex: 0 1 65%;
+    padding-right: ${spacing.xl}px;
   }
 
   ${mediaQuery.desktop} {
-    margin-top: ${spacing['2xl']}px;
+    // margin-right: 10%;
+  }
+`;
+
+const Details = styled(`div`)`
+  position: relative;
+  padding: 0 ${spacing.lg}px;
+
+  ${mediaQuery.tabletFrom} {
+    flex: 1 0 35%;
+    padding: 0 ${spacing.xl}px;
+    margin-top: ${spacing['4xl']}px;
+  }
+
+  ${mediaQuery.desktop} {
+    max-width: 40vw;
+    // margin-right: 10%;
   }
 `;
 
@@ -72,18 +86,17 @@ const PriceRow = styled(`div`)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-top: ${spacing.xs}px;
-  margin-bottom: ${spacing.lg}px;
+  margin-bottom: ${spacing.sm}px;
 
   ${mediaQuery.tabletFrom} {
-    margin-top: ${spacing.lg}px;
-    margin-bottom: ${spacing.xl}px;
+    margin-top: ${spacing.xs}px;
+    margin-bottom: ${spacing.md}px;
   }
 `;
 
-const Price = styled(FontStyle.h3)`
+const Price = styled(FontStyle.h4)`
   font-weight: ${fontWeight.heading.medium};  
-  color: ${colors.neutral4};
+  color: ${colors.neutral5};
   letter-spacing: 0.5px;
   margin-right: 8px;
 `;
@@ -112,7 +125,6 @@ class ProductPage extends Component {
     const {
       product,
       product: {
-        id,
         title,
         variants,
         descriptionHtml,
@@ -153,19 +165,21 @@ class ProductPage extends Component {
                 currentVariant
               }) => (
                   <ProductPageRoot>
-                    <Container>
-                      {(viewportIs !== 'desktop') && (viewportIs !== 'tablet') ? (
-                        <ProductImagesMobile
-                          images={finalImages[0] !== undefined ? finalImages : originalImages}
-                        />
-                      ) : (
-                          <ProductImagesDesktop
+                    <MainContainer>
+                      <ProductImagesContainer>
+                        {(viewportIs !== 'desktop') && (viewportIs !== 'tablet') ? (
+                          <ProductImagesMobile
                             images={finalImages[0] !== undefined ? finalImages : originalImages}
-
-                            imageFeatured={productImageFeatured}
-                            imageFeaturedIndex={productImageFeaturedIndex}
                           />
-                      )}
+                        ) : (
+                            <ProductImagesDesktop
+                              images={finalImages[0] !== undefined ? finalImages : originalImages}
+
+                              imageFeatured={productImageFeatured}
+                              imageFeaturedIndex={productImageFeaturedIndex}
+                            />
+                          )}
+                      </ProductImagesContainer>
 
                       <Details>
                         <ProductSpecTitle>{title}</ProductSpecTitle>
@@ -176,7 +190,7 @@ class ProductPage extends Component {
                           }
                         </PriceRow>
                         <ProductForm
-                          id={id}
+                          // id={id}
                           product={product}
                           compactVariants={false}
                           imageFeatured={currentVariant && currentVariant.image}
@@ -186,7 +200,7 @@ class ProductPage extends Component {
                         />
                         <ProductDescription dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
                       </Details>
-                    </Container>
+                    </MainContainer>
                   </ProductPageRoot>
                 )}
             </StoreContext.Consumer>
@@ -197,21 +211,21 @@ class ProductPage extends Component {
 }
 
 export default props => (
-<StoreContext.Consumer>
-        {({
-          setCurrentVariant
-        }) => {
-          const { product, finalImages } = props;
-          return (
-              <ProductPage
-                {...props}
-                product={product}
-                finalImages={finalImages}
-                setCurrentVariant={setCurrentVariant}
-              />
-          )
-        }}
-      </StoreContext.Consumer>
+  <StoreContext.Consumer>
+    {({
+      setCurrentVariant
+    }) => {
+      const { product, finalImages } = props;
+      return (
+        <ProductPage
+          {...props}
+          product={product}
+          finalImages={finalImages}
+          setCurrentVariant={setCurrentVariant}
+        />
+      )
+    }}
+  </StoreContext.Consumer>
 )
 
 ProductPage.propTypes = {

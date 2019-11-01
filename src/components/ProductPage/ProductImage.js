@@ -59,11 +59,13 @@ const ProductImageWrapper = styled(`div`)`
 
   ${mediaQuery.tabletFrom} {
     flex: 1 0 auto;
+    padding: 0;
     margin-bottom: 0;
     max-width: 70vw;
 
     &:last-child {
       max-width: 70vw;
+      padding: 0;
     }
 
     ${ProductImageInner} {
@@ -73,10 +75,10 @@ const ProductImageWrapper = styled(`div`)`
   }
 
   ${mediaQuery.desktop} {
-    max-width: 40vw;
+    max-width: 600px;
 
     &:last-child {
-      max-width: 40vw;
+      max-width: 600px;
     }
   }
 `;
@@ -99,11 +101,12 @@ class ProductImage extends Component {
           childImageSharp: { fluid }
         }
       },
-      single
+      single,
+      ...props
     } = this.props;
 
     return (
-      <ProductImageWrapper className={single ? 'single' : null}>
+      <ProductImageWrapper className={single ? 'single' : null} {...props}>
         <ProductImageInner>
           <StyledImage fluid={fluid} alt="" />
         </ProductImageInner>

@@ -7,7 +7,6 @@ import Image from 'gatsby-image';
 import InterfaceContext from '../../context/InterfaceContext';
 
 import { breakpoints, mediaQuery, colors, radius, spacing } from '../../utils/styles';
-import { type } from 'os';
 
 const THUMBNAIL_SIZE = '80px';
 
@@ -24,18 +23,18 @@ const ProductThumbnailsRoot = styled(`div`)`
     width: auto;
     max-width: calc(${THUMBNAIL_SIZE} + ${spacing.xs * 2}px);
     padding: ${spacing.xs}px 0;
-    margin-right: ${spacing.md}px;
-    overflow-x: hidden;
+    margin-right: ${spacing.xl}px;
+    overflow-y: hidden;
   }
 `;
 
 export const ProductThumbnailsContent = styled(`div`)`
-  display: inline-flex;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
 
   ${mediaQuery.tabletFrom} {
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
     min-width: 100%;
   }
 `;
@@ -43,9 +42,10 @@ export const ProductThumbnailsContent = styled(`div`)`
 export const Thumbnail = styled(`a`)`
   background-color: ${colors.white};
   border-radius: ${radius.default}px;
+  display: block;
   height: ${THUMBNAIL_SIZE};
-  margin: ${spacing.xs}px;
   width: ${THUMBNAIL_SIZE};
+  margin: ${spacing.xs}px;
   opacity: 0.75;
   box-shadow: 0 0 0 1px ${colors.neutral2};
   transition: all 0.2s ease-in-out;
@@ -96,7 +96,7 @@ class ProductThumbnails extends Component {
   }
 
   render() {
-    const { images, className } = this.props;
+    const { images, className, ...props } = this.props;
     const { activeIndex } = this.state;
 
     return (
@@ -105,7 +105,7 @@ class ProductThumbnails extends Component {
           featureProductImage,
           featureProductImageIndex
         }) => (
-          <ProductThumbnailsRoot className={className}>
+          <ProductThumbnailsRoot className={className} {...props}>
             <ProductThumbnailsContent>
               {images.map((image, idx) => {
                 const {

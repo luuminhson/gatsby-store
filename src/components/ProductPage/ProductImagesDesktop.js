@@ -10,14 +10,14 @@ import { spacing } from '../../utils/styles';
 const THUMBNAIL_SIZE = '80px';
 
 const ProductImagesDesktopRoot = styled(`div`)`
-  margin-right: ${spacing.lg}px;
-  flex: 1 0 50%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
+  width: 100%;
 `;
 
 const Thumbnails = styled(ProductThumbnails)`
+
   ${Thumbnail} {
     height: ${THUMBNAIL_SIZE};
     width: ${THUMBNAIL_SIZE};
@@ -25,13 +25,19 @@ const Thumbnails = styled(ProductThumbnails)`
   }
 `;
 
+const MainImage = styled(ProductImage)`
+  dislay: flex;
+`;
+
 const ProductImagesDesktop = ({ images, imageFeatured, imageFeaturedIndex }) => {
   const image = images[0];
 
   return (
     <ProductImagesDesktopRoot>
-      { images.length !== 1 && <Thumbnails images={images} activeIdx={imageFeaturedIndex} /> }
-      <ProductImage
+      { images.length !== 1 &&
+        <Thumbnails images={images} activeIdx={imageFeaturedIndex} />
+      }
+      <MainImage
         image={imageFeatured ? imageFeatured : image}
         idx={imageFeaturedIndex}
         single={ images.length === 1 ? true : false }

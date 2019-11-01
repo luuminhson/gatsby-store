@@ -6,11 +6,13 @@ import OiIcon from '../OiIcon';
 
 import { Fieldset, Input, Label, Select, Submit } from '../shared/FormElements';
 
-import { colors, spacing, radius, mediaQuery, FontStyle, fontFamily, fontWeight } from '../../utils/styles';
+import { colors, spacing, radius, mediaQuery, fontFamily, fontWeight } from '../../utils/styles';
 
 import StoreContext from '../../context/StoreContext';
 
 const _ = require('lodash');
+
+const swatchSize = '28px';
 
 const Form = styled(`form`)`
   display: flex;
@@ -66,44 +68,38 @@ const QtyFieldset = styled(Fieldset)`
   }
 `;
 
-const VariantFieldset = styled(Fieldset)`
+const VariantFieldGroup = styled(`div`)`
   flex-basis: 100%;
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: ${spacing.xl}px;
+  align-items: center;
+  margin: ${spacing.sm}px 0;
 `;
 
 const ProductOptions = styled(`div`)`
   display: flex;
-  justify-content: flex-start;
 `;
 
 const ProductOptionSelector = styled(`div`)`
-  flex: 1 0 50%;
   padding-right: ${spacing.lg}px;
 `;
 
-const OptionSelectorTitle = styled(`legend`)`
+const OptionSelectorTitle = styled(`div`)`
   font-family: ${fontFamily.heading};
+  color: ${colors.neutral5};
   font-size: 1rem;
-  font-weight: ${fontWeight.heading.medium};
-  margin-bottom: ${spacing.sm}px;
-
-  span {
-    color: ${colors.neutral4};
-    font-weight: ${fontWeight.heading.normal};
-  }
+  font-weight: ${fontWeight.heading.normal};
+  margin-right: ${spacing.sm}px;
 `;
 
-const OptionList = styled(`div`)`
+const OptionList = styled(`div`)` 
   display: flex;
 `;
 
 const OptionItem = styled(`div`)`
   position: relative;
   display: inline-block;
-  width: 36px;
-  height: 36px;
+  width: ${swatchSize};
+  height: ${swatchSize};
   margin-right: ${spacing.xs}px;
 `;
 
@@ -114,9 +110,11 @@ const OptionLabel = styled(Label)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-size: 0.9rem;
   text-align: center;
-  line-height: 36px;
-  color: ${colors.neutral5};
+  line-height: ${swatchSize};
+  color: ${colors.neutral4};
+  cursor: pointer;
 
   .option-color & {
     display: none;
@@ -128,13 +126,15 @@ const OptionRadioInput = styled(`input`)`
   outline: none;
   position: relative;
   display: inline-block;
-  width: 36px;
-  height: 36px;
+  background-size: cover;
+  width: ${swatchSize};
+  height: ${swatchSize};
   margin: 0;
   padding: 0;
   border: none;
   background-color: ${colors.neutral2};
-  border-radius: ${radius.large}px;
+  border-radius: 100%;
+  cursor: pointer;
 
   &:before {
     content: '';
@@ -145,11 +145,11 @@ const OptionRadioInput = styled(`input`)`
     transform-origin: 50% 50%;
     opacity: 0;
     display: inline-block;
-    width: 36px;
-    height: 36px;
-    border: 2px solid ${colors.neutral3};
-    box-shadow: inset 0 0 0 2px ${colors.white};
-    border-radius: ${radius.large}px;
+    width: ${swatchSize};
+    height: ${swatchSize};
+    border: 2px solid ${colors.neutral5};
+    box-shadow: inset 0 0 0 1px ${colors.white};
+    border-radius: 100%;
     transition: all 0.1s ease-in-out;
   }
 
@@ -160,9 +160,13 @@ const OptionRadioInput = styled(`input`)`
       opacity: 1;
       transition: all 0.2s ease-in-out;
     }
+
+    + label {
+      color: ${colors.neutral5};
+    }
   }
 
-  // Color Stripped
+  // Color option swatches
 
   [class*=optionid-Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0T3B0aW9uLzQxNzM4MjM3NzA3MDU] & {
     &.color-stripped {
@@ -174,6 +178,35 @@ const OptionRadioInput = styled(`input`)`
       background-color: #FFE398;
     }
   }
+`;
+
+const OptionResultsLabel = styled(`div`)`
+  display: inline-flex;
+
+  i {
+    font-size: 20px;
+    color: ${colors.neutral4};
+    margin-right: 4px;
+  }
+`;
+
+const OptionResultItem = styled(`span`)`
+  &:after {
+    content: ' — ';
+  }
+
+  &:last-child {
+    &:after {
+      content: '';
+    }
+  }
+`;
+
+const OptionRerults = styled(`div`)`
+  display: flex;
+  align-items: center;
+  color: ${colors.neutral4};
+  margin: ${spacing.sm}px 0;
 `;
 
 const AddToCartButton = styled(Submit)`
@@ -258,7 +291,11 @@ class ProductForm extends Component {
   handleChange2 = (
     index,
     variants,
-    callbackVariants
+    callbackVariants,
+    imageFeatured,
+    featureProductImage,
+    imageFeaturedIndex,
+    featureProductImageIndex
   ) => event => {
 
     if (event.target.value) {
@@ -287,12 +324,20 @@ class ProductForm extends Component {
 
     callbackVariants(variants[this.loopComparison(this.state.options, variants)].shopifyId);
 
+    featureProductImage(imageFeatured);
+
+    featureProductImageIndex(imageFeaturedIndex);
+
   };
 
   render() {
     const {
       product,
-      compactVariants
+      compactVariants,
+      imageFeatured,
+      featureProductImage,
+      imageFeaturedIndex,
+      featureProductImageIndex
     } = this.props;
 
     const { errors } = this.state;
@@ -310,7 +355,6 @@ class ProductForm extends Component {
       <StoreContext.Consumer>
         {({
           addVariantToCart,
-          currentVariant,
           setCurrentVariant
         }) => (
             <Form onSubmit={this.handleSubmit(addVariantToCart)} noValidate>
@@ -344,7 +388,7 @@ class ProductForm extends Component {
 
               {hasVariants && (
                 compactVariants ? (
-                  <VariantFieldset>
+                  <VariantFieldGroup>
                     <label htmlFor='variant'>Product Options</label>
                     <Select
                       id='variant'
@@ -362,37 +406,49 @@ class ProductForm extends Component {
                         </option>
                       ))}
                     </Select>
-                  </VariantFieldset>
+                  </VariantFieldGroup>
                 ) : (
-                    <ProductOptions>
-                      {product.options.map((option, idx) => (
-                        <ProductOptionSelector className={`optionid-${option.shopifyId} ${`option-${option.name.toLowerCase().replace(/\s/g, '')}`}`} key={idx}>
-                          <VariantFieldset>
-                            <OptionSelectorTitle>{`${option.name}: `}<span>{this.state.options[idx].value}</span></OptionSelectorTitle>
-                            <OptionList>
-                              {option.values.map((value, index) => (
-                                <OptionItem key={`${option.name}-${value}-${index}`}>
-                                  <OptionRadioInput
-                                    className={`${option.name.toLowerCase().replace(/\s/g, '')}-${value.toLowerCase().replace(/\s/g, '')}`}
-                                    type='radio'
-                                    id={`${option.name}-${value}`}
-                                    name={option.name}
-                                    value={value}
-                                    defaultChecked={index == 0}
-                                    onChange={this.handleChange2(
-                                      idx,
-                                      product.variants,
-                                      setCurrentVariant
-                                    )}
-                                  /><OptionLabel htmlFor={`${option.name}-${value}`}>{`${value}`}</OptionLabel>
-                                </OptionItem>
-                              ))}
-                            </OptionList>
-                          </VariantFieldset>
-                        </ProductOptionSelector>
-                      )
-                      )}
-                    </ProductOptions>
+                    <>
+                      <ProductOptions>
+                        {product.options.map((option, idx) => (
+                          <ProductOptionSelector className={`optionid-${option.shopifyId} ${`option-${option.name.toLowerCase().replace(/\s/g, '')}`}`} key={idx}>
+                            <VariantFieldGroup>
+                              <OptionSelectorTitle>{option.name}</OptionSelectorTitle>
+                              <OptionList>
+                                {option.values.map((value, index) => (
+                                  <OptionItem key={`${option.name}-${value}-${index}`}>
+                                    <OptionRadioInput
+                                      className={`${option.name.toLowerCase().replace(/\s/g, '')}-${value.toLowerCase().replace(/\s/g, '')}`}
+                                      type='radio'
+                                      id={`${option.name}-${value}`}
+                                      name={option.name}
+                                      value={value}
+                                      defaultChecked={index == 0}
+                                      onChange={this.handleChange2(
+                                        idx,
+                                        product.variants,
+                                        setCurrentVariant,
+                                        imageFeatured,
+                                        featureProductImage,
+                                        imageFeaturedIndex,
+                                        featureProductImageIndex
+                                      )}
+                                    /><OptionLabel htmlFor={`${option.name}-${value}`}>{`${value}`}</OptionLabel>
+                                  </OptionItem>
+                                ))}
+                              </OptionList>
+                            </VariantFieldGroup>
+                          </ProductOptionSelector>
+                        )
+                        )}
+                      </ProductOptions>
+                      <OptionRerults>
+                        <OptionResultsLabel><OiIcon icon='oi-icon-info' /><span>Bạn đang chọn:&nbsp;</span></OptionResultsLabel>
+                        {product.options.map((option, index) => (
+                          <OptionResultItem key={index}>{`${option.name} `}{this.state.options[index].value}</OptionResultItem>
+                        ))}
+                      </OptionRerults>
+                    </>
                   )
               )
               }
@@ -412,7 +468,7 @@ class ProductForm extends Component {
 }
 
 ProductForm.propTypes = {
-  id: PropTypes.string.isRequired,
+  // id: PropTypes.string.isRequired,
   compactVariants: PropTypes.bool,
   product: PropTypes.object.isRequired
 };
