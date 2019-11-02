@@ -206,12 +206,13 @@ const OptionRerults = styled(`div`)`
   display: flex;
   align-items: center;
   color: ${colors.neutral4};
-  margin: ${spacing.sm}px 0;
+  margin-top: ${spacing.sm}px;
 `;
 
 const AddToCartButton = styled(Submit)`
   flex-grow: 1;
   flex-basis: 100%;
+  margin-top: ${spacing.sm}px;
 
   ${mediaQuery.tabletFrom} {
     flex-basis: auto;

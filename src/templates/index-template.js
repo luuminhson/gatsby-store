@@ -332,7 +332,7 @@ class IndexTemplate extends React.Component<Props> {
           <ScrollAnimation>
             <LastestProductsSection>
               <TitleGroup>
-                <SectionTitle subtitle='Sản phẩm mới' actionLabel='Xem cửa hàng' actionLink='/store'>Tote Bags</SectionTitle>
+                <SectionTitle subtitle='Sản phẩm mới' actionLabel='Xem tất cả' actionLink='/store'>Tote Bags</SectionTitle>
               </TitleGroup>
               <ProductsWrapper>
                 <ProductListingContainer>

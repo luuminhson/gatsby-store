@@ -41,7 +41,7 @@ injectGlobal`
     }
 
     body {
-      -webkit-tap-highlight-color: rgba(0,0,0,.05);
+      -webkit-tap-highlight-color: transparent;
       margin: 0;
       font-family: ${fontFamily.body};
       color: ${colors.mainDark};

@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 import CartThumbail from './CartThumbail';
 import { Input } from '../shared/FormElements';
+import QuantityControl from './QuantityControl';
 import OiIcon from '../OiIcon';
 
 import { breakpoints, colors, spacing, FontStyle, radius } from '../../utils/styles';
@@ -51,6 +52,10 @@ const Quantity = styled(Input)`
   padding: 0 ${spacing.xs}px 0;
   text-align: center;
   width: 50px;
+
+  &::-webkit-inner-spin-button {
+    appearance: none;
+  }
 
   @media (min-width: ${breakpoints.desktop}px) {
     width: 70px;
@@ -127,9 +132,15 @@ export default ({
     setQuantity(safeValue);
 
     // If the quantity is set to 0, remove the item.
+    // if (safeValue === 0) {
+    //   handleRemove(event);
+    //   return;
+    // }
+
     if (safeValue === 0) {
-      handleRemove(event);
-      return;
+      setCartLoading(true);
+      setQuantity(1);
+      updateQuantity(1);
     }
 
     // If we get here, update the quantity.
@@ -140,6 +151,21 @@ export default ({
     setCartLoading(true);
     handleRemove(event);
   };
+
+  const setQty = (qty, type) => {
+
+    if (qty === 1 && type !== 'add' ) {
+      return;
+    } else {
+      setCartLoading(true);
+    }
+
+    if (type === 'add') {
+      updateQuantity(qty + 1);
+    } else {
+      updateQuantity(qty - 1);
+    }
+  }
 
   return (
     <CartListItemRoot>
@@ -159,6 +185,8 @@ export default ({
           <span>Xoá</span>
         </RemoveItem>
       </Info>
+
+      {/* <button onClick={() => setQty(quantity, 'add')}>+</button>
       <Quantity
         aria-label="Quantity"
         id={`quantity_${item.id.substring(58, 64)}`}
@@ -172,6 +200,17 @@ export default ({
         onBlur={() => setQuantity(item.quantity)}
         value={quantity}
       />
+      <button onClick={() => setQty(quantity, 'sub')}>-</button> */}
+
+      <QuantityControl
+        value={quantity}
+        id={`quantity_${item.id.substring(58, 64)}`}
+        onChange={event => handleInputChange(event)}
+        onBlur={() => setQuantity(item.quantity)}
+        onClickInc={() => setQty(quantity, 'add')}
+        onClickDec={() => setQty(quantity, 'sub')}
+      />
+
     </CartListItemRoot>
   );
 };
