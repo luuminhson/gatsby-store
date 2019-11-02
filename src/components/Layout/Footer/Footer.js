@@ -6,7 +6,7 @@ import FooterModule, { ModuleTitle, ModuleContent, FooterModuleInner } from './F
 import Contact from '../../SidePanel/Contacts';
 
 import { useSiteMetadata } from '../../../hooks';
-import { mediaQuery, spacing, colors, fontWeight, FontStyle, radius } from '../../../utils/styles';
+import { mediaQuery, spacing, colors, fontWeight, FontStyle } from '../../../utils/styles';
 
 import bowingImg1 from '../../../imgs/thanks.gif';
 import bowingImg2 from '../../../imgs/bow.gif';

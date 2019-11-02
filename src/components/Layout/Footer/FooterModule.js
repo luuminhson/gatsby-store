@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import PropTypes from 'prop-types';
 import OiIcon from '../../OiIcon';
 
@@ -24,52 +25,22 @@ export const ModuleContent = styled(`div`)`
     padding-bottom: ${spacing.lg}px;
 `;
 
-export const FooterModuleInner = styled(`div`)`
-    border-bottom: 1px solid ${colors.neutral2};
-    max-height: 68px;
-    overflow: hidden;
-    transition: all 1s cubic-bezier(.075,.82,.165,1);
-
-    ${mediaQuery.desktop} {
-        overflow: visible;
-        border-bottom: none;
-    }
-`;
+export const FooterModuleInner = styled(`div`)``;
 
 export const FooterModuleWrapper = styled(`div`)`
     display: inline-block;
     position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid ${colors.neutral2};
+    transition: all 1s cubic-bezier(.075,.82,.165,1);
 
-    .expanded {
-        transition: all 1s cubic-bezier(.075,.82,.165,1);
+    &:last-child {
+        border-bottom: none;
     }
 
-    :nth-of-type(1) {
-        .expanded {
-            max-height: 237px;
-
-            ${mediaQuery.phoneSmall} {
-                max-height: 261px;
-            }
-        }
-    }
-
-    :nth-of-type(2) {
-        .expanded {
-            max-height: 285px;
-        }
-    }
-
-    :nth-of-type(3) {
-        .expanded {
-            max-height: 285px;
-        }
-    }
-
-    :nth-of-type(4) {
-        .expanded {
-            max-height: 600px;
-        }
+    ${mediaQuery.desktop} {
+        overflow: visible;
+        border-bottom: none;
     }
 `;
 
@@ -86,12 +57,27 @@ class FooterModule extends Component {
         super(props);
 
         this.state = {
-            expanded: false
+            expanded: true,
+            contentExpandHeight: 0
         };
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidMount() {
+        const height = this.moduleHeight.clientHeight;
+        this.setState({ contentExpandHeight: height });
+        
+        // console.log(this.state.contentExpandHeight);
+        
+        // if (this.state.contentExpandHeight !== 0) {
+        //     this.setState({
+        //         expanded: false
+        //     });
+        // }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
         const viewportChanged = this.props.viewportIs !== prevProps.viewportIs;
+        const contentHeightChanged = this.state.contentExpandHeight !== prevState.contentExpandHeight;
 
         if (this.props.viewportIs === 'desktop') {
             if (viewportChanged) {
@@ -108,6 +94,10 @@ class FooterModule extends Component {
                 });
             }
         }
+
+        if (contentHeightChanged) {
+            this.setState({ expanded: false })
+        }
     }
 
     toggleExpand = () => {
@@ -117,18 +107,38 @@ class FooterModule extends Component {
     }
 
     render() {
-        const { className, title, alwaysExpand, children, ...rest } = this.props;
-        const { expanded } = this.state;
+        const { className, viewportIs, title, alwaysExpand, children, ...rest } = this.props;
+        const { expanded, contentExpandHeight } = this.state;
+
+        const ModuleCollapsed = css`
+            max-height: 68px;
+        `;
+
+        const ModuleExpanded = css`
+            ${ contentExpandHeight && contentExpandHeight !== 0 &&
+                `max-height: ${contentExpandHeight}px;`
+            }
+        `;
 
         return (
-            <FooterModuleWrapper className={className} {...rest}>
-                <FooterModuleInner className={(expanded || alwaysExpand) ? 'expanded' : 'collapsed'}>
+            <FooterModuleWrapper
+                {...rest}
+                className={className}
+                css={(expanded || alwaysExpand) ? ModuleExpanded : ModuleCollapsed}
+                ref={ (divElement) => this.moduleHeight = divElement}
+            >
+                <FooterModuleInner>
                     {title && (
-                        <ModuleTitle onClick={this.toggleExpand}>
+                        <ModuleTitle onClick={viewportIs === 'desktop' ? null : this.toggleExpand}>
                             {title}
                             <ModuleToggle icon={expanded ? 'oi-icon-minus' : 'oi-icon-plus'} />
                         </ModuleTitle>
                     )}
+
+                    {/* {console.log(this.state.contentExpandHeight)} */}
+
+                    {console.log('expanded: ', this.state.expanded)}
+
                     <ModuleContent>
                         {children}
                     </ModuleContent>
