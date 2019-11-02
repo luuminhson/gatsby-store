@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-
+import { css } from '@emotion/core';
 import ProductImagesMobile from './ProductImagesMobile';
 import ProductImagesDesktop from './ProductImagesDesktop';
 import ProductForm from './ProductForm';
+import Accordion, { ModuleTitle } from '../shared/Accordion';
 
 import InterfaceContext from '../../context/InterfaceContext';
 import StoreContext from '../../context/StoreContext';
 
 import { FontStyle, fontWeight, breakpoints, mediaQuery, colors, spacing, headerHeight, dimensions } from '../../utils/styles';
 import { priceWithCommas } from '../../utils/helpers';
+
+import CommonInfo from './CommonInformation';
 
 const _ = require('lodash');
 
@@ -41,7 +44,7 @@ const MainContainer = styled(`div`)`
   ${mediaQuery.tabletFrom} {
     display: flex;
     justify-content: flex-start;
-    align-items: stretch;
+    align-items: flex-start;
     width: 100%;
     max-width: ${breakpoints.hd}px;
   }
@@ -101,7 +104,7 @@ const Price = styled(FontStyle.h4)`
   margin-right: 8px;
 `;
 
-const SalePrice = styled(FontStyle.h3)`
+const SalePrice = styled(FontStyle.h4)`
   text-decoration: line-through;
   font-weight: ${fontWeight.heading.normal};
   opacity: 0.5;
@@ -109,6 +112,13 @@ const SalePrice = styled(FontStyle.h3)`
 
 const ProductDescription = styled(`div`)`
   margin: ${spacing.xl}px 0;
+`;
+
+const AccordionCss = css`
+  ${ModuleTitle} {
+    color: ${colors.neutral4};
+    font-weight: ${fontWeight.heading.normal};
+  }
 `;
 
 class ProductPage extends Component {
@@ -199,6 +209,7 @@ class ProductPage extends Component {
                           featureProductImageIndex={featureProductImageIndex}
                         />
                         <ProductDescription dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
+                        <Accordion css={AccordionCss} data={CommonInfo} />
                       </Details>
                     </MainContainer>
                   </ProductPageRoot>

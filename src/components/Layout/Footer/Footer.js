@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { Link } from '../../LinkWithPrev';
-import FooterModule, { ModuleTitle, ModuleContent, FooterModuleInner } from './FooterModule';
+import Expand, { ModuleTitle, ModuleContent } from '../../shared/Expand';
 import Contact from '../../SidePanel/Contacts';
 
 import { useSiteMetadata } from '../../../hooks';
@@ -40,22 +40,22 @@ const FooterWrapperInner = styled(`div`)`
   }
 `;
 
-const Module = styled(FooterModule)`
+const Module = styled(Expand)`
   width: 100%;
   padding: 0;
+  border-bottom: 1px solid ${colors.neutral2};
+
+  ${mediaQuery.desktop} {
+    border-bottom: none;
+  }
 
   ${mediaQuery.desktop} {
     padding: 0 ${spacing.lg}px;
     margin-bottom: ${spacing.lg}px;
   }
 
-  ${ModuleTitle} {
-    font-size: 16px;
-    margin-bottom: 0;
-
-    ${mediaQuery.desktop} {
-      margin-bottom: ${spacing.md}px;
-    }
+  ${ModuleContent} {
+    padding-bottom: ${spacing.lg}px;
   }
 
   ul {
@@ -96,9 +96,8 @@ const AboutDesc = styled(`div`)`
 
 const AboutText = styled(FontStyle.body)`
   display: block;
-  color: ${colors.neutral3};
-  margin-top: ${spacing.xs}px;
-  margin-bottom: ${spacing.md}px;
+  color: ${colors.neutral4};
+  margin: ${spacing.md}px 0;
 `;
 
 const copyrightText = css`
@@ -158,9 +157,7 @@ const Copyright = css`
 `;
 
 const ModuleOthers = css`
-  ${FooterModuleInner} {
-    border-bottom: none;
-  }
+  border-bottom: none;
 
   ${ModuleTitle} {
     display: none;
@@ -202,18 +199,19 @@ const Footer = ({ viewportIs, ...rest }) => {
   return (
     <FooterWrapper {...rest}>
       <FooterWrapperInner>
-        <Module viewportIs={viewportIs} title='ORINS là gì?'>
+
+        <Module alwaysExpand={viewportIs === 'desktop' ? true : false} title='ORINS?'>
           <AboutDesc>
-            <AboutText>ORINS là từ ghép của “Original Inside” - Điều bên trong nguyên bản.  Chúng tôi thiết kế, sản xuất túi xách và phụ kiện nhằm phục vụ cho sự tiện lợi trong cuộc sống hàng ngày với tinh thần luôn luôn khiêm nhường và hướng tới những giá trị nguyên bản.</AboutText>
+            <AboutText>ORINS là từ ghép của “Original Inside” - Điều bên trong nguyên bản.  Chúng tôi thiết kế và sản xuất các sản phẩm đựng đồ cho cuộc sống hàng ngày với tinh thần luôn luôn khiêm nhường và hướng tới những giá trị nguyên bản.</AboutText>
             <Link to='/about'>Xem thêm</Link>
           </AboutDesc>
         </Module>
 
-        <Module viewportIs={viewportIs} title='Liên hệ'>
+        <Module alwaysExpand={viewportIs === 'desktop' ? true : false} title='Liên hệ'>
           <Contact contacts={contacts} />
         </Module>
 
-        <Module viewportIs={viewportIs} title='Trợ giúp'>
+        <Module alwaysExpand={viewportIs === 'desktop' ? true : false} title='Trợ giúp'>
           <ul>
             <li>
               <FooterWidgetLink activeClassName='activeFootNavItem' to='/faqs'>Câu hỏi thường gặp</FooterWidgetLink>
@@ -230,7 +228,7 @@ const Footer = ({ viewportIs, ...rest }) => {
           </ul>
         </Module>
 
-        <Module viewportIs={viewportIs} alwaysExpand css={ModuleOthers} title='Thông tin khác'>
+        <Module alwaysExpand={viewportIs === 'desktop' ? true : false} alwaysExpand css={ModuleOthers} title='Thông tin khác'>
           <ul>
             <li>
               <FooterWidgetLink activeClassName='activeFootNavItem' to='/privacy-policy'>Chính sách bảo mật</FooterWidgetLink>
