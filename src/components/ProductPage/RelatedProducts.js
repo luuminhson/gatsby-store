@@ -99,7 +99,7 @@ class RelatedProducts extends React.Component<Props> {
             // Filtered products with the same type, limited
             _.sampleSize(
                 _.filter(this.props.edges, (item) => (
-                    item.node.productType == this.props.productType && item.node.id !== this.props.product.id
+                    item.node.productType == this.props.product.productType && item.node.id !== this.props.product.id
                 )),
                 this.props.limit
             ),
@@ -107,12 +107,11 @@ class RelatedProducts extends React.Component<Props> {
             // All the rest products, shuffled
             _.shuffle(
                 _.xor(
-                    _.filter(this.props.edges, (item) => (item.node.productType == this.props.productType)),
+                    _.filter(this.props.edges, (item) => (item.node.productType == this.props.product.productType)),
                     this.props.edges
                 )
             )
-        ),
-        prodType: this.props.productType
+        )
     };
 
     render() {

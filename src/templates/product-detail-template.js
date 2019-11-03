@@ -120,7 +120,6 @@ class ProductDetailTemplate extends Component {
                   edges={relatedProducts.edges}
                   limit={4}
                   product={product}
-                  productType={product.productType}
                 />
               </ProductDetailWrapper>
             </Page>
