@@ -48,8 +48,7 @@ class ProductDetailTemplate extends Component {
       viewportIs,
       productImageFeatured,
       setCurrentProductImages,
-      prevLink,
-      location
+      prevLink
     } = this.props;
 
     // Process the product images
@@ -117,7 +116,12 @@ class ProductDetailTemplate extends Component {
                   productImageFeatured={productImageFeatured}
                   setCurrentProductImages={setCurrentProductImages}
                 />
-                <RelatedProducts edges={relatedProducts.edges} limit={4} location={location} />
+                <RelatedProducts
+                  edges={relatedProducts.edges}
+                  limit={4}
+                  product={product}
+                  productType={product.productType}
+                />
               </ProductDetailWrapper>
             </Page>
           )}
@@ -149,7 +153,6 @@ export default props => (
               setPage={setToProductPage}
               setBackLink={() => setPrevLink(location, '/store')}
               prevLink={prevLink}
-              location={location}
             />
           )}
       </InterfaceContext.Consumer>
@@ -221,10 +224,7 @@ export const query = graphql`
       }
     }
 
-    relatedProducts: allShopifyProduct(
-      filter: { productType: { eq: $productType }, handle: { ne: $handle } },
-      sort: { fields: [publishedAt], order: ASC }
-    ) {
+    relatedProducts: allShopifyProduct {
       edges {
         node {
           id

@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import type { Edges } from '../../types';
 
@@ -94,35 +95,38 @@ const RelatedProductItem = styled(`div`)`
 
 class RelatedProducts extends React.Component<Props> {
     state = {
-        update: false
+        longTailedProducts: _.concat(
+            // Filtered products with the same type, limited
+            _.sampleSize(
+                _.filter(this.props.edges, (item) => (
+                    item.node.productType == this.props.productType && item.node.id !== this.props.product.id
+                )),
+                this.props.limit
+            ),
+
+            // All the rest products, shuffled
+            _.shuffle(
+                _.xor(
+                    _.filter(this.props.edges, (item) => (item.node.productType == this.props.productType)),
+                    this.props.edges
+                )
+            )
+        ),
+        prodType: this.props.productType
     };
 
-    componentDidUpdate(prevProps) {
-
-        // Only update sample size when location changes
-
-        if (this.props.location.pathname !== prevProps.location.pathname) {
-            this.setState({ update: true });
-
-            setTimeout(() => {
-                this.setState({ update: false });
-            }, 500);
-        }
-    }
-
     render() {
-        const { edges, limit } = this.props;
-        const { update } = this.state;
+        const { limit } = this.props;
+        const { longTailedProducts } = this.state;
 
-        const randomRelatedProducts = _.sampleSize(edges, limit);
-        const productList = update && limit ? randomRelatedProducts : edges;
+        const finalList = _.slice(longTailedProducts, 0, limit);
 
         return (
             <RelatedProductsWrapper>
                 <SectionTitleWrapper>Có thể bạn sẽ thích</SectionTitleWrapper>
                 <RelatedProductList>
                     <RelatedProductListInner>
-                        {productList.map((edge) => (
+                        {finalList.map((edge) => (
                             <RelatedProductItem key={edge.node.id}>
                                 <ProductListingItem product={edge.node} />
                             </RelatedProductItem>
@@ -133,5 +137,9 @@ class RelatedProducts extends React.Component<Props> {
         )
     }
 }
+
+RelatedProducts.propTypes = {
+    limit: PropTypes.number.isRequired,
+  };
 
 export default RelatedProducts;
