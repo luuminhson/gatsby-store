@@ -14,8 +14,8 @@ module.exports = {
             path: '/'
         },
         {
-            label: 'Cửa hàng',
-            path: '/store'
+            label: 'Sản phẩm',
+            path: '/products'
         },
         {
             label: 'Blog',
@@ -34,8 +34,8 @@ module.exports = {
         },
         {
             icon: 'oi-icon-store',
-            label: 'Cửa hàng',
-            path: '/store'
+            label: 'Sản phẩm',
+            path: '/products'
         },
         {
             icon: 'oi-icon-cart',

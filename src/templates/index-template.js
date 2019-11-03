@@ -306,7 +306,7 @@ class IndexTemplate extends React.Component<Props> {
               <HeroImage fluid={heroImageSrc} />
               <TitleGroup>
                 <HeroTitle>Cho cuộc sống đơn giản mỗi ngày.</HeroTitle>
-                <PrimaryButton to='/store'>Xem tất cả sản phẩm</PrimaryButton>
+                <PrimaryButton to='/products'>Xem tất cả sản phẩm</PrimaryButton>
               </TitleGroup>
             </HeroSection>
           </ScrollAnimation>
@@ -314,8 +314,8 @@ class IndexTemplate extends React.Component<Props> {
           <ScrollAnimation>
             <FeaturedProductSection>
               <TitleGroup>
-                <SectionTitle subtitle='Nổi bật' actionLabel='Xem chi tiết' actionLink={viewportIs === null && '/store/product/rain-shoulder'}>The Lazy Silk Leaf</SectionTitle>
-                {viewportIs !== null && <Button to='/store/product/rain-shoulder'>Xem chi tiết</Button>}
+                <SectionTitle subtitle='Nổi bật' actionLabel='Xem chi tiết' actionLink={viewportIs === null && '/products/rain-shoulder'}>The Lazy Silk Leaf</SectionTitle>
+                {viewportIs !== null && <Button to='/products/rain-shoulder'>Xem chi tiết</Button>}
               </TitleGroup>
               <ImageGroup>
                 <GroupLeft>
@@ -332,7 +332,7 @@ class IndexTemplate extends React.Component<Props> {
           <ScrollAnimation>
             <LastestProductsSection>
               <TitleGroup>
-                <SectionTitle subtitle='Sản phẩm mới' actionLabel='Xem tất cả' actionLink='/store'>Tote Bags</SectionTitle>
+                <SectionTitle subtitle='Sản phẩm mới' actionLabel='Xem tất cả' actionLink='/products'>Tote Bags</SectionTitle>
               </TitleGroup>
               <ProductsWrapper>
                 <ProductListingContainer>

@@ -92,7 +92,7 @@ class ProductDetailTemplate extends Component {
                 <Helmet>
                   <meta
                     property="og:url"
-                    content={`${site.siteMetadata.siteUrl}/store/product/${handle}`}
+                    content={`${site.siteMetadata.siteUrl}/products/${handle}`}
                   />
                   <meta property="og:locale" content="en" />
                   <meta property="og:title" content={productTitle} />
@@ -150,7 +150,7 @@ export default props => (
               currentProductImages={currentProductImages}
               setCurrentProductImages={setCurrentProductImages}
               setPage={setToProductPage}
-              setBackLink={() => setPrevLink(location, '/store')}
+              setBackLink={() => setPrevLink(location, '/products')}
               prevLink={prevLink}
             />
           )}

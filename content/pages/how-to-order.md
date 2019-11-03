@@ -11,7 +11,7 @@ Khách hàng có thể đặt mua sản phẩm của ORINS bằng một trong c�
 ## Đặt hàng qua website
 1. Khách hàng truy cập website ORINS.design và tra cứu thông tin qua các trang thông tin chính:
     - [Trang chủ](/): Sản phẩm nổi bật, sản phẩm mới nhất và các thông tin đáng quan tâm
-    - [Cửa hàng](/store): Danh sách tất cả các sản phẩm
+    - [Sản phẩm](/products): Danh sách tất cả các sản phẩm
     - [Blog](/blog): Các bài viết có liên quan
     - [Giới thiệu](/about): Thông tin về ORINS
 2. Mở một trang sản phẩm chi tiết, tại đây có các hình ảnh và thông tin chi tiết về một sản phẩm cụ thể. Bấm nút “Thêm vào giỏ hàng” để chọn mua sản phẩm này. Sản phẩm sẽ được lưu giữ tại giỏ hàng.

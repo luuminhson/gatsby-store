@@ -28,11 +28,65 @@ const createPages = async ({ graphql, actions }) => {
 
   pages.data.allShopifyProduct.edges.forEach(edge => {
     createPage({
-      path: `/store/product/${edge.node.handle}`,
+      path: `/products/${edge.node.handle}`,
       component: path.resolve('./src/templates/product-detail-template.js'),
       context: {
         id: edge.node.id,
         handle: edge.node.handle
+      }
+    });
+  });
+
+  /* SHOPIFY CATEGORY PAGES
+  ------------------------------------------------ */
+
+  const shopifyCategoryPages = await graphql(`
+    {
+      allShopifyProductType {
+        edges {
+          node {
+            name
+            shopifyId
+          }
+        }
+      }
+    }
+  `);
+
+  shopifyCategoryPages.data.allShopifyProductType.edges.forEach(edge => {
+    createPage({
+      path: `/products/category/${edge.node.shopifyId}`,
+      component: path.resolve('./src/templates/product-category-template.js'),
+      context: {
+        productType: edge.node.name
+      }
+    });
+  });
+
+  /* SHOPIFY COLLECTION PAGES
+  ------------------------------------------------ */
+
+  const shopifyCollectionPages = await graphql(`
+    {
+      allShopifyCollection {
+        edges {
+          node {
+            handle
+            title
+            id
+          }
+        }
+      }
+    }
+  `);
+
+  shopifyCollectionPages.data.allShopifyCollection.edges.forEach(edge => {
+    createPage({
+      path: `/products/collection/${edge.node.handle}`,
+      component: path.resolve('./src/templates/product-collection-template.js'),
+      context: {
+        collection: edge.node.title,
+        id: edge.node.id
       }
     });
   });
@@ -113,8 +167,8 @@ const createPages = async ({ graphql, actions }) => {
   ------------------------------------------------ */
 
   createPage({
-    path: '/store',
-    component: path.resolve('./src/templates/store-template.js')
+    path: '/products',
+    component: path.resolve('./src/templates/products-template.js')
   });
 
   /* POST LIST (BLOG)

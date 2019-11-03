@@ -2,11 +2,16 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Page from '../components/Page';
 import styled from '@emotion/styled';
+import type { PageContext } from '../types';
 
 import InterfaceContext from '../context/InterfaceContext';
 import ProductListingItem from '../components/ProductListingItem';
 
 import { mediaQuery, spacing } from '../utils/styles';
+
+type Props = {
+    pageContext: PageContext
+};
 
 const ProductListingContainer = styled(`div`)`
   display: flex;
@@ -25,50 +30,42 @@ const ProductListingContainer = styled(`div`)`
   }
 `;
 
-class StoreTemplate extends React.Component<Props> {
+class ProductCategoryTemplate extends React.Component<Props> {
 
-  componentDidMount() {
-    this.props.setPage();
-  }
+    render() {
 
-  render() {
+        const { data, pageContext } = this.props;
 
-    const { title, description } = this.props.data.site.siteMetadata;
+        const {
+            productType
+        } = pageContext;
 
-    return (
-      <Page pageTitle='Cửa hàng' title={`Cửa hàng ‧ ${title}`} description={description} pageIs='Store'>
-        <ProductListingContainer>
-          {this.props.data.products.edges.map(({ node: product }) => (
-            <ProductListingItem key={product.id} product={product} />
-          ))}
-        </ProductListingContainer>
-      </Page>
-    )
-  }
+        const { title, description } = data.site.siteMetadata;
+
+        return (
+            <Page pageTitle={productType} title={`${productType} ‧ ${title}`} description={description}>
+                <ProductListingContainer>
+                    {data.categoryProducts.edges.map(({ node: product }) => (
+                        <ProductListingItem key={product.id} product={product} />
+                    ))}
+                </ProductListingContainer>
+            </Page>
+        )
+    }
 }
 
-export default props => (
-  <InterfaceContext.Consumer>
-    {({
-      setToStorePage,
-    }) => (
-        <StoreTemplate
-          {...props}
-          setPage={setToStorePage}
-        />
-      )}
-  </InterfaceContext.Consumer>
-)
+export default ProductCategoryTemplate;
 
 export const query = graphql`
-  query StoreTemplateQuery {
+  query ProductCategoryQuery($productType: String!) {
     site {
       siteMetadata {
         title
         description
       }
     }
-    products: allShopifyProduct(
+    categoryProducts: allShopifyProduct(
+      filter: { productType: { eq: $productType } },
       sort: { fields: [publishedAt], order: DESC }
     ) {
       edges {

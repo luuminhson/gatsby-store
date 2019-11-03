@@ -138,7 +138,7 @@ const ProductListingItem = props => {
     <UserContext.Consumer>
       {() => {
         return (
-          <ProductListingItemLink to={`/store/product/${handle}`}>
+          <ProductListingItemLink to={`/products/${handle}`}>
             <ScrollAnimation>
               <Item>
                 <Preview>
