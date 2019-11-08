@@ -320,7 +320,7 @@ class PureNavigation extends React.Component {
             </NavRightWrapper>
         );
 
-        const pinStart = viewportIs === 'desktop' ? dimensions.navPaddingTopDesktop : (viewportIs === 'tablet' ? dimensions.navPaddingTopTablet : dimensions.navPaddingTopPhone);
+        const pinStart = viewportIs === 'desktop' ? dimensions.navPaddingTopDesktop : (viewportIs === null ? dimensions.navPaddingTopPhone : dimensions.navPaddingTopTablet);
 
         return (
             <HeadroomWrapper
@@ -336,7 +336,7 @@ class PureNavigation extends React.Component {
                     unfixed && unfixedStyle
                 ]}
             >
-                {viewportIs === null ?
+                {(viewportIs === null || viewportIs === 'tablet') ?
                     <NavigationWrapper className={className} css={(pageIs === 'Index' || pageIs === 'Post') && NavWhite}>
                         <NavigationInner>
                             {mobileNavLeft}

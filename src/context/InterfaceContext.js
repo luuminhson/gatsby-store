@@ -16,6 +16,8 @@ export const defaultInterfaceContext = {
   hasFeaturedImage: false,
   prevLink: null,
   setToProductPage: () => {},
+  setToProductCollectionPage: () => {},
+  setToProductCategoryPage: () => {},
   setToPostPage: () => {},
   setToBlogPage: () => {},
   setToIndexPage: () => {},

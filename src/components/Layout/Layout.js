@@ -252,6 +252,22 @@ class PureLayout extends React.Component {
           }
         }));
       },
+      setToProductCollectionPage: () => {
+        this.setState(state => ({
+          interface: {
+            ...state.interface,
+            pageIs: 'ProductCollection'
+          }
+        }));
+      },
+      setToProductCategoryPage: () => {
+        this.setState(state => ({
+          interface: {
+            ...state.interface,
+            pageIs: 'ProductCategory'
+          }
+        }));
+      },
       setToBlogPage: () => {
         this.setState(state => ({
           interface: {
@@ -426,12 +442,15 @@ class PureLayout extends React.Component {
   componentDidMount() {
     // Observe viewport switching from mobile to desktop and vice versa
     const mediaQueryToMatchTablet = `(min-width: ${breakpoints.tablet}px)`;
+    const mediaQueryToMatchTabletLandscape = `(min-width: ${breakpoints.tabletLandscape}px)`;
     const mediaQueryToMatchDesktop = `(min-width: ${breakpoints.desktop}px)`;
 
     this.tabletMediaQuery = window.matchMedia(mediaQueryToMatchTablet);
+    this.tabletLandscapeMediaQuery = window.matchMedia(mediaQueryToMatchTabletLandscape);
     this.desktopMediaQuery = window.matchMedia(mediaQueryToMatchDesktop);
 
     this.tabletMediaQuery.addListener(this.updateViewPortState);
+    this.tabletLandscapeMediaQuery.addListener(this.updateViewPortState);
     this.desktopMediaQuery.addListener(this.updateViewPortState);
 
     this.updateViewPortState();
@@ -466,14 +485,23 @@ class PureLayout extends React.Component {
 
   componentWillUnmount() {
     this.tabletMediaQuery.removeListener(this.updateViewPortState);
+    this.tabletLandscapeMediaQuery.removeListener(this.updateViewPortState);
     this.desktopMediaQuery.removeListener(this.updateViewPortState);
   };
 
-  updateViewPortState = e => {
+  updateViewPortState = () => {
     this.setState(state => ({
       interface: {
         ...state.interface,
-        viewportIs: (this.desktopMediaQuery.matches ? 'desktop' : (this.tabletMediaQuery.matches ? 'tablet' : null)),
+        viewportIs: (
+          this.desktopMediaQuery.matches
+          ? 'desktop'
+          : (
+            this.tabletLandscapeMediaQuery.matches ? 'tabletLandscape' : (
+              this.tabletMediaQuery.matches ? 'tablet' : null
+            )
+          )
+        ),
       }
     }));
   };

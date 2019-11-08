@@ -6,11 +6,10 @@ import type { PageContext } from '../types';
 
 import InterfaceContext from '../context/InterfaceContext';
 import ProductListingItem from '../components/ProductListingItem';
-
 import { mediaQuery, spacing } from '../utils/styles';
 
 type Props = {
-    pageContext: PageContext
+  pageContext: PageContext
 };
 
 const ProductListingContainer = styled(`div`)`
@@ -32,29 +31,44 @@ const ProductListingContainer = styled(`div`)`
 
 class ProductCategoryTemplate extends React.Component<Props> {
 
-    render() {
+  componentDidMount() {
+    this.props.setPage();
+  }
 
-        const { data, pageContext } = this.props;
+  render() {
 
-        const {
-            productType
-        } = pageContext;
+    const { data, pageContext } = this.props;
 
-        const { title, description } = data.site.siteMetadata;
+    const {
+      productType
+    } = pageContext;
 
-        return (
-            <Page pageTitle={productType} title={`${productType} ‧ ${title}`} description={description}>
-                <ProductListingContainer>
-                    {data.categoryProducts.edges.map(({ node: product }) => (
-                        <ProductListingItem key={product.id} product={product} />
-                    ))}
-                </ProductListingContainer>
-            </Page>
-        )
-    }
+    const { title, description } = data.site.siteMetadata;
+
+    return (
+      <Page pageTitle={productType} title={`${productType} ‧ ${title}`} description={description}>
+        <ProductListingContainer>
+          {data.categoryProducts.edges.map(({ node: product }) => (
+            <ProductListingItem key={product.id} product={product} />
+          ))}
+        </ProductListingContainer>
+      </Page>
+    )
+  }
 }
 
-export default ProductCategoryTemplate;
+export default props => (
+  <InterfaceContext.Consumer>
+      {({
+          setToProductCategoryPage,
+      }) => (
+              <ProductCategoryTemplate
+                  {...props}
+                  setPage={setToProductCategoryPage}
+              />
+          )}
+  </InterfaceContext.Consumer>
+)
 
 export const query = graphql`
   query ProductCategoryQuery($productType: String!) {

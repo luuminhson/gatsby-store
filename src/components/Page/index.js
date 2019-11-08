@@ -1,2 +1,2 @@
 // @flow
-export { default } from './Page';
+export { default, PageInner, PageBody } from './Page';

@@ -27,7 +27,7 @@ const PageStyle = css`
   }
 `;
 
-const PageInner = styled(`div`)`
+export const PageInner = styled(`div`)`
   margin: 0 auto;
   max-width: 100%;
 

@@ -85,7 +85,7 @@ const createPages = async ({ graphql, actions }) => {
       path: `/products/collection/${edge.node.handle}`,
       component: path.resolve('./src/templates/product-collection-template.js'),
       context: {
-        collection: edge.node.title,
+        collectionName: edge.node.title,
         id: edge.node.id
       }
     });
