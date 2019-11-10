@@ -50,7 +50,7 @@ const MainContainer = styled(`div`)`
   }
 
   ${mediaQuery.tabletPortrait} {
-    flex-direction: column;
+    flex-wrap: wrap;
   }
 `;
 
@@ -62,6 +62,11 @@ const ProductImagesContainer = styled(`div`)`
   ${mediaQuery.tabletFrom} {
     flex: 0 1 65%;
     padding-right: ${spacing.xl}px;
+  }
+
+  ${mediaQuery.tabletPortrait} {
+    flex: 0 1 100%;
+    padding: 0;
   }
 
   ${mediaQuery.desktop} {
@@ -77,6 +82,11 @@ const Details = styled(`div`)`
     flex: 1 0 35%;
     padding: 0 ${spacing.xl}px;
     margin-top: ${spacing['4xl']}px;
+  }
+  
+  ${mediaQuery.tabletPortrait} {
+    flex: 0 1 100%;
+    padding: 0;
   }
 
   ${mediaQuery.desktop} {
@@ -177,7 +187,7 @@ class ProductPage extends Component {
                   <ProductPageRoot>
                     <MainContainer>
                       <ProductImagesContainer>
-                        {(viewportIs !== 'desktop') && (viewportIs !== 'tablet') ? (
+                        { viewportIs === null ? (
                           <ProductImagesMobile
                             images={finalImages[0] !== undefined ? finalImages : originalImages}
                           />
@@ -188,7 +198,7 @@ class ProductPage extends Component {
                               imageFeatured={productImageFeatured}
                               imageFeaturedIndex={productImageFeaturedIndex}
                             />
-                          )}
+                        )}
                       </ProductImagesContainer>
 
                       <Details>

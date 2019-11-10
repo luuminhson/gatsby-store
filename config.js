@@ -15,7 +15,13 @@ module.exports = {
         },
         {
             label: 'Sản phẩm',
-            path: '/products'
+            path: '/products/category',
+            submenu: 'productCategories'
+        },
+        {
+            label: 'Collections',
+            path: '/products/collection',
+            submenu: 'productCollections'
         },
         {
             label: 'Blog',

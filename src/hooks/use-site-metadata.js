@@ -9,6 +9,7 @@ const useSiteMetadata = () => {
             menu {
               label
               path
+              submenu
             }
             siteUrl
             title

@@ -11,7 +11,9 @@ import Menu from './Menu';
 import OiIcon from '../../OiIcon';
 import CartToggle from '../../Cart/CartToggle';
 import CartNumber from '../../Cart/CartNumber';
-import { dimensions, mediaQuery, spacing, colors, breakpoints, headerHeight, shadow } from '../../../utils/styles';
+import { dimensions, mediaQuery, spacing, colors, shadow } from '../../../utils/styles';
+
+import InterfaceContext from '../../../context/InterfaceContext';
 
 /* --------------------------- STYLES --------------------------- */
 
@@ -72,11 +74,13 @@ const DesktopNavLogo = styled(Logo)``;
 
 const NavCenterWrapper = styled(`div`)`
     display: flex;
+    justify-content: center;
     align-items: center;
     position: relative;
 
     ${mediaQuery.tabletFrom} {
         position: absolute;
+        width: calc(100% - 280px);
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
@@ -154,7 +158,12 @@ const NavWhite = css`
         ul > li > a {
             color: ${colors.white};
 
-            &.activeMenuItem {
+            i {
+                color: ${colors.white};
+            }
+
+            &.activeMenuItem,
+            &.activeMenuItem > i {
                 color: ${colors.mainClickable};
             }
         }
@@ -173,7 +182,7 @@ const unpinnedStyle = css``;
 
 const pinnedStyle = css`
     ${NavigationWrapper} {
-        background-color: ${colors.white};
+        background-color: #fafafa;
         box-shadow: ${shadow.navShadow};
         
         ${NavigationInner} {
@@ -184,12 +193,29 @@ const pinnedStyle = css`
             }
         }
 
+        ${DesktopNavLogo},
         ${MobileNavLogo} {
             svg {
                 fill: ${colors.mainBranding};
             }
         }
+
+        ${MainMenu} {
+            ul > li > a {
+                color: ${colors.mainDark};
     
+                i {
+                    color: ${colors.mainDark};
+                }
+    
+                &.activeMenuItem,
+                &.activeMenuItem > i {
+                    color: ${colors.mainClickable};
+                }
+            }
+        }
+    
+        ${CartToggleIcon},
         ${MovileNavIconWrapper} {
             i {
                 color: ${colors.mainDark};
@@ -229,6 +255,7 @@ class PureNavigation extends React.Component {
             unpinned: false,
             unfixed: true
         });
+        this.props.toggleSubmenu(false);
     }
 
     headRoomUnpin = () => {
@@ -237,6 +264,7 @@ class PureNavigation extends React.Component {
             pinned: false,
             unpinned: true
         });
+        this.props.toggleSubmenu(false);
     }
 
     headRoomPin = () => {
@@ -245,6 +273,7 @@ class PureNavigation extends React.Component {
             unpinned: false,
             pinned: true
         });
+        this.props.toggleSubmenu(false);
     }
 
     render() {
@@ -323,6 +352,7 @@ class PureNavigation extends React.Component {
         const pinStart = viewportIs === 'desktop' ? dimensions.navPaddingTopDesktop : (viewportIs === null ? dimensions.navPaddingTopPhone : dimensions.navPaddingTopTablet);
 
         return (
+
             <HeadroomWrapper
                 upTolerance={8}
                 downTolerance={8}
@@ -337,7 +367,10 @@ class PureNavigation extends React.Component {
                 ]}
             >
                 {(viewportIs === null || viewportIs === 'tablet') ?
-                    <NavigationWrapper className={className} css={(pageIs === 'Index' || pageIs === 'Post') && NavWhite}>
+                    <NavigationWrapper
+                        className={className}
+                        css={((viewportIs === null && pageIs === 'Index') || pageIs === 'Post') && NavWhite}
+                    >
                         <NavigationInner>
                             {mobileNavLeft}
                             {mobileNavRight}
@@ -354,6 +387,7 @@ class PureNavigation extends React.Component {
                 }
 
             </HeadroomWrapper>
+
         );
     }
 }
@@ -376,12 +410,21 @@ const Navigation = (props) => (
               menu {
                 label
                 path
+                submenu
               }
             }
           }
         }
       `}
-        render={(data) => <PureNavigation {...props} data={data} />}
+        render={(data) => (
+            <InterfaceContext.Consumer>
+                {({
+                    toggleSubmenu
+                }) => (
+                        <PureNavigation {...props} data={data} toggleSubmenu={toggleSubmenu} />
+                    )}
+            </InterfaceContext.Consumer>
+        )}
     />
 );
 

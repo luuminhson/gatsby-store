@@ -2,6 +2,8 @@ import React from 'react';
 
 export const defaultInterfaceContext = {
   viewportIs: null,
+  submenuOpened: null,
+  toggleSubmenu: () => {},
   cartStatus: 'initial',
   sidebarStatus: false,
   toggleCart: () => {},
@@ -14,7 +16,6 @@ export const defaultInterfaceContext = {
   setCurrentProductImages: () => {},
   pageIs: null,
   hasFeaturedImage: false,
-  prevLink: null,
   setToProductPage: () => {},
   setToProductCollectionPage: () => {},
   setToProductCategoryPage: () => {},
@@ -26,6 +27,7 @@ export const defaultInterfaceContext = {
   setToMorePage: () => {},
   setToPagePage: () => {},
   setToHasFeaturedImage: () => {},
+  prevLink: null,
   setPrevLink: () => {},
 };
 

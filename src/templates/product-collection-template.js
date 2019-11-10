@@ -202,10 +202,10 @@ export default props => (
 export const query = graphql`
     query ProductCollectionQuery($id: String!) {
         site {
-        siteMetadata {
-            title
-            description
-        }
+            siteMetadata {
+                title
+                description
+            }
         }
         collectionProducts: allShopifyCollection(
             filter: { id: { eq: $id } },

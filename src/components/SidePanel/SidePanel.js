@@ -1,10 +1,12 @@
 // @flow
 import React from 'react';
 import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import Contacts from './Contacts';
 import Menu from './Menu';
+import OiIcon from '../OiIcon';
 import { useSiteMetadata } from '../../hooks';
-import { mediaQuery, spacing, colors } from '../../utils/styles';
+import { mediaQuery, spacing, colors, FontStyle } from '../../utils/styles';
 
 type Props = {
   isIndex?: boolean,
@@ -12,7 +14,7 @@ type Props = {
 
 const SidePanelWrapper = styled(`div`)`
   width: 100%;
-  height: 120vh;
+  height: 100vh;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
 
@@ -25,24 +27,58 @@ const SidePanelWrapper = styled(`div`)`
   }
 `;
 
+const SidePanelInner = styled(`div`)`
+  
+`;
+
+const SidePanelHeader = styled(`div`)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  
+  height: 64px;
+  padding: 0 ${spacing.lg}px;
+  border-bottom: 1px solid ${colors.neutral1};
+`;
+
+const SidePanelTitle = styled(FontStyle.h3)`
+  text-transform: uppercase;
+`;
+
+const SidePanelContent = styled(`div`)`
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: auto;
+  touch-action: auto;
+  height: calc(100vh - 64px);
+`;
+
+const SidePanelCloseBtn = css`
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  margin-right: -${spacing.md}px;
+`;
+
 const SidePanelMenu = styled(Menu)`
   width: 100%;
-  margin-top: 16px;
+`;
 
-  ${mediaQuery.tabletFrom} {
-      // display: none;
-  }
+const ContactModuleTitle = styled(FontStyle.h3)`
+  padding: ${spacing.md}px ${spacing.lg}px ${spacing.xs}px;
+  text-transform: uppercase;
 `;
 
 const ContactModule = styled(Contacts)`
-  margin: ${spacing.xl}px 0 ${spacing.lg}px;
+  margin-bottom: ${spacing['8xl'] - 12}px;
 
   > ul {
-    padding: 32px 0;
-    border-top: 1px solid ${colors.neutral2};
+    > li {
+      width: 100%;
 
-    > li > a {
-      padding: 12px 32px;
+      > a {
+        display: flex;
+        align-items: center;
+        padding: ${spacing.sm}px ${spacing.lg}px;
+      }
     }
   }
 `;
@@ -52,10 +88,17 @@ const SidePanel = ({ className, toggleSidebar }: Props) => {
 
   return (
     <SidePanelWrapper className={className}>
-      <div className='sidebar__inner'>
-        <SidePanelMenu menu={menu} toggleSidebar={toggleSidebar} />
-        <ContactModule contacts={contacts} />
-      </div>
+      <SidePanelInner>
+        <SidePanelHeader>
+          <SidePanelTitle>Menu</SidePanelTitle>
+          <OiIcon icon='oi-icon-close' css={SidePanelCloseBtn} onClick={toggleSidebar} />
+        </SidePanelHeader>
+        <SidePanelContent>
+          <SidePanelMenu menu={menu} toggleSidebar={toggleSidebar} />
+          <ContactModuleTitle>Liên Hệ</ContactModuleTitle>
+          <ContactModule contacts={contacts} />
+        </SidePanelContent>
+      </SidePanelInner>
     </SidePanelWrapper>
   );
 };

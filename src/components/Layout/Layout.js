@@ -134,7 +134,8 @@ const Overlay = styled(`div`)`
 `;
 
 const SidePanelWrapper = styled(`div`)`
-  max-width: 80%;  
+  width: 240px;  
+  max-width: 80%;
   background-color: ${colors.white};
   position: fixed;
   top: 0;
@@ -155,14 +156,6 @@ const SidebarOn = css`
   box-shadow: 0 8px 10px -5px rgba(0,0,0,.2), 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12);
   transform: translate3d(0, 0, 0);
   transition: transform 0.35s cubic-bezier(0.46, 0.98, 0.43, 1.01), box-shadow 0.25s ease-in-out, opacity 0.3s ease-in-out;
-`;
-
-const SidePanelCloseBtn = css`
-  cursor: pointer;
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  z-index: 3100;
 `;
 
 class PureLayout extends React.Component {
@@ -211,6 +204,14 @@ class PureLayout extends React.Component {
             ...state.interface,
             currentProductImages: images,
             productImageFeatured: null
+          }
+        }));
+      },
+      toggleSubmenu: (open) => {
+        this.setState(state => ({
+          interface: {
+            ...state.interface,
+            submenuOpened: open ? true : false
           }
         }));
       },
@@ -551,7 +552,6 @@ class PureLayout extends React.Component {
                                 toggle={toggleCart}
                               />
                               <SidePanelWrapper css={sidebarStatus === true && SidebarOn}>
-                                <OiIcon icon='oi-icon-close' css={SidePanelCloseBtn} onClick={toggleSidebar} />
                                 <SidePanel toggleSidebar={toggleSidebar} />
                               </SidePanelWrapper>
                               <Navigation
