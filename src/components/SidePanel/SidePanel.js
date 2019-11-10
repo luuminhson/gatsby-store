@@ -40,9 +40,7 @@ const SidePanelHeader = styled(`div`)`
   border-bottom: 1px solid ${colors.neutral1};
 `;
 
-const SidePanelTitle = styled(FontStyle.h3)`
-  text-transform: uppercase;
-`;
+const SidePanelTitle = styled(FontStyle.h3)``;
 
 const SidePanelContent = styled(`div`)`
   overflow-y: scroll;
@@ -64,7 +62,6 @@ const SidePanelMenu = styled(Menu)`
 
 const ContactModuleTitle = styled(FontStyle.h3)`
   padding: ${spacing.md}px ${spacing.lg}px ${spacing.xs}px;
-  text-transform: uppercase;
 `;
 
 const ContactModule = styled(Contacts)`
