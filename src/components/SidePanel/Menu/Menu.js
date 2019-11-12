@@ -4,18 +4,15 @@ import { StaticQuery, graphql } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { Link } from '../../LinkWithPrev';
-import OiIcon from '../../OiIcon';
+import MenuExpand from './MenuExpand';
 import { mediaQuery, colors, fontWeight, fontFamily, spacing } from '../../../utils/styles';
-
-import InterfaceContext from '../../../context/InterfaceContext';
 
 type Props = {
   menu: {
     label: string,
     path: string,
+    submenu: string,
   }[],
-  burgerClick: bool,
-  isPost: bool,
 };
 
 const MenuWrapperInner = styled(`nav`)`
@@ -66,22 +63,12 @@ const MenuItemLink = styled(Link)`
   height: 56px;
   line-height: 56px;
   color: ${colors.mainDark};
-
-  &:hover,
-  &:focus {
-    color: ${colors.mainDark};
-  }
 `;
 
 const MenuLinkActiveStyle = css`
   &.activeMenuItem {
     color: ${colors.mainClickable};
   }
-`;
-
-const SubmenuWrapper = styled(`div`)`
-  margin-top: -${spacing.xs}px;
-  padding-bottom: ${spacing.sm}px;
 `;
 
 const SubmenuList = styled(`div`)`
@@ -97,36 +84,16 @@ const SubmenuItem = styled(`div`)`
 
 const SubmenuItemLink = styled(Link)`
   display: block;
-  color: ${colors.mainDark};
+  color: ${colors.neutral5};
   font-size: 0.9em;
   white-space: nowrap;
-  padding: ${spacing.xs}px ${spacing.md}px ${spacing.xs}px ${spacing['2xl']}px;
+  padding: ${spacing.xs}px ${spacing.lg}px ${spacing.xs}px;
 
   @media (hover: hover) {
     &:hover {
       color: ${colors.mainClickable};
     }
   }
-`;
-
-const DropdownIcon = styled(OiIcon)`
-  width: 20px;
-  height: 20px;
-  font-size: 20px;
-  line-height: 20px;
-  margin-left: ${spacing.xs / 2}px;
-`;
-
-const IconSubmenuOpenedCss = css`
-  transform: rotate(180deg);
-`;
-
-const submenuOpenedCss = css`
-  display: block;
-`;
-
-const submenuClosedCss = css`
-  display: none;
 `;
 
 const SubMenuLinkActiveStyle = css`
@@ -136,33 +103,15 @@ const SubMenuLinkActiveStyle = css`
 `;
 
 class Menu extends React.Component<Props> {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      submenuIs: null
-    };
-  }
-
   render() {
     const {
       data,
       menu,
-      isPost,
-      unfixed,
-      onFeaturedImage,
       toggleSidebar,
       ...rest
     } = this.props;
 
-    const { submenuIs } = this.state;
-
-    const hideSubmenu = (toogleSubmenu, toggleSidebar) => {
-      toogleSubmenu(false);
-      toggleSidebar();
-    }
-
-    const getSubmenu = (submenuType, toggleSubmenu) => {
+    const getSubmenu = (submenuType) => {
       let submenu;
 
       switch (submenuType) {
@@ -171,7 +120,7 @@ class Menu extends React.Component<Props> {
             <SubmenuList>
               {data.allShopifyCollection.edges.map((collection, index) => (
                 <SubmenuItem key={index}>
-                  <SubmenuItemLink to={`/products/collection/${collection.node.handle}`} css={SubMenuLinkActiveStyle} activeClassName='activeMenuItem' partiallyActive={true} onClick={() => hideSubmenu(toggleSubmenu, toggleSidebar)}>
+                  <SubmenuItemLink to={`/products/collection/${collection.node.handle}`} css={SubMenuLinkActiveStyle} activeClassName='activeMenuItem' partiallyActive={true} onClick={toggleSidebar}>
                     {collection.node.title}
                   </SubmenuItemLink>
                 </SubmenuItem>
@@ -185,7 +134,7 @@ class Menu extends React.Component<Props> {
             <SubmenuList>
               {data.allShopifyProductType.edges.map((category, index) => (
                 <SubmenuItem key={index}>
-                  <SubmenuItemLink to={`/products/category/${category.node.shopifyId}`} css={SubMenuLinkActiveStyle} activeClassName='activeMenuItem' partiallyActive={true} onClick={() => hideSubmenu(toggleSubmenu, toggleSidebar)}>
+                  <SubmenuItemLink to={`/products/category/${category.node.shopifyId}`} css={SubMenuLinkActiveStyle} activeClassName='activeMenuItem' partiallyActive={true} onClick={toggleSidebar}>
                     {category.node.name}
                   </SubmenuItemLink>
                 </SubmenuItem>
@@ -202,54 +151,33 @@ class Menu extends React.Component<Props> {
       return submenu;
     };
 
-    const handleSubmenu = (submenu, submenuOpened, toogleSubmenu, toggleSidebar) => event => {
-      if (submenu !== null) {
-        event.preventDefault();
-        this.setState({
-          submenuIs: submenu
-        });
-        toogleSubmenu(submenuOpened === false ? true : (this.state.submenuIs === submenu ? false : true));
-      } else {
-        toogleSubmenu(false);
-      }
-      toggleSidebar();
-    };
-
     return (
-      <InterfaceContext.Consumer>
-        {({
-          submenuOpened,
-          toggleSubmenu
-        }) => (
-            <MenuWrapper {...rest}>
-              {!isPost && (
-                <MenuWrapperInner>
-                  <MenuList>
-                    {menu.map((item) => (
-                      <MenuListItem key={item.path}>
-                        <MenuItemLink
-                          to={item.path}
-                          onClick={handleSubmenu(item.submenu, submenuOpened, toggleSubmenu, () => (item.submenu == null ? toggleSidebar() : null) )}
-                          css={MenuLinkActiveStyle}
-                          activeClassName='activeMenuItem'
-                          partiallyActive={item.path === '/' ? false : true}
-                        >
-                          <span>{item.label}</span>
-                          {item.submenu !== null && <DropdownIcon css={submenuIs === item.submenu && submenuOpened && IconSubmenuOpenedCss} icon='oi-icon-drop-down' />}
-                        </MenuItemLink>
-                        {item.submenu !== null &&
-                          <SubmenuWrapper css={(submenuIs === item.submenu && submenuOpened) ? submenuOpenedCss : submenuClosedCss}>
-                            {getSubmenu(item.submenu, toggleSubmenu)}
-                          </SubmenuWrapper>
-                        }
-                      </MenuListItem>
-                    ))}
-                  </MenuList>
-                </MenuWrapperInner>
-              )}
-            </MenuWrapper>
-          )}
-      </InterfaceContext.Consumer>
+      <MenuWrapper {...rest}>
+        <MenuWrapperInner>
+          <MenuList>
+            {menu.map((item) => (
+              item.submenu === null ?
+                <MenuListItem key={item.path}>
+                  <MenuItemLink
+                    to={item.path}
+                    onClick={toggleSidebar}
+                    css={MenuLinkActiveStyle}
+                    activeClassName='activeMenuItem'
+                    partiallyActive={item.path === '/' ? false : true}
+                  >
+                    <span>{item.label}</span>
+                  </MenuItemLink>
+                </MenuListItem>
+                :
+                <MenuListItem key={item.path}>
+                  <MenuExpand title={item.label} menuLink={item.path}>
+                    {getSubmenu(item.submenu)}
+                  </MenuExpand>
+                </MenuListItem>
+            ))}
+          </MenuList>
+        </MenuWrapperInner>
+      </MenuWrapper>
     )
   }
 }
@@ -290,18 +218,6 @@ export default (props) => (
           }
       }
     `}
-    render={data => (
-      <InterfaceContext.Consumer>
-        {({
-          toggleSubmenu
-        }) => (
-            <Menu
-              {...props}
-              data={data}
-              toggleSubmenu={toggleSubmenu}
-            />
-          )}
-      </InterfaceContext.Consumer>
-    )}
+    render={data => <Menu {...props} data={data} />}
   />
 );

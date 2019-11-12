@@ -6,7 +6,7 @@ import Contacts from './Contacts';
 import Menu from './Menu';
 import OiIcon from '../OiIcon';
 import { useSiteMetadata } from '../../hooks';
-import { mediaQuery, spacing, colors, FontStyle } from '../../utils/styles';
+import { spacing, colors, FontStyle, mediaQuery } from '../../utils/styles';
 
 type Props = {
   isIndex?: boolean,
@@ -15,8 +15,6 @@ type Props = {
 const SidePanelWrapper = styled(`div`)`
   width: 100%;
   height: 100vh;
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;
 
   &__inner {
     position: relative;
@@ -40,7 +38,11 @@ const SidePanelHeader = styled(`div`)`
   border-bottom: 1px solid ${colors.neutral1};
 `;
 
-const SidePanelTitle = styled(FontStyle.h3)``;
+const SidePanelTitle = styled(FontStyle.h3)`
+  ${mediaQuery.tabletFrom} {
+    font-size: 1.2rem;
+  }
+`;
 
 const SidePanelContent = styled(`div`)`
   overflow-y: scroll;
@@ -61,7 +63,11 @@ const SidePanelMenu = styled(Menu)`
 `;
 
 const ContactModuleTitle = styled(FontStyle.h3)`
-  padding: ${spacing.md}px ${spacing.lg}px ${spacing.xs}px;
+  padding: ${spacing.md}px ${spacing.lg}px 0;
+
+  ${mediaQuery.tabletFrom} {
+    font-size: 1.2rem;
+  }
 `;
 
 const ContactModule = styled(Contacts)`

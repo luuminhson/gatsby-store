@@ -35,6 +35,11 @@ const ContactListItemLink = styled(`a`)`
   align-items: center;
   padding: 12px 0;
   color: ${colors.mainDark};
+
+  span {
+    font-size: 0.9em;
+    color: ${colors.neutral5};
+  }
 `;
 
 const ContactIcon = styled(OiIcon)`
