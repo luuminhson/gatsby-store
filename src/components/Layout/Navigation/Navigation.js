@@ -116,8 +116,8 @@ const MainMenu = styled(Menu)`
 
 const MobileNavLogo = styled(Logo)`
     svg {
-        width: 87px;
-        height: 20px;
+        width: 108px;
+        height: 56px;
     }
 `;
 
@@ -196,7 +196,7 @@ const pinnedStyle = css`
         ${DesktopNavLogo},
         ${MobileNavLogo} {
             svg {
-                fill: ${colors.mainBranding};
+                fill: ${colors.black};
             }
         }
 
