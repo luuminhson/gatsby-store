@@ -232,7 +232,7 @@ class ProductForm extends Component {
     )), ['name', 'value']),
   };
 
-  handleChange = (setVariant) => event => {
+  handleChangeVariant = (setVariant) => event => {
     event.preventDefault();
 
     if (event.target.value) {
@@ -253,6 +253,12 @@ class ProductForm extends Component {
 
     setVariant(event.target.value);
   };
+
+  handleChangeQuantity = event => {
+    event.preventDefault();
+
+    this.setState({ [event.target.name]: event.target.value });
+  }
 
   handleSubmit = callback => event => {
     event.preventDefault();
@@ -289,7 +295,7 @@ class ProductForm extends Component {
     return variantItem;
   }
 
-  handleChange2 = (
+  handleChangeVariantOpt = (
     index,
     variants,
     callbackVariants,
@@ -382,7 +388,7 @@ class ProductForm extends Component {
                   step='1'
                   inputmode='numeric'
                   pattern='[0-9]*'
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeQuantity}
                   value={this.state.quantity}
                 />
               </QtyFieldset>
@@ -395,7 +401,7 @@ class ProductForm extends Component {
                       id='variant'
                       value={this.state.variant}
                       name='variant'
-                      onChange={this.handleChange(setCurrentVariant)}
+                      onChange={this.handleChangeVariant(setCurrentVariant)}
                     >
                       {product.variants.map(variant => (
                         <option
@@ -425,7 +431,7 @@ class ProductForm extends Component {
                                       name={option.name}
                                       value={value}
                                       defaultChecked={index == 0}
-                                      onChange={this.handleChange2(
+                                      onChange={this.handleChangeVariantOpt(
                                         idx,
                                         product.variants,
                                         setCurrentVariant,
