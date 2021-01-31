@@ -216,11 +216,11 @@ module.exports = {
       options: {
         custom: {
           families: [
-            'Fira Sans:n4,n5,n6',
-            'Source Sans Pro:n4,i4,n6,i6,n7,i7'
+            'Merriweather',
+            'Source Serif Pro:n4,i4,n6,i6,n7,i7'
           ],
           urls: [
-            'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i,700,700i|Fira+Sans:400,500,600&display=swap&subset=latin-ext,vietnamese',
+            'https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,400i,600,600i,700,700i|Merriweather:400,700,900&display=swap&subset=latin-ext,vietnamese',
           ],
         },
       }

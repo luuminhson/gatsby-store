@@ -116,7 +116,7 @@ export const dimensions = {
   navHeightDesktop: '180px',
   navPaddingTopPhone: 12,
   navPaddingTopTablet: 40,
-  navPaddingTopDesktop: 60,
+  navPaddingTopDesktop: 40,
   botNavHeight: '52px',
   cartWidthDesktop: '480px',
   pictureBrowserAction: {
@@ -172,8 +172,8 @@ const monospaceFontStack = [
 ].join();
 
 export const fontFamily = {
-  body: `Source Sans Pro, ${defaultFontStack}`,
-  heading: `Fira Sans, ${defaultFontStack}`,
+  body: `Source Serif Pro, ${defaultFontStack}`,
+  heading: `Merriweather, ${defaultFontStack}`,
   monospace: monospaceFontStack
 };
 
@@ -214,8 +214,8 @@ const lineHeight = {
 export const fontWeight = {
   heading: {
     normal: 400,
-    medium: 500,
-    bold: 600,
+    medium: 700,
+    bold: 900,
   },
   body: {
     normal: 400,

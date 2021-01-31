@@ -15,13 +15,12 @@ export const ButtonBase = styled(`button`)`
   cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
   height: 50px;
   display: inline-flex;
-  font-family: ${fontFamily.heading};
-  font-weight: ${fontWeight.heading.bold};
-  font-size: 0.9rem;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  font-family: ${fontFamily.body};
+  font-weight: ${fontWeight.heading.normal};
+  font-size: 1.125rem;
   justify-content: center;
-  padding: 0.85rem 1.25rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 2px;
   transition: 0.2s ease-in-out;
 
   :focus {
