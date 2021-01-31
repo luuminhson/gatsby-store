@@ -5,7 +5,7 @@ backend:
 media_folder: "static/media"
 public_folder: "/media"
 
-site_url: https://luuminhson.com
+site_url: https://oicakery.com
 
 collections:
   - name: "posts"
