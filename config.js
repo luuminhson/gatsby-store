@@ -1,35 +1,36 @@
 'use strict';
 
 module.exports = {
-    siteUrl: 'https://orins.design',
-    title: 'ORINS',
-    subtitle: 'Fine Bags & Accessories',
-    description: 'We create bags and accessories that aim to serve your well-living everyday with the spirit of being humble and focusing on orignal matters.',
-    copyright: 'ORINS © All rights reserved.',
+    siteUrl: 'https://oicakery.com',
+    title: 'Bánh Ổi',
+    subtitle: 'Happiness is homemade',
+    description: 'Bánh Ổi là một cửa hàng nhỏ bán các loại bánh nhà làm. Ăn bánh khi vui, khi buồn và khi biết mình còn có thể sẻ chia.',
+    copyright: 'Oi Cakery © All rights reserved.',
     postsPerPage: 5,
     googleAnalyticsId: '',
     menu: [
+        // {
+        //     label: 'Trang chủ',
+        //     path: '/',
+        // },
         {
-            label: 'Trang chủ',
-            path: '/'
+            label: 'Bánh',
+            path: '/products',
+            // submenu: 'productCategories'
+            submenu: 'none' // At least one menu must have submenu value
         },
-        {
-            label: 'Sản phẩm',
-            path: '/products/category',
-            submenu: 'productCategories'
-        },
-        {
-            label: 'Collections',
-            path: '/products/collection',
-            submenu: 'productCollections'
-        },
+        // {
+        //     label: 'Collections',
+        //     path: '/products/collection',
+        //     submenu: 'productCollections'
+        // },
         {
             label: 'Blog',
-            path: '/blog'
+            path: '/blog',
         },
         {
             label: 'Giới thiệu',
-            path: '/about'
+            path: '/about',
         }
     ],
     botNav: [
@@ -40,7 +41,7 @@ module.exports = {
         },
         {
             icon: 'oi-icon-store',
-            label: 'Sản phẩm',
+            label: 'Bánh',
             path: '/products'
         },
         {
@@ -61,8 +62,8 @@ module.exports = {
     ],
     contacts: {
         phone: '+84934410491',
-        email: 'hello@orins.design',
-        facebook: 'orins.design',
-        instagram: 'orins.design',
+        email: 'hello@oicakery.com',
+        // facebook: 'orins.design',
+        instagram: 'banh.oi',
     }
 };

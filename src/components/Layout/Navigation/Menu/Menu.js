@@ -244,7 +244,7 @@ class Menu extends React.Component<Props> {
     };
 
     const handleSubmenu = (submenu, submenuOpened, toogleSubmenu) => event => {
-      if (submenu !== null) {
+      if ( submenu !== null && submenu !== 'none' ) {
         event.preventDefault();
         this.setState({
           submenuIs: submenu
@@ -274,9 +274,9 @@ class Menu extends React.Component<Props> {
                         partiallyActive={(item.path === '/' || item.path === null) ? false : true}
                       >
                         <span>{item.label}</span>
-                        {item.submenu !== null && <DropdownIcon css={submenuIs === item.submenu && submenuOpened && IconSubmenuOpenedCss} icon='oi-icon-drop-down' />}
+                        {( item.submenu !== null && item.submenu !== 'none' ) && <DropdownIcon css={submenuIs === item.submenu && submenuOpened && IconSubmenuOpenedCss} icon='oi-icon-drop-down' />}
                       </MenuItemLink>
-                      {item.submenu !== null &&
+                      {( item.submenu !== null && item.submenu !== 'none' ) &&
                         <SubmenuWrapper css={(submenuIs === item.submenu && submenuOpened) ? submenuOpenedCss : submenuClosedCss}>
                           {getSubmenu(item.submenu, toggleSubmenu)}
                         </SubmenuWrapper>

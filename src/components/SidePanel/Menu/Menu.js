@@ -156,7 +156,7 @@ class Menu extends React.Component<Props> {
         <MenuWrapperInner>
           <MenuList>
             {menu.map((item) => (
-              item.submenu === null ?
+              ( item.submenu === null || item.submenu === 'none' ) ?
                 <MenuListItem key={item.path}>
                   <MenuItemLink
                     to={item.path}

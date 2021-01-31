@@ -604,7 +604,6 @@ export const Layout = (props) => (
             contacts {
               phone
               email
-              facebook
               instagram
             }
             menu {

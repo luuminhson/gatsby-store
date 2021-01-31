@@ -18,7 +18,6 @@ const useSiteMetadata = () => {
             contacts {
               phone
               email
-              facebook
               instagram
             }
           }
