@@ -181,7 +181,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-shopify',
       options: {
-        shopName: 'original-inside',
+        shopName: 'oicakery',
         accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
         paginationSize: 100,
       }
