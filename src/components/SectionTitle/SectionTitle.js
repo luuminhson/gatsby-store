@@ -3,7 +3,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { Button } from '../shared/Buttons';
-import { FontStyle, spacing, colors } from '../../utils/styles';
+import { FontStyle, fontFamily, fontWeight, spacing, colors } from '../../utils/styles';
 
 const SectionWrapper = styled(`div`)`
     display: flex;
@@ -19,8 +19,9 @@ const TitleGroup = styled(`div`)`
 `;
 
 const SubTitle = styled(FontStyle.h4)`
-    font-size: 0.9rem !important;
-    text-transform: uppercase;
+    font-family: ${fontFamily.body};
+    font-weight: ${fontWeight.body.medium};
+    font-size: 1.125rem !important;
     color: ${colors.neutral3};
 `;
 

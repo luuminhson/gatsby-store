@@ -200,9 +200,9 @@ const Footer = ({ viewportIs, ...rest }) => {
     <FooterWrapper {...rest}>
       <FooterWrapperInner>
 
-        <Module alwaysExpand={viewportIs === 'desktop' ? true : false} title='ORINS?'>
+        <Module alwaysExpand={viewportIs === 'desktop' ? true : false} title='Bánh Ổi?'>
           <AboutDesc>
-            <AboutText>ORINS là từ ghép của “Original Inside” - Điều bên trong nguyên bản.  Chúng tôi thiết kế và sản xuất các sản phẩm đựng đồ cho cuộc sống hàng ngày với tinh thần luôn luôn khiêm nhường và hướng tới những giá trị nguyên bản.</AboutText>
+            <AboutText>Bánh Ổi là vì bánh được làm bởi Ổi – Một người tin rằng bánh là con đường ngắn nhưng sâu sắc để có được hạnh phúc.</AboutText>
             <Link to='/about'>Xem thêm</Link>
           </AboutDesc>
         </Module>
@@ -237,7 +237,7 @@ const Footer = ({ viewportIs, ...rest }) => {
               <FooterWidgetLink activeClassName='activeFootNavItem' to='/terms-and-conditions'>Điều khoản &amp; Điều kiện</FooterWidgetLink>
             </li>
             <li css={Copyright}>
-              <span css={copyrightText}>ORINS © 2019 - All right reserved</span>
+              <span css={copyrightText}>Oi Cakery © 2021 - All right reserved</span>
             </li>
             <li css={wishingANiceDay}>
               <span css={wishText}>Chúc bạn một ngày vui!</span>

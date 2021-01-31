@@ -38,7 +38,7 @@ class ProductsTemplate extends React.Component<Props> {
     const { title, description } = data.site.siteMetadata;
 
     return (
-      <Page pageTitle='Sản phẩm' title={`Sản phẩm ‧ ${title}`} description={description} pageIs='Store'>
+      <Page pageTitle='Các loại bánh' title={`Các loại bánh ‧ ${title}`} description={description} pageIs='Store'>
         <ProductListingContainer>
           {data.products.edges.map(({ node: product }) => (
             <ProductListingItem key={product.id} product={product} />

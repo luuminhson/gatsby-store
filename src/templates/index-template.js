@@ -20,7 +20,7 @@ type Props = {
 
 const IndexWrapper = styled(`div`)`
   margin: 0 auto;
-  margin-top: -${headerHeight.tablet};
+  margin-top: calc(-${headerHeight.tablet} - ${spacing['2xl']}px);
   padding-bottom: ${spacing.lg}px;
 
   ${mediaQuery.tabletFrom} {
@@ -63,20 +63,19 @@ const HeroImage = styled(Img)`
 `;
 
 const HeroTitle = styled(FontStyle.h1)`
-  font-size: 1.4rem;
-  line-height: 1.8rem;
-  max-width: 68vw;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
   margin-bottom: ${spacing.lg}px;
 
   ${mediaQuery.tabletFrom} {
     font-size: 1.6rem;
     line-height: 2.4rem;
-    max-width: none;
+    max-width: 68vw;
     margin-bottom: ${spacing.xl}px;
   }
 
   ${mediaQuery.desktop} {
-    font-size: 2rem;
+    font-size: 2.4rem;
     line-height: 3.2rem;
     margin-bottom: ${spacing.xl}px;
   }
@@ -129,61 +128,6 @@ const HeroSection = styled(`section`)`
       ${mediaQuery.tabletFrom} {
         color: inherit;
       }
-    }
-  }
-`;
-
-// FEATURED PRODUCT SECTION
-
-const FeaturedImage = styled(Img)`
-  border-radius: ${radius.large}px;
-`;
-
-const GroupLeft = styled(`div`)`
-  flex: 1 0 50%;
-
-  ${FeaturedImage} {
-    margin: 0 ${spacing.lg}px ${spacing.lg}px 0;
-  }
-`;
-
-const GroupRight = styled(`div`)`
-  flex: 1 0 50%;
-  display: flex;
-  align-items: stretch;
-
-  ${FeaturedImage} {
-    width: 100%;
-    margin-bottom: ${spacing.lg}px;
-  }
-`;
-
-const ImageGroup = styled(`div`)`
-  flex: 1 0 100%;
-  width: 130vw;
-  display: flex;
-
-  ${mediaQuery.tabletFrom} {
-    flex: 1 0 65%;
-  }
-`;
-
-const FeaturedProductSection = styled(`div`)`
-  display: flex;
-  flex-direction: column;
-  margin: 12% 0 10%;
-  padding: 0 ${spacing.lg}px;
-
-  ${mediaQuery.tabletFrom} {
-    flex-direction: row;
-    padding: 0;
-  }
-
-  ${TitleGroup} {
-
-    ${mediaQuery.tabletFrom} {
-      flex: 1 0 35%;
-      padding: 0 5% 0 0;
     }
   }
 `;
@@ -290,12 +234,6 @@ class IndexTemplate extends React.Component<Props> {
 
     const heroImageSrc = data.heroImage.childImageSharp.fluid;
 
-    const featuredImgs = [
-      data.featuredImage1.childImageSharp.fluid,
-      data.featuredImage2.childImageSharp.fluid,
-      data.featuredImage3.childImageSharp.fluid,
-    ];
-
     const latestProductList = data.latestProducts.edges;
 
     return (
@@ -305,34 +243,16 @@ class IndexTemplate extends React.Component<Props> {
             <HeroSection>
               <HeroImage fluid={heroImageSrc} />
               <TitleGroup>
-                <HeroTitle>Cho cuộc sống đơn giản mỗi ngày.</HeroTitle>
-                <PrimaryButton to='/products'>Xem tất cả sản phẩm</PrimaryButton>
+                <HeroTitle>Happiness is homemade</HeroTitle>
+                <PrimaryButton to='/products'>Mua bánh về ăn</PrimaryButton>
               </TitleGroup>
             </HeroSection>
           </ScrollAnimation>
 
           <ScrollAnimation>
-            <FeaturedProductSection>
-              <TitleGroup>
-                <SectionTitle subtitle='Nổi bật' actionLabel='Xem chi tiết' actionLink={viewportIs === null && '/products/rain-shoulder'}>The Lazy Silk Leaf</SectionTitle>
-                {viewportIs !== null && <Button to='/products/rain-shoulder'>Xem chi tiết</Button>}
-              </TitleGroup>
-              <ImageGroup>
-                <GroupLeft>
-                  <FeaturedImage fluid={featuredImgs[0]} />
-                  <FeaturedImage fluid={featuredImgs[1]} />
-                </GroupLeft>
-                <GroupRight>
-                  <FeaturedImage fluid={featuredImgs[2]} />
-                </GroupRight>
-              </ImageGroup>
-            </FeaturedProductSection>
-          </ScrollAnimation>
-
-          <ScrollAnimation>
             <LastestProductsSection>
               <TitleGroup>
-                <SectionTitle subtitle='Sản phẩm mới' actionLabel='Xem tất cả' actionLink='/products'>Tote Bags</SectionTitle>
+                <SectionTitle subtitle='Bánh mới' actionLabel='Xem tất cả' actionLink='/products'>Cookies &amp; Cakes</SectionTitle>
               </TitleGroup>
               <ProductsWrapper>
                 <ProductListingContainer>
@@ -413,37 +333,16 @@ export const query = graphql`
         }
       }
     },
-    heroImage: file(relativePath: { eq: "index-demo-1.jpg" }) {
+    heroImage: file(relativePath: { eq: "index-demo.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 1000, quality: 100) {
           ...GatsbyImageSharpFluid
         }
       }
     }
-    featuredImage1: file(relativePath: { eq: "lazy-silk-leaf-featured-1.png" }) {
-      childImageSharp {
-        fluid(maxWidth: 1000, quality: 100) {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    featuredImage2: file(relativePath: { eq: "lazy-silk-leaf-featured-2.png" }) {
-      childImageSharp {
-        fluid(maxWidth: 1000, quality: 100) {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    featuredImage3: file(relativePath: { eq: "featured-supporting-img-1.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 1000, quality: 100) {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    },
     latestProducts: allShopifyProduct(
       limit: 3,
-      sort: { fields: [publishedAt], order: ASC }
+      sort: { fields: [publishedAt], order: DESC }
     ) {
       edges {
         node {
