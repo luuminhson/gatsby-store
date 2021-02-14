@@ -21,7 +21,7 @@ const numberEntry = keyframes`
 
 const ItemsNumber = styled(`span`)`
   align-items: center;
-  background-color: ${colors.mainClickable};
+  background-color: ${colors.mainHighlight};
   color: ${colors.white};
   display: flex;
   justify-content: center;

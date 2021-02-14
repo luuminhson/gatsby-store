@@ -36,9 +36,10 @@ export const colors = {
   mainLight:      '#F9F9FB',
 
   mainBranding:   '#1F3A93', // Jacksons Purple
-  mainClickable:  '#D24D57', // Chesnut Rose
+  mainClickable:  '#22A686', // Pine Green
   mainHighlight:  '#F9B42D', // Sea Buckthorn
   mainSupport:    '#1BA39C', // Light Sea Green
+  secondSupport:  '#D24D57', // Chesnut Rose
 
   neutral1:       '#F6F7F9', // Mystic
   neutral2:       '#E4E9ED', // Solitude
@@ -178,6 +179,10 @@ export const fontFamily = {
 };
 
 const fontSize = {
+  pageTitle: {
+    mobile: '2.25rem',
+    desktop: '2.5rem'
+  },
   h1: {
     mobile: '1.8rem',
     desktop: '2.5rem'
@@ -205,6 +210,7 @@ const lineHeight = {
   h2: '48px',
   h3: '36px',
   h4: '24px',
+  pageTitle: '1.25em',
   headline: '24px',
   body: '24px',
   smallbody: '24px',
@@ -283,6 +289,16 @@ export const H4 = styled(`h4`)`
   }
 `;
 
+const pageTitle = styled(`h1`)`
+  ${headingCommonStyle}
+  font-size: ${fontSize.pageTitle.mobile};
+  line-height: ${lineHeight.pageTitle};
+
+  @media (min-width: ${breakpoints.tablet}px) {
+    font-size: ${fontSize.pageTitle.desktop};
+  }
+`;
+
 const fontStyleHeadline = styled(`span`)`
   ${headingCommonStyle}
   font-size: ${fontSize.headline};
@@ -312,6 +328,7 @@ export const FontStyle = {
   h2: H2,
   h3: H3,
   h4: H4,
+  pageTitle: pageTitle,
   headline: fontStyleHeadline,
   body: fontStyleBody,
   smallbody: fontStyleSmallbody,

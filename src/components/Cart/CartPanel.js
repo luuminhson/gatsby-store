@@ -104,7 +104,7 @@ const Title = styled(FontStyle.h3)`
 
 const ItemsNumber = styled(FontStyle.smallbody)`
   margin-left: ${spacing.xs}px;
-  background-color: ${colors.mainClickable};
+  background-color: ${colors.mainHighlight};
   color: ${colors.white};
   padding: 2px 4px;
   border-radius: 20px;

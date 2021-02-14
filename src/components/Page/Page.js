@@ -30,22 +30,21 @@ const PageStyle = css`
 export const PageInner = styled(`div`)`
   margin: 0 auto;
   max-width: 100%;
-  padding-top: ${spacing['2xl']}px;
+  padding-top: ${spacing.md}px;
 
   ${mediaQuery.tabletFrom} {
     padding-top: ${spacing['4xl']}px;
   }
 `;
 
-const PageTitle = styled(FontStyle.h1)`
-  font-size: 1.6rem;
-  font-weight: ${fontWeight.heading.bold};
-  margin: 0 auto ${spacing.md}px;
+const PageTitle = styled(FontStyle.pageTitle)`
+  font-weight: ${fontWeight.heading.medium};
+  margin: 0 auto ${spacing['2xl']}px;
   padding: 0 ${spacing.lg}px;
 
   ${mediaQuery.tabletFrom} {
-    margin: 0 auto ${spacing['4xl']}px;
     text-align: center;
+    margin: 0 auto ${spacing['4xl']}px;
     padding: 0 ${spacing.xl}px;
   }
 `;

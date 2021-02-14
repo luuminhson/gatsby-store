@@ -23,7 +23,7 @@ const numberEntry = keyframes`
 
 const ItemsNumber = styled(`span`)`
   align-items: center;
-  background: ${colors.mainClickable};
+  background: ${colors.mainHighlight};
   border-radius: 50%;
   color: ${colors.white};
   display: flex;
