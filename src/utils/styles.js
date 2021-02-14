@@ -42,7 +42,7 @@ export const colors = {
   secondSupport:  '#D24D57', // Chesnut Rose
 
   neutral1:       '#F6F7F9', // Mystic
-  neutral2:       '#E4E9ED', // Solitude
+  neutral2:       '#EBEFF2', // Solitude
   neutral3:       '#6C7A89', // Lynch
   neutral4:       '#6C7A89', // Lynch
   neutral5:       '#4A5460', // Lynch Dark

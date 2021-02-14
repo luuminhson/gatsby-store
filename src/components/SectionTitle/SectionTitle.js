@@ -43,7 +43,7 @@ const SectionTitle = ({ children, subtitle, centered, actionLink, actionLabel, c
             </FontStyle.h3>
         </TitleGroup>
         {actionLink && (
-            <Button to={actionLink}>
+            <Button to={actionLink} small>
                 {actionLabel}
             </Button>
         )

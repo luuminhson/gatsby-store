@@ -5,7 +5,7 @@ import { Link } from '../LinkWithPrev';
 
 import { colors, fontFamily, radius, fontWeight } from '../../utils/styles';
 
-export const ButtonBase = styled(`button`)`
+export const ButtonBase = styled(Link)`
   align-items: center;
   background: ${props => (props.inverse ? colors.mainClickable : colors.neutral1)};
   opacity: ${props => (props.disabled ? '0.75' : '1')};
@@ -13,13 +13,14 @@ export const ButtonBase = styled(`button`)`
   border-radius: ${radius.large}px;
   color: ${props => (props.inverse ? colors.brandLight : colors.mainClickable)};
   cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
-  height: 50px;
+  height: ${props => (props.small ? '32px' : '50px')};
   display: inline-flex;
   font-family: ${fontFamily.body};
   font-weight: ${fontWeight.heading.normal};
   font-size: 1.125rem;
   justify-content: center;
   padding: 0.85rem 1.5rem;
+  padding: ${props => (props.small ? '0.25rem 0.85rem' : '0.85rem 1.5rem')};
   border-radius: 2px;
   transition: 0.2s ease-in-out;
 
@@ -53,7 +54,7 @@ const ButtonAsInternalLink = ButtonAsExternalLink.withComponent(
 
 export class Button extends Component {
   render() {
-    const { children, to, href, ref, inverse = false, ...rest } = this.props;
+    const { children, to, href, ref, inverse = false, small, ...rest } = this.props;
 
     // automtic recognition of icon placement, works properly only for [text + <Icon>] childrens
     const iconOnLeft = typeof children[0] !== 'string';
@@ -64,6 +65,7 @@ export class Button extends Component {
           to={to}
           iconOnLeft={iconOnLeft}
           inverse={inverse}
+          small={small}
           {...rest}
         >
           {children}
@@ -75,6 +77,7 @@ export class Button extends Component {
           href={href}
           inverse={inverse}
           iconOnLeft={iconOnLeft}
+          small={small}
           {...rest}
         >
           {children}
@@ -82,7 +85,7 @@ export class Button extends Component {
       );
     } else {
       return (
-        <ButtonBase inverse={inverse} iconOnLeft={iconOnLeft} {...rest}>
+        <ButtonBase inverse={inverse} iconOnLeft={iconOnLeft} small={small} {...rest}>
           {children}
         </ButtonBase>
       );
@@ -94,8 +97,13 @@ Button.propTypes = {
   children: PropTypes.node.isRequired,
   inverse: PropTypes.bool,
   to: PropTypes.string,
-  href: PropTypes.string
+  href: PropTypes.string,
+  small: PropTypes.bool
 };
+
+Button.defaultProps = {
+  small: false
+}
 
 export const PrimaryButton = styled(Button)`
   background: ${colors.mainClickable};
