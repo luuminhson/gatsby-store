@@ -9,10 +9,10 @@ module.exports = {
     postsPerPage: 5,
     googleAnalyticsId: '',
     menu: [
-        // {
-        //     label: 'Trang chủ',
-        //     path: '/',
-        // },
+        {
+            label: 'Trang chủ',
+            path: '/',
+        },
         {
             label: 'Bánh',
             path: '/products',
@@ -63,7 +63,7 @@ module.exports = {
     contacts: {
         phone: '+84934410491',
         email: 'hello@oicakery.com',
-        // facebook: 'orins.design',
+        // facebook: 'banh.oi',
         instagram: 'banh.oi',
     }
 };

@@ -147,20 +147,6 @@ const Cost = styled(`div`)`
   }
 `;
 
-const Shipping = styled(FontStyle.body)`
-  text-align: center;
-  color: ${colors.neutral4};
-  margin-top: ${spacing.lg}px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  i {
-    color: ${colors.mainSupport};
-    margin-right: ${spacing.xs}px;
-  }
-`;
-
 const ButtonGroup = styled(`div`)`
   display: flex;
   flex-direction: column;
@@ -231,10 +217,9 @@ class CartPage extends Component {
                           <span>Thuế:</span> <strong>{checkout.totalTax}</strong>
                         </Cost>
                       }
-                      <Shipping><OiIcon icon='oi-icon-check' />Free ship toàn Việt Nam.</Shipping>
                     </Costs>
                     <ButtonGroup>
-                      <CheckOut href={checkout.webUrl}>Đặt hàng →</CheckOut>
+                      <CheckOut href={checkout.webUrl}>Đặt hàng</CheckOut>
                     </ButtonGroup>
                   </CartFooter>
                 </>

@@ -4,13 +4,13 @@ template: "page"
 slug: /privacy-policy
 ---
 
-ORINS tôn trọng dữ liệu và quyền riêng tư của bạn. Văn bản này chứa các thông tin chính thức của chúng tôi về việc sử dụng và bảo mật thông tin của bạn cũng như mọi khách hàng truy cập vào website này. Nếu bạn không đồng ý với những chính sách liệt kê trong văn bản này, bạn không nên sử dụng sản phẩm hoặc dịch vụ của chúng tôi.
+Bánh Ổi tôn trọng dữ liệu và quyền riêng tư của bạn. Văn bản này chứa các thông tin chính thức của chúng tôi về việc sử dụng và bảo mật thông tin của bạn cũng như mọi khách hàng truy cập vào website này. Nếu bạn không đồng ý với những chính sách liệt kê trong văn bản này, bạn không nên sử dụng sản phẩm hoặc dịch vụ của chúng tôi.
 
 # I. Về việc thu thập thông tin
 
-Việc thu thập thông tin cá nhân của khách hàng trên website ORINS.design luôn được chúng tôi cố gắng giữ ở mức tối thiểu nhất có thể. Đó là một định hướng hoạt động của chúng tôi.
+Việc thu thập thông tin cá nhân của khách hàng trên website Oicakery.com luôn được chúng tôi cố gắng giữ ở mức tối thiểu nhất có thể. Đó là một định hướng hoạt động của chúng tôi.
 
-Dưới đây liệt kê các thông tin mà chúng tôi có thể thu thập từ bạn trong quá trình bạn sử dụng sản phẩm hoặc dịch vụ của ORINS.
+Dưới đây liệt kê các thông tin mà chúng tôi có thể thu thập từ bạn trong quá trình bạn sử dụng sản phẩm hoặc dịch vụ của Bánh Ổi.
 
 ## Thông tin giỏ hàng
 - Sản phẩm bạn chọn để đặt hàng
@@ -41,7 +41,7 @@ Các thông tin mà bạn cung cấp nêu trên đều được bảo mật trê
 
 Mặc dù được trang bị các hình thức bảo mật thông tin tiêu chuẩn, trên thực tế, chúng tôi không hề lưu giữ các thông tin về tài khoản cá nhân hoặc thông tin nhạy cảm của khách hàng, vì các lý do:
 
-- Chúng tôi không yêu cầu khách hàng phải tạo tài khoản trên website ORINS.design
+- Chúng tôi không yêu cầu khách hàng phải tạo tài khoản trên website Oicakery.com
 - Chúng tôi không liên kết với bất kỳ dịch vụ tài khoản online nào khác
 - Thông tin về giỏ hàng chỉ được lưu trong cookies của trình duyệt của người sử dụng, các thông tin này sẽ được tự động xoá sau khi đặt hàng thành công hoặc người dùng tự xoá.
 - Các dữ liệu thống kê về việc sử dụng website chỉ là các dữ liệu kỹ thuật, không có tính chất định danh người sử dụng.
@@ -100,6 +100,6 @@ Một lần nữa, giữ cho việc thu thập thông tin cá nhân của khách
 
 # VII. Về việc cập nhật chính sách
 
-Chính sách bảo mật và riêng tư của chúng tôi sẽ có thể được thay đổi và cập nhật mà không cần phải báo trước. Tuy nhiên, chúng tôi vẫn sẽ thông báo chính thức trên website ORINS.design với những thay đổi quan trọng.
+Chính sách bảo mật và riêng tư của chúng tôi sẽ có thể được thay đổi và cập nhật mà không cần phải báo trước. Tuy nhiên, chúng tôi vẫn sẽ thông báo chính thức trên website Oicakery.com với những thay đổi quan trọng.
 
 Chúng tôi cũng luôn mong chờ ý kiến đóng góp từ bạn cũng như sẽ đáp ứng bất cứ yêu cầu nào của bạn liên quan đến thông tin cá nhân mà bạn đã cung cấp trên website này.

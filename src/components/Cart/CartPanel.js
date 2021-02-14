@@ -161,6 +161,7 @@ const CartFooter = styled(`div`)`
 const Costs = styled('div')`
   display: flex;
   flex-direction: column;
+  margin-bottom: ${spacing.md}px;
 `;
 
 const Cost = styled(`div`)`
@@ -186,19 +187,6 @@ const Cost = styled(`div`)`
     font-size: 1.4rem;
     font-weight: 600;
     text-align: right;
-  }
-`;
-
-const Shipping = styled(FontStyle.body)`
-  text-align: center;
-  color: ${colors.neutral4};
-  margin-top: ${spacing.lg}px;
-  display: flex;
-  align-items: center;
-
-  i {
-    color: ${colors.mainSupport};
-    margin-right: ${spacing.xs}px;
   }
 `;
 
@@ -313,15 +301,14 @@ class Cart extends Component {
                           <span>Thuế:</span> <strong>{checkout.totalTax}</strong>
                         </Cost>
                       }
-                      <Shipping><OiIcon icon='oi-icon-check' />Free ship toàn Việt Nam.</Shipping>
                       {/* <Total>
                         <span>Total Price:</span>
                         <strong>USD ${checkout.totalPrice}</strong>
                       </Total> */}
                     </Costs>
                     <ButtonGroup>
-                      <CheckOut href={checkout.webUrl}>Đặt hàng →</CheckOut>
-                      <BackLink onClick={toggle}>← Tiếp tục mua hàng</BackLink>
+                      <CheckOut href={checkout.webUrl}>Đặt hàng</CheckOut>
+                      <BackLink onClick={toggle}>Tiếp tục mua hàng</BackLink>
                     </ButtonGroup>
                   </CartFooter>
                 </>

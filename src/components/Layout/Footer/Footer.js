@@ -202,7 +202,7 @@ const Footer = ({ viewportIs, ...rest }) => {
 
         <Module alwaysExpand={viewportIs === 'desktop' ? true : false} title='Bánh Ổi?'>
           <AboutDesc>
-            <AboutText>Bánh Ổi là vì bánh được làm bởi Ổi – Một người tin rằng bánh là con đường ngắn nhưng sâu sắc để có được hạnh phúc.</AboutText>
+            <AboutText>Một tiệm bánh nhỏ tại Đà Lạt. Chúng tôi làm những chiếc bánh thơm ngon và hướng tới trải nghiệm thưởng thức chân thật mà thú vị.</AboutText>
             <Link to='/about'>Xem thêm</Link>
           </AboutDesc>
         </Module>
@@ -220,7 +220,7 @@ const Footer = ({ viewportIs, ...rest }) => {
               <FooterWidgetLink activeClassName='activeFootNavItem' to='/how-to-order'>Hướng dẫn đặt hàng</FooterWidgetLink>
             </li>
             <li>
-              <FooterWidgetLink activeClassName='activeFootNavItem' to='/shipping-and-return'>Giao hàng &amp; Đổi trả</FooterWidgetLink>
+              <FooterWidgetLink activeClassName='activeFootNavItem' to='/shipping'>Giao hàng</FooterWidgetLink>
             </li>
             <li>
               <FooterWidgetLink activeClassName='activeFootNavItem' to='/payment-methods'>Phương thức thanh toán</FooterWidgetLink>

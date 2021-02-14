@@ -121,8 +121,8 @@ const MenuItemLink = styled(Link)`
   display: flex;
   align-items: center;
   font-family: ${fontFamily.heading};
-  font-weight: ${fontWeight.heading.bold};
-  font-size: 0.95rem;
+  font-weight: ${fontWeight.heading.medium};
+  font-size: 1.125rem;
   padding: 0 20px;
   height: 48px;
   line-height: 48px;

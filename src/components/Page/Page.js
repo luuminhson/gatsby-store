@@ -7,7 +7,7 @@ import ScrollAnimation from '../shared/ScrollAnimation';
 import Footer from '../Layout/Footer';
 
 import InterfaceContext from '../../context/InterfaceContext';
-import { mediaQuery, FontStyle, spacing, dimensions } from '../../utils/styles';
+import { mediaQuery, FontStyle, spacing, dimensions, fontWeight } from '../../utils/styles';
 
 type Props = {
   title?: string,
@@ -39,6 +39,7 @@ export const PageInner = styled(`div`)`
 
 const PageTitle = styled(FontStyle.h1)`
   font-size: 1.6rem;
+  font-weight: ${fontWeight.heading.bold};
   margin: 0 auto ${spacing.md}px;
   padding: 0 ${spacing.lg}px;
 
@@ -89,7 +90,7 @@ class PurePage extends React.Component<Props> {
           <title>{title}</title>
           <meta name="description" content={description} />
 
-          <link rel="preconnect" href="https://orins.design" />
+          <link rel="preconnect" href="https://oicakery.com" />
           <link rel="canonical" href={siteUrl} />
           <link rel="apple-touch-startup-image" href="launch.png"></link>
           <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -101,7 +102,7 @@ class PurePage extends React.Component<Props> {
           <meta name="theme-color" content="#ffffff" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-          <meta name="apple-mobile-web-app-title" content="ORINS" />
+          <meta name="apple-mobile-web-app-title" content="Bánh Ổi" />
 
           <meta property="og:url" content={siteUrl} />
           <meta property="og:type" content="website" />
@@ -111,7 +112,7 @@ class PurePage extends React.Component<Props> {
           <meta property="og:description" content={description} />
 
           <meta property="og:image" content={`${siteUrl}/img-share-link.jpg`} />
-          <meta property="og:image:alt" content="We are ORINS." />
+          <meta property="og:image:alt" content="Đây là Bánh Ổi." />
           <meta property="og:image:width" content="1280" />
           <meta property="og:image:height" content="686" />
         </Helmet>

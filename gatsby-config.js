@@ -96,7 +96,7 @@ module.exports = {
               }
             `,
           output: '/rss.xml',
-          title: "ORINS's RSS Feed",
+          title: "Oi Cakery's RSS Feed",
           match: "^/blog/",
         }]
       }
@@ -190,8 +190,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'ORINS',
-        short_name: 'ORINS',
+        name: 'Oi Cakery',
+        short_name: 'Oi Cakery',
         start_url: '/',
         background_color: '#ffffff',
         theme_color: '#ffffff',
@@ -216,11 +216,11 @@ module.exports = {
       options: {
         custom: {
           families: [
-            'Merriweather',
+            'Vollkorn',
             'Source Serif Pro:n4,i4,n6,i6,n7,i7'
           ],
           urls: [
-            'https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,400i,600,600i,700,700i|Merriweather:400,700,900&display=swap&subset=latin-ext,vietnamese',
+            'https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,400i,600,600i,700,700i|Vollkorn:400,600,800&display=swap&subset=latin-ext,vietnamese',
           ],
         },
       }

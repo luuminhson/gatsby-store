@@ -173,7 +173,7 @@ const monospaceFontStack = [
 
 export const fontFamily = {
   body: `Source Serif Pro, ${defaultFontStack}`,
-  heading: `Merriweather, ${defaultFontStack}`,
+  heading: `Vollkorn, ${defaultFontStack}`,
   monospace: monospaceFontStack
 };
 
@@ -214,8 +214,8 @@ const lineHeight = {
 export const fontWeight = {
   heading: {
     normal: 400,
-    medium: 700,
-    bold: 900,
+    medium: 600,
+    bold: 800,
   },
   body: {
     normal: 400,
@@ -232,7 +232,7 @@ const headingLetterSpacing = '0';
 const headingCommonStyle = (`
   color: ${colors.mainDark};  
   font-family: ${fontFamily.heading};
-  font-weight: ${fontWeight.heading.bold};
+  font-weight: ${fontWeight.heading.medium};
   letter-spacing: ${headingLetterSpacing};
   margin: 0;
 `);
