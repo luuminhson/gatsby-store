@@ -5,13 +5,13 @@ import { Link } from '../LinkWithPrev';
 
 import { colors, fontFamily, radius, fontWeight } from '../../utils/styles';
 
-export const ButtonBase = styled(Link)`
+export const ButtonBase = styled(`button`)`
   align-items: center;
-  background: ${props => (props.inverse ? colors.mainClickable : colors.neutral1)};
+  background: ${colors.neutral1};
   opacity: ${props => (props.disabled ? '0.75' : '1')};
   border: none;
   border-radius: ${radius.large}px;
-  color: ${props => (props.inverse ? colors.brandLight : colors.mainClickable)};
+  color: ${colors.mainClickable};
   cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
   height: ${props => (props.small ? '32px' : '50px')};
   display: inline-flex;
@@ -49,18 +49,17 @@ const ButtonAsExternalLink = styled(ButtonBase.withComponent(`a`))`
 `;
 
 const ButtonAsInternalLink = ButtonAsExternalLink.withComponent(
-  ({ inverse, ...rest }) => <Link {...rest} />
+  ({ ...rest }) => <Link {...rest} />
 );
 
 export class Button extends Component {
   render() {
-    const { children, to, href, ref, inverse, small, ...rest } = this.props;
+    const { children, to, href, ref, small, ...rest } = this.props;
 
     if (to) {
       return (
         <ButtonAsInternalLink
           to={to}
-          inverse={inverse ? 1 : 0}
           small={small ? 1 : 0}
           {...rest}
         >
@@ -71,7 +70,6 @@ export class Button extends Component {
       return (
         <ButtonAsExternalLink
           href={href}
-          inverse={inverse ? 1 : 0}
           small={small ? 1 : 0}
           {...rest}
         >
@@ -80,7 +78,7 @@ export class Button extends Component {
       );
     } else {
       return (
-        <ButtonBase inverse={inverse} small={small ? 1 : 0} {...rest}>
+        <ButtonBase small={small ? 1 : 0} {...rest}>
           {children}
         </ButtonBase>
       );
@@ -90,14 +88,12 @@ export class Button extends Component {
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  inverse: PropTypes.bool,
   to: PropTypes.string,
   href: PropTypes.string,
   small: PropTypes.bool
 };
 
 Button.defaultProps = {
-  inverse: false,
   small: false
 }
 
