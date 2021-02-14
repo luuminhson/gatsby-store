@@ -56,6 +56,7 @@ const SidePanelCloseBtn = css`
   height: 48px;
   line-height: 48px;
   margin-right: -${spacing.md}px;
+  cursor: pointer;
 `;
 
 const SidePanelMenu = styled(Menu)`

@@ -463,7 +463,6 @@ class ProductForm extends Component {
               <AddToCartButton
                 type="submit"
                 disabled={isOutOfStock}
-                fullWidth={!hasVariants}
               >
                 {isOutOfStock ? 'Tạm hết hàng' : 'Chọn mua'}
               </AddToCartButton>

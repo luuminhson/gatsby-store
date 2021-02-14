@@ -86,12 +86,10 @@ const Details = styled(`div`)`
   
   ${mediaQuery.tabletPortrait} {
     flex: 0 1 100%;
-    padding: 0;
   }
 
   ${mediaQuery.desktop} {
     max-width: 40vw;
-    // margin-right: 10%;
   }
 `;
 

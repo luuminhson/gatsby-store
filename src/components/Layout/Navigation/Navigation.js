@@ -121,9 +121,10 @@ const MobileNavLogo = styled(Logo)`
     }
 `;
 
-const MovileNavIconWrapper = styled(`div`)`
+const MobileNavIconWrapper = styled(`div`)`
     position: relative;
     padding: ${spacing.sm}px;
+    cursor: pointer;
 
     > * {
         display: block;
@@ -148,7 +149,7 @@ const NavWhite = css`
     }
 
     ${CartToggleIcon},
-    ${MovileNavIconWrapper} {
+    ${MobileNavIconWrapper} {
         i {
             color: ${colors.white};
         }
@@ -216,7 +217,7 @@ const pinnedStyle = css`
         }
     
         ${CartToggleIcon},
-        ${MovileNavIconWrapper} {
+        ${MobileNavIconWrapper} {
             i {
                 color: ${colors.mainDark};
             }
@@ -302,11 +303,11 @@ class PureNavigation extends React.Component {
         }
 
         const backButton = (
-            <MovileNavIconWrapper>
+            <MobileNavIconWrapper>
                 <Link to={backLink()}>
                     <OiIcon icon='oi-icon-arrow-back' />
                 </Link>
-            </MovileNavIconWrapper>
+            </MobileNavIconWrapper>
         );
 
         const navLeft = (
@@ -335,17 +336,17 @@ class PureNavigation extends React.Component {
 
         const mobileNavRight = (
             <NavRightWrapper>
-                <MovileNavIconWrapper>
+                <MobileNavIconWrapper>
                     <Link to='/cart'>
                         <OiIcon icon='oi-icon-cart' />
                         <CartItemNumber number={cartNumber} />
                     </Link>
-                </MovileNavIconWrapper>
-                <MovileNavIconWrapper>
+                </MobileNavIconWrapper>
+                <MobileNavIconWrapper>
                     <div onClick={toggleSidebar}>
                         <OiIcon icon='oi-icon-menu' />
                     </div>
-                </MovileNavIconWrapper>
+                </MobileNavIconWrapper>
             </NavRightWrapper>
         );
 
@@ -369,7 +370,7 @@ class PureNavigation extends React.Component {
                 {(viewportIs === null || viewportIs === 'tablet') ?
                     <NavigationWrapper
                         className={className}
-                        css={((viewportIs === null && pageIs === 'Index') || pageIs === 'Post') && NavWhite}
+                        css={(pageIs === 'Post') && NavWhite}
                     >
                         <NavigationInner>
                             {mobileNavLeft}
