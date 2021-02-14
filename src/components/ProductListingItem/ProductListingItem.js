@@ -32,9 +32,9 @@ const ProductListingItemLink = styled(Link)`
     flex-basis: calc(50% - ${spacing.sm * 2}px);
   }
 
-  ${mediaQuery.tablet} {
-    flex-basis: calc(50% - ${spacing.lg * 2}px);
-    margin: ${spacing.lg}px;
+  ${mediaQuery.tabletFrom} {
+    flex-basis: calc(50% - ${spacing.md * 2}px);
+    margin: ${spacing.md}px;
   }
 
   ${mediaQuery.desktop} {
@@ -57,12 +57,14 @@ const Preview = styled(`div`)`
   position: relative;
 `;
 
-const ProductTitle = styled(FontStyle.h4)`
-  font-size: 0.9rem;
+const ProductTitle = styled(FontStyle.h3)`
+  font-size: 1rem;
+  line-height: 1.5rem;
 
   ${mediaQuery.tabletFrom} {
-    margin-top: ${spacing.sm}px;
+    margin-top: ${spacing.xs}px;
     font-size: 1.1rem;
+    line-height: 1.65rem;
   }
 `;
 

@@ -46,7 +46,7 @@ const StripWrapper = styled(`div`)`
         scroll-snap-type: none;
         overflow: visible;
         flex-wrap: wrap;
-        margin: 0 -${spacing.sm}px;
+        margin: 0 -${spacing.xl}px;
         padding: 0 0 20px;
     }
 `;
@@ -85,18 +85,19 @@ const StripItem = styled(`div`)`
 
     ${mediaQuery.tabletFrom} {
         flex-basis: 33.3333%;
-        max-width: calc(33.3333%);
-        padding: 0 ${spacing.sm}px;
+        max-width: 33.3333%;
+        padding: 0 ${spacing.xl}px;
         margin-bottom: 36px;
 
         &:last-child {
-            padding-right: ${spacing.sm}px;
+            padding-right: ${spacing.xl}px;
         }
 
         &.has-featured-image {
             .strip-item-inner {
                 .postThumbnail {
                     height: 240px;
+                    margin-bottom: ${spacing.sm}px;
                 }
             }
         }
@@ -110,7 +111,7 @@ const ItemLink = styled(Link)`
 
 const ItemInfo = styled(`div`)`
     flex: 1 0 100%;
-    padding: 16px 0 0;
+    padding: ${spacing.sm}px 0 0;
     max-width: 100%;
     box-sizing: border-box;
 
@@ -118,9 +119,9 @@ const ItemInfo = styled(`div`)`
         color: ${colors.mainDark};
         font-family: ${fontFamily.heading};
         font-size: 1rem;
-        line-height: 24px;
-        max-height: 48px;
-        margin: 0 0 8px;
+        line-height: 1.5rem;
+        max-height: 3rem;
+        margin: 0 0 ${spacing.xs}px;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;

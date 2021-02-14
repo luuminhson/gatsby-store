@@ -17,7 +17,7 @@ const ProductListingContainer = styled(`div`)`
   margin: 0 auto;
 
   ${mediaQuery.tablet} {
-    padding: 0 ${spacing.lg}px;
+    padding: 0 ${spacing.md}px;
   }
 
   ${mediaQuery.desktop} {

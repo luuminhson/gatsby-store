@@ -35,6 +35,10 @@ const IndexWrapper = styled(`div`)`
 
 const TitleGroup = styled(`div`)`
   margin-bottom: 3%;
+
+  ${mediaQuery.tabletFrom} {
+    margin-bottom: 5%;
+  }
 `;
 
 // HERO SECTION
@@ -42,6 +46,7 @@ const TitleGroup = styled(`div`)`
 const HeroImage = styled(Img)`
   width: 75%;
   height: 35vh;
+  min-height: 250px;
   margin-left: 25%;
   border-radius: ${radius.large}px;
 
@@ -57,6 +62,7 @@ const HeroImage = styled(Img)`
 const HeroImageSub = styled(Img)`
   width: 50%;
   height: 20vh;
+  min-height: 180px;
   margin-top: -${spacing['8xl']}px;
   margin-right: 55%;
   border-radius: ${radius.large}px;
@@ -137,7 +143,7 @@ const ProductsWrapper = styled(`div`)`
 
   ${mediaQuery.tabletFrom} {
     height: auto;
-    margin: 0 -${spacing.sm}px;
+    margin: 0 -${spacing.xl}px;
   }
 `;
 
@@ -166,11 +172,12 @@ const ProductListingContainer = styled(`div`)`
     }
 
     ${mediaQuery.tabletFrom} {
-      flex: 1 0 25%;
+      flex: 1 0 33.33%;
+      padding: 0 ${spacing.xl}px;
       max-width: none;
     
       &:last-child {
-          padding-right: ${spacing.md}px;
+          padding-right: ${spacing.xl}px;
       }
     }
   }
@@ -180,17 +187,18 @@ const ProductListingContainer = styled(`div`)`
 
     > a {
       margin: 0;
-      flex-basis: calc(33.33% - 24px);
+      flex-basis: calc(33.3333% - ${spacing.xl*2}px);
     }
   }
 `;
 
 const LastestProductsSection = styled(`div`)`
   padding: 0 ${spacing.lg}px;
-  margin: 12% 0;
+  margin: 20% 0;
 
   ${mediaQuery.tabletFrom} {
     padding: 0;
+    margin: 12% 0;
   }
 `;
 
@@ -199,7 +207,7 @@ const LastestProductsSection = styled(`div`)`
 const IndexStrip = styled(Strip)``;
 
 const LastestBlogSection = styled(`div`)`
-  margin: 12% 0 0;
+  margin: 20% 0 0;
   padding: 0 ${spacing.lg}px;
 
   ${IndexStrip} {
@@ -207,6 +215,7 @@ const LastestBlogSection = styled(`div`)`
   }
 
   ${mediaQuery.tabletFrom} {
+    margin: 12% 0 0;
     padding: 0;
 
     ${IndexStrip} {
