@@ -31,8 +31,8 @@ export const ButtonBase = styled(Link)`
 
   svg {
     height: 1.1em;
-    margin-left: ${props => (props.iconOnLeft ? 0 : '0.5em')};
-    margin-right: ${props => (props.iconOnLeft ? '0.5em' : 0)};
+    margin-left: 0.5em;
+    margin-right: 0.5em;
     width: 1.1em;
   }
 
@@ -49,23 +49,19 @@ const ButtonAsExternalLink = styled(ButtonBase.withComponent(`a`))`
 `;
 
 const ButtonAsInternalLink = ButtonAsExternalLink.withComponent(
-  ({ iconOnLeft, inverse, ...rest }) => <Link {...rest} />
+  ({ inverse, ...rest }) => <Link {...rest} />
 );
 
 export class Button extends Component {
   render() {
-    const { children, to, href, ref, inverse = false, small, ...rest } = this.props;
-
-    // automtic recognition of icon placement, works properly only for [text + <Icon>] childrens
-    const iconOnLeft = typeof children[0] !== 'string';
+    const { children, to, href, ref, inverse, small, ...rest } = this.props;
 
     if (to) {
       return (
         <ButtonAsInternalLink
           to={to}
-          iconOnLeft={iconOnLeft}
-          inverse={inverse}
-          small={small}
+          inverse={inverse ? 1 : 0}
+          small={small ? 1 : 0}
           {...rest}
         >
           {children}
@@ -75,9 +71,8 @@ export class Button extends Component {
       return (
         <ButtonAsExternalLink
           href={href}
-          inverse={inverse}
-          iconOnLeft={iconOnLeft}
-          small={small}
+          inverse={inverse ? 1 : 0}
+          small={small ? 1 : 0}
           {...rest}
         >
           {children}
@@ -85,7 +80,7 @@ export class Button extends Component {
       );
     } else {
       return (
-        <ButtonBase inverse={inverse} iconOnLeft={iconOnLeft} small={small} {...rest}>
+        <ButtonBase inverse={inverse} small={small ? 1 : 0} {...rest}>
           {children}
         </ButtonBase>
       );
@@ -102,6 +97,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
+  inverse: false,
   small: false
 }
 
