@@ -16,7 +16,7 @@ type Props = {
 };
 
 const PostWrapper = styled(`div`)`
-  margin-top: -${headerHeight.tablet};
+  margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet}px);
 
   ${mediaQuery.tabletFrom} {
     margin-top: calc(-${headerHeight.tablet} - ${dimensions.navPaddingTopTablet}px - ${spacing['4xl']}px);

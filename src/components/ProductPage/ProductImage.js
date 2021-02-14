@@ -38,7 +38,7 @@ const ProductImageWrapper = styled(`div`)`
   margin-bottom: ${spacing.lg}px;
 
   &:last-child {
-    max-width: calc(${imageItemWidth} + ${spacing.md}px);
+    max-width: calc(${imageItemWidth} + ${spacing.sm}px);
     padding-right: ${spacing.xl}px;
   }
 
@@ -61,10 +61,10 @@ const ProductImageWrapper = styled(`div`)`
     flex: 1 0 auto;
     padding: 0;
     margin-bottom: 0;
-    max-width: 70vw;
+    // max-width: 70vw;
 
     &:last-child {
-      max-width: 70vw;
+      // max-width: 70vw;
       padding: 0;
     }
 
@@ -74,13 +74,13 @@ const ProductImageWrapper = styled(`div`)`
     }
   }
 
-  ${mediaQuery.desktop} {
-    max-width: 600px;
+  // ${mediaQuery.desktop} {
+  //   max-width: 600px;
 
-    &:last-child {
-      max-width: 600px;
-    }
-  }
+  //   &:last-child {
+  //     max-width: 600px;
+  //   }
+  // }
 `;
 
 export const StyledImage = styled(Image)`

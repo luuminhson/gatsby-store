@@ -30,7 +30,7 @@ const PageStyle = css`
 export const PageInner = styled(`div`)`
   margin: 0 auto;
   max-width: 100%;
-  padding-top: ${spacing.md}px;
+  padding-top: ${spacing.xl}px;
 
   ${mediaQuery.tabletFrom} {
     padding-top: ${spacing['4xl']}px;

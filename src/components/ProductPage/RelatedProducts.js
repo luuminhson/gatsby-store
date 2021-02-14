@@ -6,7 +6,7 @@ import type { Edges } from '../../types';
 
 import ProductListingItem from '../ProductListingItem';
 import SectionTitle from '../SectionTitle';
-import { spacing, mediaQuery } from '../../utils/styles';
+import { spacing, breakpoints, mediaQuery } from '../../utils/styles';
 
 type Props = {
     edges: Edges,
@@ -21,20 +21,21 @@ const SectionTitleWrapper = styled(SectionTitle)`
 
     ${mediaQuery.tabletFrom} {
         margin-bottom: ${spacing.xl}px;
-        padding: 0 ${spacing.xs}px;
+        padding: 0;
     }
 `;
 
 const RelatedProductsWrapper = styled(`div`)`
-    margin: ${spacing.lg}px 0;
+    margin: ${spacing.lg}px auto;
+    max-width: ${breakpoints.hd}px;
 
     ${mediaQuery.tabletFrom} {
-        margin: ${spacing['4xl']}px 0;
-        padding: 0 ${spacing.lg}px;
+        margin: ${spacing['4xl']}px auto;
+        padding: 0 ${spacing.xl}px;
     }
 
-    ${mediaQuery.desktop} {
-        padding: 0 ${spacing['4xl']}px;
+    ${mediaQuery.desktopLarge} {
+        padding: 0;
     }
 `;
 

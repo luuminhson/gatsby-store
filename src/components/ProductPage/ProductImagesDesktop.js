@@ -11,8 +11,7 @@ const THUMBNAIL_SIZE = '80px';
 
 const ProductImagesDesktopRoot = styled(`div`)`
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  align-items: start;
   width: 100%;
 `;
 
@@ -25,10 +24,6 @@ const Thumbnails = styled(ProductThumbnails)`
   }
 `;
 
-const MainImage = styled(ProductImage)`
-  dislay: flex;
-`;
-
 const ProductImagesDesktop = ({ images, imageFeatured, imageFeaturedIndex }) => {
   const image = images[0];
 
@@ -37,7 +32,7 @@ const ProductImagesDesktop = ({ images, imageFeatured, imageFeaturedIndex }) => 
       { images.length !== 1 &&
         <Thumbnails images={images} activeIdx={imageFeaturedIndex} />
       }
-      <MainImage
+      <ProductImage
         image={imageFeatured ? imageFeatured : image}
         idx={imageFeaturedIndex}
         single={ images.length === 1 ? true : false }

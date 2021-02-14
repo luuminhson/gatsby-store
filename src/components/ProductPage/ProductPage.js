@@ -61,7 +61,7 @@ const ProductImagesContainer = styled(`div`)`
 
   ${mediaQuery.tabletFrom} {
     flex: 0 1 65%;
-    padding-right: ${spacing.xl}px;
+    padding-right: ${spacing['2xl']}px;
   }
 
   ${mediaQuery.tabletPortrait} {
@@ -70,7 +70,8 @@ const ProductImagesContainer = styled(`div`)`
   }
 
   ${mediaQuery.desktop} {
-    // margin-right: 10%;
+    // flex: 0 1 50%;
+    padding-right: ${spacing['4xl']}px;
   }
 `;
 
@@ -80,12 +81,12 @@ const Details = styled(`div`)`
 
   ${mediaQuery.tabletFrom} {
     flex: 1 0 35%;
-    padding: 0 ${spacing.xl}px;
-    margin-top: ${spacing['4xl']}px;
+    padding: 0;
   }
   
   ${mediaQuery.tabletPortrait} {
     flex: 0 1 100%;
+    margin-top: ${spacing['2xl']}px;
   }
 
   ${mediaQuery.desktop} {

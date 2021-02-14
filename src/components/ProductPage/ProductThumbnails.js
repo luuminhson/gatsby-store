@@ -22,7 +22,7 @@ const ProductThumbnailsRoot = styled(`div`)`
     height: auto;
     width: auto;
     max-width: calc(${THUMBNAIL_SIZE} + ${spacing.xs * 2}px);
-    padding: ${spacing.xs}px 0;
+    padding: 0;
     margin-right: ${spacing.xl}px;
     overflow-y: hidden;
   }
@@ -42,17 +42,18 @@ export const ProductThumbnailsContent = styled(`div`)`
 export const Thumbnail = styled(`a`)`
   background-color: ${colors.white};
   border-radius: ${radius.default}px;
+  overflow: hidden;
   display: block;
   height: ${THUMBNAIL_SIZE};
   width: ${THUMBNAIL_SIZE};
   margin: ${spacing.xs}px;
-  opacity: 0.75;
+  opacity: 0.6;
   box-shadow: 0 0 0 1px ${colors.neutral2};
   transition: all 0.2s ease-in-out;
 
   &.active {
     opacity: 1;
-    box-shadow: 0 0 0 2px ${colors.mainDark};
+    box-shadow: 0 0 0 3px ${colors.mainClickable};
   }
 
   @media (min-width: ${breakpoints.desktop}px) {
@@ -62,7 +63,7 @@ export const Thumbnail = styled(`a`)`
 
 const active = css`
   opacity: 1;
-  box-shadow: 0 0 0 2px ${colors.mainDark};
+  box-shadow: 0 0 0 3px ${colors.mainClickable};
 `;
 
 class ProductThumbnails extends Component {
