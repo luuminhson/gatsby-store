@@ -11,6 +11,8 @@ import { Button, PrimaryButton } from '../components/shared/Buttons';
 import ProductListingItem from '../components/ProductListingItem';
 import type { AllMarkdownRemark } from '../types';
 
+import InstagramFeed from '../components/InstagramFeed';
+
 import InterfaceContext from '../context/InterfaceContext';
 import { mediaQuery, spacing, FontStyle, radius, dimensions, headerHeight, colors } from '../utils/styles';
 
@@ -368,7 +370,7 @@ const AboutImg3 = styled(Img)`
 const IndexStrip = styled(Strip)``;
 
 const LastestBlogSection = styled(`div`)`
-  margin: 15vh 0 0;
+  margin: 15vh 0;
   padding: 0 ${spacing.lg}px;
 
   ${IndexStrip} {
@@ -384,7 +386,22 @@ const LastestBlogSection = styled(`div`)`
   }
 
   ${mediaQuery.tabletPortrait} {
-    margin: 10vh 0 0;
+    margin: 10vh 0;
+  }
+`;
+
+// INSTA FEED SECTION
+
+const InstaFeedSection = styled(`div`)`
+  margin: 15vh 0;
+  padding: 0 ${spacing.lg}px;
+
+  ${mediaQuery.tabletFrom} {
+    padding: 0;
+  }
+
+  ${mediaQuery.tabletPortrait} {
+    margin: 10vh 0;
   }
 `;
 
@@ -396,7 +413,7 @@ class IndexTemplate extends React.Component<Props> {
 
   render() {
 
-    const { data } = this.props;
+    const { data, viewportIs } = this.props;
 
     const { title, subtitle, description } = data.site.siteMetadata;
     const blogPost = data.blogStrip.edges;
@@ -409,6 +426,8 @@ class IndexTemplate extends React.Component<Props> {
     const indexIntroImage3Src = data.indexIntroImage3.childImageSharp.fluid;
 
     const latestProductList = data.latestProducts.edges;
+
+    const instaFeedGap = viewportIs === 'desktop' || viewportIs === 'tablet' || viewportIs === 'tabletLandscape' ? 64 : 24;
 
     return (
       <Page title={`${title} ‧ ${subtitle}`} description={description} pageIs='Index'>
@@ -463,6 +482,15 @@ class IndexTemplate extends React.Component<Props> {
               </TitleGroup>
               <IndexStrip edges={blogPost} />
             </LastestBlogSection>
+          </ScrollAnimation>
+
+          <ScrollAnimation>
+            <InstaFeedSection>
+              <TitleGroup>
+                <SectionTitle subtitle='Khoảnh khắc ngày thường' actionLabel='@banh.oi' externalLink='https://www.instagram.com/banh.oi/' newTab>Banh Oi's Instagram</SectionTitle>
+              </TitleGroup>
+              <InstagramFeed total={6} cols={6} gap={instaFeedGap} />
+            </InstaFeedSection>
           </ScrollAnimation>
         </IndexWrapper>
       </Page>

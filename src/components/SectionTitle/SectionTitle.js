@@ -48,7 +48,7 @@ const CenteredStyle = css`
     }
 `;
 
-const SectionTitle = ({ children, subtitle, centered, actionLink, actionLabel, className, props }) => (
+const SectionTitle = ({ children, subtitle, centered, actionLink, externalLink, actionLabel, newTab = false, className, props }) => (
     <SectionWrapper className={className} css={centered && CenteredStyle} {...props}>
         <TitleGroup>
             {subtitle && <SubTitle>{subtitle}</SubTitle>}
@@ -56,8 +56,8 @@ const SectionTitle = ({ children, subtitle, centered, actionLink, actionLabel, c
                 {children}
             </Title>
         </TitleGroup>
-        {actionLink && (
-            <Button to={actionLink} small>
+        {(actionLink || externalLink) && (
+            <Button to={actionLink && actionLink} href={((actionLink && externalLink) || externalLink) && externalLink} newTab={newTab} small>
                 {actionLabel}
             </Button>
         )

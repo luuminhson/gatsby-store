@@ -232,5 +232,11 @@ module.exports = {
         showSpinner: false,
       },
     },
+    {
+      resolve: `gatsby-source-instagram`,
+      options: {
+        username: `27288374482`,
+      },
+    },
   ]
 };

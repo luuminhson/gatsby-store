@@ -54,7 +54,7 @@ const ButtonAsInternalLink = ButtonAsExternalLink.withComponent(
 
 export class Button extends Component {
   render() {
-    const { children, to, href, ref, small, ...rest } = this.props;
+    const { children, to, href, ref, small, newTab, ...rest } = this.props;
 
     if (to) {
       return (
@@ -71,6 +71,7 @@ export class Button extends Component {
         <ButtonAsExternalLink
           href={href}
           small={small ? 1 : 0}
+          target={newTab && '_blank'}
           {...rest}
         >
           {children}
@@ -90,10 +91,12 @@ Button.propTypes = {
   children: PropTypes.node.isRequired,
   to: PropTypes.string,
   href: PropTypes.string,
+  newTab: PropTypes.bool,
   small: PropTypes.bool
 };
 
 Button.defaultProps = {
+  newTab: false,
   small: false
 }
 
