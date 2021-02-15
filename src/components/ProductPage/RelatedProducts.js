@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import type { Edges } from '../../types';
 
 import ProductListingItem from '../ProductListingItem';
-import SectionTitle from '../SectionTitle';
+import SectionTitle, { Title } from '../SectionTitle';
 import { spacing, breakpoints, mediaQuery } from '../../utils/styles';
 
 type Props = {
@@ -22,6 +22,12 @@ const SectionTitleWrapper = styled(SectionTitle)`
     ${mediaQuery.tabletFrom} {
         margin-bottom: ${spacing.xl}px;
         padding: 0;
+    }
+
+    ${Title} {
+        font-size: 2rem;
+        line-height: 2.25rem;
+        margin-bottom: 0;
     }
 `;
 

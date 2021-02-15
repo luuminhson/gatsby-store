@@ -1,2 +1,2 @@
 // @flow
-export { default } from './SectionTitle';
+export { default, Title } from './SectionTitle';

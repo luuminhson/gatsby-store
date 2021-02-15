@@ -23,14 +23,19 @@ const SubTitle = styled(FontStyle.h4)`
     margin-bottom: ${spacing.sm}px;
 `;
 
-const Title = styled(FontStyle.h3)`
+export const Title = styled(FontStyle.h3)`
     font-size: 2.5rem;
     line-height: 2.65rem;
     margin-bottom: ${spacing.sm}px;
 
     ${mediaQuery.tabletFrom} {
-        font-size: 4rem;
-        line-height: 4.25rem;
+        font-size: 2.5rem;
+        line-height: 2.65rem;
+    }
+
+    ${mediaQuery.desktop} {
+        font-size: 3.6rem;
+        line-height: 4rem;
     }
 `;
 
