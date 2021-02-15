@@ -29,10 +29,6 @@ const InstaPostItem = styled(`div`)`
     ${mediaQuery.desktop} {
         flex: 1 0 calc(100%/${props => (props.cols)});
     }
-
-    ${ImgLink} {
-
-    }
 `;
 
 const PostMask = styled(`div`)`
