@@ -73,16 +73,17 @@ export const breakpoints = {
 };
 
 export const mediaQuery = {
-  phoneSmall:       `@media (max-width: ${breakpoints.mobile - 1}px)`,
-  phoneLarge:       `@media (min-width: ${breakpoints.mobile}px) and (max-width: ${breakpoints.tablet - 1}px)`,
-  phone:            `@media (max-width: ${breakpoints.tablet - 1}px)`,
-  tablet:           `@media (min-width: ${breakpoints.phablet}px) and (max-width: ${breakpoints.desktop - 1}px)`,
-  tabletPortrait:   `@media (min-width: ${breakpoints.phablet}px) and (max-width: ${breakpoints.tabletLandscape - 1}px) and (orientation: portrait)`,  
-  tabletLandscape:  `@media (min-width: ${breakpoints.phablet}px) and (max-width: ${breakpoints.tabletLandscape}px) and (orientation: landscape)`,
-  tabletFrom:       `@media (min-width: ${breakpoints.tablet}px)`,
-  desktop:          `@media (min-width: ${breakpoints.desktop}px)`,
-  desktopLarge:     `@media (min-width: ${breakpoints.hd}px)`,
-  desktopXLarge:    `@media (min-width: ${breakpoints.fhd}px)`,
+  phoneSmall:           `@media (max-width: ${breakpoints.mobile - 1}px)`,
+  phoneLarge:           `@media (min-width: ${breakpoints.mobile}px) and (max-width: ${breakpoints.tablet - 1}px)`,
+  phone:                `@media (max-width: ${breakpoints.tablet - 1}px)`,
+  tablet:               `@media (min-width: ${breakpoints.phablet}px) and (max-width: ${breakpoints.desktop - 1}px)`,
+  tabletPortrait:       `@media (min-width: ${breakpoints.phablet}px) and (max-width: ${breakpoints.tabletLandscape - 1}px) and (orientation: portrait)`,  
+  tabletLandscape:      `@media (min-width: ${breakpoints.phablet}px) and (max-width: ${breakpoints.tabletLandscape}px) and (orientation: landscape)`,
+  tabletFrom:           `@media (min-width: ${breakpoints.tablet}px)`,
+  tabletLandscapeFrom:  `@media (min-width: ${breakpoints.tabletLandscape}px)`,
+  desktop:              `@media (min-width: ${breakpoints.desktop}px)`,
+  desktopLarge:         `@media (min-width: ${breakpoints.hd}px)`,
+  desktopXLarge:        `@media (min-width: ${breakpoints.fhd}px)`,
 }
 
 /* SPACING

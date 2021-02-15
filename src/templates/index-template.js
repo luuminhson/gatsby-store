@@ -43,6 +43,25 @@ const TitleGroup = styled(`div`)`
 
 // HERO SECTION
 
+const HeroSection = styled(`section`)`
+  position: relative;  
+  display: grid;
+  grid-template-rows: auto;
+  row-gap: ${spacing.xl}px;
+  padding: 0 ${spacing.lg}px;
+  margin: 5vh 0 15vh;
+
+  ${mediaQuery.tabletFrom} {
+    grid-template-columns: 40% 55%;
+    column-gap: 5%;
+    padding: 0;
+  }
+
+  ${mediaQuery.tabletPortrait} {
+    margin: 2vh 0 10vh;
+  }
+`;
+
 const HeroImage = styled(Img)`
   width: 75%;
   height: 35vh;
@@ -102,10 +121,15 @@ const HeroTitle = styled(FontStyle.h1)`
   margin-bottom: ${spacing.lg}px;
 
   ${mediaQuery.tabletFrom} {
-    font-size: 2.4rem;
-    line-height: 3rem;
+    font-size: 3.6rem;
+    line-height: 4rem;
     max-width: 68vw;
     margin-bottom: ${spacing.xl}px;
+  }
+
+  ${mediaQuery.tabletPortrait} {
+    font-size: 3rem;
+    line-height: 3.25rem;
   }
 
   ${mediaQuery.desktop} {
@@ -114,27 +138,30 @@ const HeroTitle = styled(FontStyle.h1)`
   }
 
   ${mediaQuery.desktopLarge} {
+    font-size: 5.6rem;
+    line-height: 6rem;
+  }
+
+  ${mediaQuery.desktopXLarge} {
     font-size: 6rem;
     line-height: 6.75rem;
   }
 `;
 
-const HeroSection = styled(`section`)`
-  position: relative;  
-  display: grid;
-  grid-template-rows: auto;
-  row-gap: ${spacing.xl}px;
+// LATEST PRODUCTS SECTION
+
+const LastestProductsSection = styled(`div`)`
   padding: 0 ${spacing.lg}px;
-  margin: 5% 0 15%;
+  margin: 15vh 0;
 
   ${mediaQuery.tabletFrom} {
-    grid-template-columns: 40% 55%;
-    column-gap: 5%;
     padding: 0;
   }
-`;
 
-// LATEST PRODUCTS SECTION
+  ${mediaQuery.tabletPortrait} {
+    margin: 10vh 0;
+  }
+`;
 
 const ProductsWrapper = styled(`div`)`
   height: 78vw;
@@ -187,18 +214,152 @@ const ProductListingContainer = styled(`div`)`
 
     > a {
       margin: 0;
-      flex-basis: calc(33.3333% - ${spacing.xl*2}px);
+      flex-basis: calc(33.3333% - ${spacing.xl * 2}px);
     }
   }
 `;
 
-const LastestProductsSection = styled(`div`)`
+// ABOUT INTRO SECTION
+
+const AboutIntroSection = styled(`div`)`
   padding: 0 ${spacing.lg}px;
-  margin: 20% 0;
+  margin: 15vh 0;
 
   ${mediaQuery.tabletFrom} {
     padding: 0;
-    margin: 12% 0;
+  }
+
+  ${mediaQuery.tabletPortrait} {
+    margin: 10vh 0;
+  }
+
+  ${mediaQuery.desktop} {
+
+  }
+`;
+
+const AboutIntroRow1 = styled(`div`)`
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+
+  ${mediaQuery.tabletLandscapeFrom} {
+    flex-direction: row;
+
+    ${TitleGroup} {
+      order: 1;
+      width: calc(50vw - ${spacing['4xl']}px);
+      padding-right: 5%;
+
+      p {
+        padding-right: 5%;
+      }
+    }
+  }
+
+  ${mediaQuery.desktop} {
+    ${TitleGroup} {
+      padding-right: 10%;
+
+      p {
+        padding-right: 10%;
+      }
+    }
+  }
+
+  ${mediaQuery.desktopLarge} {
+    padding-left: 10%;
+  }
+`;
+
+const AboutIntroRow2 = styled(`div`)`
+  display: flex;
+`;
+
+const AboutImg1 = styled(Img)`
+  width: 65vw;
+  height: 40vh;
+  margin-top: ${spacing.xl}px;
+  border-radius: ${radius.large}px;
+
+  ${mediaQuery.tabletFrom} {
+
+  }
+
+  ${mediaQuery.tabletLandscapeFrom} {
+    order: 0;
+    width: 50vw;
+    height: 55vh;
+    margin-top: ${spacing['8xl']}px;
+    margin-right: ${spacing['4xl']}px;
+  }
+
+  ${mediaQuery.desktop} {
+
+  }
+
+  ${mediaQuery.desktopLarge} {
+    margin-right: ${spacing['8xl']}px;
+  }
+`;
+
+const AboutImg2 = styled(Img)`
+  display: inline-block;
+  margin-top: ${spacing.xl}px;
+  width: 40%;
+  height: 25vh;
+  border-radius: ${radius.large}px;
+
+  ${mediaQuery.tabletFrom} {
+
+  }
+
+  ${mediaQuery.tabletLandscapeFrom} {
+    margin-top: ${spacing['4xl']}px;
+    margin-left: 10%;
+    width: 25%;
+    height: 35vh;
+  }
+
+  ${mediaQuery.desktop} {
+    margin-left: 20%;
+    width: 20%;
+    height: 30vh;
+  }
+
+  ${mediaQuery.desktopXLarge} {
+
+  }
+`;
+
+const AboutImg3 = styled(Img)`
+  display: inline-block;
+  width: calc(60% - ${spacing.xl}px);
+  height: 35vh;
+  margin-top: calc(-20vh + ${spacing['4xl']}px);
+  margin-left: ${spacing.xl}px;
+  border-radius: ${radius.large}px;
+
+  ${mediaQuery.tabletFrom} {
+
+  }
+
+  ${mediaQuery.tabletLandscapeFrom} {
+    width: calc(50% - ${spacing['4xl']}px);
+    height: 50vh;
+    margin-top: -20vh;
+    margin-left: ${spacing['4xl']}px;
+  }
+
+  ${mediaQuery.desktop} {
+    width: 35%;
+    height: 40vh;
+    margin-left: ${spacing['4xl']}px;
+    margin-top: -15vh;
+  }
+
+  ${mediaQuery.desktopXLarge} {
+    margin-top: -25vh;
   }
 `;
 
@@ -207,7 +368,7 @@ const LastestProductsSection = styled(`div`)`
 const IndexStrip = styled(Strip)``;
 
 const LastestBlogSection = styled(`div`)`
-  margin: 20% 0 0;
+  margin: 15vh 0 0;
   padding: 0 ${spacing.lg}px;
 
   ${IndexStrip} {
@@ -215,12 +376,15 @@ const LastestBlogSection = styled(`div`)`
   }
 
   ${mediaQuery.tabletFrom} {
-    margin: 12% 0 0;
     padding: 0;
 
     ${IndexStrip} {
       margin: 0;
     }
+  }
+
+  ${mediaQuery.tabletPortrait} {
+    margin: 10vh 0 0;
   }
 `;
 
@@ -232,7 +396,7 @@ class IndexTemplate extends React.Component<Props> {
 
   render() {
 
-    const { data, viewportIs } = this.props;
+    const { data } = this.props;
 
     const { title, subtitle, description } = data.site.siteMetadata;
     const blogPost = data.blogStrip.edges;
@@ -240,6 +404,9 @@ class IndexTemplate extends React.Component<Props> {
     const heroImageSrc = data.heroImage.childImageSharp.fluid;
     const heroImageSubSrc = data.heroImageSub.childImageSharp.fluid;
     const heroTitleMaskSrc = data.heroTitleMaskImage.childImageSharp.fluid.src;
+    const indexIntroImage1Src = data.indexIntroImage1.childImageSharp.fluid;
+    const indexIntroImage2Src = data.indexIntroImage2.childImageSharp.fluid;
+    const indexIntroImage3Src = data.indexIntroImage3.childImageSharp.fluid;
 
     const latestProductList = data.latestProducts.edges;
 
@@ -270,6 +437,23 @@ class IndexTemplate extends React.Component<Props> {
                 </ProductListingContainer>
               </ProductsWrapper>
             </LastestProductsSection>
+          </ScrollAnimation>
+
+          <ScrollAnimation>
+            <AboutIntroSection>
+              <AboutIntroRow1>
+                <TitleGroup>
+                  <SectionTitle>Bánh và những cung bậc cảm xúc</SectionTitle>
+                  <p>Nhấm nháp mỗi chiếc bánh và cảm nhận sự gần gũi với thiên nhiên cùng những cảm xúc bình dị thường ngày.</p>
+                  <Button css={{ marginTop: '16px' }} to='/about' small>Xem thêm</Button>
+                </TitleGroup>
+                <AboutImg1 fluid={indexIntroImage1Src} />
+              </AboutIntroRow1>
+              <AboutIntroRow2>
+                <AboutImg2 fluid={indexIntroImage2Src} />
+                <AboutImg3 fluid={indexIntroImage3Src} />
+              </AboutIntroRow2>
+            </AboutIntroSection>
           </ScrollAnimation>
 
           <ScrollAnimation>
@@ -359,6 +543,27 @@ export const query = graphql`
       childImageSharp {
         fluid(maxWidth: 1000, quality: 100) {
           ...GatsbyImageSharpFluid_noBase64
+        }
+      }
+    }
+    indexIntroImage1: file(relativePath: { eq: "index-intro-1.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1000, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    indexIntroImage2: file(relativePath: { eq: "index-intro-2.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1000, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    indexIntroImage3: file(relativePath: { eq: "index-intro-3.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1000, quality: 100) {
+          ...GatsbyImageSharpFluid
         }
       }
     }
